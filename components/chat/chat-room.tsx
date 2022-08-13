@@ -216,7 +216,7 @@ const MessagesWrapper: React.FC = () => {
     return (
         <div>
             {messages.map(({sender, recipient, content, type, createdAt }: Message, index: number) => (
-                <div key={index} className="mt-2">
+                <div key={index} className="mt-4">
                     {type !== EMessageType.ACTION &&
                      <>
                       {sender?.id === userId &&

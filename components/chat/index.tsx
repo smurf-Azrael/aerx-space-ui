@@ -164,7 +164,7 @@ const Chat: React.FC = () => {
 
                 <div>
                 <div className='flex gap-2 mt-4'>
-                    <Image src="/icons/fill-icon.svg" alt="Pin" width={13} height={13} />
+                    <Image src="/assets/icons/fill-icon.svg" alt="Pin" width={13} height={13} />
                     <label className='text-[14px] text-white opacity-[15%]'>All Charts</label>
                 </div>
                 <div>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react'
-import SearchInput from '../search-input';
+import SearchInput from '../SearchInput';
 import ChatRoom from './chat-room';
 
 export interface IMessageItem {

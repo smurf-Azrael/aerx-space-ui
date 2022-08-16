@@ -1,5 +1,5 @@
 import React from 'react';
-import Chat from '../../components/chat';
+import Chat from '../../components/Chat';
 import FlowFeeds from '../../components/Flow';
 import Space from '../../components/Space';
 

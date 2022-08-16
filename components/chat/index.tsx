@@ -124,21 +124,7 @@ const Chat: React.FC = () => {
             message:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
 
         },
-        {
-            avatar: '/assets/images/avatar.svg',
-            name: 'John Doe',
-            status: 'offline',
-            time: '12:00',
-            message:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
-
-        },
-        {
-            avatar: '/assets/images/avatar.svg',
-            name: 'John Doe',
-            status: 'offline',
-            time: '12:00',
-            message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
-        }
+        
     ];
 
 

@@ -5,7 +5,7 @@ import Space from '../../components/Space';
 
 const Flow: React.FC = () => {
     return (
-        <div className='w-full h-screen bg-black p-6'>
+        <div className='w-full h-screen bg-black p-6 flow'>
            <div className='flex justify-between'>
                 <div className='w-[39%] h-[94vh]'>
                     <Chat />

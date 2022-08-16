@@ -160,13 +160,13 @@ const ListFeeds: React.FC = () => {
             {posts.map((post: Post, index: number) => (
                 <>
                     {post.type === 'text' && 
-                        <TextPost {...post} />
+                        <TextPost {...post} key={index}/>
                     }
                     {post.type === 'video' && 
-                        <VideoPost {...post} />
+                        <VideoPost {...post} key={index} />
                     }
                     {post.type === 'tempo' && 
-                        <TempoPost {...post} />
+                        <TempoPost {...post} key={index} />
                     }
                 </>
             ))}

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react'
 import SearchInput from '../SearchInput';
-import ChatRoom from './chat-room';
+import ChatRoom from './ChatRoom';
 
 export interface IMessageItem {
     avatar: string,

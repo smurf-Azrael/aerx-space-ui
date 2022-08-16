@@ -1,14 +1,19 @@
 import Image from 'next/image';
 import React from 'react';
 
-const SearchInput: React.FC = () => {
+export interface Props {
+    width?:string,
+    backgroundColor?:string,
+    placeholder?: string
+}
+const SearchInput: React.FC<Props> = ({backgroundColor='bg-black-dark', width='200px', placeholder="Search user" }) => {
     return (
-        <div className='bg-black-dark py-1 rounded-md flex items-center  gap-1 w-[200px]'>
-            <div className='ml-3 mt-2'>
-            <Image src={'/assets/icons/search-input-icon.svg'}  width={15} height={15} alt="Search" />
+        <div className={`${backgroundColor} px-3 py-2 rounded-md flex items-center  gap-2 w-[${width}]`}>
+            <div className=''>
+            <Image src={'/assets/icons/search-input-icon.svg'}  width={20} height={20} alt="Search" />
             </div>
             <div>
-              <input type="text" placeholder='Search user' className='text-white bg-transparent text-sm focus:outline-none' style={{}} />
+              <input type="text" placeholder={placeholder} className='text-white bg-transparent text-sm focus:outline-none' style={{}} />
             </div>
         </div>
     )

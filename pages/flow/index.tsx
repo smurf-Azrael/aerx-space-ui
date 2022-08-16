@@ -1,5 +1,6 @@
 import React from 'react';
 import Chat from '../../components/chat';
+import FlowFeeds from '../../components/flow';
 
 const Flow: React.FC = () => {
     return (
@@ -9,8 +10,8 @@ const Flow: React.FC = () => {
                     <Chat />
                 </div>
 
-                <div className='bg-blue-500 w-[39%] h-[94vh]'>
-
+                <div className=' w-[39%] h-[94vh] overflow-y-scroll '>
+                    <FlowFeeds />
                 </div>
 
                 <div className='w-[18%] bg-green-500 h-[94vh]'>

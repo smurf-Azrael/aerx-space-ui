@@ -1,15 +1,15 @@
 import { Box } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
-function getRandomArbitrary(min, max) {
+function getRandomArbitrary(min:number, max:number) {
     return Math.random() * (max - min) + min;
 }
 
 const colors = ["#FFA2F6", "#7E4CF9", "#A0FFCC"];
 
-const toPercent = (num) => num + "%";
+const toPercent = (num:number) => num + "%";
 
-const WithDots = ({ children }) => {
+const WithDots:React.FC<{children: unknown}> = ({ children}) => {
     const positions = {
         top: [
             ["30%", "70%"],
@@ -19,7 +19,7 @@ const WithDots = ({ children }) => {
         left: [30, ["90%", "50%"], ["95%"]],
     };
 
-    const [dots, setDots] = useState([]);
+    const [dots, setDots] = useState<unknown>([]);
 
     useEffect(() => {
         const dots = [];
@@ -39,7 +39,7 @@ const WithDots = ({ children }) => {
 
     return (
         <Box position="relative">
-            {dots.map((dot, i) => (
+            {(dots as any).map((dot:any, i:number) => (
                 <Box
                     position="absolute"
                     key={dot + i}

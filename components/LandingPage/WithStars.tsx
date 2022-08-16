@@ -1,14 +1,15 @@
 import { Box } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import Image from "next/image";
+import React, { useState, useEffect } from "react";
 import CustomImage from "./CustomImage";
 
-function getRandomArbitrary(min, max) {
+function getRandomArbitrary(min: number, max: number) {
     return Math.random() * (max - min) + min;
 }
 
-const StarComponent = ({ top, left, radius }) => (
+const StarComponent: React.FC<{top: number, left: number, radius: number}> = ({ top, left, radius }) => (
     <Box position="absolute" top={top} left={left}>
-        <img
+        <Image
             src="/star.svg"
             style={{
                 width: radius,
@@ -18,7 +19,7 @@ const StarComponent = ({ top, left, radius }) => (
     </Box>
 );
 
-const WithStar = ({ children }) => {
+const WithStar: React.FC<{children: unknown}> = ({ children }) => {
     const positions = {
         top: [
             ["30%", "70%"],
@@ -28,7 +29,7 @@ const WithStar = ({ children }) => {
         left: [30, ["90%", "50%"], ["95%"]],
     };
 
-    const [stars, setStars] = useState([]);
+    const [stars, setStars] = useState<any>([]);
 
     useEffect(() => {
         const stars = [];
@@ -44,9 +45,9 @@ const WithStar = ({ children }) => {
 
     return (
         <Box position="relative">
-            {stars.map((star, i) => (
+            {stars.map((star: { top: number; left: number; radius: number; }, i: number) => (
                 <StarComponent
-                    key={star + i}
+                    key={i}
                     top={star.top}
                     left={star.left}
                     radius={star.radius}

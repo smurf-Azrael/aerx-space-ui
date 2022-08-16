@@ -1,12 +1,11 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import LandingPage from "../components/LandingPage";
 
-const Home: NextPage = () => {
-  return (
-    <h1>AERX</h1>
-  )
-}
-
-export default Home
+const landingPage = () => {
+    const logo="../aerx_logo-removebg-preview 1 (Traced)-1.svg"
+    return (
+        <div className="landing">
+        <LandingPage />
+        </div>
+    );
+};
+export default landingPage

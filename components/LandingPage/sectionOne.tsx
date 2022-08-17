@@ -22,7 +22,7 @@ const SectionOne: React.FC = () => {
             {/* <Container maxWidth="container.xlg"  > */}
             <WithDots>
             <Flex   marginTop="239px" 
-             bgImage="url('../Group 5392.png')"
+             bgImage="url('../resources/Group 5392.png')"
              bgRepeat="no-repeat"
              bgPosition="center left"
              bgSize="80%"

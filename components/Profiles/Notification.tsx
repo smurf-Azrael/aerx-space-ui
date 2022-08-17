@@ -52,10 +52,10 @@ const Notification = (props: Props) => {
     zIndex="3"
   >
      <Center>
-                <Image src={"Rectangle 3526.png"} mt="12px" />
+                <Image src={"resources/Rectangle 3526.png"} mt="12px" />
               </Center>
               <Center>
-                <Image src={"Rectangle 3526.png"} mt="4px" />
+                <Image src={"resources/Rectangle 3526.png"} mt="4px" />
               </Center>
               <Flex marginLeft="84px" marginTop="12px">
                 <Box
@@ -66,7 +66,7 @@ const Notification = (props: Props) => {
                   padding="5px"
                 >
                   <Flex>
-                    <Image src={"Notification.png"} />
+                    <Image src={"resources/Notification.png"} />
                   </Flex>
                 </Box>
                 <Text
@@ -90,7 +90,7 @@ const Notification = (props: Props) => {
                   marginRight="32px"
                   padding="5px"
                 >
-                  <Image src={"Ellipse 706.png"} />
+                  <Image src={"resources/Ellipse 706.png"} />
                 </Box>
                 <Box
                   border="1px"
@@ -99,7 +99,7 @@ const Notification = (props: Props) => {
                   borderRadius="100%"
                   padding="8px"
                 >
-                  <Image src={"Setting.png"} />
+                  <Image src={"resources/Setting.png"} />
                 </Box>
               </Flex>
     </Box>

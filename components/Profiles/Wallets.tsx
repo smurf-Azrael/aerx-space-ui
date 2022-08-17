@@ -53,10 +53,10 @@ const Wallets = (props: Props) => {
 
           >
              <Center>
-              <Image src={"Rectangle 3526.png"} mt="12px" />
+              <Image src={"resources/Rectangle 3526.png"} mt="12px" />
             </Center>
             <Center>
-              <Image src={"Rectangle 3526.png"} mt="4px" />
+              <Image src={"resources/Rectangle 3526.png"} mt="4px" />
             </Center>
             <Text
               marginLeft="24px"
@@ -81,7 +81,7 @@ const Wallets = (props: Props) => {
               </Text>
               <Flex>
                 <Image
-                  src={"Download.png"}
+                  src={"resources/Download.png"}
                   alt="download"
                   w="24px"
                   h="24px"
@@ -89,7 +89,7 @@ const Wallets = (props: Props) => {
                 />
 
                 <Image
-                  src={"Upload.png"}
+                  src={"resources/Upload.png"}
                   alt="upload"
                   w="24px"
                   h="24px"
@@ -97,7 +97,7 @@ const Wallets = (props: Props) => {
                 />
 
                 <Image
-                  src={"Frame 5556.png"}
+                  src={"resources/Frame 5556.png"}
                   alt="upload"
                   w="24px"
                   h="24px"
@@ -105,7 +105,7 @@ const Wallets = (props: Props) => {
                 />
 
                 <Image
-                  src={"plant 1.png"}
+                  src={"resources/plant 1.png"}
                   alt="upload"
                   w="24px"
                   h="24px"

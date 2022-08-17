@@ -27,7 +27,7 @@ const HeroSection: React.FC = () => {
           flexDirection="row"
           marginRight="95px"
           marginLeft="95px"
-          bgImage="url('../Saly-1.png')"
+          bgImage="url('../resources/saly-1.png')"
           bgRepeat="no-repeat"
           bgPosition="center right"
           

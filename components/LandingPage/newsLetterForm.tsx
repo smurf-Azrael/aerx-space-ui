@@ -32,7 +32,7 @@ const NewsLetterForm: React.FC = () => {
         <Flex display='flex' alignItems="center" py="30" flexDirection="row" marginRight='95px' marginLeft="95px"
          
         >
-            <Box ml={0} width={615} bgImage="url('../Group 5403.png')"
+            <Box ml={0} width={615} bgImage="url('../resources/Group 5403.png')"
          bgRepeat="no-repeat"
          bgPosition="center top"
          bgSize="65%"   

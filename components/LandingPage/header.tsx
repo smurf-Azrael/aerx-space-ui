@@ -23,7 +23,7 @@ const Header: React.FC = () => {
         mb="150px"
       >
         
-          <Image src={logo} alt="logo" />
+          <Image src="../resources/aerx_logo-removebg-preview 1 (Traced) copy.svg" alt="logo"  />
 
 
 

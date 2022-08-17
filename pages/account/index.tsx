@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 
 const AccountPage = () => {
     return (
-        <Box>
+        <Box className="account">
             <Account />
         </Box>
     );

@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from '../../store/store';
 import {  getUserState, setImages } from '../../store/slices/imageSlices';
 
 
-const SectionTwo: React.FC = () => {
+const About: React.FC = () => {
     const dispatch = useDispatch();
     const { frame,polygon } = useSelector(getUserState);
     return (
@@ -21,15 +21,21 @@ const SectionTwo: React.FC = () => {
             <WithDots>
             <Container maxWidth="container.xlg">
                 
-            <Center py={21}>
-                <Heading  color='#322E65' fontSize='6xl' fontWeight='600px' >
+            <Center>
+                <Heading    
+                    
+                     fontSize="64px"
+                     lineHeight="96px"
+                     fontWeight="600"
+                     color="#322E65;"
+                     mb="64px">
                About project
                 </Heading>  
             </Center>
             <Center>
                 <Button margin="auto" position="absolute" bgColor="#8D00FF;
 ">
-                    <Image width={12} src={polygon} />
+                    <Image src={polygon} />
                 </Button>
                     <Image src={frame}/>
             </Center>
@@ -42,4 +48,4 @@ const SectionTwo: React.FC = () => {
     )
 }
 
-export default SectionTwo;
+export default About;

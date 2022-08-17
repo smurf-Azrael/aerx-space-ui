@@ -33,7 +33,7 @@ const ProfileSection = (props: Props) => {
   return (
   
     <Flex
-      bgImage="url('../Rectangle 3212.png')"
+      bgImage="url('../resources/Rectangle 3212.png')"
       bgRepeat="no-repeat"
       bgPosition="0 48px"
       bgColor="#191919"

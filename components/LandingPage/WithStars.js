@@ -9,7 +9,7 @@ function getRandomArbitrary(min, max) {
 const StarComponent = ({ top, left, radius }) => (
     <Box position="absolute" top={top} left={left}>
         <img
-            src="/star.svg"
+            src="/resources/star.svg"
             style={{
                 width: radius,
                 height: radius,

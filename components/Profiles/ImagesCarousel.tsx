@@ -53,10 +53,10 @@ const ImagesCarousel = (props: Props) => {
         >
             <Box>
             <Center>
-              <Image src={"Rectangle 3526.png"} mt={4} />
+              <Image src={"resources/Rectangle 3526.png"} mt={4} />
             </Center>
             <Center>
-              <Image src={"Rectangle 3526.png"} mt={1} />
+              <Image src={"resources/Rectangle 3526.png"} mt={1} />
             </Center>
           </Box>
 

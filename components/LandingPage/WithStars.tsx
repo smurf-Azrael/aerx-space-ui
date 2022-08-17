@@ -11,6 +11,8 @@ const StarComponent: React.FC<{top: number, left: number, radius: number}> = ({ 
     <Box position="absolute" top={top} left={left}>
         <Image
             src="/star.svg"
+            height={radius}
+            width={radius}
             style={{
                 width: radius,
                 height: radius,

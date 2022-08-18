@@ -25,11 +25,13 @@ const SectionTwo: React.FC = () => {
               lineHeight="96px"
               color="#322E65"
             >
-              Earn more
+              <Image src="../resources\Earn more.png"/>
+              {/* Earn more */}
             </Heading>
             <Box display="flex" flexDirection="row">
               <Image src={star} mr={2} />
-              <Text
+              <Image src="../resources\Together.png" mt="27px" />
+              {/* <Text
                 fontWeight="800"
                 fontSize="96px"
                 lineHeight="114px"
@@ -38,7 +40,7 @@ const SectionTwo: React.FC = () => {
                 fontStyle="italic"
               >
                 Together
-              </Text>
+              </Text> */}
             </Box>
             <Text
               fontStyle="italic"
@@ -48,8 +50,10 @@ const SectionTwo: React.FC = () => {
               mt="48px"
               color="#322E6580"
             >
-              You can create combined posts with other authors and earn money on
-              it together
+              <Image src="resources\createcombine.png"/>
+
+              {/* You can create combined posts with other authors and earn money on
+              it together */}
             </Text>
             <Text
               fontSize="20px"
@@ -58,9 +62,11 @@ const SectionTwo: React.FC = () => {
               mt="32px"
               color="#322E6580"
             >
-              Some blogger decides to use for his post a picture that another
+              <Image src="resources\someblogger.png"/>
+
+              {/* Some blogger decides to use for his post a picture that another
               user drew, and is ready to pay him a little for it. It turns out a
-              win = a
+              win = a */}
             </Text>
           </Box>
           <Box ml={0} width={585} mr={4} position="relative"></Box>

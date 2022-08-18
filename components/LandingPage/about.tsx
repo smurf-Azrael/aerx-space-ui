@@ -29,7 +29,8 @@ const About: React.FC = () => {
                      fontWeight="600"
                      color="#322E65;"
                      mb="64px">
-               About project
+               {/* About project */}
+               <Image src='resources\About project.png' />
                 </Heading>  
             </Center>
             <Center>

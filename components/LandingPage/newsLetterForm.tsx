@@ -41,14 +41,15 @@ const NewsLetterForm: React.FC = () => {
 
             <Box width={695}>
                     <Heading fontSize='64px' fontWeight="600" fontFamily="Poppins" lineHeight="96px">
-                    Be part of the team
+                        <Image src='resources\team2.png'/>
+                    {/* Be part of the team */}
                     </Heading>
                     <Box display="flex" flexDirection='row'>
-                        <Image  src={star} mr={2}/>
+                        {/* <Image  src={star} mr={2}/> */}
                     <Text 
                     className='easily' fontFamily="Poppins" fontStyle="italic" fontWeight="800" fontSize="96px" lineHeight="144px"  color="#8d00ff"
                     >
-                       Right now
+                        <Image src='resources\Group 5381.png' />
                     </Text>
                     </Box>
                     <Text 
@@ -62,7 +63,8 @@ const NewsLetterForm: React.FC = () => {
                      
                      color="#322E6580"
                     >
-                    Kindly subscribe to our email news letter to get amazing information.
+                          <Image src='resources\subscribe.png' />
+                    {/* Kindly subscribe to our email news letter to get amazing information. */}
 
                     </Text>
                     <FormControl>

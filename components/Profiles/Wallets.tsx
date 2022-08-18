@@ -46,10 +46,11 @@ const Wallets = (props: Props) => {
             bgColor="#242424"
             width="376px"
             marginLeft="0"
-            borderRadius="40px 40px"
-            top="602"
+            borderTopRadius="50px"
+            top="602px"
             position="absolute"
             height="478px"
+            zIndex="0"
 
           >
              <Center>

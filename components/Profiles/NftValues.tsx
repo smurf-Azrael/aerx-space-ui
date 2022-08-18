@@ -42,10 +42,10 @@ const NftValues = (props: Props) => {
       bgColor="#282828"
       width="376px"
       height="358px"
-      marginLeft="0"
-      borderRadius="40px 40px"
-      // zIndex={2}
-      marginTop={23}
+      marginLeft="0" 
+      borderTopRadius="50px"
+      zIndex={1}
+  
       position="absolute"
       top="722px"
     >
@@ -56,7 +56,7 @@ const NftValues = (props: Props) => {
         <Image src={"resources/Rectangle 3526.png"} mt="4px" />
       </Center>
 
-      <Flex mt="32px" ml="24px" alignItems="center">
+      <Flex mt="12px" ml="24px" alignItems="center">
                 <Text
                   fontWeight="500"
                   fontSize="16px"

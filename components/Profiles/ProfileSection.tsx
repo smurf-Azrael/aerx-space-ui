@@ -38,33 +38,49 @@ const ProfileSection = (props: Props) => {
       bgPosition="0 48px"
       bgColor="#191919"
       w="376px"
-    height="495px"
-    //  top="0"
+      height="494px"
+    top="0"
     // position="absolute"
-    // zIndex={-1}
+    zIndex="-2"
    
 
     >
       <Flex flexDirection="column" gap="16px" ml="24px" mt="32px">
-        <Image width={10} height={10} src={groupP1} border="2px" />
+        {/* never put border and border rad */}
+        <Image  width={10} height={10}   border="2px solid"
+          borderColor="white"
+          padding="2px"
+          borderRadius="100%"
+          src={"../resources/Ellipse 1.svg"}
+          />
+      
+
         <Image
           width={10}
           height={10}
-          src={ellipse1}
-          border="2px"
-          borderColor="gray.200"
+          padding="2px"
+          border="2px solid"
+          borderColor="white"
           borderRadius="100%"
+          src={"../resources/Ellipse 2.png"}
         />
 
-        <Image width={10} height={10} src={groupP2} border="2px" />
+        <Image width={10} height={10} border="2px solid"
+          borderColor="white"
+          borderRadius="100%"
+          padding="2px"
+          src={"../resources/Ellipse 3.png"}
+           />
+
         <Image
           width={10}
           height={10}
-          src={ellipse2}
-          border="2px"
-          borderColor="gray.200"
-          borderRadius="100%"
-        />
+          src={"../resources/Ellipse 4.svg"}
+          border="2px solid"
+          padding="2px"
+          borderColor="white"
+          borderRadius="100%" />
+
       </Flex>
       {/* end */}
       <Flex flexDirection="column" alignItems="center" mx="auto">

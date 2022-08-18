@@ -1,44 +1,73 @@
 import React from "react";
-import { Box, Button, Image, Text, Container } from "@chakra-ui/react";
+import { Box, Button, Image, Text, Container, Flex,} from "@chakra-ui/react";
 
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 
-
 const Header: React.FC = () => {
   const dispatch = useDispatch();
   const { logo } = useSelector(getUserState);
+  
+
+
+
+  function authentication() {
+    console.log("Welcome to arex");
+  }
+
+
   return (
-    <Container maxWidth="1921px">
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        paddingRight="95px"
-        paddingLeft="95px"
+    
+      <Flex
+        justifyItems="center"
+        overflow="hidden"
+        marginInline="150px"
         mt={6}
+        mb="60px"
+      
       >
-        <Box>
-          <Image src={logo} alt="logo" />
-        </Box>
-        <Box display="flex" marginLeft="-625px">
-          <Text fontSize="md" mr={4} mt={2}>
+        
+          <Image src="../resources/aerx_logo-removebg-preview 1 (Traced) copy.svg" alt="logo"  w="125px"  h="47px" />
+
+
+        
+
+
+
+        
+        <Flex  alignItems="center" gap="56px"  className="links" overflow="hidden" marginLeft="99px">
+          
+          <Text fontFamily="Poppins" fontWeight="400" color="rgba(50, 46, 101, 0.5);
+" >
             Home
           </Text>
-          <Text fontSize="md" mr={4} mt={2}>
+          <Text fontFamily="Poppins" fontWeight="400" color="rgba(50, 46, 101, 0.5);
+">
             Features
           </Text>
-          <Text fontSize="md" mr={4} mt={2}>
+          <Text fontFamily="Poppins" fontWeight="400" color="rgba(50, 46, 101, 0.5);
+" >
             About us
           </Text>
-        </Box>
-        <Box display="flex">
-          <Button bgColor="#8D00FF" borderRadius={50} color="white">
+        </Flex>
+        
+          <Button
+            bgColor="#8D00FF"
+            py="12px"
+            px="40px"
+            fontFamily="Poppins"
+            borderRadius={50}
+            fontWeight="600"
+            color="white"
+            marginLeft="auto"
+            onClick={authentication}
+          >
             Login/Register
           </Button>
-        </Box>
-      </Box>
-    </Container>
+      
+      
+      </Flex>
+    
   );
 };
 

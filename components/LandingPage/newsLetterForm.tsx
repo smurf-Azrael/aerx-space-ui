@@ -45,7 +45,7 @@ const NewsLetterForm: React.FC = () => {
                     {/* Be part of the team */}
                     </Heading>
                     <Box display="flex" flexDirection='row'>
-                        {/* <Image  src={star} mr={2}/> */}
+                        {/* <Image  src={star} mr={3}/> */}
                     <Text 
                     className='easily' fontFamily="Poppins" fontStyle="italic" fontWeight="800" fontSize="96px" lineHeight="144px"  color="#8d00ff"
                     >

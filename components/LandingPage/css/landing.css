@@ -100,3 +100,15 @@ color: #8D00FF;
   position:absolute;
   margin-right: 88px;
 }
+
+@media screen and (min-width:400px) {
+  .link {
+    display: hidden;
+  }
+
+  .button {
+    margin-inline: auto;
+  }
+} 
+
+  

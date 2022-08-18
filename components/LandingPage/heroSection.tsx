@@ -33,6 +33,7 @@ const HeroSection: React.FC = () => {
           
           height="80vh"
           bgSize="40%"
+          
         >
           <Box>
             <Heading
@@ -42,7 +43,8 @@ const HeroSection: React.FC = () => {
               fontFamily="Poppins"
               color="#322E65"
             >
-              Welcome to Aerx
+              <Image src="resources\Welcome.png" />
+              {/* Welcome to Aerx */}
             </Heading>
             <Text
               fontSize="24px"
@@ -52,7 +54,9 @@ const HeroSection: React.FC = () => {
               color="#322E65CC"
               lineHeight="36px"
             >
-              web3.0 media social platform
+                <Image src="resources\web3.png"  mt={3}/>
+
+              {/* web3.0 media social platform */}
             </Text>
             <Text
               fontSize="24px"
@@ -62,12 +66,14 @@ const HeroSection: React.FC = () => {
               width={525}
               color="#322E6580"
             >
-              Aerx is a web 3 social media platform with a <br /> fundamentally
+              <Image src="resources\aerxcont.png" />
+              {/* Aerx is a web 3 social media platform with a <br /> fundamentally
               new approach to <br />
-              monetization of user content
+              monetization of user content */}
             </Text>
             <Button
               bgColor="#8D00FF"
+              className="button"
               py="12px"
               px="40px"
               fontFamily="Poppins"
@@ -82,7 +88,7 @@ const HeroSection: React.FC = () => {
           </Box>
           <WithDots>
             <Box marginLeft="135px" marginTop="-125px" >
-              <Image width="100" src={group1} className="group1-a" />
+              <Image width="100" src="resources\Group 5401.png" className="group1-a" />
             </Box>
           </WithDots>
         </Flex>

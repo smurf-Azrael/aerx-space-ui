@@ -39,17 +39,25 @@ const SectionOne: React.FC = () => {
                      fontWeight='300'
                      mt="32px"
                      color="#322E6580">
-                    Monetize your ideas
+                      
+                        <Image  src="../resources\Monetize11.png" mr={2}/>
+
+                    {/* Monetize your ideas */}
                     </Heading>
                     <Box display="flex" flexDirection='row'>
-                        <Image  src={star} mr={2}/>
-                    <Text 
+                        {/* <Image  src={star} mr={2}/> */}
+                    {/* <Text 
                     className='easily' fontWeight="800" fontSize="96px" lineHeight="114px" fontFamily="Poppins" color="#8d00ff" fontStyle="italic" letterSpacing="-0.03em"
-                    >
-                       Easily
-                    </Text>
+                    > */}
+                        <Image  src="../resources\Group 5380.png" mr={2} mb="48px"/>
+                       
+                    {/* </Text> */}
                     </Box>
-                    <Text
+                        <Image  src="../resources/in aerx.png
+                        
+                        "/>
+
+                    {/* <Text
                      fontSize='20px'
                      lineHeight="30px"
                      fontWeight='300'
@@ -69,7 +77,7 @@ const SectionOne: React.FC = () => {
                     >            
         Just publish what you have created: text, video, picture or audio. It doesn't matter if you are a professional artist who just came up with a funny meme, an aspiring musician or an author of interesting texts. Post it and get rewarded if other users like it.
 
-                    </Text>
+                    </Text> */}
                 </Box>          
             </Flex>
             </WithDots>

@@ -7,8 +7,9 @@ import About from './about'
 import NewsLetterForm from './newsLetterForm'
 import WithDots from "./WithDots";
 import {
-  Box,
+  Box, Image
 } from "@chakra-ui/react";
+import WithStarsAndDots from './WithStarsAndDots'
 
 
 
@@ -17,21 +18,21 @@ import {
 
 
 
-const Index: React.FC = () => {
+const Index = () => {
 
 
 
   return (
-  < Box>
- 
-  <WithDots>
+  < Box overflow="hidden" maxWidth="1920px" bg="white"  bgGradient="linear(to-r11%,FFFFFF 11%)">
+    {/* <Box boxSizing="border-box" position="absolute"  top="-383-px" left="811px" w="797px" h="797px" bgImage="url('../resources/Ellipse 727.png')"></Box> */}
+    <WithStarsAndDots />
+   
     <Header />
     <HeroSection />
     <SectionOne />
     <SectionTwo  />
     <About  />
     <NewsLetterForm />
-  </WithDots>
   </Box>
 
   )

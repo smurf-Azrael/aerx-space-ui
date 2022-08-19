@@ -24,7 +24,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-fit-to-viewport": "^0.1.1",
-    "react-redux": "^8.0.2"
+    "react-redux": "^8.0.2",
+    "react-viewport-height": "^1.2.1"
   },
   "devDependencies": {
     "@types/node": "18.7.0",

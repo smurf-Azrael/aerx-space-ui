@@ -51,6 +51,8 @@ const Header: React.FC = () => {
           </Text>
         </Flex>
         
+          <Flex alignItems="center"  marginLeft="auto" gap="56px">
+            <Text fontFamily="Poppins" fontWeight="400" color="rgba(50, 46, 101, 0.5);">Register</Text>
           <Button
             bgColor="#8D00FF"
             py="12px"
@@ -62,9 +64,10 @@ const Header: React.FC = () => {
             marginLeft="auto"
             onClick={authentication}
           >
-            Login/Register
+            Login
           </Button>
       
+          </Flex>
       
       </Flex>
     

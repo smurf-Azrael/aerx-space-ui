@@ -20,7 +20,7 @@ const SectionOne: React.FC = () => {
     return (
         <Box>
             {/* <Container maxWidth="container.xlg"  > */}
-            <WithDots>
+            
             <Flex   marginTop="239px" 
              bgImage="url('../resources/Group 5392.png')"
              bgRepeat="no-repeat"
@@ -80,7 +80,7 @@ const SectionOne: React.FC = () => {
                     </Text> */}
                 </Box>          
             </Flex>
-            </WithDots>
+        
             {/* </Container > */}
         </Box>
         

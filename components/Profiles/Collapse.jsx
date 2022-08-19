@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState} from 'react'
 import {
     Box,
     Image,
@@ -7,16 +7,31 @@ import {
     Flex,
   } from "@chakra-ui/react";
 
-type Props = {}
 
-function Collapse({}: Props) {
+
+
+
+    
+
+function Collapse(props) {
+// const [isToggle,setToggle] = useState(false)
+
+//     const toggleClick = () => {
+//         setToggle(prevState => !prevState)
+//         console.log(isToggle)
+    
+//     }
+
+       
+       
+        
   return (
-        <Flex h="1000px" w="80px" ml="13px" flexDirection="column" bgColor="#6054F0" position="absolute" left="388px" top="0" borderRadius="20px" py="32px" px="24px">
+        <Flex h="1000px" w="80px" ml="13px" flexDirection="column" bgColor="#6054F0" position="absolute" left="0" top="0" borderRadius="20px" py="32px" px="24px">
                 <Flex flexDirection="column" gap="32px" mb="624px">
                     <Image src={"../resources/Frame 5449.png"} w="32px" h="32px" />
                     <Image src={"../resources/Flow.png"} w="32px" h="32px" />
                     <Image src={"../resources/Group.png"} w="32px" h="32px" />
-                    <Image src={"../resources/Group 5409.png"} w="32px" h="32px" />
+                    <Image src={"../resources/Group 5409.png"} w="32px" h="32px" onClick={props.toggle} />
                 </Flex>
                 <Flex></Flex>
                 <Flex flexDirection="column" gap="32px">

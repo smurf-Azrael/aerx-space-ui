@@ -7,7 +7,8 @@ import {
   Heading,
   Container,
   FormControl,
-  Input
+  Input,
+  Flex,
 } from "@chakra-ui/react";
 
 import WithStar from "./WithStars";
@@ -27,37 +28,43 @@ const NewsLetterForm: React.FC = () => {
     <WithStar>
         <WithDots>
     <Box className='form'>
-        <Image width='185px' src={saly2} className='saly2-b'/>
         <Container maxWidth="container.xlg">
-        <Box display='flex' alignItems="center" py="10" flexDirection="row" marginRight='95px' marginLeft="95px">
-            <Box ml={0} width={615} mr={4} >
-                <Image width='285px' src={saly1} className='saly1-b'/>
+        <Flex display='flex' alignItems="center" py="30" flexDirection="row" marginRight='95px' marginLeft="95px"
+         
+        >
+            <Box ml={0} width={615} bgImage="url('../resources/Group 5403.png')"
+         bgRepeat="no-repeat"
+         bgPosition="center top"
+         bgSize="65%"   
+         height="100vh">
             </Box>
 
             <Box width={695}>
-                    <Heading fontSize='6xl' color='#322E65'>
-                    Be part of the team
+                    <Heading fontSize='64px' fontWeight="600" fontFamily="Poppins" lineHeight="96px">
+                        <Image src='resources\team2.png'/>
+                    {/* Be part of the team */}
                     </Heading>
                     <Box display="flex" flexDirection='row'>
-                        <Image  src={star} mr={2}/>
+                        {/* <Image  src={star} mr={3}/> */}
                     <Text 
-                    className='easily'
+                    className='easily' fontFamily="Poppins" fontStyle="italic" fontWeight="800" fontSize="96px" lineHeight="144px"  color="#8d00ff"
                     >
-                       Right now
+                        <Image src='resources\Group 5381.png' />
                     </Text>
                     </Box>
                     <Text 
-                     fontSize='2xl'
-                     fontStyle='normal'
-                     lineHeight={1.5}
+                     fontSize='20px'
+                     
+                     lineHeight="30px"
                      fontWeight='300'
-                     justifyContent='left'
-                     marginRight={13}
-                     mt={35}
-                     mb={35}
+                     
+                     
+                     my="48px"
+                     
                      color="#322E6580"
                     >
-                    Kindly subscribe to our email news letter to get amazing information.
+                          <Image src='resources\subscribe.png' />
+                    {/* Kindly subscribe to our email news letter to get amazing information. */}
 
                     </Text>
                     <FormControl>
@@ -66,8 +73,9 @@ const NewsLetterForm: React.FC = () => {
                         type="text"
                         width='50%'
                         borderRadius='25'
-                        py={6}
+                        py="24px"
                         borderColor="8E8E8E"
+                        pl="32px"
                         >
                         
                         </Input>
@@ -75,13 +83,13 @@ const NewsLetterForm: React.FC = () => {
                             <Image width={3} height={3} src={frame3} />
                         </Button>
                         <Box display='flex' flexDirection='row' mt={35} mb={55}>
-                            <Image src={frame1} mr={6}/>
-                            <Image src={frame2}/>
+                            <Image src={frame1} mr="32px" color="#ebe8fe" w="45px" height="45px" />
+                            <Image src={frame2} color="#ebe8fe" w="48px" height="48px "/>
                         </Box>
                     </FormControl>
                 </Box>
               
-        </Box>
+        </Flex>
         </Container>
     </Box>
     </WithDots>

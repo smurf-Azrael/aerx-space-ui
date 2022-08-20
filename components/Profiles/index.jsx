@@ -13,7 +13,6 @@ import Chat from "../Chat/index";
 import Space from "../Space/index"
 
 import { useState } from "react";
-import { FitToViewport } from "react-fit-to-viewport";
 
 // type Props = {
 // }

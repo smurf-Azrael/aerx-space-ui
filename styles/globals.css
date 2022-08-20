@@ -12,7 +12,9 @@
   color: #2b2b2b
 }
 
-.flow,.poppins,.account {
+.flow,
+.poppins,
+.account {
   font-family: 'Poppins';
 }
 
@@ -39,6 +41,7 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: #191919;

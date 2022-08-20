@@ -24,13 +24,13 @@ const ChatHeader: React.FC = () => {
             <div className='flex items-center  gap-4 text-[12px]'>
                 <div 
                 onClick={() => setIsPersonalActive(true)}
-                className={`${isPersonalActive ? 'bg-primary text-white px-4 ': 'text-gray-400 '}  text-white p-2 rounded-md cursor-pointer`}>
-                    <label className='cursor-pointer'>Personal</label>
+                className={`${isPersonalActive ? 'bg-primary text-white px-4 ': ' text-red-200 ' }   p-2 rounded-md cursor-pointer`}>
+                    <label className={`cursor-pointer ${isPersonalActive ? ' text-white ': 'text-gray-400'}`}>Personal</label>
                 </div>
                 <div  
                 onClick={() => setIsPersonalActive(false)}
-                className={`${!isPersonalActive ? 'bg-primary text-white px-4 ': 'text-gray-400'} p-2 rounded-md cursor-pointer`}>
-                   <label className='cursor-pointer'>Work</label>
+                className={`${!isPersonalActive ? 'bg-primary text-white px-4 ': 'text-gray-200'} p-2 rounded-md cursor-pointer`}>
+                   <label className={`cursor-pointer ${!isPersonalActive ? ' text-white ': 'text-gray-400'}`}>Work</label>
                 </div>
             </div>
         </div>

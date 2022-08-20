@@ -6,7 +6,7 @@ export interface Props {
     backgroundColor?:string,
     placeholder?: string
 }
-const SearchInput: React.FC<Props> = ({backgroundColor='bg-black-dark', width='200px', placeholder="Search user" }) => {
+const SearchInput: React.FC<Props> = ({backgroundColor='bg-[#2b2b2b]', width='200px', placeholder="Search user" }) => {
     return (
         <div className={`${backgroundColor} px-3 py-2 rounded-md flex items-center  gap-2 w-[${width}]`}>
             <div className=''>

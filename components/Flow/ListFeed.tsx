@@ -7,7 +7,7 @@ import VideoControl from '../VideoControl';
 const TextPost: React.FC<Post> = ({coverImage, postOwner, nftId, title, description}) => {
     const bgImage = coverImage;
     return (
-        <div className='w-[60%] h-[40vh] flex flex-col justify-between rounded-md p-2' style={{
+        <div className='w-[60%] h-[40vh] flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2' style={{
             backgroundImage: `url(${bgImage})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
@@ -52,9 +52,9 @@ const TextPost: React.FC<Post> = ({coverImage, postOwner, nftId, title, descript
 
 const VideoPost: React.FC<Post> = ({coverImage, postOwner}) => {
     return (
-        <div className='relative w-[38%]  h-[40vh] rounded-md'>
+        <div className='relative w-[38%]  h-[40vh] rounded-[20px]'>
 
-        <div className='w-full  h-full absolute rounded-md' 
+        <div className='w-full  h-full absolute rounded-[20px]' 
         style={{
             backgroundImage: `url(${coverImage})`,
             backgroundRepeat: 'no-repeat',
@@ -110,7 +110,7 @@ const VideoPost: React.FC<Post> = ({coverImage, postOwner}) => {
 const TempoPost: React.FC<Post> = ({coverImage, postOwner}) => {
     
     return (
-        <div className='flex flex-col justify-between w-[38%] bg-black h-[40vh] rounded-md p-2' style={{
+        <div className='flex flex-col justify-between w-[38%] bg-black h-[40vh] rounded-[20px] p-2' style={{
             backgroundImage: `url(${coverImage})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',

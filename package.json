@@ -12,7 +12,10 @@
     "@chakra-ui/react": "^2.2.6",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@pinata/sdk": "^1.1.26",
     "@reduxjs/toolkit": "^1.8.4",
+    "aws-sdk": "^2.1199.0",
+    "dotenv": "^16.0.1",
     "formik": "^2.2.9",
     "framer-motion": "^6.5.1",
     "next": "12.2.4",
@@ -21,6 +24,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.2",
+    "sha.js": "^2.4.9",
     "yup": "^0.32.11"
   },
   "devDependencies": {

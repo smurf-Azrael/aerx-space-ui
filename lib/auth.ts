@@ -297,7 +297,7 @@ export async function loginToken(nearState: NearStoreType) {
     await nearState.walletConnection.requestSignIn(
         process.env.TOKEN_CONTRACT_NAME,
         "",
-        window.location.origin + "/account",
+        window.location.origin + "/settings/profile",
         "",
     );
 

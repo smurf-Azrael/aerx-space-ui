@@ -40,175 +40,189 @@ const NftValues = () => {
   return (
     <Box
       bgColor="#282828"
-      width="376px"
-      height="358px"
-      marginLeft="0" 
-      borderTopRadius="50px"
+      width="257.56px"
+      height="245.23px"
+      marginLeft="0"
+      borderTopRadius="34.25px"
       zIndex={1}
-  
       position="absolute"
-      top="722px"
+      // top="456.897px"
+      top="494.57px"
     >
       <Center>
-        <Image src={"resources/Rectangle 3526.png"} mt="12px" />
+        <Box
+          w="21.92px"
+          bgColor="rgba(255, 255, 255, 0.3);"
+          height="2px"
+          mt="8.22px"
+        ></Box>
       </Center>
       <Center>
-        <Image src={"resources/Rectangle 3526.png"} mt="4px" />
+        <Box
+          w="21.92px"
+          bgColor="rgba(255, 255, 255, 0.3);"
+          height="2px"
+          mt="2.74px"
+        ></Box>
       </Center>
 
-      <Flex mt="12px" ml="24px" alignItems="center">
-                <Text
-                  fontWeight="500"
-                  fontSize="16px"
-                  color="rgba(255, 255, 255, 0.3);"
-                  mr="234px"
-                  fontFamily="Poppins"
-                >
-                  Values
-                </Text>
-                <Flex>
-                  <Image src={dot} alt="" w="8px" h="8px" mr="8px" />
-                  <Image
-                    src={" resources/Rectangle blank.png"}
-                    alt=""
-                    w="8px"
-                    h="8px"
-                    mr="8px"
-                  />
-                  <Image src={" resources/Rectangle blank.png "} alt="" w="8px" h="8px" />
-                </Flex>
-              </Flex>
-    
-              <Flex mt="20px" ml="24px" overflow="hidden">
-                <Box marginRight="16px" position="relative">
-                  <Flex position="absolute" left={43} top={39}>
-                    <Image src={"resources/Ticket Star.png"} />
-                    <Text
-                      fontWeight="400"
-                      fontSize="16px"
-                      color="#ffffff"
-                      position="absolute"
-                      marginLeft="32px"
-                      fontFamily="Poppins"
-                    >
-                      Art
-                    </Text>
-                  </Flex>
-                  <Text
-                    position="absolute"
-                    color="#ffffff"
-                    top={71}
-                    left={25}
-                    fontSize="18px"
-                    fontWeight={600}
-                    fontFamily="Poppins"
-                  >
-                    NFT Name
-                  </Text>
-                  <Text
-                    position="absolute"
-                    top="93px"
-                    left="38px"
-                    color="#ffffff"
-                    fontWeight={400}
-                    fontSize="16px"
-                    fontFamily="Poppins"
-                  >
-                    24,6 aex
-                  </Text>
-                  <Image
-                    src={"resources/Rectangle 3421.png"}
-                    maxWidth="140px"
-                    height="149px"
-                  />
-                </Box>
+      <Flex mt="8.22px" ml="16.44px" alignItems="center">
+        <Text
+          fontWeight="500"
+          fontSize="10.96px"
+          color="rgba(255, 255, 255, 0.3);"
+          mr="160.29px"
+          fontFamily="Poppins"
+        >
+          Values
+        </Text>
+        <Flex>
+          <Image src={dot} alt="" w="5.48px" h="5.48px" mr="5.48px" />
+          <Image
+            src={" resources/Rectangle blank.png"}
+            alt=""
+            w="5.48px"
+            h="5.48px"
+            mr="5.48px"
+          />
+          <Image
+            src={" resources/Rectangle blank.png "}
+            w="5.48px"
+            h="5.48px"
+            mr="5.48px"
+          />
+        </Flex>
+      </Flex>
 
-                <Box marginRight="16px" position="relative">
-                  <Flex position="absolute" left={43} top={39}>
-                    <Image src={"resources/Fill 1.png"} />
-                    <Text
-                      fontWeight="400"
-                      fontSize="16px"
-                      color="#ffffff"
-                      position="absolute"
-                      marginLeft="32px"
-                      fontFamily="Poppins"
-                    >
-                      Ticket
-                    </Text>
-                  </Flex>
-                  <Text
-                    position="absolute"
-                    color="#ffffff"
-                    top={71}
-                    left={25}
-                    fontSize="18px"
-                    fontWeight={600}
-                    fontFamily="Poppins"
-                  >
-                    NFT Name
-                  </Text>
-                  <Text
-                    position="absolute"
-                    top="93px"
-                    left="38px"
-                    color="#ffffff"
-                    fontWeight={400}
-                    fontSize="16px"
-                    fontFamily="Poppins"
-                  >
-                    24,6 aex
-                  </Text>
-                  <Image
-                    src={"resources/Rectangle 3527.png"}
-                    maxWidth="140px"
-                    height="149px"
-                  />
-                </Box>
+      <Flex mt="13.7px" ml="16.44px" overflow="hidden">
+        <Box marginRight="10.96px" position="relative">
+          <Flex position="absolute" left="30.825px" top="28.77px">
+            <Image src={"resources/Ticket Star.png"} w="13.7px" h="12.33px" />
+            <Text
+              fontWeight="400"
+              fontSize="10.96px"
+              marginLeft="21.92px"
+              color="#ffffff"
+              position="absolute"
+              fontFamily="Poppins"
+            >
+              Art
+            </Text>
+          </Flex>
+          <Text
+            position="absolute"
+            color="#ffffff"
+            top="48.633px"
+            left="17.125px"
+            fontSize="12.33px"
+            fontWeight={600}
+            fontFamily="Poppins"
+          >
+            NFT Name
+          </Text>
+          <Text
+            position="absolute"
+            top="63.705px"
+            left="26.03px"
+            color="#ffffff"
+            fontWeight={400}
+            fontSize="10.96px"
+            fontFamily="Poppins"
+          >
+            24,6 aex
+          </Text>
+          <Image
+            src={"resources/Rectangle 3421.png"}
+            maxWidth="95.9px"
+            height="102.065px"
+          />
+        </Box>
 
-                <Box marginRight="16px" position="relative">
-                  <Flex position="absolute" left={43} top={39}>
-                    <Image src={"resources/Ticket Star.png"} />
-                    <Text
-                      fontWeight="400"
-                      fontSize="16px"
-                      color="#ffffff"
-                      position="absolute"
-                      marginLeft="32px"
-                      fontFamily="Poppins"
-                    >
-                      Art
-                    </Text>
-                  </Flex>
-                  <Text
-                    position="absolute"
-                    color="#ffffff"
-                    top={71}
-                    left={25}
-                    fontSize="18px"
-                    fontWeight={600}
-                    fontFamily="Poppins"
-                  >
-                    NFT Name
-                  </Text>
-                  <Text
-                    position="absolute"
-                    top="93px"
-                    left="38px"
-                    color="#ffffff"
-                    fontWeight={400}
-                    fontSize="16px"
-                    fontFamily="Poppins"
-                  >
-                    24,6 aex
-                  </Text>
-                  <Image
-                    src={"resources/Rectangle 3421.png"}
-                    maxWidth="140px"
-                    height="149px"
-                  />
-                </Box>
-              </Flex>
+        <Box marginRight="16px" position="relative">
+          <Flex position="absolute" left="30.825px" top="28.77px">
+            <Image src={"resources/Fill 1.png"} w="13.7px" h="12.33px" />
+            <Text
+              fontWeight="400"
+              color="#ffffff"
+              fontSize="10.96px"
+              marginLeft="21.92px"
+              position="absolute"
+              fontFamily="Poppins"
+            >
+              Ticket
+            </Text>
+          </Flex>
+          <Text
+            position="absolute"
+            color="#ffffff"
+            top="48.633px"
+            left="17.125px"
+            fontSize="12.33px"
+            fontWeight={600}
+            fontFamily="Poppins"
+          >
+            NFT Name
+          </Text>
+          <Text
+            position="absolute"
+            top="63.705px"
+            left="26.03px"
+            color="#ffffff"
+            fontWeight={400}
+            fontSize="10.96px"
+            fontFamily="Poppins"
+          >
+            24,6 aex
+          </Text>
+          <Image
+            src={"resources/Rectangle 3527.png"}
+            maxWidth="95.9px"
+            height="102.065px"
+          />
+        </Box>
+
+        <Box marginRight="16px" position="relative">
+          <Flex position="absolute" left="30.825px" top="28.77px">
+            <Image src={"resources/Ticket Star.png"} w="13.7px" h="12.33px" />
+            <Text
+              fontWeight="400"
+              fontSize="10.96px"
+              marginLeft="21.92px"
+              color="#ffffff"
+              position="absolute"
+              fontFamily="Poppins"
+            >
+              Art
+            </Text>
+          </Flex>
+          <Text
+            position="absolute"
+            color="#ffffff"
+            top="48.633px"
+            left="17.125px"
+            fontSize="12.33px"
+            fontFamily="Poppins"
+          >
+            NFT Name
+          </Text>
+          <Text
+            position="absolute"
+            top="63.705px"
+            left="26.03px"
+            color="#ffffff"
+            fontWeight={400}
+            fontSize="10.96px"
+            fontFamily="Poppins"
+          >
+            24,6 aex
+          </Text>
+          <Image
+            src={"resources/Rectangle 3421.png"}
+            maxWidth="95.9px"
+            height="102.065px"
+          />
+        </Box>
+      </Flex>
     </Box>
   );
 };

@@ -10,13 +10,14 @@ import {
     ConnectConfig,
     ConnectedWalletAccount,
 } from "near-api-js";
-import { contractFullAccessKey } from "./pNftinit";
 import { NearStoreType } from "../types/stores";
 import {
     DexContract,
     ProfileContract,
     TokenContract,
 } from "../types/contracts";
+
+import { TOKEN_CONTRACT_NAME, PROFILE_CONTRACT_NAME, DEX_CONTRACT_NAME } from "../utils/constants/contract";
 
 
 const {
@@ -193,7 +194,7 @@ const loadTokenContract = (
 ) => {
     const tokenContract: TokenContract = new Contract(
         account,
-        process.env.TOKEN_CONTRACT_NAME,
+        TOKEN_CONTRACT_NAME,
         {
             viewMethods: [
                 "ft_balance_of",
@@ -220,7 +221,7 @@ const loadDexContrat = (
     nearState: NearStoreType,
     account: ConnectedWalletAccount,
 ) => {
-    const dexContract = new Contract(account, process.env.DEX_CONTRACT_NAME, {
+    const dexContract = new Contract(account, DEX_CONTRACT_NAME, {
         viewMethods: ["all_pools", "get_user_share"],
         changeMethods: [
             "connect_or_get_balance",
@@ -238,7 +239,7 @@ const loadProfileWithUserAsSigner = (
 ) => {
     const profileContractWithUserAsSigner = new Contract(
         account,
-        process.env.PROFILE_CONTRACT_NAME,
+        PROFILE_CONTRACT_NAME,
         {
             // change methods(methods that change state)
             changeMethods: [

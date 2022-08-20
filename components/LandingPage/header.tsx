@@ -3,8 +3,6 @@ import { Box, Button, Image, Text, Container, Flex, } from "@chakra-ui/react";
 
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
-import { loginToken } from "../../lib/auth";
-import { nearStore } from "../../store/near";
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,10 +11,8 @@ const Header: React.FC = () => {
 
 
 
-  function connectWallect() {
-    const state = nearStore((state) => state);
-    console.log("Register/login button clicked");
-//     loginToken(state)
+  function authentication() {
+    console.log("Welcome to arex");
   }
 
 
@@ -64,7 +60,7 @@ const Header: React.FC = () => {
         fontWeight="600"
         color="white"
         marginLeft="auto"
-        onClick={connectWallect}
+        onClick={authentication}
       >
         Login/Register
       </Button>

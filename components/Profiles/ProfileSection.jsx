@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
-import { FitToViewport } from "react-fit-to-viewport";
 
 // type Props = {};
 

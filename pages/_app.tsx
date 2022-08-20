@@ -1,4 +1,7 @@
 import '../styles/globals.css'
+import '../components/profiles/css/index.css'
+
+
 import type { AppProps } from 'next/app'
 import "../components/LandingPage/css/landing.css";
 import { ThemeProvider } from "next-themes";
@@ -11,6 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   
   return (
+    
+    <div className="profile <div  className='w-[39%] h-[100vh] overflow-hidden'>">
     <Provider store={store}>
     <ChakraProvider
                 theme={myTheme}
@@ -20,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ThemeProvider>
     </ChakraProvider>
     </Provider>
+    </div>
   ) 
 }
 

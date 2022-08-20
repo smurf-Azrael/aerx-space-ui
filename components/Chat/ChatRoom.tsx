@@ -169,11 +169,11 @@ const MessagesWrapper: React.FC = () => {
     const RenderSenderMessage: React.FC<{content: string, type: EMessageType}> = ({content, type}) => {
         return (
             <div className='flex'>
-            <div className='ml-auto bg-black-light p-2 px-4 w-[max-content] max-w-[90%]' style={{borderRadius:'20px 20px 0px 20px'}}>
+            <div className='ml-auto bg-black-light p-3 px-4 w-[max-content] max-w-[90%]' style={{borderRadius:'20px 20px 0px 20px'}}>
                {type === EMessageType.TEXT && 
-                <label className='text-white text-sm'>
+                <p className='text-white text-[11px]'>
                     {content}
-                </label>
+                </p>
                 }
                 {type === EMessageType.AUDIO && 
                     <Image src="/assets/icons/audio-icon.svg" alt="voice note" width={20} height={20} />
@@ -185,11 +185,11 @@ const MessagesWrapper: React.FC = () => {
 
     const RenderRecipientMessage: React.FC<{content: string, type: EMessageType}> = ({content, type}) => {
         return (
-            <div className='bg-primary p-2 px-4 w-[max-content] max-w-[90%]' style={{borderRadius:'20px 20px 20px 0px'}}>
+            <div className='bg-primary p-3 px-4 w-[max-content] max-w-[90%]' style={{borderRadius:'20px 20px 20px 0px'}}>
                 {type === EMessageType.TEXT && 
-                <label className='text-white text-sm'>
+                <p className='text-white text-[11px]'>
                     {content}
-                </label>
+                </p>
                 }
                 {type === EMessageType.AUDIO && 
                     <Image src="/assets/icons/audio-icon.svg" alt="voice note" width={100} height={30} className="" />

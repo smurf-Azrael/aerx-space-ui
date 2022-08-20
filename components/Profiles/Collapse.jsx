@@ -7,7 +7,6 @@ function Collapse(props) {
 
 
 // {/* <Wallets toggle={props.toggle} left={props.left} /> */}
-// test
   return (
     <Flex
       h="739.8px"

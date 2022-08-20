@@ -16,7 +16,7 @@ const Header: React.FC = () => {
   function connectWallect() {
     const state = nearStore((state) => state);
     console.log("Register/login button clicked");
-    loginToken(state)
+//     loginToken(state)
   }
 
 

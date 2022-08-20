@@ -10,8 +10,8 @@ const Header: React.FC = () => {
   const dispatch = useDispatch();
   const { logo } = useSelector(getUserState);
 
-  const state = nearStore((state) => state);
 
+  const state = nearStore((state: any) => state);
 
   function connectWallet() {
     console.log("Register/login button clicked");
@@ -57,20 +57,23 @@ const Header: React.FC = () => {
         </Text>
       </Flex>
 
-      <Button
-        bgColor="#8D00FF"
-        py="12px"
-        px="40px"
-        fontFamily="Poppins"
-        borderRadius={50}
-        fontWeight="600"
-        color="white"
-        marginLeft="auto"
-        onClick={connectWallet}
-      >
-        Login/Register
-      </Button>
+      <Flex alignItems="center" marginLeft="auto" gap="56px">
+        <Text fontFamily="Poppins" fontWeight="400" color="rgba(50, 46, 101, 0.5);">Register</Text>
+        <Button
+          bgColor="#8D00FF"
+          py="12px"
+          px="40px"
+          fontFamily="Poppins"
+          borderRadius={50}
+          fontWeight="600"
+          color="white"
+          marginLeft="auto"
+          onClick={connectWallet}
+        >
+          Login
+        </Button>
 
+      </Flex>
 
     </Flex>
 

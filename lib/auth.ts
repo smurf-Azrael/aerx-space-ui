@@ -1,4 +1,3 @@
-// require('dotenv').config();
 import * as nearApiJs from "near-api-js";
 import { PNFTContract } from "../types/contracts";
 import { getConfig } from "./config";
@@ -139,7 +138,8 @@ export async function initNearConnection(nearState: NearStoreType) {
     console.log("accountId : ", accountId);
     //verify accountId exists
     if (!accountId) {
-        console.error("ACCOUNTID IS EMPTY");
+        console.log("Account id is empty");
+        //Todo: prompt user to register or login
         return;
     }
     nearState.setAccountId(accountId);
@@ -156,7 +156,7 @@ export async function initNearConnection(nearState: NearStoreType) {
 
 
 export async function checkProfile(nearState: any) {
-    // checks profile is initialised and user is connected
+    // checks profile contract is initialised and user is connected(has accountId)
     if (nearState.pnftContract && nearState.accountId) {
         console.log("profile checking ...", nearState.profile);
         const has_registered = await nearState.pnftContract?.has_registered({
@@ -289,9 +289,11 @@ export function logout(nearState: NearStoreType) {
     window.location.replace(window.location.origin + window.location.pathname);
 }
 
+//Todo: create custom url/page for error 401 or 404(incase user didn't approve connection or insufficient balance)
 export async function loginToken(nearState: NearStoreType) {
     if (!nearState.walletConnection) {
-        throw new Error("wallet is not connected");
+        throw new Error("Error finding walletConnection state try again later");
+        //Todo: alert users if this ever happens
     }
     //Todo: change contract to profile
     await nearState.walletConnection.requestSignIn(
@@ -300,6 +302,4 @@ export async function loginToken(nearState: NearStoreType) {
         window.location.origin + "/settings/profile",
         "",
     );
-
-    //Todo: create custom url/page for error 401 or 404
 }

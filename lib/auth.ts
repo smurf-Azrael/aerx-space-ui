@@ -1,4 +1,3 @@
-require('dotenv').config();
 import * as nearApiJs from "near-api-js";
 import { PNFTContract } from "../types/contracts";
 import { getConfig } from "./config";
@@ -16,8 +15,8 @@ import {
     ProfileContract,
     TokenContract,
 } from "../types/contracts";
-
 import { TOKEN_CONTRACT_NAME, PROFILE_CONTRACT_NAME, DEX_CONTRACT_NAME } from "../utils/constants/contract";
+import { authenticatePinata } from "./pinata";
 
 
 const {
@@ -139,7 +138,8 @@ export async function initNearConnection(nearState: NearStoreType) {
     console.log("accountId : ", accountId);
     //verify accountId exists
     if (!accountId) {
-        console.error("ACCOUNTID IS EMPTY");
+        console.log("Account id is empty");
+        //Todo: prompt user to register or login
         return;
     }
     nearState.setAccountId(accountId);
@@ -156,7 +156,7 @@ export async function initNearConnection(nearState: NearStoreType) {
 
 
 export async function checkProfile(nearState: any) {
-    // checks profile is initialised and user is connected
+    // checks profile contract is initialised and user is connected(has accountId)
     if (nearState.pnftContract && nearState.accountId) {
         console.log("profile checking ...", nearState.profile);
         const has_registered = await nearState.pnftContract?.has_registered({
@@ -275,6 +275,13 @@ const loadProfileContract = async (nearState: NearStoreType) => {
     console.log("pnft contract:", pnftContract);
 }
 
+//Todo: maybe moved into initNearConnection depending on the speed of pinata to authenticate(when we have a gateway will test and decide)
+export async function initPinata(nearState: NearStoreType) {
+    const pinatastate = await authenticatePinata();
+    nearState.setPinataState(pinatastate);
+    console.log("Pinata state: ", pinatastate);
+}
+
 export function logout(nearState: NearStoreType) {
     // TODO: NEED TO CONFIRM IF IT'S OK TO THROW
     if (!nearState.walletConnection) {
@@ -289,17 +296,17 @@ export function logout(nearState: NearStoreType) {
     window.location.replace(window.location.origin + window.location.pathname);
 }
 
+//Todo: create custom url/page for error 401 or 404(incase user didn't approve connection or insufficient balance)
 export async function loginToken(nearState: NearStoreType) {
     if (!nearState.walletConnection) {
-        throw new Error("wallet is not connected");
+        throw new Error("Error finding walletConnection state try again later");
+        //Todo: alert users if this ever happens
     }
     //Todo: change contract to profile
-    await nearState.walletConnection.requestSignIn(
-        process.env.TOKEN_CONTRACT_NAME,
-        "",
-        window.location.origin + "/account",
-        "",
+    await nearState.walletConnection.requestSignIn({
+        contractId: process.env.TOKEN_CONTRACT_NAME,
+        successUrl: `${window.location.origin}/settings/profile`,
+        failureUrl: `${window.location.origin}/error`,
+    }
     );
-
-    //Todo: create custom url/page for error 401 or 404
 }

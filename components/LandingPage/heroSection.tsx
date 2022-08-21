@@ -19,7 +19,7 @@ const HeroSection: React.FC = () => {
     console.log("welcome to arex");
   }
   return (
-    <WithStar>
+    
       <Container maxWidth="container.xlg">
         <Flex
           alignItems="center"
@@ -27,12 +27,15 @@ const HeroSection: React.FC = () => {
           flexDirection="row"
           marginRight="95px"
           marginLeft="95px"
-          bgImage="url('../resources/saly-1.png')"
+          bgImage="url('../resources/saly-1.png'), url('../resources/Ellipse 727.png'),  url('../resources/Ellipse 6.png') "
           bgRepeat="no-repeat"
-          bgPosition="center right"
-          
+          bgPosition="center right, top right, center left"
+          // bgGradient="linear(to-l, #7928CA, #FF0080)"
           height="80vh"
           bgSize="40%"
+          // bgColor="#16FF02"
+          // filter='blur(345px)'
+          // opacity="0.2px"
           
         >
           <Box>
@@ -86,14 +89,14 @@ const HeroSection: React.FC = () => {
               Get started
             </Button>
           </Box>
-          <WithDots>
+          
             <Box marginLeft="135px" marginTop="-125px" >
               <Image width="100" src="resources\Group 5401.png" className="group1-a" />
             </Box>
-          </WithDots>
+          
         </Flex>
       </Container>
-    </WithStar>
+    
   );
 };
 export default HeroSection;

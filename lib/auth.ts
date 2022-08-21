@@ -17,6 +17,7 @@ import {
 } from "../types/contracts";
 
 import { TOKEN_CONTRACT_NAME, PROFILE_CONTRACT_NAME, DEX_CONTRACT_NAME } from "../utils/constants/contract";
+import { authenticatePinata } from "./pinata";
 
 
 const {
@@ -273,6 +274,13 @@ const loadProfileContract = async (nearState: NearStoreType) => {
     }
     nearState.setPNFTContract(pnftContract);
     console.log("pnft contract:", pnftContract);
+}
+
+//Todo: maybe moved into initNearConnection depending on the speed of pinata to authenticate(when we have a gateway will test and decide)
+export async function initPinata(nearState: NearStoreType) {
+    const pinatastate = await authenticatePinata();
+    nearState.setPinataState(pinatastate);
+    console.log("Pinata state: ", nearState.pinataState);
 }
 
 export function logout(nearState: NearStoreType) {

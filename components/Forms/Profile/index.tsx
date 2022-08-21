@@ -55,7 +55,7 @@ const ProfileSettingForm: React.FC = () => {
             // });
             setFilePreview(URL.createObjectURL(file));
             setFile(file)
-            toast.success("File uploaded successfully")
+            toast.success("Image selected")
         }
     }
 
@@ -139,10 +139,14 @@ const ProfileSettingForm: React.FC = () => {
             </div>
             <div className="w-full flex justify-around mt-4">
                 <button 
-                disabled={!isValid}
+                disabled={(!isValid 
+                 || (!touched.name || !touched.userName || !touched.bio)
+                 || !file) ? true : false}
                 onClick={handleSubmit}
                 className="text-white bg-purple p-2 rounded-[10px] w-[200px]"
-                style={isValid ? {opacity: 1} : {opacity: 0.5}}
+                style={(!isValid || (!touched.name || !touched.userName || !touched.bio) 
+                      || !file
+                    ) ? {opacity: 0.5 } : {opacity: 1}}
                 >
                     Create
                 </button>

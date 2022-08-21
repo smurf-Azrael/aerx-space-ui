@@ -278,9 +278,8 @@ const loadProfileContract = async (nearState: NearStoreType) => {
 //Todo: maybe moved into initNearConnection depending on the speed of pinata to authenticate(when we have a gateway will test and decide)
 export async function initPinata(nearState: NearStoreType) {
     const pinatastate = await authenticatePinata();
-    console.log("Return from authentication: ", pinatastate);
     nearState.setPinataState(pinatastate);
-    console.log("Pinata state: ", nearState.pinataState);
+    console.log("Pinata state: ", pinatastate);
 }
 
 export function logout(nearState: NearStoreType) {

@@ -19,7 +19,6 @@
     "dotenv": "^16.0.1",
     "formik": "^2.2.9",
     "framer-motion": "^6.5.1",
-    "fs": "^0.0.1-security",
     "near-api-js": "^0.45.1",
     "next": "12.2.4",
     "next-themes": "^0.2.0",

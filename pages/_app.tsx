@@ -1,4 +1,3 @@
-require('dotenv').config();
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import "../components/LandingPage/css/landing.css";
@@ -46,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [isLoading, nearState.accountId, nearState.tokenContract]);
 
   useEffect(() => {
-    //fetch posts 
+    //4)fetch posts 
     if (!isLoading) {
       (async () => {
         await fetchpostsData(nearState);
@@ -55,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [isLoading, nearState.accountId, nearState.pnftContract]);
 
   useEffect(() => {
-    //authenticatePinata Pinata
+    // 5) authenticate Pinata
     if (!isLoading) {
       (async () => {
         await initPinata(nearState)

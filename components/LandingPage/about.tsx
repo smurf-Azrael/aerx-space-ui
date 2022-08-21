@@ -17,13 +17,13 @@ const About: React.FC = () => {
     const dispatch = useDispatch();
     const { frame,polygon } = useSelector(getUserState);
     return (
-            <WithStar>
-            <WithDots>
+            
+            
             <Container maxWidth="container.xlg">
                 
             <Center>
                 <Heading    
-                    
+                    mt="190.75px"
                      fontSize="64px"
                      lineHeight="96px"
                      fontWeight="600"
@@ -38,11 +38,11 @@ const About: React.FC = () => {
 ">
                     <Image src={polygon} />
                 </Button>
-                    <Image src={frame}/>
+                    <Image src={frame} width="1320px" height="633px"/>
             </Center>
             </Container >
-            </WithDots>
-            </WithStar>
+            
+            
         
         
 

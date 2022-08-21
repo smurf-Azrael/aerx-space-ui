@@ -25,10 +25,9 @@ const NewsLetterForm: React.FC = () => {
     const dispatch = useDispatch();
     const { saly1, saly2, frame1, frame2, frame3, star } = useSelector(getUserState);
     return (
-    <WithStar>
-        <WithDots>
+    
     <Box className='form'>
-        <Container maxWidth="container.xlg">
+        <Container maxWidth="container.xlg" mt="209px">
         <Flex display='flex' alignItems="center" py="30" flexDirection="row" marginRight='95px' marginLeft="95px"
          
         >
@@ -92,8 +91,7 @@ const NewsLetterForm: React.FC = () => {
         </Flex>
         </Container>
     </Box>
-    </WithDots>
-    </WithStar>
+
   )
 }
 export default NewsLetterForm;

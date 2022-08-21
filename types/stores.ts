@@ -46,6 +46,11 @@ export type NearStoreType = {
     aexBalance: number;
     setAexBalance: (aexBalance: any) => void;
     removeAexBalance: () => void;
+
+    pinataState: boolean | null;
+    setPinataState: (pinataState: boolean) => void;
+    removePinataState: () => void;
+
 };
 
 export type ProfileStoreType = {

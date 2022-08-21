@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import "../components/LandingPage/css/landing.css";

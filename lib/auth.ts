@@ -303,10 +303,10 @@ export async function loginToken(nearState: NearStoreType) {
         //Todo: alert users if this ever happens
     }
     //Todo: change contract to profile
-    await nearState.walletConnection.requestSignIn(
-        process.env.TOKEN_CONTRACT_NAME,
-        "",
-        window.location.origin + "/settings/profile",
-        "",
+    await nearState.walletConnection.requestSignIn({
+        contractId: process.env.TOKEN_CONTRACT_NAME,
+        successUrl: `${window.location.origin}/settings/profile`,
+        failureUrl: `${window.location.origin}/error`,
+    }
     );
 }

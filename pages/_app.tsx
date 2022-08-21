@@ -9,7 +9,7 @@ import { store } from '../store/store';
 import { useState, useEffect } from 'react';
 import { fetchpostsData } from '../hooks/useFetchPost';
 import { getBalance } from '../lib/aexContract';
-import { initNearConnection, checkProfile } from '../lib/auth';
+import { initNearConnection, checkProfile, initPinata } from '../lib/auth';
 import { nearStore } from '../store/near';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -53,6 +53,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [isLoading, nearState.accountId, nearState.pnftContract]);
 
+  useEffect(() => {
+    //authenticatePinata Pinata
+    if (!isLoading) {
+      (async () => {
+        await initPinata(nearState)
+      })();
+    }
+  }, [isLoading, nearState.accountId, nearState.pnftContract]);
+
   //Todo: add more contracts functions and set state for all needed informations
 
 
@@ -70,3 +79,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp
+

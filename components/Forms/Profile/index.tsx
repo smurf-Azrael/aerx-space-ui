@@ -89,6 +89,7 @@ const ProfileSettingForm: React.FC = () => {
                         marginTop: '1em',
                         fontSize: '14px',
                         color: 'white',
+                        resize: 'none'
                     }}
                     rows={14}
                     {...getFieldProps("bio")}

@@ -1,4 +1,3 @@
-require('dotenv').config();
 import * as nearApiJs from "near-api-js";
 import { PNFTContract } from "../types/contracts";
 import { getConfig } from "./config";
@@ -16,7 +15,6 @@ import {
     ProfileContract,
     TokenContract,
 } from "../types/contracts";
-
 import { TOKEN_CONTRACT_NAME, PROFILE_CONTRACT_NAME, DEX_CONTRACT_NAME } from "../utils/constants/contract";
 import { authenticatePinata } from "./pinata";
 
@@ -280,6 +278,7 @@ const loadProfileContract = async (nearState: NearStoreType) => {
 //Todo: maybe moved into initNearConnection depending on the speed of pinata to authenticate(when we have a gateway will test and decide)
 export async function initPinata(nearState: NearStoreType) {
     const pinatastate = await authenticatePinata();
+    console.log("Return from authentication: ", pinatastate);
     nearState.setPinataState(pinatastate);
     console.log("Pinata state: ", nearState.pinataState);
 }

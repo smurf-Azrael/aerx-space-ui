@@ -56,7 +56,7 @@ const ProfileSettingForm: React.FC = () => {
             setFilePreview(URL.createObjectURL(file));
             setFile(file)
             toast.success("Image selected")
-            console.log("File: ", event.target.files)
+             console.log("File: ", filePreview)
         }
     }
 

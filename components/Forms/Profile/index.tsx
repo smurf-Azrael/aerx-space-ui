@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Textarea } from "@chakra-ui/react";
 import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import toast, {Toaster} from 'react-hot-toast';
+
 
 const ProfileSettingForm: React.FC = () => {
+    const [file, setFile] = useState<File>();
+    const [filePreview, setFilePreview] = useState<string>();
+
     const initialValues = {
         name: "",
         userName: "",
@@ -31,8 +36,33 @@ const ProfileSettingForm: React.FC = () => {
         const dataToPost = {...values, image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"};
         alert('Data to post: ' + JSON.stringify(dataToPost));
     }
+
+    const uploadPhoto = () => {
+        (document.getElementsByClassName('upload-photo')[0] as any).click();
+    }
+
+    function fileChange(event: any) {
+        const file = event.target.files[0];
+        if (file) {
+            const filename = file?.name;
+            var parts = filename.split(".");
+            const fileType = parts[parts.length - 1];
+            // setBody((prevBody: any) => {
+            //     return {
+            //         ...prevBody,
+            //         media_extension: fileType,
+            //     };
+            // });
+            setFilePreview(URL.createObjectURL(file));
+            setFile(file)
+            toast.success("Image selected")
+        }
+    }
+
+    
     return (
         <div className="px-6">
+            <Toaster />
             <div className="mt-4 flex w-ful gap-6">
                 <div className="h-[400px] w-[230px] bg-[#0000004d] p-2" style={{
                     backgroundImage: `url("/assets/images/profile-avatar-cover.svg")`,
@@ -46,9 +76,15 @@ const ProfileSettingForm: React.FC = () => {
                             <label className="text-white">Avatar</label>
                         </div>
 
-                        <div className="w-full  flex flex-col justify-around">
-                            <Image src="/assets/icons/upload-icon.svg" alt="profile-avatar" width={40} height={40} />
-                            <label className="text-white text-center">Upload</label>
+                        <div className="w-full  flex flex-col justify-around cursor-pointer" onClick={uploadPhoto}>
+                            <Image src="/assets/icons/upload-icon.svg" alt="profile-avatar" width={40} height={40} className="cursor-pointer" />
+                            <label className="text-white text-center cursor-pointer">Upload</label>
+                            <input type="file" 
+                             hidden 
+                             accept='image/*' 
+                             onChange={fileChange}
+                             className="upload-photo"
+                            />
                         </div>
 
                         
@@ -89,6 +125,7 @@ const ProfileSettingForm: React.FC = () => {
                         marginTop: '1em',
                         fontSize: '14px',
                         color: 'white',
+                        resize: 'none'
                     }}
                     rows={14}
                     {...getFieldProps("bio")}
@@ -102,10 +139,14 @@ const ProfileSettingForm: React.FC = () => {
             </div>
             <div className="w-full flex justify-around mt-4">
                 <button 
-                disabled={!isValid}
+                disabled={(!isValid 
+                 || (!touched.name || !touched.userName || !touched.bio)
+                 || !file) ? true : false}
                 onClick={handleSubmit}
                 className="text-white bg-purple p-2 rounded-[10px] w-[200px]"
-                style={isValid ? {opacity: 1} : {opacity: 0.5}}
+                style={(!isValid || (!touched.name || !touched.userName || !touched.bio) 
+                      || !file
+                    ) ? {opacity: 0.5 } : {opacity: 1}}
                 >
                     Create
                 </button>

@@ -1,4 +1,3 @@
-// require('dotenv').config();
 import * as nearApiJs from "near-api-js";
 import { PNFTContract } from "../types/contracts";
 import { getConfig } from "./config";
@@ -16,7 +15,6 @@ import {
     ProfileContract,
     TokenContract,
 } from "../types/contracts";
-
 import { TOKEN_CONTRACT_NAME, PROFILE_CONTRACT_NAME, DEX_CONTRACT_NAME } from "../utils/constants/contract";
 import { authenticatePinata } from "./pinata";
 
@@ -281,7 +279,7 @@ const loadProfileContract = async (nearState: NearStoreType) => {
 export async function initPinata(nearState: NearStoreType) {
     const pinatastate = await authenticatePinata();
     nearState.setPinataState(pinatastate);
-    console.log("Pinata state: ", nearState.pinataState);
+    console.log("Pinata state: ", pinatastate);
 }
 
 export function logout(nearState: NearStoreType) {
@@ -305,10 +303,10 @@ export async function loginToken(nearState: NearStoreType) {
         //Todo: alert users if this ever happens
     }
     //Todo: change contract to profile
-    await nearState.walletConnection.requestSignIn(
-        process.env.TOKEN_CONTRACT_NAME,
-        "",
-        window.location.origin + "/settings/profile",
-        "",
+    await nearState.walletConnection.requestSignIn({
+        contractId: process.env.TOKEN_CONTRACT_NAME,
+        successUrl: `${window.location.origin}/settings/profile`,
+        failureUrl: `${window.location.origin}/error`,
+    }
     );
 }

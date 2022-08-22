@@ -3,7 +3,7 @@ import { Textarea } from "@chakra-ui/react";
 import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import toast, {Toaster} from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const ProfileSettingForm: React.FC = () => {
@@ -30,10 +30,10 @@ const ProfileSettingForm: React.FC = () => {
         }
     });
 
-    const { touched, values, getFieldProps, isValid, errors} = formik;
+    const { touched, values, getFieldProps, isValid, errors } = formik;
 
     const handleSubmit = () => {
-        const dataToPost = {...values, image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"};
+        const dataToPost = { ...values, image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" };
         alert('Data to post: ' + JSON.stringify(dataToPost));
     }
 
@@ -56,10 +56,11 @@ const ProfileSettingForm: React.FC = () => {
             setFilePreview(URL.createObjectURL(file));
             setFile(file)
             toast.success("Image selected")
+            console.log("File: ", file)
         }
     }
 
-    
+
     return (
         <div className="px-6">
             <Toaster />
@@ -79,15 +80,15 @@ const ProfileSettingForm: React.FC = () => {
                         <div className="w-full  flex flex-col justify-around cursor-pointer" onClick={uploadPhoto}>
                             <Image src="/assets/icons/upload-icon.svg" alt="profile-avatar" width={40} height={40} className="cursor-pointer" />
                             <label className="text-white text-center cursor-pointer">Upload</label>
-                            <input type="file" 
-                             hidden 
-                             accept='image/*' 
-                             onChange={fileChange}
-                             className="upload-photo"
+                            <input type="file"
+                                hidden
+                                accept='image/*'
+                                onChange={fileChange}
+                                className="upload-photo"
                             />
                         </div>
 
-                        
+
                         <div className="w-full  flex flex-col justify-around">
                             <Image src="/assets/icons/3d-account-icon.svg" alt="profile-avatar" width={40} height={40} />
                             <label className="text-white text-center">3D avatar</label>
@@ -95,58 +96,58 @@ const ProfileSettingForm: React.FC = () => {
                     </div>
                 </div>
                 <div className="w-[55%] ">
-                    <input 
-                    type="text" 
-                    placeholder="Full name" 
-                    className="w-full text-sm  py-3 px-4 focus:outline-none bg-black rounded-md text-white"
-                    {...getFieldProps("name")}
-                    name="name"
-                    style={touched.name && errors.name ? {borderColor: "red"} : {}}
+                    <input
+                        type="text"
+                        placeholder="Full name"
+                        className="w-full text-sm  py-3 px-4 focus:outline-none bg-black rounded-md text-white"
+                        {...getFieldProps("name")}
+                        name="name"
+                        style={touched.name && errors.name ? { borderColor: "red" } : {}}
                     />
                     <>
-                    {touched.name && errors.name && <label className="text-red-500 text-sm">{errors?.name}</label> }
+                        {touched.name && errors.name && <label className="text-red-500 text-sm">{errors?.name}</label>}
                     </>
-                    <input 
-                    type="text" 
-                    placeholder="Username" 
-                    className="mt-[1em] w-full text-sm  py-3 px-4 focus:outline-none bg-black rounded-md text-white"
-                    {...getFieldProps("userName")}
-                    name="userName"
-                    style={touched.userName && errors.userName ? {borderColor: "red"} : {}}
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        className="mt-[1em] w-full text-sm  py-3 px-4 focus:outline-none bg-black rounded-md text-white"
+                        {...getFieldProps("userName")}
+                        name="userName"
+                        style={touched.userName && errors.userName ? { borderColor: "red" } : {}}
                     />
                     <>
-                    {touched.userName && errors.userName && <label className="text-red-500 text-sm">{errors?.userName}</label> }
+                        {touched.userName && errors.userName && <label className="text-red-500 text-sm">{errors?.userName}</label>}
                     </>
 
-                    <Textarea placeholder="About" 
-                    style={{
-                        border: 0,
-                        backgroundColor: 'black',
-                        marginTop: '1em',
-                        fontSize: '14px',
-                        color: 'white',
-                        resize: 'none'
-                    }}
-                    rows={14}
-                    {...getFieldProps("bio")}
-                    className={touched.bio && errors.bio ? "border-red-500" : ""}
-                    name="bio"
+                    <Textarea placeholder="About"
+                        style={{
+                            border: 0,
+                            backgroundColor: 'black',
+                            marginTop: '1em',
+                            fontSize: '14px',
+                            color: 'white',
+                            resize: 'none'
+                        }}
+                        rows={14}
+                        {...getFieldProps("bio")}
+                        className={touched.bio && errors.bio ? "border-red-500" : ""}
+                        name="bio"
                     />
                     <>
-                    {touched.bio && errors.bio && <label className="text-red-500 text-sm">{errors?.bio}</label> }
+                        {touched.bio && errors.bio && <label className="text-red-500 text-sm">{errors?.bio}</label>}
                     </>
                 </div>
             </div>
             <div className="w-full flex justify-around mt-4">
-                <button 
-                disabled={(!isValid 
-                 || (!touched.name || !touched.userName || !touched.bio)
-                 || !file) ? true : false}
-                onClick={handleSubmit}
-                className="text-white bg-purple p-2 rounded-[10px] w-[200px]"
-                style={(!isValid || (!touched.name || !touched.userName || !touched.bio) 
-                      || !file
-                    ) ? {opacity: 0.5 } : {opacity: 1}}
+                <button
+                    disabled={(!isValid
+                        || (!touched.name || !touched.userName || !touched.bio)
+                        || !file) ? true : false}
+                    onClick={handleSubmit}
+                    className="text-white bg-purple p-2 rounded-[10px] w-[200px]"
+                    style={(!isValid || (!touched.name || !touched.userName || !touched.bio)
+                        || !file
+                    ) ? { opacity: 0.5 } : { opacity: 1 }}
                 >
                     Create
                 </button>

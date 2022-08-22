@@ -1,4 +1,3 @@
-// custom hook for IPFS
 import { useEffect, useState } from "react";
 import { pinToIPFS } from "../lib/pinata";
 import { UseToastOptions } from "@chakra-ui/react";

@@ -1,4 +1,3 @@
-import fs from 'fs';
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import "../components/LandingPage/css/landing.css";
@@ -76,12 +75,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </ChakraProvider>
     </Provider>
   )
-}
-
-//node fix for fs
-export async function getStaticProps(content: string) {
-  let result = await fs.createReadStream(content);
-  return result;
 }
 
 export default MyApp

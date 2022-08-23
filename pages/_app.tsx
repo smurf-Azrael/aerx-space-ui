@@ -13,7 +13,6 @@ import { initNearConnection, checkProfile, initPinata } from '../lib/auth';
 import { nearStore } from '../store/near';
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   const [isLoading, setIsLoading] = useState(true);
   const nearState = nearStore((state) => state);
   //1) Initialise near connection and contracts
@@ -76,6 +75,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       </ChakraProvider>
     </Provider>
   )
+}
+
+//node fix for fs
+export async function getStaticProps(content: string) {
+  const fs = require('fs');
+  let result = await fs.createReadStream(content);
+  return result;
 }
 
 export default MyApp

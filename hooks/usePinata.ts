@@ -1,3 +1,4 @@
+// custom hook for IPFS
 import { useEffect, useState } from "react";
 import { pinToIPFS } from "../lib/pinata";
 import { UseToastOptions } from "@chakra-ui/react";
@@ -19,12 +20,11 @@ export type IPFSDataType = {
     urlSha256: string | null;
 };
 
-// Change this for using crust or not. If you use crust we will unpin the file from pinata
-const deployCrust = false;
 
-// pass the file or state you want to upload. It will upload the file and retrun the response.
+// pin file to ipfs through pinata
 export default function usePinata(
-    file: File | undefined,
+    file_url: string | undefined,
+    file_name: string | undefined,
     method_type: string,
     username: string,
     toast: (
@@ -41,11 +41,11 @@ export default function usePinata(
 
     useEffect(() => {
         async function fileUpload() {
-            const filename = file!.name;
+            const filename = file_name;
             var parts = filename.split(".");
             const fileType = parts[parts.length - 1];
             console.log("fileType to upload: ", fileType)
-            const { url, urlHash, size }: any = pinToIPFS(file, filename, method_type, username);
+            const { url, urlHash, size }: any = pinToIPFS(file_url, filename, method_type, username);
             setIpfsData((prevIpfs) => ({
                 ...prevIpfs,
                 fileUrl: url,
@@ -60,8 +60,8 @@ export default function usePinata(
             return [urlHash, size];
         }
 
-        file && fileUpload();
-    }, [file]);
+        file_url && fileUpload();
+    }, [file_url]);
 
     return ipfsData;
 }

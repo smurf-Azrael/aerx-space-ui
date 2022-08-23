@@ -1,3 +1,4 @@
+import fs from 'fs';
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import "../components/LandingPage/css/landing.css";
@@ -79,7 +80,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 //node fix for fs
 export async function getStaticProps(content: string) {
-  const fs = require('fs');
   let result = await fs.createReadStream(content);
   return result;
 }

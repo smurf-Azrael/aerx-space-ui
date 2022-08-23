@@ -7,7 +7,7 @@ module.exports = {
 //   webpack: (config) => {
 //     config.resolve.fallback = { fs: true };
 
-    return config;
-  },
+//     return config;
+//   },
 }
 

@@ -2,8 +2,6 @@
 import { useEffect, useState } from "react";
 import { pinToIPFS } from "../lib/pinata";
 import { UseToastOptions } from "@chakra-ui/react";
-import shajs from "sha.js";
-import { AnyArray } from "immer/dist/internal";
 
 export type usePinataProps = {
     file: File | undefined;
@@ -38,16 +36,15 @@ export default function usePinata(
         fileSize: null,
         urlSha256: null,
     });
-
+    const { url, urlHash, size }: any = pinToIPFS(file_url, file_name, method_type, username);
     useEffect(() => {
         async function fileUpload() {
-            const filename = file_name;
-            if (filename != undefined) {
-                var parts = filename.split(".");
+            if (file_name != undefined) {
+                var parts = file_name.split(".");
                 const fileType = parts[parts.length - 1];
                 console.log("fileType to upload: ", fileType)
             }
-            const { url, urlHash, size }: any = pinToIPFS(file_url, filename, method_type, username);
+
             setIpfsData((prevIpfs) => ({
                 ...prevIpfs,
                 fileUrl: url,

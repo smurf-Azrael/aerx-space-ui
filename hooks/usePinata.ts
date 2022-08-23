@@ -31,12 +31,12 @@ export default function usePinata(
     //     toastId: string,
     // ) => void,
 ) {
+    const { url, urlHash, size }: any = pinToIPFS(file_url, file_name, method_type, username);
     const [ipfsData, setIpfsData] = useState<IPFSDataType>({
         fileUrl: null,
         fileSize: null,
         urlSha256: null,
     });
-    const { url, urlHash, size }: any = pinToIPFS(file_url, file_name, method_type, username);
     useEffect(() => {
         async function fileUpload() {
             if (file_name != undefined) {

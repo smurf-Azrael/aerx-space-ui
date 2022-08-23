@@ -5,7 +5,7 @@ module.exports = {
   swcMinify: true,
   webpack5: true,
   webpack: (config) => {
-    config.resolve.fallback = { fs: stream-browserify };
+    config.resolve.fallback = { fs: false};
 
     return config;
   },

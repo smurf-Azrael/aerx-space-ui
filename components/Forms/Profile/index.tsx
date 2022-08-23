@@ -36,7 +36,7 @@ const ProfileSettingForm: React.FC = () => {
     const handleSubmit = () => {
         console.log("File_url: ", filePreview)
         console.log("Username: ", formik.values.userName);
-        usePinata(filePreview, file?.name, "PROFILE", formik.values.userName, toast)
+        usePinata(filePreview, file?.name, "PROFILE", formik.values.userName)
     }
 
     const uploadPhoto = () => {

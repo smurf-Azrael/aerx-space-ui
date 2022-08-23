@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
+import usePinata from "../../../hooks/usePinata";
 
 
 const ProfileSettingForm: React.FC = () => {
@@ -31,14 +32,11 @@ const ProfileSettingForm: React.FC = () => {
     });
 
     const { touched, values, getFieldProps, isValid, errors } = formik;
-    //Todo: fix the default state of filepreview not to return undefined
+
     const handleSubmit = () => {
-        //Temporary fix 
-        if (filePreview == undefined) {
-            console.log("Undefined file url")
-        } else {
-            console.log("File_url: ", filePreview)
-        }
+        console.log("File_url: ", filePreview)
+        console.log("Username: ", formik.values.userName);
+        usePinata(filePreview, file?.name, "PROFILE", formik.values.userName, toast)
     }
 
     const uploadPhoto = () => {

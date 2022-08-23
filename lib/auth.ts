@@ -1,4 +1,3 @@
-import fs from 'fs';
 import * as nearApiJs from "near-api-js";
 import { PNFTContract } from "../types/contracts";
 import { getConfig } from "./config";

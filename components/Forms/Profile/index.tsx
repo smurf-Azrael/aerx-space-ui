@@ -31,7 +31,7 @@ const ProfileSettingForm: React.FC = () => {
     });
 
     const { touched, values, getFieldProps, isValid, errors } = formik;
-    let file_url: string = "";//temporary fix to get file url because state return undefined on first attempt
+    let file_url: string;//temporary fix to get file url because state return undefined on first attempt
     const handleSubmit = () => {
         // const dataToPost = { ...values, image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" };
         // alert('Data to post: ' + JSON.stringify(dataToPost));
@@ -58,6 +58,7 @@ const ProfileSettingForm: React.FC = () => {
             setFile(file)
             toast.success("Image selected")
             file_url = URL.createObjectURL(file);
+            console.log("File_url: ", file_url)
         }
     }
 

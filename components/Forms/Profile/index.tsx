@@ -31,11 +31,14 @@ const ProfileSettingForm: React.FC = () => {
     });
 
     const { touched, values, getFieldProps, isValid, errors } = formik;
-    let file_url: string;//temporary fix to get file url because state return undefined on first attempt
+    //Todo: fix the default state of filepreview not to return undefined
     const handleSubmit = () => {
-        // const dataToPost = { ...values, image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" };
-        // alert('Data to post: ' + JSON.stringify(dataToPost));
-        console.log("File_url: ", file_url)
+        //Temporary fix 
+        if (filePreview == undefined) {
+            console.log("Undefined file url")
+        } else {
+            console.log("File_url: ", filePreview)
+        }
     }
 
     const uploadPhoto = () => {
@@ -57,8 +60,6 @@ const ProfileSettingForm: React.FC = () => {
             setFilePreview(URL.createObjectURL(file));
             setFile(file)
             toast.success("Image selected")
-            file_url = URL.createObjectURL(file);
-            console.log("File_url: ", file_url)
         }
     }
 

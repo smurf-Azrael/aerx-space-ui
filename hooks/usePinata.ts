@@ -27,11 +27,11 @@ export default function usePinata(
     file_name: string | undefined,
     method_type: string,
     username: string,
-    toast: (
-        status: UseToastOptions["status"],
-        description: string,
-        toastId: string,
-    ) => void,
+    // toast: (
+    //     status: UseToastOptions["status"],
+    //     description: string,
+    //     toastId: string,
+    // ) => void,
 ) {
     const [ipfsData, setIpfsData] = useState<IPFSDataType>({
         fileUrl: null,
@@ -42,9 +42,11 @@ export default function usePinata(
     useEffect(() => {
         async function fileUpload() {
             const filename = file_name;
-            var parts = filename.split(".");
-            const fileType = parts[parts.length - 1];
-            console.log("fileType to upload: ", fileType)
+            if (filename != undefined) {
+                var parts = filename.split(".");
+                const fileType = parts[parts.length - 1];
+                console.log("fileType to upload: ", fileType)
+            }
             const { url, urlHash, size }: any = pinToIPFS(file_url, filename, method_type, username);
             setIpfsData((prevIpfs) => ({
                 ...prevIpfs,
@@ -52,11 +54,11 @@ export default function usePinata(
                 fileSize: size,
                 urlSha256: urlHash,
             }));
-            toast(
-                "success",
-                "File deployed to IPFS! CID: " + url,
-                "ipfsSccss",
-            );
+            // toast(
+            //     "success",
+            //     "File deployed to IPFS! CID: " + url,
+            //     "ipfsSccss",
+            // );
             return [urlHash, size];
         }
 

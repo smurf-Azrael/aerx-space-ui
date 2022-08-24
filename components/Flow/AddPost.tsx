@@ -22,7 +22,7 @@ const CreatePostForm: React.FC = () => {
         let postToMint;
         if (nearState.postDetails.title == "") {
             postToMint = {
-                title: `AERX-postNFT for ${nearState.profile.username}`,
+                title: `AERX-postNFT for ${nearState.profile?.username}`,
                 description: nearState.postDetails.body,
                 media: nearState.postDetails.media,
                 media_hash: nearState.postDetails.mediaHash,

@@ -1,7 +1,7 @@
 import create from "zustand";
 import { NearStoreType } from "../types/stores";
 
-const nearStore = create<NearStoreType>((set: (arg0: { (state: any): { connection: any; }; (state: any): { connection: null; }; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; }) => any) => ({
+const nearStore = create<NearStoreType>((set) => ({
     connection: null,
     setConnection: (connection: any) => set(() => ({ connection })),
     removeConnection: () => set(() => ({ connection: null })),
@@ -55,8 +55,26 @@ const nearStore = create<NearStoreType>((set: (arg0: { (state: any): { connectio
     removeAexBalance: () => set((state) => ({ ...state, aexBalance: 0 })),
 
     pinataState: null,
-    setPinataState: (pinataState: boolean) => set((state) => ({ ...state, pinataState })),
+    setPinataState: (pinataState: any) => set((state) => ({ ...state, pinataState })),
     removePinataState: () => set((state) => ({ ...state, pinataState: null })),
+
+    postDetails: {
+        title: "",
+        body: "",
+        media: "",
+        mediaType: "",
+        mediaHash: null
+    },
+    setpostDetails: (postDetails: any) => set((state) => ({ ...state, postDetails })),
+    removepostDetails: () => set((state) => ({
+        ...state, postDetails: {
+            title: "",
+            body: "",
+            media: "",
+            mediaType: "",
+            mediaHash: null
+        }
+    })),
 
 }));
 

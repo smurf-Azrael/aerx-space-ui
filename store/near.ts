@@ -3,8 +3,8 @@ import { NearStoreType } from "../types/stores";
 
 const nearStore = create<NearStoreType>((set: (arg0: { (state: any): { connection: any; }; (state: any): { connection: null; }; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; (state: any): any; }) => any) => ({
     connection: null,
-    setConnection: (connection: any) => set((state) => ({ connection })),
-    removeConnection: () => set((state) => ({ connection: null })),
+    setConnection: (connection: any) => set(() => ({ connection })),
+    removeConnection: () => set(() => ({ connection: null })),
 
     walletConnection: null,
     setWalletConnection: (walletConnection: any) =>

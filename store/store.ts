@@ -4,10 +4,12 @@ import {
   useDispatch as useDispatchBase,
   useSelector as useSelectorBase,
 } from "react-redux";
+import modulesSlice from "./slices/modulesSlices";
 
 export const store = configureStore({
   reducer: {
     images: imageSlice,
+    modules: modulesSlice
   },
 });
 

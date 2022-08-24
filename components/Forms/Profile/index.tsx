@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
-import usePinata from "../../../hooks/usePinata";
+import usePinata from '../../../lib/pinata/usePinata';
+// import usePinata from "../../../hooks/usePinata";
 
 
 const ProfileSettingForm: React.FC = () => {
@@ -33,10 +34,12 @@ const ProfileSettingForm: React.FC = () => {
 
     const { touched, values, getFieldProps, isValid, errors } = formik;
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log("File_url: ", filePreview)
         console.log("Username: ", formik.values.userName);
-        usePinata(filePreview, file?.name, "PROFILE", formik.values.userName)
+        // usePinata(filePreview, file?.name, "PROFILE", formik.values.userName)
+        const res = await usePinata(file)
+        console.log("res: ", JSON.stringify(res))
     }
 
     const uploadPhoto = () => {

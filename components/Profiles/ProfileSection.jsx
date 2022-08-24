@@ -49,8 +49,8 @@ const ProfileSection = (props) => {
       {/* <Image src={'../resources/Rectangle 3212.png'} position="absolute" zIndex="-2" /> */}
       <Flex flexDirection="column" gap="10.96px" ml="16.44px" mt="21.92px">
         <Box
-         width="27.4px"
-         height="27.4px"
+          width="27.4px"
+          height="27.4px"
           border="2px solid"
           borderColor="white"
           padding="2px"
@@ -76,8 +76,8 @@ const ProfileSection = (props) => {
 
         <Box>
           <Image
-           width="27.4px"
-           height="27.4px"
+            width="27.4px"
+            height="27.4px"
             padding="2px"
             border="2px solid"
             borderColor="white"

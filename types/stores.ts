@@ -1,4 +1,5 @@
 import { Near, WalletConnection } from "near-api-js";
+import { postDetailsType } from "../hooks/useFetchPost";
 import { DexContract, PNFTContract, ProfileContract } from "./contracts";
 
 // TODO: CHANGE ANY TYPE TO CUSTOM TYPE
@@ -50,6 +51,10 @@ export type NearStoreType = {
     pinataState: boolean | null;
     setPinataState: (pinataState: boolean | undefined) => void;
     removePinataState: () => void;
+
+    postDetails: postDetailsType;
+    setpostDetails: (pinataState: postDetailsType | null) => void;
+    removepostDetails: () => void;
 
 };
 

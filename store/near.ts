@@ -58,6 +58,24 @@ const nearStore = create<NearStoreType>((set) => ({
     setPinataState: (pinataState: any) => set((state) => ({ ...state, pinataState })),
     removePinataState: () => set((state) => ({ ...state, pinataState: null })),
 
+    postDetails: {
+        title: "",
+        body: "",
+        media: "",
+        mediaType: "",
+        mediaHash: null
+    },
+    setpostDetails: (postDetails: any) => set((state) => ({ ...state, postDetails })),
+    removepostDetails: () => set((state) => ({
+        ...state, postDetails: {
+            title: "",
+            body: "",
+            media: "",
+            mediaType: "",
+            mediaHash: null
+        }
+    })),
+
 }));
 
 export { nearStore };

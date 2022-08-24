@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
-import { pinFileToIPFS } from "../../../lib/pinata";
+import { pinToPinata } from "../../../lib/pinata";
 import { IPFSDataType } from "../../../hooks/usePinata";
-var shajs = require('sha.js');
+const shajs = require('sha.js');
 import { nearStore } from '../../../store/near';
 import { ProfileType } from "../../../types/stores";
 
@@ -45,7 +45,7 @@ const ProfileSettingForm: React.FC = () => {
     const handleSubmit = async () => {
         console.log("File: ", file)
         console.log("Username: ", formik.values.userName);
-        const returnedIpfsData = await pinFileToIPFS(file, "PROFILE", formik.values.userName);
+        const returnedIpfsData = await pinToPinata(file, "PROFILE", formik.values.userName);
         const fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${returnedIpfsData.IpfsHash}`
         console.log("File url: ", fileUrl)
         const fileSize = returnedIpfsData.PinSize

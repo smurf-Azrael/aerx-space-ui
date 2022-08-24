@@ -9,8 +9,9 @@ import { store } from '../store/store';
 import { useState, useEffect } from 'react';
 import { fetchpostsData } from '../hooks/useFetchPost';
 import { getBalance } from '../lib/aexContract';
-import { initNearConnection, checkProfile, initPinata } from '../lib/auth';
+import { initNearConnection, checkProfile } from '../lib/auth';
 import { nearStore } from '../store/near';
+import { initPinata } from '../lib/auth';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(true);
@@ -76,6 +77,18 @@ function MyApp({ Component, pageProps }: AppProps) {
     </Provider>
   )
 }
+
+// export async function getStaticProps() {
+//   // fs.createReadStream(content);
+//   // console.log("boy")
+//   const result = authenticatePinata()
+// }
+
+// export async function getStaticProps(content: string) {
+//   // fs.createReadStream(content);
+//   // console.log("boy")
+//   authenticatePinata()
+// }
 
 export default MyApp
 

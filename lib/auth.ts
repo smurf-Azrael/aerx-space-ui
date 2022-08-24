@@ -9,7 +9,7 @@ import {
     ConnectConfig,
     ConnectedWalletAccount,
 } from "near-api-js";
-import { NearStoreType } from "../types/stores";
+import { NearStoreType, ProfileType } from "../types/stores";
 import {
     DexContract,
     ProfileContract,
@@ -169,20 +169,15 @@ export async function checkProfile(nearState: any) {
                 user_id: nearState.accountId,
                 user_to_find_id: nearState.accountId,
             });
-            // check if the nft has extra fields
-            const extra = user_info.metadata?.extra
-                ? JSON.parse(user_info.metadata.extra)
-                : null;
-            // check if the nft has media
-            const image = user_info.metadata?.media
-                ? user_info.metadata.media
-                : null;
-            // set profile to state
-            nearState.setProfile({
-                ...user_info,
-                ...extra,
-                profileImg: image,
-            });
+            const returnedProfile: ProfileType = {
+                user_id: user_info.owner_id,
+                username: user_info.token_id,
+                fullName: user_info.metadata.extra,
+                aboutMe: user_info.metadata.description,
+                profileImg: user_info.metadata.media,
+            }
+            nearState.setProfile(returnedProfile)
+            console.log("Profile: ", returnedProfile)
         }
     }
 }

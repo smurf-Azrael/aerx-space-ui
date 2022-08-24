@@ -4,13 +4,22 @@ import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
-import usePinata from "../../../hooks/usePinata";
+import { pinFileToIPFS } from "../../../lib/pinata";
+import { IPFSDataType } from "../../../hooks/usePinata";
+var shajs = require('sha.js');
+import { nearStore } from '../../../store/near';
+import { ProfileType } from "../../../types/stores";
 
 
 const ProfileSettingForm: React.FC = () => {
     const [file, setFile] = useState<File>();
     const [filePreview, setFilePreview] = useState<string>();
-
+    const [ipfsData, setIpfsData] = useState<IPFSDataType>({
+        fileUrl: null,
+        fileSize: null,
+        urlSha256: null,
+    });
+    const nearState = nearStore((state) => state);
     const initialValues = {
         name: "",
         userName: "",
@@ -33,10 +42,63 @@ const ProfileSettingForm: React.FC = () => {
 
     const { touched, values, getFieldProps, isValid, errors } = formik;
 
-    const handleSubmit = () => {
-        console.log("File_url: ", filePreview)
+    const handleSubmit = async () => {
+        console.log("File: ", file)
         console.log("Username: ", formik.values.userName);
-        usePinata(filePreview, file?.name, "PROFILE", formik.values.userName)
+        const returnedIpfsData = await pinFileToIPFS(file, "PROFILE", formik.values.userName);
+        const fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${returnedIpfsData.IpfsHash}`
+        console.log("File url: ", fileUrl)
+        const fileSize = returnedIpfsData.PinSize
+        console.log("File size: ", fileSize)
+        const fileUrlHash = new shajs.sha256().update(fileUrl).digest("base64");
+        console.log("Encrypted url: ", fileUrlHash)
+        //is the set state really needed?
+        setIpfsData((prevIpfs) => ({
+            ...prevIpfs,
+            fileUrl: fileUrl,
+            fileSize: fileSize,
+            urlSha256: fileUrlHash,
+        }));
+        const profileToMint = {
+            title: "AERX ProfileNFT for " + formik.values.userName,
+            username: formik.values.userName,
+            description: formik.values.bio,
+            media: fileUrl,
+            media_hash: fileUrlHash,
+            issued_at: new Date().toISOString(),
+            extra: formik.values.name,
+            //Todo: confirm if there will be extra from project management
+        };
+        console.log("Profile to mint: ", profileToMint)
+        console.log("Ipfs data: ", returnedIpfsData)
+
+        try {
+            await nearState.pnftContract?.mint_profile({
+                user_id: nearState.accountId,
+                username: profileToMint.username,
+                token_metadata: profileToMint,
+            },
+                "300000000000000",
+                "1300000000000000000000",
+            ).then((res) => {
+                toast.success(`AERX profileNFT minted succesfully with username: '${profileToMint.username}'`)
+                const returnedProfile: ProfileType = {
+                    user_id: res.owner_id,
+                    username: res.token_id,
+                    fullName: formik.values.name,
+                    aboutMe: formik.values.bio,
+                    profileImg: res.metadata.media,
+                }
+                nearState.setProfile(returnedProfile)
+                console.log("Profile: ", returnedProfile)
+                window.location.replace(`${window.location.origin}/profile`);
+            })
+        } catch (error) {
+            toast.error(`Unable to mint AERX profileNFT. Try again later`)
+            console.error("Unable to mint AERX profileNFT: ", error)
+
+        }
+
     }
 
     const uploadPhoto = () => {

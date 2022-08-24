@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react'
+import { selectModules } from '../../store/slices/modulesSlices';
+import { useSelector } from '../../store/store';
 import SearchInput from '../SearchInput';
 import ChatRoom from './ChatRoom';
 
@@ -129,10 +131,16 @@ const Chat: React.FC = () => {
 
 
     const [activeMessage, setActiveMessage] = useState<number>(0);
+    const { chat, flow } = useSelector(selectModules)
 
     return (
         <div className='w-full h-[100%] bg-black-dark rounded-[10px] flex gap-2'>
-           <div className='w-[45%] rounded-[10px] bg-black-light h-full p-4'>
+            {!chat.minimized && 
+           <div className='w-[45%] rounded-[10px] bg-black-light h-full p-4'
+             style={{
+               width : (flow.collapsed) ? "30%" : ""
+             }}
+           >
                 <ChatHeader />
 
                 <div>
@@ -161,7 +169,13 @@ const Chat: React.FC = () => {
                 </div>
                 </div>
            </div>
-           <div className='w-[55%]'>
+            }
+           <div className='w-[55%]'
+            style={{
+                width: (chat.minimized) ? "100%" : 
+                (flow.collapsed) ? "70%" : ""
+            }}
+           >
             <ChatRoom />
            </div>
         </div>

@@ -80,7 +80,10 @@ export const modulesSlice = createSlice({
         }).addCase(minimizeChat.fulfilled, (state, action) => {
             state.chat.minimized = true;
             state.chat.collapsed = false;
-            state.chat.collapsed = false;
+            state.chat.default = false;
+            if(state.flow.collapsed){
+                state.flow.collapsed = false;
+            }
         })
         .addCase(expandChat.fulfilled, (state, action) => {
             state.chat.default = true;
@@ -89,6 +92,9 @@ export const modulesSlice = createSlice({
         })
         .addCase(collapseFlow.fulfilled, (state, action) => {
             state.flow.collapsed = true;
+            state.chat.default = true;
+            state.chat.collapsed = false;
+            state.chat.minimized = false;
         })
         .addCase(expandFlow.fulfilled, (state, action) => {
             state.flow.collapsed = false;

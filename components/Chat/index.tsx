@@ -52,14 +52,14 @@ const MessageItem: React.FC<IMessageItem> = ({avatar, name, time, status, messag
                 </div>
                 <div>
                     <div className='flex justify-between'>
-                        <label className='text-white text-bold text-[14px]'>
+                        <label className='text-white text-bold text-[13px]'>
                             {name}
                         </label>
                         {status !== 'isTyping' && 
-                        <label className='text-white opacity-[30%] text-sm'>{time}</label>
+                        <label className='text-white opacity-[30%] text-[13px]'>{time}</label>
                         }
                     </div>
-                    <div className='text-sm text-lighter'>
+                    <div className='text-[12px] text-lighter'>
                         {status === 'isTyping' &&
                          <label className='text-primary'>Typing...</label>
                         }
@@ -126,6 +126,14 @@ const Chat: React.FC = () => {
             message:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
 
         },
+        {
+            avatar: '/assets/images/avatar.svg',
+            name: 'John Doe',
+            status: 'offline',
+            time: '12:00',
+            message:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
+
+        },
         
     ];
 
@@ -173,7 +181,7 @@ const Chat: React.FC = () => {
            <div className='w-[55%]'
             style={{
                 width: (chat.minimized) ? "100%" : 
-                (flow.collapsed) ? "70%" : ""
+                (flow.collapsed) ? "70%" : "",
             }}
            >
             <ChatRoom />

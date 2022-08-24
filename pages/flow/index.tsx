@@ -27,19 +27,18 @@ const Flow: React.FC = () => {
     return (
         <div className='w-full h-screen bg-black p-6 flow'>
            <div className='flex justify-between'>
-            {(flow.collapsed || space.collapsed || chat.collapsed || chat.minimized) && 
                 <CollapsingSidebar 
                 onChatClicked={handleChatClicked}
                 onFlowClicked={handleFlowClicked}
                 onSpaceClicked={handleSpaceClicked}
                 />
-            }
 
             {!chat.collapsed && 
-                <div className='w-[39%] h-[94vh]'
+                <div className='w-[39%] h-[94vh] ml-[20px]'
                  style={{
                     width: (chat.minimized) ? "19.5%" : 
-                    (flow.collapsed) ? "75%" : ""
+                    (flow.collapsed) ? "75%" : "",
+                    marginLeft: (chat.minimized) ? "5%" : ""
                  }}
                 >
                     <Chat />
@@ -53,9 +52,10 @@ const Flow: React.FC = () => {
                     (chat.minimized && !space.collapsed) ? "55%" : 
                     (chat.collapsed && !space.collapsed) ? "75%" : 
                     (space.collapsed && chat.minimized) ? "73%" : 
-                    (space.collapsed && chat.default) ? "54%" : 
+                    (space.collapsed && chat.default) ? "58%" : 
                     (space.collapsed && chat.collapsed) ? "95%" : "",
-                    padding: (space.collapsed && chat.collapsed) ? "0% 10%" :""
+                    padding: (space.collapsed && chat.collapsed) ? "0% 10%" :"",
+                    marginLeft: (chat.collapsed) ? "5%" : ""
                   }}
                 >
                     <FlowFeeds />

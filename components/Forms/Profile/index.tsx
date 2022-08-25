@@ -83,7 +83,7 @@ const ProfileSettingForm: React.FC = () => {
             ).then((res) => {
                 toast.success(`AERX profileNFT minted succesfully with username: '${profileToMint.username}'`)
                 const returnedProfile: ProfileType = {
-                    user_id: res.owner_id,
+                    userId: res.owner_id,
                     username: res.token_id,
                     fullName: formik.values.name,
                     aboutMe: formik.values.bio,

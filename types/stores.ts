@@ -70,7 +70,7 @@ export type ProfileStoreType = {
 };
 
 export type ProfileType = {
-    user_id: string | undefined;
+    userId: string | undefined;
     username: string | undefined;
     fullName: string | undefined;
     aboutMe: string | undefined;

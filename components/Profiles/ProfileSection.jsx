@@ -14,10 +14,14 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
+import { nearStore } from "../../store/near";
+
 
 // type Props = {};
 
 const ProfileSection = (props) => {
+  const nearState = nearStore((state) => state);
+
   const dispatch = useDispatch();
   const {
     groupP1,
@@ -33,18 +37,20 @@ const ProfileSection = (props) => {
   return (
     <Flex
       id=""
-      bgImage="url('../resources/Rectangle 3212.png')"
+      bgImage={`url('${nearState.profile.profileImg}')`}
       bgRepeat="no-repeat"
-      bgPosition="60 5px"
+      bgPosition="30 0"
       bgSize="257.56px 297.29px"
-      // // bg="top right"
+      // bgGradient=" linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))"
+
       bgColor="#191919"
       w="257.56px"
-      height="323.29px"
+      height="321.29px"
       top="0"
       // position="absolute"
       zIndex="2"
       display={props.hidden}
+      className="profileSection"
     >
       {/* <Image src={'../resources/Rectangle 3212.png'} position="absolute" zIndex="-2" /> */}
       <Flex flexDirection="column" gap="10.96px" ml="16.44px" mt="21.92px">
@@ -126,7 +132,7 @@ const ProfileSection = (props) => {
       {/* end */}
 
       <Flex flexDirection="column" alignItems="center" mx="auto">
-        <Image width="42.47px" height="15.755px" src={logoP} mt="9.59px" />
+        <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
         <Box mt="176.045px">
           <Heading
@@ -137,7 +143,8 @@ const ProfileSection = (props) => {
             fontStyle="normal"
             lineHeight="100%"
           >
-            Pavel Dantsev
+            {nearState.profile.fullName}
+
           </Heading>
 
           <Flex alignItems="center" flexDirection="column">
@@ -151,7 +158,7 @@ const ProfileSection = (props) => {
               marginTop="5.48px"
               mb="11.645px"
             >
-              pashq.aerx
+              {nearState.profile.username}
             </Text>
 
             <Flex>

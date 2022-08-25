@@ -19,10 +19,11 @@ const CreatePostForm: React.FC = () => {
         e.preventDefault();
         console.log("Post button clicked")
         console.log("Post details before removing: ", nearState.postDetails)
+        //disable button after post has be clicked
         let postToMint;
         if (nearState.postDetails.title == "") {
             postToMint = {
-                title: `AERX-postNFT for ${nearState.profile.username}`,
+                title: `AERX-postNFT for ${nearState.profile?.username}`,
                 description: nearState.postDetails.body,
                 media: nearState.postDetails.media,
                 media_hash: nearState.postDetails.mediaHash,
@@ -59,6 +60,7 @@ const CreatePostForm: React.FC = () => {
 
         }
         nearState.removepostDetails()
+        //return user to flow
     }
 
     const updateTitle = (e: any) => {
@@ -78,6 +80,7 @@ const CreatePostForm: React.FC = () => {
             var parts = filename.split(".");
             const fileType = parts[parts.length - 1];
             setFilePreview(URL.createObjectURL(file));
+            //don't pin to pinata just preview(you will pin to pinata when user click post)
             await pinToPinata(file, "POST", nearState.profile?.username).then((res: { IpfsHash: any; }) => {
                 const fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${res.IpfsHash}`
                 console.log("File url: ", fileUrl)

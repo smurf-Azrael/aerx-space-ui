@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'next/link';
+import Link from "next/link";
 
 import {
   Box,
@@ -14,11 +14,15 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
+import { nearStore } from "../../store/near";
+
 
 // type Props = {}
 
-const Wallets = () => {
-  const dispatch = useDispatch();
+const WalletHead = (props) => {
+  const nearState = nearStore((state) => state);
+
+  const dispatch = useDispatch()
   const {
     rectangle,
     groupP1,
@@ -38,35 +42,38 @@ const Wallets = () => {
     rectangleP4,
     ellipse5,
   } = useSelector(getUserState);
+
+
+
   return (
     <Box
       bgColor="#242424"
       width="257.56px"
       marginLeft="0"
       borderTopRadius="34.25px"
-      // top="374.695px"
-      top="412.37px"
       position="absolute"
-      height="327.43px"
-      zIndex="1"
+      h="327.43px"
+      top="412.37px"
     >
-      {" "}
-      <Center>
-        <Box
-          w="21.92px"
-          bgColor="rgba(255, 255, 255, 0.3);"
-          height="2px"
-          mt="8.22px"
-        ></Box>
+
+      <Center cursor="pointer">
+        <Flex flexDirection="column" mt="8.22px" gap="2.74px" onClick={() => props.wallet()}>
+          <Box
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+            borderRadius="6.85px"
+          ></Box>
+          <Box
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+            borderRadius="6.85px"
+          ></Box>
+        </Flex>
       </Center>
-      <Center>
-        <Box
-          w="21.92px"
-          bgColor="rgba(255, 255, 255, 0.3);"
-          height="2px"
-          mt="2.74px"
-        ></Box>
-      </Center>
+
+
       <Text
         marginLeft="16.44px"
         marginTop="8.22px"
@@ -85,7 +92,7 @@ const Wallets = () => {
           fontFamily="Poppins"
           mr="30.14px"
         >
-           <Link href="wallet">12,786 AEX</Link>
+          {nearState.aexBalance} AEX
         </Text>
         <Flex>
           <Image
@@ -102,6 +109,7 @@ const Wallets = () => {
             w="16.44px"
             h="16.44px"
             mr="10.275px"
+            onClick={() => props.upload()}
           />
 
           <Image
@@ -110,6 +118,7 @@ const Wallets = () => {
             w="16.44px"
             h="16.44px"
             mr="10.275px"
+            onClick={() => props.exchange()}
           />
 
           <Image
@@ -118,6 +127,7 @@ const Wallets = () => {
             w="16.44px"
             h="16.44px"
             mr="10.275px"
+            onClick={() => props.pool()}
           />
         </Flex>
       </Flex>
@@ -126,4 +136,4 @@ const Wallets = () => {
   );
 };
 
-export default Wallets;
+export default WalletHead;

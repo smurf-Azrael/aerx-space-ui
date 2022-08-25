@@ -41,29 +41,28 @@ const NftValues = () => {
     <Box
       bgColor="#282828"
       width="257.56px"
-      height="245.23px"
       marginLeft="0"
       borderTopRadius="34.25px"
-      zIndex={1}
       position="absolute"
-      // top="456.897px"
+      h="245.23px"
       top="494.57px"
+
     >
-      <Center>
-        <Box
-          w="21.92px"
-          bgColor="rgba(255, 255, 255, 0.3);"
-          height="2px"
-          mt="8.22px"
-        ></Box>
-      </Center>
-      <Center>
-        <Box
-          w="21.92px"
-          bgColor="rgba(255, 255, 255, 0.3);"
-          height="2px"
-          mt="2.74px"
-        ></Box>
+      <Center cursor="pointer">
+        <Flex flexDirection="column">
+          <Box
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+            mt="8.22px"
+          ></Box>
+          <Box
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+            mt="2.74px"
+          ></Box>
+        </Flex>
       </Center>
 
       <Flex mt="8.22px" ml="16.44px" alignItems="center">

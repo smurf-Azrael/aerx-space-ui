@@ -5,9 +5,9 @@ import { Box, Flex, Image, Text, Button, Heading } from "@chakra-ui/react";
 
 const Circle = (props) => {
 
-  let zIndex = props.circle ? "2" : "-8" 
+  let zIndex = props.circle ? "2" : "-8"
 
- 
+
 
   return (
     <Box
@@ -50,8 +50,8 @@ const Circle = (props) => {
         </Box>
         <Box>
           <Image
-           width="27.4px"
-           height="27.4px"
+            width="27.4px"
+            height="27.4px"
             padding="2px"
             border="2px solid"
             borderColor="white"
@@ -61,22 +61,22 @@ const Circle = (props) => {
         </Box>
       </Flex>
 
-      <Flex position="absolute" flexDirection="column" gap="16.44px" ml="248.47005px" mt="46.54px" zIndex='2'>
-       <Image src={'../resources/Group 5450.png'}  w="13.37805px" h="21.92px" />
-       <Image src={'../resources/Frame 13920.png'}  w="21.92px" h="21.92px" />
-       <Image src={'../resources/Send.svg'}    w="21.92px" h="21.92px" />
-       <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" />
+      <Flex position="absolute" flexDirection="column" gap="16.44px" ml="248.47005px" mt="46.54px" alignItems="center" zIndex='2'>
+        <Image src={'../resources/Group 5450.png'} w="13.37805px" h="21.92px" />
+        <Image src={'../resources/Frame 13920.png'} w="21.92px" h="21.92px" />
+        <Image src={'../resources/Send.svg'} w="21.92px" h="21.92px" />
+        <Image src={'../resources/Tempo.png'} w="21.92px" h="21.92px" />
       </Flex>
 
 
       <Image
-           onClick={(e) => props.removeCircle(e)}
+        onClick={(e) => props.removeCircle(e)}
 
         src={"../resources/Frame 139.png"}
         position="absolute"
         w="16.44px"
         h="16.44px"
-        top="21.92px"
+        top="15.07685px"
         right="10.96px"
         zIndex="2"
       />
@@ -85,18 +85,17 @@ const Circle = (props) => {
         bgImage="url('../resources/Rectangle 321.png')"
         bgRepeat="no-repeat"
         bgSize="282.905px 297.29px"
-        //   bgColor="#191919"
+        bgColor="#191919"
+        // bgGradient='linear(to-b black.100)'
+        opacity="0.8"
 
-        // bgGradient='linear(to-b, 0, black 20%)'
-        // opacity="0.2"
-        // blur="15px"
         borderTopRadius="13.7px"
-        //   left="3.5px"
         w="282.905px"
         height="297.29px"
-        top="10.96px"
+        top="0"
         position="absolute"
         zIndex=""
+        className="modal"
       ></Box>
       <Flex
         flexDirection="column"
@@ -112,8 +111,6 @@ const Circle = (props) => {
           fontStyle="normal"
           lineHeight="21.92px"
           mb="4.795px"
-          // backdropBlur="25px"
-          // bgColor="black"
         >
           Anna Smith
         </Heading>
@@ -218,6 +215,7 @@ const Circle = (props) => {
           px="25.345px"
           bgColor="#B882E1"
           borderRadius="6.85px"
+          height="32.88px"
         >
           <Image
             src={"../resources/Frame 14044.png"}

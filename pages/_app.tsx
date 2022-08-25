@@ -58,7 +58,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (!isLoading) {
       (async () => {
         await initPinata(nearState)
-        console.log("Post to mint", nearState.postDetails)
       })();
     }
   }, [isLoading, nearState.accountId, nearState.pnftContract]);

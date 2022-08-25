@@ -170,7 +170,7 @@ export async function checkProfile(nearState: any) {
                 user_to_find_id: nearState.accountId,
             });
             const returnedProfile: ProfileType = {
-                user_id: user_info.owner_id,
+                userId: user_info.owner_id,
                 username: user_info.token_id,
                 fullName: user_info.metadata.extra,
                 aboutMe: user_info.metadata.description,

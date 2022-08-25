@@ -82,8 +82,8 @@ const ProfileSettingForm: React.FC = () => {
                 "1300000000000000000000",
             ).then((res) => {
                 toast.success(`AERX profileNFT minted succesfully with username: '${profileToMint.username}'`)
-                const returnedProfile: ProfileType = {
-                    userId: res.owner_id,
+                const returnedProfile: any = {
+                    user_id: res.owner_id,
                     username: res.token_id,
                     fullName: formik.values.name,
                     aboutMe: formik.values.bio,
@@ -98,7 +98,6 @@ const ProfileSettingForm: React.FC = () => {
             console.error("Unable to mint AERX profileNFT: ", error)
 
         }
-
     }
 
     const uploadPhoto = () => {

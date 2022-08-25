@@ -2,12 +2,24 @@ import Image from 'next/image'
 import React from 'react'
 import { Message } from '../../types/Message'
 import { EMessageType } from '../../enums/EMessageType';
+import { useDispatch, useSelector } from '../../store/store';
+import { collapseChat, minimizeChat, selectModules } from '../../store/slices/modulesSlices';
 
 const PrimaryHeader: React.FC = () => {
+    const {chat} = useSelector(selectModules);
+    const dispatch = useDispatch();
+    const handleCollapseChat = () => {
+        if(chat.default){
+            dispatch(minimizeChat());
+        }
+        else if(chat.minimized){
+            dispatch(collapseChat());
+        }
+    }
     return (
         <div className='flex justify-between items-center'>
             <div className='flex items-center'>
-                <div className='mt-2'>
+                <div className='mt-0'>
                 <Image src={"/assets/icons/chat-room-header-ico.svg"} alt="voluengr" width={35} height={35} />
                 </div>
                 <div className=''>
@@ -18,8 +30,8 @@ const PrimaryHeader: React.FC = () => {
                 <div className='mt-1'>
                     <Image src="/assets/icons/add-user-icon.svg" alt="Add new user" width={15} height={15} />
                 </div>
-                <div className='mt-2'>
-                    <Image src="/assets/icons/chat-room-menu-icon.svg" alt="Menu" width={20} height={20} />
+                <div className='mt-2 cursor-pointer' onClick={handleCollapseChat}>
+                    <Image src="/assets/icons/chat-room-menu-icon.svg" alt="Menu" width={30} height={30} />
                 </div>
             </div>
         </div>

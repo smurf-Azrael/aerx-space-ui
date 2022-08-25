@@ -15,7 +15,7 @@ import { initPinata } from '../lib/auth';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const nearState = nearStore((state) => state);
+  const nearState:any = nearStore((state) => state);
   //1) Initialise near connection and contracts
   useEffect(() => {
     if (isLoading) {
@@ -77,18 +77,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     </Provider>
   )
 }
-
-// export async function getStaticProps() {
-//   // fs.createReadStream(content);
-//   // console.log("boy")
-//   const result = authenticatePinata()
-// }
-
-// export async function getStaticProps(content: string) {
-//   // fs.createReadStream(content);
-//   // console.log("boy")
-//   authenticatePinata()
-// }
 
 export default MyApp
 

@@ -17,9 +17,13 @@ import Pools from "../BranchWallet/Pools"
 import Exchange from "../BranchWallet/Exchange";
 import SendingTokens from "../BranchWallet/SendingTokens";
 import AddLiquidity from "../BranchWallet/AddLiquidity";
+import RecieveToken from "../BranchWallet/RecieveToken";
+
+
 
 
 import { useState } from "react";
+
 
 // type Props = {
 // }
@@ -30,28 +34,33 @@ function index() {
   const [doubleclicked, setDoubleClicked] = useState(false);
   const [isOpenWallet, setOpenWallet] = useState(false);
 
+  
+
+  const [isUpload,setUpload] = React.useState(false)
+
+  const [isExchange,setExchange] = React.useState(false)
+
+  const [isPool,setPool] = React.useState(false)
+
+  const [isLiquidity,setLiquidity] = React.useState(false)
+
+  const [isRecieved,setRecieved] = React.useState(false)
 
 
-  const [isUpload, setUpload] = React.useState(false)
-
-  const [isExchange, setExchange] = React.useState(false)
-
-  const [isPool, setPool] = React.useState(false)
-
-  const [isLiquidity, setLiquidity] = React.useState(false)
-
-
-  const changeUpload = () => {
+  const changeUpload =() => {
     setUpload((prevState) => !prevState);
   }
-  const changeExchange = () => {
+  const changeExchange =() => {
     setExchange((prevState) => !prevState);
   }
-  const changePool = () => {
+  const changePool =() => {
     setPool((prevState) => !prevState);
   }
-  const changeLiquidity = () => {
+  const changeLiquidity =() => {
     setLiquidity((prevState) => !prevState);
+  }
+  const changeRecieve =() => {
+    setRecieved((prevState) => !prevState);
   }
 
 
@@ -87,47 +96,58 @@ function index() {
     console.log(isOpenWallet);
   };
 
-  const wallet = <Wallets
-    upload={changeUpload}
-    exchange={changeExchange}
-    pool={changePool}
-    liquidity={changeLiquidity}
-    changeAction={setToggle}
-    toggle={isToggle}
-    toggleWallet={openWallet}
+  const wallet = <Wallets 
+  upload={changeUpload}
+  exchange={changeExchange}
+  pool={changePool}
+  liquidity={changeLiquidity}
+  changeAction={setToggle}
+  toggle={isToggle}
+  toggleWallet={openWallet}
+  recieved={changeRecieve}
   />
   return (
     <div id="profile" className=" bg-[black] flex">
 
       {isToggle && (
         <div>
-          {!isOpenWallet ?
+        {!isOpenWallet ? 
 
-            <div>
-              <ProfileSection />
-              <ImagesCarousel doubleClick={doubleClick} />
-              <WalletsHead wallet={openWallet} />
-              <NftValues />
-              <Notifications />
-            </div> :
-            <div>
-              {wallet}
-              {isExchange && <Exchange exchange={changeExchange} />}
-              {isUpload && <SendingTokens upload={changeUpload} />}
-              {isPool && <Pools pool={changePool} />}
-              {isLiquidity && <AddLiquidity liquidity={changeLiquidity} />}
-            </div>
-          }
+          <div>
+            <ProfileSection toggle={toggleClick}  />
+            <ImagesCarousel doubleClick={doubleClick} />
+            <WalletsHead wallet={openWallet} />
+            <NftValues />
+            <Notifications />
+            <tokenWallet />
+
+          </div> :
+          <div>
+            
+            {wallet}
+            {isExchange && <Exchange exchange={changeExchange} toggleWallet={openWallet} /> }
+            {isUpload && <SendingTokens upload={changeUpload}  toggleWallet={openWallet} />  }
+            {isPool && <Pools pool={changePool} toggleWallet={openWallet} />  }
+            {isLiquidity && <AddLiquidity liquidity={changeLiquidity} toggleWallet={openWallet}  />  }
+            {/* {isRecieved && <RecieveToken recieved={changeLiquidity} toggleWallet={openWallet}  />  } */}
+          </div>
+}
         </div>
       )}
 
-      <Collapse toggle={toggleClick} Toggle={isToggle} />
+      {!isToggle && <Collapse toggle={toggleClick} Toggle={isToggle} /> }
+      <ChatRoom circle={doubleclicked} removeCircle={removeCircle} />
 
-      {/* <div className=" w-[39%] h-[94vh]  overflow-y-scroll poppins ">
+      <div className=" w-[59%] h-[94vh]  overflow-y-scroll poppins position-absolute left-542.52px" >
         <FlowFeeds />
-      </div> */}
-      {/* <Circle circle={doubleclicked} removeCircle={removeCircle} />s */}
-    </div>
+      </div>
+      <div className=" w-[39%] h-[94vh]  overflow-y-scroll poppins position-absolute left-542.52px" >
+        <Space />
+      </div>
+      
+
+      <Circle circle={doubleclicked} removeCircle={removeCircle} />
+  </div>
   );
 }
 

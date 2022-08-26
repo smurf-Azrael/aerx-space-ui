@@ -1,9 +1,10 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { Message } from '../../types/Message'
 import { EMessageType } from '../../enums/EMessageType';
 import { useDispatch, useSelector } from '../../store/store';
 import { collapseChat, minimizeChat, selectModules } from '../../store/slices/modulesSlices';
+import SendTokens from '../SendTokens';
 
 const PrimaryHeader: React.FC = () => {
     const {chat} = useSelector(selectModules);
@@ -249,26 +250,35 @@ const MessagesWrapper: React.FC = () => {
     )
 }
 
-const SendMessage = () => {
+const SendMessage: React.FC<{
+    onSend: () => void
+}> = ({onSend}) => {
     return (
-        <div className='flex gap-3'>
+        <div className='flex justify-between'>
+            <div className='flex gap-3'>
             <Image src="/assets/icons/tag-icon.svg" alt="Tag" width={20} height={20} />
-            <input type="text" placeholder="Type message..." width={20} height={20} className=".placeholder-black-light bg-transparent focus:outline-none w-[70%]" />
-            <Image src="/assets/icons/send-message-icon.svg" alt="send message" width={40} height={40} />
+            <input type="text" placeholder="Type message..." width={20} height={20} className=".placeholder-black-light bg-transparent focus:outline-none w-[70%] text-white text-sm" />
+            </div>
+            <Image src="/assets/icons/send-message-icon.svg" alt="send message" width={40} height={40}
+             className="cursor-pointer" onClick={onSend} />
         </div>
     )
 }
 
 const ChatRoom: React.FC = () => {
+    const [initializeSendToken, setInitializeSendToken] = useState<boolean>(false);
     return (
+        <>
         <div className='p-2'>
             <PrimaryHeader/>
             <SecondaryHeader />
             <div className='h-[75vh] flex flex-col justify-between'>
             <MessagesWrapper />
-            <SendMessage />
+            <SendMessage onSend={() => setInitializeSendToken(true)} />
             </div>
         </div>
+        {initializeSendToken && <SendTokens onClose={() => setInitializeSendToken(false)} />}
+        </>
     )
 }
 

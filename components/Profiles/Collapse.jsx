@@ -58,37 +58,17 @@ function Collapse(props) {
         <Image src={"../resources/Frame 14046.png"} w="21.92px" h="21.92px" />
       </Flex>
 
-      {/* <Image
-        src={"../resources/Frame 14290.png"}
-        py="28.085px"
-        px="8.905px"
-        w="24.66px"
-        alignSelf="center"
-        h="67.13px"
-        borderRadius="10.275px"
-        mb="247.97px"
-        bgColor="rgba(255, 255, 255, 0.05);"
+      <div
+        className="mb-[247.97px]  rounded-[10.275px] cursor-pointer mx-auto py-[28.085px] px-[8.905px] flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[67.13px] align-center"
         onClick={props.toggle}
-        cursor="pointer"
-      /> */}
-      {/* <div
-        className="cursor-pointer bg-[#ffffff27] hover:bg-[#ffffff39] w-[24.66px] h-[67.13px] flex justify-around p-[6px] rounded-[15px]"
-        onClick={() => onChatClicked()}
       >
         <Image
           src="resources/Frame 14290.png"
-          alt="trigger"
-          py="28.085px"
-          px="8.905px"
-          w="24.66px"
-          alignSelf="center"
-          h="67.13px"
-          borderRadius="10.275px"
+          className="cursor-pointer"
+          width="5.48px"
+          height="10.96px"
         />
-      </div> */}
-       <div className='mb-[247.97px]  rounded-[10.275px] cursor-pointer mx-auto py-[28.085px] px-[8.905px] flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[67.13px] align-center' onClick={props.toggle}>
-                                <Image src="resources/Frame 14290.png" className='cursor-pointer'  width={10} height={10} />
-                        </div>
+      </div>
 
       <Flex flexDirection="column" gap="10.96px" alignItems="center">
         <Box

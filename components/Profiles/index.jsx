@@ -119,7 +119,7 @@ function index() {
             <WalletsHead wallet={openWallet} />
             <NftValues />
             <Notifications />
-            <tokenWallet />
+            {/* <tokenWallet /> */}
 
           </div> :
           <div>
@@ -129,7 +129,7 @@ function index() {
             {isUpload && <SendingTokens upload={changeUpload}  toggleWallet={openWallet} />  }
             {isPool && <Pools pool={changePool} toggleWallet={openWallet} />  }
             {isLiquidity && <AddLiquidity liquidity={changeLiquidity} toggleWallet={openWallet}  />  }
-            {/* {isRecieved && <RecieveToken recieved={changeLiquidity} toggleWallet={openWallet}  />  } */}
+            {isRecieved && <RecieveToken recieved={changeRecieve} toggleWallet={openWallet}  />  }
           </div>
 }
         </div>
@@ -138,10 +138,10 @@ function index() {
       {!isToggle && <Collapse toggle={toggleClick} Toggle={isToggle} /> }
       <ChatRoom circle={doubleclicked} removeCircle={removeCircle} />
 
-      <div className=" w-[59%] h-[94vh]  overflow-y-scroll poppins position-absolute left-542.52px" >
+      <div className=" w-[59%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px" >
         <FlowFeeds />
       </div>
-      <div className=" w-[39%] h-[94vh]  overflow-y-scroll poppins position-absolute left-542.52px" >
+      <div className=" w-[39%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px" >
         <Space />
       </div>
       

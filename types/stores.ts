@@ -53,8 +53,12 @@ export type NearStoreType = {
     removePinataState: () => void;
 
     postDetails: postDetailsType;
-    setpostDetails: (pinataState: postDetailsType | null) => void;
-    removepostDetails: () => void;
+    setPostDetails: (pinataState: postDetailsType | null) => void;
+    removePostDetails: () => void;
+
+    successfulTransfer: boolean | null;
+    setSuccessfulTransfer: (successfulTransfer: boolean | null) => void;
+    removeSuccessfulTransfer: () => void
 
 };
 

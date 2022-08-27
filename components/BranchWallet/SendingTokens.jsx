@@ -9,8 +9,46 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { MinusIcon } from '@chakra-ui/icons'
+import { nearStore } from "../../store/near";
+import { transferAexDetailsType } from "../../lib/aexContract";
+import { useState } from "react";
 
 function SendingTokens(props) {
+  const [transferAexDetails, setTransferAexDetails] = useState({
+    receiver: "",
+    amount: "",
+  });
+  const nearState = nearStore((state) => state);
+  const getReceiver = (e) => {
+    let val = e.target.value;
+    setTransferAexDetails({
+      receiver: val,
+      amount: "5" + "000000000000000000000000",
+    })
+  }
+
+  const transferAex = async () => {
+    console.log("Send button clicked")
+    console.log("Details: ", transferAexDetails)
+    try {
+      await nearState.tokenContract.ft_transfer({
+        receiver_id: transferAexDetails.receiver,
+        amount: transferAexDetails.amount,
+        memo: "AEX Transfer",
+      },
+        "300000000000000",
+        "1",
+      )
+      nearState.setSuccessfulTransfer(true);
+      console.log("Transfer successful")
+      //show successful page
+    } catch (error) {
+      console.error("Transfer not successful")
+      //show error page
+    }
+
+  }
+
   return (
     <Box
       height="739.8px"
@@ -19,17 +57,17 @@ function SendingTokens(props) {
       position="absolute"
       top="0"
     >
-   <Center>
-      <div
-        className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+      <Center>
+        <div
+          className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
         mb-[26.825px]
         mt-2
         "
-        onClick={props.toggleWallet}
-      >
-        <MinusIcon
+          onClick={props.toggleWallet}
+        >
+          <MinusIcon
             w="21.92px"
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
@@ -39,16 +77,16 @@ function SendingTokens(props) {
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
           />
-      </div>
+        </div>
       </Center>
-  <Box
+      <Box
         mb="158.235px"
         mx="16.44px"
         fontFamily="Poppins"
         fontSize="10.96px"
         fontWeight="400"
       >
-      <Flex gap="5.48px" alignItems="center" mb="202.075px" ml="16.44px" onClick={props.upload} cursor="pointer" >
+        <Flex gap="5.48px" alignItems="center" mb="202.075px" ml="16.44px" onClick={props.upload} cursor="pointer" >
           <Image
             src={"../resources/Arrow - Right1.png"}
             color="#FFFFFF4D;"
@@ -56,8 +94,8 @@ function SendingTokens(props) {
             h="10.275px"
           />
           <Text color="#FFFFFF4D;">Back</Text>
-    
-      </Flex>
+
+        </Flex>
       </Box>
 
       <Center mb="32.88px">
@@ -96,6 +134,7 @@ function SendingTokens(props) {
         fontSize="10.96px"
         fontWeight="500"
         color="white"
+        onChange={getReceiver}
       />
 
       <Center mb="21.92px">
@@ -107,6 +146,7 @@ function SendingTokens(props) {
           bgColor="#6054F0;"
           w="191.8px"
           h="38.36px"
+          onClick={transferAex}
         >
           <Image
             src={"../resources/Arrow - Right.png"}
@@ -117,10 +157,10 @@ function SendingTokens(props) {
           Send
         </Button>
       </Center>
-      <Flex alignItems="center" flexDirection="column" gap="5.48px"  fontFamily="Poppins"
-          fontSize="9.59px"
-          
-          fontWeight="400">
+      <Flex alignItems="center" flexDirection="column" gap="5.48px" fontFamily="Poppins"
+        fontSize="9.59px"
+
+        fontWeight="400">
         <Text color="#ffffff4d" >Available to send</Text>
         <Text color="#ffffff4d">102.48283 NEAR</Text>
       </Flex>

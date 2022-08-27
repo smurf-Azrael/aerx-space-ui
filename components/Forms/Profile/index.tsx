@@ -81,7 +81,7 @@ const ProfileSettingForm: React.FC = () => {
                 "300000000000000",
                 "1300000000000000000000",
             ).then((res) => {
-                toast.success(`AERX profileNFT minted succesfully with username: '${profileToMint.username}'`)
+                toast.success(`AERX profileNFT minted Successfully with username: '${profileToMint.username}'`)
                 const returnedProfile: any = {
                     user_id: res.owner_id,
                     username: res.token_id,

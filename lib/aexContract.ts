@@ -1,5 +1,9 @@
 import { Big } from "big.js";
 
+export type transferAexDetailsType = {
+    amount: string,
+    receiver: string,
+};
 
 //Returns the total number of tokens that exist in circulation
 export async function getTotalSupply(state: { tokenContract: { ft_total_supply: () => Promise<string>; }; }) {

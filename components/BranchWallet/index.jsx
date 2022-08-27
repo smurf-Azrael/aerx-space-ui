@@ -68,7 +68,7 @@ const wallet = <Wallets
         {isExchange && <Exchange exchange={changeExchange}  /> }
         {isUpload && <SendingTokens upload={changeUpload}  />  }
         {isPool && <Pools pool={changePool}  />  }
-        {isLiquidity && <AddLiquidity liquidity={changeLiquidity}  />  }
+        {/* {isLiquidity && <AddLiquidity liquidity={changeLiquidity}  />  } */}
          
 
 

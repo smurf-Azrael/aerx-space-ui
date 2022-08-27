@@ -9,12 +9,7 @@ function tokenWallet(props) {
 
 
 
-              {/* {isExchange && <Exchange exchange={changeExchange} toggleWallet={openWallet} /> }
-            {isUpload && <SendingTokens upload={changeUpload}  toggleWallet={openWallet} />  }
-            {isPool && <Pools pool={changePool} toggleWallet={openWallet} />  }
-            {isLiquidity && <AddLiquidity liquidity={changeLiquidity} toggleWallet={openWallet}  />  } */}
-            {/* {isRecieved && <RecieveToken recieved={changeLiquidity} toggleWallet={openWallet}  />  } */}
-
+             
   return (
     <Box
       w="257.56px"

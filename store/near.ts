@@ -65,8 +65,8 @@ const nearStore = create<NearStoreType>((set) => ({
         mediaType: "",
         mediaHash: null
     },
-    setpostDetails: (postDetails: any) => set((state) => ({ ...state, postDetails })),
-    removepostDetails: () => set((state) => ({
+    setPostDetails: (postDetails: any) => set((state) => ({ ...state, postDetails })),
+    removePostDetails: () => set((state) => ({
         ...state, postDetails: {
             title: "",
             body: "",
@@ -75,6 +75,9 @@ const nearStore = create<NearStoreType>((set) => ({
             mediaHash: null
         }
     })),
+    successfulTransfer: null,
+    setSuccessfulTransfer: (successfulTransfer: any) => set((state) => ({ ...state, successfulTransfer })),
+    removeSuccessfulTransfer: () => set((state) => ({ ...state, successfulTransfer: null })),
 
 }));
 

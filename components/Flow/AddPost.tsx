@@ -1,7 +1,8 @@
 import { Textarea } from '@chakra-ui/react';
 import Image from 'next/image';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import toast, {Toaster} from 'react-hot-toast';
 import { pinToPinata } from '../../lib/pinata';
 import { nearStore } from '../../store/near';
 const shajs = require('sha.js');
@@ -11,36 +12,32 @@ interface IProps {
 }
 
 
-const CreatePostForm: React.FC = () => {
+const CreatePostForm: React.FC<{setFileToPreview: (fileURL: string) => void}> = ({setFileToPreview}) => {
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [filePreview, setFilePreview] = useState<string>();
+    const [media, setMedia] = useState();
     const nearState = nearStore((state) => state);
     //Todo: handle together with
     const handlePost = async (e: { preventDefault: () => void; }) => {
+        if(isLoading) return;
         e.preventDefault();
-        console.log("Post button clicked")
-        console.log("Post details before removing: ", nearState.postDetails)
-        //disable button after post has be clicked
         let postToMint;
-        if (nearState.postDetails.title == "") {
-            postToMint = {
-                title: `AERX-postNFT for ${nearState.profile?.username}`,
-                description: nearState.postDetails.body,
-                media: nearState.postDetails.media,
-                media_hash: nearState.postDetails.mediaHash,
-                issued_at: new Date().toISOString(),
-                //extra will be used to handle the toghether with on the create post
-            }
-        } else {
-            postToMint = {
-                title: nearState.postDetails.title,
-                description: nearState.postDetails.body,
-                media: nearState.postDetails.media,
-                media_hash: nearState.postDetails.mediaHash,
-                issued_at: new Date().toISOString(),
-                //extra will be used to handle the toghether with on the create post
-            }
+        if(!nearState.postDetails.body || nearState.postDetails.body.length === 0) return toast.error("Please enter a description");
+      
+        postToMint = {
+            title: (!nearState?.postDetails?.title || (nearState.postDetails.title = "")) ?  `AERX-postNFT for ${nearState.profile?.username}` 
+            : nearState?.postDetails?.title,
+            description: nearState.postDetails.body,
+            media: nearState.postDetails.media,
+            media_hash: nearState.postDetails.mediaHash,
+            issued_at: new Date().toISOString(),
+            //extra will be used to handle the toghether with on the create post
         }
         try {
+            console.log("post to mint", postToMint);
+            setIsLoading(true);
+            saveMediaToPinata();
             console.log("Post to mint: ", postToMint)
             await nearState.pnftContract?.mint_post({
                 user_id: nearState.accountId,
@@ -50,17 +47,21 @@ const CreatePostForm: React.FC = () => {
                 "300000000000000"
             ).then((res) => {
                 toast.success(`Your AERX-postNFT has been minted Successfully`)
+                nearState.postDetails.body = "";
+                nearState.postDetails.title = "";
+                router.push('/flow')
                 console.log("Minted post: ", res)
                 //save post
 
             })
+            setIsLoading(false);
         } catch (err) {
+            setIsLoading(false);
             toast.error("Unable to mint AERX-postNFT. Try again later")
             console.error("Unable to mint AERX postNFT: ", err)
 
         }
-        nearState.removePostDetails()
-        //return user to flow
+       
     }
 
     const updateTitle = (e: any) => {
@@ -74,13 +75,25 @@ const CreatePostForm: React.FC = () => {
     //Todo: handle file preview
     const updateMedia = async (e: any) => {
         const file = e.target.files[0];
+        if(!file) return;
+        setMedia(file);
+        setFilePreview(URL.createObjectURL(file));
+        setFileToPreview(URL.createObjectURL(file));
+       
+    }
+
+    const uploadPhoto = () => {
+        console.log("Update photo clicked");
+        (document.getElementsByClassName('upload-photo')[0] as any).click();
+    }
+
+    const saveMediaToPinata = async () => {
+        const file = media;
         if (file) {
-            toast.success("Image selected")
-            const filename = file?.name;
+            const filename = (file as File).name;
             var parts = filename.split(".");
             const fileType = parts[parts.length - 1];
-            setFilePreview(URL.createObjectURL(file));
-            //don't pin to pinata just preview(you will pin to pinata when user click post)
+            
             await pinToPinata(file, "POST", nearState.profile?.username).then((res: { IpfsHash: any; }) => {
                 const fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${res.IpfsHash}`
                 console.log("File url: ", fileUrl)
@@ -95,13 +108,9 @@ const CreatePostForm: React.FC = () => {
         }
     }
 
-    const uploadPhoto = () => {
-        console.log("Update photo clicked");
-        (document.getElementsByClassName('upload-photo')[0] as any).click();
-    }
-
     return (
         <div>
+            <Toaster/>
             <h1 className='text-white text-center text-sm' style={{
                 fontWeight: 'bolder'
             }}>Create Post</h1>
@@ -222,7 +231,8 @@ const CreatePostForm: React.FC = () => {
                         <button
                             onClick={handlePost}
                             className='p-3 rounded-[10px] text-[#ffffff53]  bg-black-light w-full'
-                        >Post
+                        >
+                        {isLoading ? 'Loading...' : 'Post'}
                         </button>
                     </div>
                 </div>
@@ -232,6 +242,7 @@ const CreatePostForm: React.FC = () => {
 }
 
 const AddPost: React.FC<IProps> = ({ onClose }) => {
+    const [filePreview, setFilePreview] = useState<string>();
     const nearState = nearStore((state) => state);
     const updateBody = (e: any) => {
         const val = e.currentTarget.value;
@@ -241,15 +252,28 @@ const AddPost: React.FC<IProps> = ({ onClose }) => {
 
     }
 
+
     return (
-        <div className='w-full  h-full flex'>
+        <div className='w-full  h-[94vh] flex'>
             <div className='flex justify-between w-full h-full'>
-                <div className='h-full w-[50%]'>
+                <div className='h-full w-[50%] '>
+                    {!filePreview && 
                     <div className='h-[50%] flex justify-around bg-black-light' style={{ borderRadius: '10px 10px 0px 0px' }}>
-                        <Image src="/assets/icons/default-image-icon.svg"
+                        <Image src={(!filePreview) ? "/assets/icons/default-image-icon.svg" : filePreview}
                             alt="avatar" width={100} height={100}
-                        />
+                            />
                     </div>
+                    }
+                    {filePreview && 
+                    <div className='h-[50%] flex justify-around bg-black-light' style={{ borderRadius: '10px 10px 0px 0px' }}>
+                        <Image src={(!filePreview) ? "/assets/icons/default-image-icon.svg" : filePreview}
+                            alt="avatar" width={270} height={100}
+                            style={{
+                                borderRadius: '10px 10px 0px 0px',
+                            }}
+                            />
+                    </div>
+                    }
                     <div className='h-[50%] p-4'>
                         <textarea
                             className='w-full h-[100%] focus:outline-none bg-transparent text-sm'
@@ -274,7 +298,7 @@ const AddPost: React.FC<IProps> = ({ onClose }) => {
                             />
                         </div>
 
-                        <CreatePostForm />
+                        <CreatePostForm setFileToPreview={setFilePreview} />
                     </div>
                 </div>
             </div>

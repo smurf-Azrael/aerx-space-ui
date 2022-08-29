@@ -1,21 +1,15 @@
 import React from "react";
 import {
   Box,
-  Spacer,
   Image,
   Text,
   Heading,
-  SimpleGrid,
-  extendTheme,
-  Center,
   Flex,
-  Container,
-  position,
+
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import { nearStore } from "../../store/near";
-
 
 // type Props = {};
 
@@ -24,10 +18,6 @@ const ProfileSection = (props) => {
 
   const dispatch = useDispatch();
   const {
-    groupP1,
-    groupP2,
-    ellipse1,
-    ellipse2,
     ellipse3,
     logoP,
     frameP1,
@@ -49,11 +39,28 @@ const ProfileSection = (props) => {
       top="0"
       // position="absolute"
       zIndex="2"
-      display={props.hidden}
       className="profileSection"
     >
       {/* <Image src={'../resources/Rectangle 3212.png'} position="absolute" zIndex="-2" /> */}
-      <Flex flexDirection="column" gap="10.96px" ml="16.44px" mt="21.92px">
+      <Flex flexDirection="column" gap="10.96px" ml="16.44px" mt="21.92px" cursor="pointer">
+        <Box
+          bgColor="#6054F0"
+          width="27.4px"
+          height="27.4px"
+          border="2px solid"
+          borderColor="#6054F0"
+          borderRadius="6.85px"
+          onClick={() => props.toggle()}
+        >
+          <Image
+            src="../resources/Frame 14297.png"
+            w="18px"
+            py="5px"
+            px="auto"
+            pl="4px"
+          />
+        </Box>
+       
         <Box
           width="27.4px"
           height="27.4px"
@@ -144,7 +151,6 @@ const ProfileSection = (props) => {
             lineHeight="100%"
           >
             {nearState.profile.fullName}
-
           </Heading>
 
           <Flex alignItems="center" flexDirection="column">
@@ -162,7 +168,7 @@ const ProfileSection = (props) => {
             </Text>
 
             <Flex>
-              <Image src={ellipse3} marginRight={2} w='10.96px' />
+              <Image src={ellipse3} marginRight={2} w="10.96px" />
               <Text
                 color="#FFFFFF80"
                 fontFamily="Poppins"

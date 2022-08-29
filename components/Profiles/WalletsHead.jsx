@@ -1,28 +1,19 @@
 import React from "react";
 import Link from "next/link";
 
-import {
-  Box,
-  Spacer,
-  Image,
-  Text,
-  Heading,
-  SimpleGrid,
-  extendTheme,
-  Center,
-  Flex,
-} from "@chakra-ui/react";
+import { Box, Image, Text, Center, Flex, Button } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import { nearStore } from "../../store/near";
 
+import { MinusIcon } from "@chakra-ui/icons";
 
 // type Props = {}
 
 const WalletHead = (props) => {
   const nearState = nearStore((state) => state);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const {
     rectangle,
     groupP1,
@@ -43,9 +34,8 @@ const WalletHead = (props) => {
     ellipse5,
   } = useSelector(getUserState);
 
-
-
   return (
+    
     <Box
       bgColor="#242424"
       width="257.56px"
@@ -54,23 +44,27 @@ const WalletHead = (props) => {
       position="absolute"
       h="327.43px"
       top="412.37px"
+    
     >
-
-      <Center cursor="pointer">
-        <Flex flexDirection="column" mt="8.22px" gap="2.74px" onClick={() => props.wallet()}>
-          <Box
+    
+      <Center>
+      <div
+        className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+        background-#1F1F1F
+        gap-0.5"
+        onClick={props.wallet}
+      >
+        <MinusIcon
             w="21.92px"
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
-            borderRadius="6.85px"
-          ></Box>
-          <Box
+          />
+          <MinusIcon
             w="21.92px"
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
-            borderRadius="6.85px"
-          ></Box>
-        </Flex>
+          />
+      </div>
       </Center>
 
 
@@ -95,40 +89,77 @@ const WalletHead = (props) => {
           {nearState.aexBalance} AEX
         </Text>
         <Flex>
+        <div
+        className="cursor-pointer  hover:bg-[#ffffff39]
+        background-#1F1F1F
+        w-[16.44px]
+        h-[16.44px]
+        mr-[10.275px]
+
+       "
+      >
           <Image
             src={"resources/Download.png"}
             alt="download"
             w="16.44px"
             h="16.44px"
-            mr="10.275px"
+          
           />
+          </div>
+          <div
+        className="cursor-pointer  hover:bg-[#ffffff39]
+        background-#1F1F1F
+        w-[16.44px]
+        h-[16.44px]
+        mr-[10.275px]
 
+       "
+       onClick={props.wallet}
+      >
           <Image
             src={"resources/Upload.png"}
             alt="upload"
             w="16.44px"
             h="16.44px"
             mr="10.275px"
-            onClick={() => props.upload()}
           />
+          </div>
+          <div
+        className="cursor-pointer  hover:bg-[#ffffff39]
+        background-#1F1F1F
+        w-[16.44px]
+        h-[16.44px]
+        mr-[10.275px]
 
+       "
+       onClick={props.wallet}
+      >
           <Image
             src={"resources/Frame 5556.png"}
             alt="upload"
             w="16.44px"
             h="16.44px"
             mr="10.275px"
-            onClick={() => props.exchange()}
           />
+          </div>
+          <div
+        className="cursor-pointer  hover:bg-[#ffffff39]
+        background-#1F1F1F
+        w-[16.44px]
+        h-[16.44px]
+        mr-[10.275px]
 
+       "
+       onClick={props.wallet}
+      >
           <Image
             src={"resources/plant 1.png"}
             alt="upload"
             w="16.44px"
             h="16.44px"
             mr="10.275px"
-            onClick={() => props.pool()}
           />
+          </div>
         </Flex>
       </Flex>
       {/* <NftValues /> */}

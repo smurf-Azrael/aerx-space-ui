@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Image, Text, Center, Flex } from "@chakra-ui/react";
+import { Box, Image, Text, Center, Flex, Button } from "@chakra-ui/react";
 import WalletHead from "./WalletsHead";
 
 function Collapse(props) {
@@ -57,18 +57,18 @@ function Collapse(props) {
         />
         <Image src={"../resources/Frame 14046.png"} w="21.92px" h="21.92px" />
       </Flex>
-      <Image
-        src={"../resources/Frame 14290.png"}
-        py="28.085px"
-        px="8.905px"
-        w="24.66px"
-        alignSelf="center"
-        h="67.13px"
-        borderRadius="10.275px"
-        mb="247.97px"
-        bgColor="rgba(255, 255, 255, 0.05);"
+
+      <div
+        className="mb-[247.97px]  rounded-[10.275px] cursor-pointer mx-auto py-[28.085px] px-[8.905px] flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[67.13px] align-center"
         onClick={props.toggle}
-      />
+      >
+        <Image
+          src="resources/Frame 14290.png"
+          className="cursor-pointer"
+          width="5.48px"
+          height="10.96px"
+        />
+      </div>
 
       <Flex flexDirection="column" gap="10.96px" alignItems="center">
         <Box

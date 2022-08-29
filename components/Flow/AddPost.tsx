@@ -49,7 +49,7 @@ const CreatePostForm: React.FC = () => {
             },
                 "300000000000000"
             ).then((res) => {
-                toast.success(`Your AERX-postNFT has been minted succesfully`)
+                toast.success(`Your AERX-postNFT has been minted Successfully`)
                 console.log("Minted post: ", res)
                 //save post
 
@@ -59,7 +59,7 @@ const CreatePostForm: React.FC = () => {
             console.error("Unable to mint AERX postNFT: ", err)
 
         }
-        nearState.removepostDetails()
+        nearState.removePostDetails()
         //return user to flow
     }
 

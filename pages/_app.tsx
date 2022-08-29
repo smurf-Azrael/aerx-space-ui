@@ -15,7 +15,7 @@ import { initPinata } from '../lib/auth';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const nearState:any = nearStore((state) => state);
+  const nearState: any = nearStore((state) => state);
   //1) Initialise near connection and contracts
   useEffect(() => {
     if (isLoading) {
@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [isLoading]);
 
-  //Run checks on each contract to confirm they are succesfully loaded and at same time save needed informations to state
+  //Run checks on each contract to confirm they are Successfully loaded and at same time save needed informations to state
   useEffect(() => {
     //2) check profile and set profile to state(if user has registered) 
     if (!isLoading) {

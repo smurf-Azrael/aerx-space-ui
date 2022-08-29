@@ -13,9 +13,15 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
+import { nearStore } from "../../store/near";
+import { MinusIcon } from '@chakra-ui/icons'
+
+
 // type Props = {}
 
 const Notification = () => {
+  const nearState = nearStore((state) => state);
+
   const dispatch = useDispatch();
   const {
     rectangle,
@@ -46,23 +52,29 @@ const Notification = () => {
       borderTopRadius="50px"
       h="76.72px"
       top="662.395px"
-
+    
     >
-      <Center cursor="pointer">
-        <Flex flexDirection="column" >
-          <Box
+      <Center>
+         <div
+        className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+        background-#1F1F1F
+        gap-0.5
+     
+        mt-2
+       "
+        onClick=""
+      >
+        <MinusIcon
             w="21.92px"
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
-            mt="8.22px"
-          ></Box>
-          <Box
+          />
+          <MinusIcon
             w="21.92px"
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
-            mt="2.74px"
-          ></Box>
-        </Flex>
+          />
+      </div>
       </Center>
 
       <Center
@@ -80,19 +92,19 @@ const Notification = () => {
         >
           <Flex alignItems="center" justifyItems="center">
             <Text
-              color="#ffffff"
-              marginTop={-4}
-              marginLeft={3}
-              position="absolute"
-              backgroundColor="red"
-              px="3.5px"
-              borderRadius="100%"
-              fontFamily="Poppins"
-              fontWeight="500"
-              fontSize="9.59px"
-            >
-              3
-            </Text>
+            color="#ffffff"
+            marginTop={-4}
+            marginLeft={3}
+            position="absolute"
+            backgroundColor="red"
+            px="3.5px"
+            borderRadius="100%"
+            fontFamily="Poppins"
+            fontWeight="500"
+            fontSize="9.59px"
+          >
+            3
+          </Text>
             <Image src={"resources/Notification.png"} w="19.52895px" h="21.26895px" />
           </Flex>
         </Box>
@@ -102,7 +114,7 @@ const Notification = () => {
           borderRadius="100%"
           padding="5px"
         >
-          <Image src={"resources/Ellipse 706.png"} w="21.92px" />
+          <Image src={nearState.profile.profileImg} w="21.92px" h="21.92px" borderRadius="100%" />
         </Box>
         <Box
           border="1px"

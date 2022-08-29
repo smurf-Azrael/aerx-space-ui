@@ -8,10 +8,28 @@ import {
   Input,
   Button,
 } from "@chakra-ui/react";
-// import { Input } from "postcss";
+import SendingTokens  from "./SendingTokens";
+import { MinusIcon } from '@chakra-ui/icons'
+import { nearStore } from "../../store/near";
 
 function SendTokens(props) {
+
+    const [amount,setAmount] = React.useState(0)
+    const [isProceed,setProceed] = React.useState(false)
+
+    const handleAmount = (event) => {
+      setAmount(event.target.value)
+    }
+    const handleClick = () => {
+      setProceed((prevState) => !prevState)
+    }
+    let bgColor
+    let disabled
+  const propsColor=  amount.length === 0 ? bgColor="#FFFFFF1D;" : bgColor="#6054F0" 
+  const propsDisabled =  amount.length === 0 ? disabled=true : disabled=false 
+    
   return (
+    isProceed ? <SendingTokens click={handleClick} amount={amount} toggle={props.toggleWallet} /> :
     <Box
       height="739.8px"
       w="257.56px"
@@ -19,24 +37,27 @@ function SendTokens(props) {
       position="absolute"
       top="0"
     >
-      <Center>
-        <Box
-          w="21.92px"
-          bgColor="rgba(255, 255, 255, 0.3);"
-          height="2px"
-          mt="8.22px"
-          borderRadius="6.85px"
-        ></Box>
-      </Center>
-      <Center>
-        <Box
-          w="21.92px"
-          bgColor="rgba(255, 255, 255, 0.3);"
-          height="2px"
-          mt="2.74px"
-          borderRadius="6.85px"
-          mb="23.29px"
-        ></Box>
+       <Center>
+        <div
+          className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+        background-#1F1F1F
+        gap-0.5
+        mb-[26.825px]
+        mt-2
+        "
+          onClick={props.toggleWallet}
+        >
+          <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+          <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+        </div>
       </Center>
 
       <Box
@@ -69,17 +90,25 @@ function SendTokens(props) {
       </Center>
 
       <Center mb="27.4px">
+        <Flex w="257.56" justifyContent="center">
         <Text
+          textAlign="center"
+
           fontFamily="Poppins"
           fontSize="24.66px"
           fontWeight="700"
           color="#ffffff"
+           w="143px"
+           h="24px"
+
         >
-          0
+          {amount}
         </Text>
+        </Flex>
       </Center>
 
       <Input
+        type="number"
         py="13.7px"
         mx="32.88px"
         w="191.8px"
@@ -88,22 +117,24 @@ function SendTokens(props) {
         bgColor="#1B1B1B;"
         border="none"
         borderRadius="10.275px"
-        placeholder="User"
+        placeholder="Amount"
         fontFamily="Poppins"
         fontSize="10.96px"
         fontWeight="400"
         color="#ffffff4d"
+        onChange={(e) => handleAmount(e)}
       />
 
       <Center mb="21.92px">
         <Button
+          disabled={disabled}
+          onClick={() => handleClick()}
           fontFamily="Poppins"
           fontSize="10.96px"
           color="#ffffff"
-          opacity="0.3"
+          // opacity="0.3"
           fontWeight="600"
-          bgColor="#FFFFFF1D;"
-          
+          bgColor={bgColor} 
           w="191.8px"
           h="38.36px"
         >

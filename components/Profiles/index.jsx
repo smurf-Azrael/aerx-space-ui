@@ -1,6 +1,5 @@
 import React from "react";
 import ProfileSection from "./ProfileSection";
-import { Box, Container, ChakraProvider } from "@chakra-ui/react";
 import ImagesCarousel from "./ImagesCarousel";
 import Notifications from "./Notification";
 import NftValues from "./NftValues";
@@ -8,14 +7,12 @@ import Collapse from "./Collapse";
 import FlowFeeds from "../Flow/index";
 import Circle from "./Circle";
 import ChatRoom from "../Chat/ChatRoom";
-import Chat from "../Chat/index";
 import Space from "../Space/index";
 import Wallets from "../BranchWallet/tokenWallet";
 import WalletsHead from "./WalletsHead";
-
 import Pools from "../BranchWallet/Pools"
 import Exchange from "../BranchWallet/Exchange";
-import SendingTokens from "../BranchWallet/SendingTokens";
+import SendTokens from "../BranchWallet/SendTokens";
 import AddLiquidity from "../BranchWallet/AddLiquidity";
 import RecieveToken from "../BranchWallet/RecieveToken";
 
@@ -126,7 +123,7 @@ function index() {
             
             {wallet}
             {isExchange && <Exchange exchange={changeExchange} toggleWallet={openWallet} /> }
-            {isUpload && <SendingTokens upload={changeUpload}  toggleWallet={openWallet} />  }
+            {isUpload && <SendTokens upload={changeUpload}  toggleWallet={openWallet} />  }
             {isPool && <Pools pool={changePool} toggleWallet={openWallet} />  }
             {isLiquidity && <AddLiquidity liquidity={changeLiquidity} toggleWallet={openWallet}  />  }
             {isRecieved && <RecieveToken recieved={changeRecieve} toggleWallet={openWallet}  />  }

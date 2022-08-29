@@ -27,12 +27,14 @@ const ImagesCarousel = (props) => {
 
   return (
     <Box
-      bgColor="#1F1F1F"
-      borderTopRadius="34.25px"
+      bgColor="#1F1F1F;
+      "
+      // borderTopRadius="34.25px"
       width="257.56px"
-      position="absolute"
+      position="absolute"s
       h="442.51px"
       top="297.29px"
+      borderRadius="50px 50px 0px 0px"
 
     >
       <Center>

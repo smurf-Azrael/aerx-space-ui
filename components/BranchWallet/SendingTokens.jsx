@@ -86,7 +86,7 @@ function SendingTokens(props) {
         fontSize="10.96px"
         fontWeight="400"
       >
-        <Flex gap="5.48px" alignItems="center" mb="202.075px" ml="16.44px" onClick={props.upload} cursor="pointer" >
+        <Flex gap="5.48px" alignItems="center" mb="202.075px" ml="16.44px" onClick={props.click} cursor="pointer" >
           <Image
             src={"../resources/Arrow - Right1.png"}
             color="#FFFFFF4D;"
@@ -116,7 +116,7 @@ function SendingTokens(props) {
           fontWeight="700"
           color="#ffffff"
         >
-          50
+          {props.amount}
         </Text>
       </Center >
 

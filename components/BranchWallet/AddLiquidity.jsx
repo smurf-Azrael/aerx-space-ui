@@ -166,12 +166,13 @@ function AddLiquidities(props) {
           {/* I'll probably change this code because of the max placeholder from here*/}
           <NumberInput
             //   defaultValue={0.0}
-            min={0.0}
-            max={20}
+            // min={0.0}
+            // max={20}
             w="113.71px"
             h="38.36px"
           >
             <NumberInputField
+            disabled
               color="#ffffff"
               fontSize="10.96px"
               bgColor="#191A1B;"

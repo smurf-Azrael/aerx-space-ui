@@ -23,7 +23,7 @@ function SendingTokens(props) {
     let val = e.target.value;
     setTransferAexDetails({
       receiver: val,
-      amount: "5" + "000000000000000000000000",
+      amount: props.amount + "000000000000000000000000",
     })
   }
 
@@ -43,7 +43,7 @@ function SendingTokens(props) {
       console.log("Transfer successful")
       //show successful page
     } catch (error) {
-      console.error("Transfer not successful")
+      console.log("Transfer not successful: ", error)
       //show error page
     }
 
@@ -162,7 +162,7 @@ function SendingTokens(props) {
 
         fontWeight="400">
         <Text color="#ffffff4d" >Available to send</Text>
-        <Text color="#ffffff4d">102.48283 NEAR</Text>
+        <Text color="#ffffff4d">{nearState.aexBalance} AEX</Text>
       </Flex>
     </Box>
   );

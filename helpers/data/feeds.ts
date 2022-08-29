@@ -1,4 +1,4 @@
-import { Post } from "../../types/Post";
+import { Feed, Post } from "../../types/Post";
 
 export const posts: Array<Post> = [
     {
@@ -64,3 +64,25 @@ export const posts: Array<Post> = [
 
     },
 ]
+
+export const videoFeed: Feed = {
+    post_id: "video.test",
+    owner_id: "2",
+    metadata: {
+        title: "Hello for the team at City of Orange",
+        media: "assets/images/cover-image-5.jpeg",
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper eu felis morbi fringilla est fames fusce. Tristique nulla diam elit volutpat dui pellentesque gravida dictum at. Posuere pretium velit interdum. Egestas cursus imperdiet proin morbi dolor',
+    },
+    type: 'video'
+}
+
+export const tempoFeed: Feed = {
+    post_id: "tempo.test",
+    owner_id: "2",
+    metadata: {
+        title: "Hello for the team at City of Orange",
+        media: "assets/images/cover-image-5.jpeg",
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper eu felis morbi fringilla est fames fusce. Tristique nulla diam elit volutpat dui pellentesque gravida dictum at. Posuere pretium velit interdum. Egestas cursus imperdiet proin morbi dolor',
+    },
+    type: 'tempo',
+}

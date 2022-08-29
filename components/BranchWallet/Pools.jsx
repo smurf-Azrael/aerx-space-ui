@@ -8,23 +8,27 @@ import {
   FormControl,
   Input,
 } from "@chakra-ui/react";
-import Collapse from "../Profiles/Collapse";
-import Newpools from "./NewPool"
-import { MinusIcon } from '@chakra-ui/icons'
+import AddLiquidities from "./AddLiquidity";
 
+import { MinusIcon } from '@chakra-ui/icons'
 
 function Pools(props) {
 
-  const [isNewPool, setNewPool] = React.useState(false);
+  
+  const [isAddLiquidity, setAddLiquidity] = React.useState(true);
 
   const newPools =() => {
     setNewPool((prevState) => !prevState);
   }
 
+  const AddLiquidity =() => {
+    setAddLiquidity((prevState) => !prevState);
+  }
+
   return (
     <>
     {
-      isNewPool ? <Newpools newPool={newPools} /> :
+      isAddLiquidity ? <AddLiquidities liquidity={AddLiquidity} toggleWallet={props.toggleWallet}  /> :
       <Box w="257.56px" h="739.8px" bgColor="#1F1F1F" position="absolute" top="0">
         <Center>
       <div
@@ -282,7 +286,12 @@ function Pools(props) {
           </Flex>
         </Flex>
 
-        <Flex ml="16.44" mb="23.975px">
+
+        <Flex ml="16.44" mb="23.975px" 
+          onClick = {() => AddLiquidity()}
+          cursor="pointer"
+        
+        >
         <Flex mr="20.975px" pl="9.59px" alignItems="center">
           <Image
             src={"../resources/Group 14031.png"}
@@ -319,7 +328,12 @@ function Pools(props) {
         </Flex>
         </Flex>
 
-        <Flex ml="16.44" mb="23.975px">
+        <Flex ml="16.44" mb="23.975px"
+         
+         onClick = {() => AddLiquidity()}
+         cursor="pointer"
+        
+        >
         <Flex mr="20.975px" pl="9.59px" alignItems="center">
           <Image
             src={"../resources/Group 14030.png"}
@@ -356,7 +370,11 @@ function Pools(props) {
         </Flex>
         </Flex>
 
-        <Flex ml="16.44" mb="23.975px">
+        <Flex ml="16.44" mb="23.975px"
+          onClick = {() => AddLiquidity()}
+          cursor="pointer"
+        
+        >
         <Flex mr="20.975px" pl="9.59px" alignItems="center">
           <Image
             src={"../resources/Group 14031.png"}
@@ -393,7 +411,11 @@ function Pools(props) {
         </Flex>
         </Flex>
 
-        <Flex ml="16.44" mb="23.975px">
+        <Flex ml="16.44" mb="23.975px"
+          onClick = {() => AddLiquidity()}
+          cursor="pointer"
+        
+        >
         <Flex mr="20.975px" pl="9.59px" alignItems="center">
           <Image
             src={"../resources/Group 14030.png"}
@@ -430,7 +452,10 @@ function Pools(props) {
         </Flex>
         </Flex>
 
-        <Flex ml="16.44" mb="23.975px">
+        <Flex ml="16.44" mb="23.975px"
+          onClick = {() => AddLiquidity()}
+        cursor="pointer"
+        >
         <Flex mr="20.975px" pl="9.59px" alignItems="center">
           <Image
             src={"../resources/Group 14031.png"}
@@ -467,7 +492,11 @@ function Pools(props) {
         </Flex>
         </Flex>
 
-        <Flex ml="16.44" mb="23.975px">
+        <Flex ml="16.44" mb="23.975px"
+          onClick = {() => AddLiquidity()}
+          cursor="pointer"
+        
+        >
         <Flex mr="20.975px" pl="9.59px" alignItems="center">
           <Image
             src={"../resources/Group 14030.png"}
@@ -504,7 +533,11 @@ function Pools(props) {
         </Flex>
         </Flex>
 
-        <Flex ml="16.44" mb="23.975px">
+        <Flex ml="16.44" mb="23.975px"
+          onClick = {() => AddLiquidity()}
+          cursor="pointer"
+        
+        >
         <Flex mr="20.975px" pl="9.59px" alignItems="center">
           <Image
             src={"../resources/Group 14031.png"}
@@ -541,7 +574,11 @@ function Pools(props) {
         </Flex>
         </Flex>
 
-        <Flex ml="16.44" mb="23.975px">
+        <Flex ml="16.44" mb="23.975px"
+          onClick = {() => AddLiquidity()}
+          cursor="pointer"
+        
+        >
         <Flex mr="20.975px" pl="9.59px" alignItems="center">
           <Image
             src={"../resources/Group 14030.png"}

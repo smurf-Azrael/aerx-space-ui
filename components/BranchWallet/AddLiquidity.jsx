@@ -16,35 +16,43 @@ import {
   NumberIncrementStepper,
   NumberInputStepper,
 } from "@chakra-ui/react";
+import { MinusIcon } from "@chakra-ui/icons";
 
 
 
 
-function AddLiquidity(props) {
+
+function AddLiquidities(props) {
   return (
     <Box
       height="739.8px"
       w="257.56px"
       bgColor="#1f1f1f"
+      position="absolute"
+      top="0"
     >
       <Center>
-        <Box
-          w="21.92px"
-          bgColor="rgba(255, 255, 255, 0.3);"
-          height="2px"
-          mt="8.22px"
-          borderRadius="6.85px"
-        ></Box>
-      </Center>
-      <Center>
-        <Box
-          w="21.92px"
-          bgColor="rgba(255, 255, 255, 0.3);"
-          height="2px"
-          mt="2.74px"
-          borderRadius="6.85px"
-          mb="23.29px"
-        ></Box>
+      <div
+        className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+        background-#1F1F1F
+        gap-0.5
+        mb-[26.825px]
+        mt-2
+        "
+        onClick={props.toggleWallet}
+        cursor="pointer"
+      >
+        <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+          <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+      </div>
       </Center>
 
       <Box
@@ -54,7 +62,7 @@ function AddLiquidity(props) {
         fontSize="10.96px"
         fontWeight="400"
       >
-        <Flex gap="5.48px" alignItems="center" mb="202.075px" onClick={() => props.liquidity()}>
+        <Flex gap="5.48px" alignItems="center" mb="202.075px" onClick={() => props.liquidity()} cursor="pointer">
           <Image
             src={"../resources/Arrow - Right1.png"}
             color="#FFFFFF4D;"
@@ -186,4 +194,4 @@ function AddLiquidity(props) {
   )
 }
 
-export default AddLiquidity
+export default AddLiquidities

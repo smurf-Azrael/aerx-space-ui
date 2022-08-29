@@ -24,6 +24,7 @@ function Collapse(props) {
         justifyItems="center"
         alignItems="center"
       >
+       
         <Image src={"../resources/Frame 5449.png"} w="21.92px" mb="19.865px" />
         {/* <Text fontFamily="Open Sans" fontWeight="800" color="white" w="21.92px" h="21px">æ</Text> */}
         <Image
@@ -65,16 +66,17 @@ function Collapse(props) {
         className="mb-[247.97px] color-[white]  rounded-[10.275px] cursor-pointer mx-auto  flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[67.13px] align-center"
         onClick={props.toggle}
       >
-        {/* <Image
+        <Image
           src="resources/Frame 14290.png"
         
-        /> */}
-        <ChevronRightIcon 
-          color='white'
+        />
+        {/* <ChevronRightIcon 
+       
           width="36.44px"
           height="36.44px"
           ml="-5px"
-          />
+          color="#FFFFFF"
+          /> */}
       </div>
 
       <Flex flexDirection="column" gap="10.96px" alignItems="center">
@@ -100,7 +102,7 @@ function Collapse(props) {
           <Image
             src={"../resources/Notification22.png"}
             w="11.64px"
-            h="13.7px"
+            h="13.7px" 
           />
         </Box>
         <Box

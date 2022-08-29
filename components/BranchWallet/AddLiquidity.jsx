@@ -17,12 +17,29 @@ import {
   NumberInputStepper,
 } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
+import { nearStore } from '../../store/near';
 
 
 
 
 
 function AddLiquidities(props) {
+  const nearState = nearStore((state) => state);
+  const addLiquidity = () => {
+    console.log("Add liquidity has been clicked")
+    // try {
+    //   nearState.DexContract.lend({
+    //     pool_id: 1,
+    //     token_id: "near.near",
+    //     amount: ,
+    //     min_expected: ,
+    //     equivalent_aex: ,
+    //   })
+    // } catch (error) {
+
+    // }
+  }
+
   return (
     <Box
       height="739.8px"
@@ -32,17 +49,17 @@ function AddLiquidities(props) {
       top="0"
     >
       <Center>
-      <div
-        className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+        <div
+          className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
         mb-[26.825px]
         mt-2
         "
-        onClick={props.toggleWallet}
-        cursor="pointer"
-      >
-        <MinusIcon
+          onClick={props.toggleWallet}
+          cursor="pointer"
+        >
+          <MinusIcon
             w="21.92px"
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
@@ -52,7 +69,7 @@ function AddLiquidities(props) {
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
           />
-      </div>
+        </div>
       </Center>
 
       <Box
@@ -185,6 +202,7 @@ function AddLiquidities(props) {
           w="191.8px"
           h="38.36px"
           letterSpacing="0.02px"
+          onClick={addLiquidity}
         >
 
           Add Liquidity

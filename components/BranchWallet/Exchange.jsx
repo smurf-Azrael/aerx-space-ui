@@ -30,29 +30,41 @@ function Exchange(props) {
   };
 
 
-const [tolerance,setTolerance] = React.useState(0.1)
+  const [tolerance, setTolerance] = React.useState(0.1)
 
 
-  const slipPage = (tolerance) =>{
+  const slipPage = (tolerance) => {
     setTolerance(tolerance)
 
   }
-  const calculatedAexTolerance = tolerance * swapValue.aex
-  const calculatedNearTolerance = tolerance * swapValue.near
+  const swapToken = () => {
+    console.log("Swap button has been clicked")
+    console.log("minimum Aex: ", minimumAex)
+    console.log("minimum Near: ", minimumNear)
+  }
 
 
-let color1 = "#FFFFFF4D;"
-let color2 = "#FFFFFF4D;"
-let color3 = "#FFFFFF4D;"
-if(tolerance === 0.1 ) {
-  color1="#ffffff"
-}
-if(tolerance === 0.5 ){
-  color2 = "#ffffff"
-} 
-if(tolerance === 1){
-  color3 = "#ffffff"
-}
+  const calculatedAexOutput = swapValue.aex / 111
+  const calculatedNearOutput = 111 * swapValue.near
+  const tolerancePercentage = tolerance / 100;
+  const calcDifferenceAex = tolerancePercentage * calculatedAexOutput
+  const calcDifferenceNear = tolerancePercentage * calculatedNearOutput
+  const minimumAex = calculatedAexOutput - calcDifferenceAex
+  const minimumNear = calculatedNearOutput - calcDifferenceNear
+
+
+  let color1 = "#FFFFFF4D;"
+  let color2 = "#FFFFFF4D;"
+  let color3 = "#FFFFFF4D;"
+  if (tolerance === 0.1) {
+    color1 = "#ffffff"
+  }
+  if (tolerance === 0.5) {
+    color2 = "#ffffff"
+  }
+  if (tolerance === 1) {
+    color3 = "#ffffff"
+  }
 
 
 
@@ -137,7 +149,7 @@ if(tolerance === 1){
           <Flex>
             <div className="w-[191px]">
               <Input
-              type="number"
+                type="number"
                 name="near"
                 onChange={handleSwap}
                 className="
@@ -161,7 +173,7 @@ if(tolerance === 1){
           <Flex>
             <div className="w-[191px]">
               <Input
-              type="number"
+                type="number"
 
                 name="aex"
                 onChange={handleSwap}
@@ -208,9 +220,9 @@ if(tolerance === 1){
         px="16.44"
         gap="auto"
       >
-   
-        <Text color={color1}  cursor="pointer" onClick={() => slipPage(0.1)}>0.1%
-  
+
+        <Text color={color1} cursor="pointer" onClick={() => slipPage(0.1)}>0.1%
+
         </Text>
 
         <Text color={color2} ml="39.045px" mr="34.935px" cursor="pointer" onClick={() => slipPage(0.5)}>
@@ -268,9 +280,9 @@ if(tolerance === 1){
             <div className="w-[191px]">
               <Input
                 disabled
-                placeholder={calculatedAexTolerance}
-              name="near" onChange={handleSwap}
-              
+                placeholder={calculatedAexOutput}
+                name="near" onChange={handleSwap}
+
                 className="
           h-[28.36px] border-color-white  border-black text-white"
               />
@@ -292,10 +304,10 @@ if(tolerance === 1){
           <Flex>
             <div className="w-[191px]" >
               <Input
-              disabled
-              placeholder={calculatedNearTolerance}
-              name="aex"
-              onChange={handleSwap}
+                disabled
+                placeholder={calculatedNearOutput}
+                name="aex"
+                onChange={handleSwap}
                 className="
         h-[28.36px] border-color-white  border-black text-white "
               />
@@ -308,13 +320,13 @@ if(tolerance === 1){
                 src={"../resources/Group 14031.png"}
                 w="16.44px"
                 h="16.44px"
-                
+
               />
             </Flex>
           </Flex>
         )}
       </Flex>
-     
+
       <Text
         mb="27.4px"
         textAlign="center"
@@ -335,6 +347,8 @@ if(tolerance === 1){
           bgColor="#6054F0;"
           w="191.8px"
           h="38.36px"
+          onClick={swapToken}
+          cursor="pointer"
         >
           <Image src={"../resources/Frame 5556.png"} mr="5.48px" />
           Change

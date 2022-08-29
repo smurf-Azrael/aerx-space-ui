@@ -5,11 +5,13 @@ import {
   useSelector as useSelectorBase,
 } from "react-redux";
 import modulesSlice from "./slices/modulesSlices";
+import postsSlice from "./slices/postsSlice";
 
 export const store = configureStore({
   reducer: {
     images: imageSlice,
-    modules: modulesSlice
+    modules: modulesSlice,
+    posts: postsSlice,
   },
 });
 

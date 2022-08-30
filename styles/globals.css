@@ -52,3 +52,32 @@ a {
 
   }
 }
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+.nft-container::-webkit-scrollbar-track {
+  background: #6054F0; 
+}
+ 
+/* Handle */
+.nft-container::-webkit-scrollbar-thumb {
+  background: #6054F0; 
+}
+
+/* Handle on hover */
+.nft-container::-webkit-scrollbar-thumb:hover {
+  background: #6054F0; 
+}

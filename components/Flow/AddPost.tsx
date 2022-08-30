@@ -50,7 +50,6 @@ const CreatePostForm: React.FC<{setFileToPreview: (fileURL: string) => void}> = 
                 nearState.postDetails.body = "";
                 nearState.postDetails.title = "";
                 router.push('/flow')
-                console.log("Minted post: ", res)
                 //save post
 
             })

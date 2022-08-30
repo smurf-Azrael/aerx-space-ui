@@ -66,7 +66,7 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
     return (
         <div className='relative w-full  h-[40vh] rounded-[20px]'>
 
-            <div className='w-full  h-full absolute rounded-[20px]'
+            <div className='w-full  h-full absolute rounded-[20px] '
                 style={{
                     backgroundImage: `url(${metadata?.media})`,
                     backgroundRepeat: 'no-repeat',

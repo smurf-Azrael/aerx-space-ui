@@ -201,7 +201,7 @@ function Exchange(props) {
         fontFamily="Poppins"
         fontWeight="400"
         fontSize="9.59"
-        color="#FFFFFF4D;"
+        color="#FFFFFF4D"
       >
         Available: 102.4 NEAR
       </Text>
@@ -354,6 +354,26 @@ function Exchange(props) {
           Change
         </Button>
       </Center>
+      <Center mt="5px">
+      {!isExchange ?
+       <Text 
+      fontFamily="Poppins"
+      fontWeight="400"
+      fontSize="9.59"
+      color="#FFFFFF4D"
+      >
+        minimuim near recieved :{minimumNear}
+
+      </Text >:
+      <Text
+      fontFamily="Poppins"
+      fontWeight="400"
+      fontSize="9.59"
+      color="#FFFFFF4D"
+      > 
+       minimuim aex recieved :{minimumAex}
+       </Text>}
+        </Center>
     </Box>
   );
 }

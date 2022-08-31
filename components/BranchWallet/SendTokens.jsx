@@ -7,6 +7,11 @@ import {
   Image,
   Input,
   Button,
+  NumberInput,
+  NumberInputField,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInputStepper,
 } from "@chakra-ui/react";
 import SendingTokens from "./SendingTokens";
 import { MinusIcon } from '@chakra-ui/icons'
@@ -16,17 +21,49 @@ function SendTokens(props) {
   const nearState = nearStore((state) => state);
 
   const [amount, setAmount] = React.useState("")
+  const [receiver, setReceiver] = React.useState("")
   const [isProceed, setProceed] = React.useState(false)
 
   const handleAmount = (event) => {
     setAmount(event.target.value)
+    console.log(amount)
   }
+  const handleUser = (event) => {
+    setReceiver(event.target.value)
+  
+  }
+    
+    const transferAex = async () => {
+      console.log("Send button clicked")
+      console.log("Details: ", amount,receiver)
+      try {
+        await nearState.tokenContract.ft_transfer({
+          receiver_id: receiver,
+          amount: amount + "000000000000000000000000" ,
+          memo: "AEX Transfer",
+        },
+          "300000000000000",
+          "1",
+        )
+        nearState.setSuccessfulTransfer(true);
+        console.log("Transfer successful")
+        //show successful page
+      } catch (error) {
+        console.log("Transfer not successful: ", error)
+        //show error page
+      }
+  
+    }
+
+
+
+
   const handleClick = () => {
     setProceed((prevState) => !prevState)
   }
   let bgColor
   let disabled
-  const propsColor = amount.length < 1 ? bgColor = "#FFFFFF1D;" : bgColor = "#6054F0"
+  const propsColor = amount.length  < 1  ? bgColor = "#FFFFFF1D;" : bgColor = "#6054F0"
   const propsDisabled = amount.length < 1 ? disabled = true : disabled = false
 
   return (
@@ -90,46 +127,64 @@ function SendTokens(props) {
           </Text>
         </Center>
 
-        <Center mb="27.4px">
-          <Flex w="257.56" justifyContent="center">
-            <Text
-              textAlign="center"
-
-              fontFamily="Poppins"
-              fontSize="24.66px"
-              fontWeight="700"
+        <Center mb="5.48px">
+          <Flex w="257.56px" justifyContent="center">
+        <NumberInput
+            min={0.0}
+            max={20}
+            w="257.56"
+            h="38.36px"
+          >
+            <NumberInputField
               color="#ffffff"
-              w="143px"
-              h="24px"
-
-            >
-              {amount}
-            </Text>
+              fontSize="10.96px"
+              bgColor="#191A1B;"
+              border="none"
+              borderRadius="10.275px"
+              placeholder='111'
+              onChange={(e) => handleAmount(e)}
+            />
+            <NumberInputStepper>
+              <NumberIncrementStepper pr="16px" children="MAX" color="#ffffff4d" border="none" />
+            </NumberInputStepper>
+          </NumberInput>
           </Flex>
+        </Center>
+        <Center mb="10.96px">
+          <Text
+           fontFamily="Poppins"
+           fontSize="9.59px"
+           fontWeight="400"
+           lineHeight="8.22px"
+           color="#FFFFFF4D
+           "
+          >
+          ≈ $155.13 USD
+          </Text>
         </Center>
 
         <Input
-          type="number"
+          type="text"
           py="13.7px"
           mx="32.88px"
           w="191.8px"
           h="38.36px"
-          mb="10.96px"
+          mb="16.44px"
           bgColor="#1B1B1B;"
           border="none"
           borderRadius="10.275px"
-          placeholder="Amount"
+          placeholder="User"
           fontFamily="Poppins"
           fontSize="10.96px"
           fontWeight="400"
           color="#ffffff4d"
-          onChange={(e) => handleAmount(e)}
+          onChange={(e) => handleUser(e)}
         />
 
         <Center mb="21.92px">
           <Button
             disabled={disabled}
-            onClick={() => handleClick()}
+       
             fontFamily="Poppins"
             fontSize="10.96px"
             color="#ffffff"
@@ -138,6 +193,7 @@ function SendTokens(props) {
             bgColor={bgColor}
             w="191.8px"
             h="38.36px"
+            onClick={transferAex}
           >
             <Image src={"../resources/Arrow - Right.png"} w="8.25425px" h="10.275px" mr="5.48px" />
             Send

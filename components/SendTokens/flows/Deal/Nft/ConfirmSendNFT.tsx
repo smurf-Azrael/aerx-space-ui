@@ -89,15 +89,15 @@ const ConfirmSendNFT: React.FC<IProps> = ({ selectedNFTs }) => {
                 </div>
 
                 <div className='w-full mt-4'>
-                    {loading && 
-                    <button className='bg-black-light p-2 mt-2 rounded-[10px] w-full justify-around  items-center flex'>
-                        <div className='flex gap-2 items-center'>
-                        <Image 
-                        className='opacity-[30%]'
-                        src="/assets/icons/wait-icons.svg" alt="loading" width={25} height={25} />
-                        <label className='text-sm text-white opacity-[30%]' style={{fontWeight:'bold'}}>Wait</label>
-                        </div>
-                    </button>
+                    {loading &&
+                        <button className='bg-black-light p-2 mt-2 rounded-[10px] w-full justify-around  items-center flex'>
+                            <div className='flex gap-2 items-center'>
+                                <Image
+                                    className='opacity-[30%]'
+                                    src="/assets/icons/wait-icons.svg" alt="loading" width={25} height={25} />
+                                <label className='text-sm text-white opacity-[30%]' style={{ fontWeight: 'bold' }}>Wait</label>
+                            </div>
+                        </button>
                     }{
                         !loading &&
                         <Button label='Received' icon='/assets/icons/white-tick-icon.svg' />
@@ -105,11 +105,11 @@ const ConfirmSendNFT: React.FC<IProps> = ({ selectedNFTs }) => {
                 </div>
 
                 <div className='w-full flex my-6 justify-around'>
-                <div className='flex gap-4'>
-                    <StepIndicator />
-                    <StepIndicator />
-                    <StepIndicator bg="purple" />
-                </div>
+                    <div className='flex gap-4'>
+                        <StepIndicator />
+                        <StepIndicator />
+                        <StepIndicator bg="purple" />
+                    </div>
                 </div>
             </div>
         </div>

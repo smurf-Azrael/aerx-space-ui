@@ -15,6 +15,7 @@ import Exchange from "../BranchWallet/Exchange";
 import SendTokens from "../BranchWallet/SendTokens";
 import AddLiquidity from "../BranchWallet/AddLiquidity";
 import RecieveToken from "../BranchWallet/RecieveToken";
+import NewProfile from "./NewProfile"
 
 
 
@@ -111,11 +112,12 @@ function index() {
         {!isOpenWallet ? 
 
           <div>
-            <ProfileSection toggle={toggleClick}  />
+            <NewProfile toggle={toggleClick} doubleClick={doubleClick} wallet={openWallet} />
+            {/* <ProfileSection toggle={toggleClick}  />
             <ImagesCarousel doubleClick={doubleClick} />
             <WalletsHead wallet={openWallet} />
             <NftValues />
-            <Notifications />
+            <Notifications /> */}
             {/* <tokenWallet /> */}
 
           </div> :
@@ -127,6 +129,7 @@ function index() {
             {isPool && <Pools pool={changePool} toggleWallet={openWallet} />  }
             {isLiquidity && <AddLiquidity liquidity={changeLiquidity} toggleWallet={openWallet}  />  }
             {isRecieved && <RecieveToken recieved={changeRecieve} toggleWallet={openWallet}  />  }
+          
           </div>
 }
         </div>

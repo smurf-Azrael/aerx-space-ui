@@ -8,6 +8,8 @@ import {
   Button,
   Input,
   PseudoBox,
+  NumberInputField,
+  NumberInput
 } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
 
@@ -29,44 +31,37 @@ function Exchange(props) {
     console.log(swapValue);
   };
 
-
-  const [tolerance, setTolerance] = React.useState(0.1)
-
+  const [tolerance, setTolerance] = React.useState(0.1);
 
   const slipPage = (tolerance) => {
-    setTolerance(tolerance)
-
-  }
+    setTolerance(tolerance);
+  };
   const swapToken = () => {
-    console.log("Swap button has been clicked")
-    console.log("minimum Aex: ", minimumAex)
-    console.log("minimum Near: ", minimumNear)
-  }
+    console.log("Swap button has been clicked");
+    console.log("minimum Aex: ", minimumAex);
+    console.log("minimum Near: ", minimumNear);
+  };
 
-
-  const calculatedAexOutput = swapValue.aex / 111
-  const calculatedNearOutput = 111 * swapValue.near
+  const calculatedAexOutput = swapValue.aex / 111;
+  const calculatedNearOutput = 111 * swapValue.near;
   const tolerancePercentage = tolerance / 100;
-  const calcDifferenceAex = tolerancePercentage * calculatedAexOutput
-  const calcDifferenceNear = tolerancePercentage * calculatedNearOutput
-  const minimumAex = calculatedAexOutput - calcDifferenceAex
-  const minimumNear = calculatedNearOutput - calcDifferenceNear
+  const calcDifferenceAex = tolerancePercentage * calculatedAexOutput;
+  const calcDifferenceNear = tolerancePercentage * calculatedNearOutput;
+  const minimumAex = calculatedAexOutput - calcDifferenceAex;
+  const minimumNear = calculatedNearOutput - calcDifferenceNear;
 
-
-  let color1 = "#FFFFFF4D;"
-  let color2 = "#FFFFFF4D;"
-  let color3 = "#FFFFFF4D;"
+  let color1 = "#FFFFFF4D;";
+  let color2 = "#FFFFFF4D;";
+  let color3 = "#FFFFFF4D;";
   if (tolerance === 0.1) {
-    color1 = "#ffffff"
+    color1 = "#ffffff";
   }
   if (tolerance === 0.5) {
-    color2 = "#ffffff"
+    color2 = "#ffffff";
   }
   if (tolerance === 1) {
-    color3 = "#ffffff"
+    color3 = "#ffffff";
   }
-
-
 
   return (
     <Box
@@ -174,7 +169,6 @@ function Exchange(props) {
             <div className="w-[191px]">
               <Input
                 type="number"
-
                 name="aex"
                 onChange={handleSwap}
                 className="
@@ -218,18 +212,37 @@ function Exchange(props) {
         fontWeight="500"
         py="14.385px"
         px="16.44"
-        gap="auto"
+        gap="23px"
       >
-
-        <Text color={color1} cursor="pointer" onClick={() => slipPage(0.1)}>0.1%
-
+        <Text color={color1} cursor="pointer" onClick={() => slipPage(0.1)}>
+          0.1%
         </Text>
 
-        <Text color={color2} ml="39.045px" mr="34.935px" cursor="pointer" onClick={() => slipPage(0.5)}>
+        <Text color={color2} cursor="pointer" onClick={() => slipPage(0.5)}>
           0.5%
         </Text>
 
-        <Text color={color3} cursor="pointer" onClick={() => slipPage(1)} >1%</Text>
+        <Text color={color3} cursor="pointer" onClick={() => slipPage(1)}>
+          1%
+        </Text>
+
+      
+            <NumberInput
+            min={0.0}
+            max={20}
+            w="257.56"
+            h="38.36px"
+          >
+          <NumberInputField
+              color="#ffffff"
+              fontSize="10.96px"
+              bgColor="#191A1B;"
+              border="none"
+              borderRadius="10.275px"
+              placeholder='111'
+             
+            />
+            </NumberInput>
       </Flex>
 
       <Text
@@ -281,8 +294,8 @@ function Exchange(props) {
               <Input
                 disabled
                 placeholder={calculatedAexOutput}
-                name="near" onChange={handleSwap}
-
+                name="near"
+                onChange={handleSwap}
                 className="
           h-[28.36px] border-color-white  border-black text-white"
               />
@@ -302,7 +315,7 @@ function Exchange(props) {
           </Flex>
         ) : (
           <Flex>
-            <div className="w-[191px]" >
+            <div className="w-[191px]">
               <Input
                 disabled
                 placeholder={calculatedNearOutput}
@@ -312,7 +325,7 @@ function Exchange(props) {
         h-[28.36px] border-color-white  border-black text-white "
               />
             </div>
-            <Flex gap="5.48px" ml="-55px" mt="12px" >
+            <Flex gap="5.48px" ml="-55px" mt="12px">
               <Text color="#FFFFFF33;" fontWeight="400" fontSize="10.96px">
                 AEX
               </Text>
@@ -320,7 +333,6 @@ function Exchange(props) {
                 src={"../resources/Group 14031.png"}
                 w="16.44px"
                 h="16.44px"
-
               />
             </Flex>
           </Flex>
@@ -355,25 +367,26 @@ function Exchange(props) {
         </Button>
       </Center>
       <Center mt="5px">
-      {!isExchange ?
-       <Text 
-      fontFamily="Poppins"
-      fontWeight="400"
-      fontSize="9.59"
-      color="#FFFFFF4D"
-      >
-        minimuim near recieved :{minimumNear}
-
-      </Text >:
-      <Text
-      fontFamily="Poppins"
-      fontWeight="400"
-      fontSize="9.59"
-      color="#FFFFFF4D"
-      > 
-       minimuim aex recieved :{minimumAex}
-       </Text>}
-        </Center>
+        {!isExchange ? (
+          <Text
+            fontFamily="Poppins"
+            fontWeight="400"
+            fontSize="9.59"
+            color="#FFFFFF4D"
+          >
+            minimuim near recieved :{minimumNear}
+          </Text>
+        ) : (
+          <Text
+            fontFamily="Poppins"
+            fontWeight="400"
+            fontSize="9.59"
+            color="#FFFFFF4D"
+          >
+            minimuim aex recieved :{minimumAex}
+          </Text>
+        )}
+      </Center>
     </Box>
   );
 }

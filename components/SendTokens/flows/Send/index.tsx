@@ -3,10 +3,10 @@ import SuccessPayment from '../../../Alerts/SuccessPayment';
 import ErrorPayment from '../../../Alerts/ErrorPayment';
 import InitializeSend from './InitializeSend';
 import SendCoins from './SendCoins';
-import SelectNFTs from './SelectNFT';
+import SelectNFTs from '../Common/SelectNFT';
 import { NFT } from '../../../../types/NFT';
 import SendNFT from './SendNFT';
-import {nfts as allNfts} from './SelectNFT'
+import {nfts as allNfts} from '../Common/SelectNFT'
 
 interface IProps {
     onClose: () => void;

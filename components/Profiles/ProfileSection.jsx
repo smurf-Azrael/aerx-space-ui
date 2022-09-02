@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import { nearStore } from "../../store/near";
+import LogOut from "./LogOut"
 
 // type Props = {};
 

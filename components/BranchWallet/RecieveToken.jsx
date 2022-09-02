@@ -8,9 +8,29 @@ import {
   Input,
   Button,
 } from "@chakra-ui/react";
-import { MinusIcon } from "@chakra-ui/icons";
+import { MinusIcon, CopyIcon } from "@chakra-ui/icons";
+import { QRCodeSVG } from "qrcode.react";
+import { nearStore } from "../../store/near";
 
 function RecieveToken(props) {
+  const nearState = nearStore((state) => state);
+
+  const [copiedTimeT, setCopiedTimeT] = React.useState("");
+  const [copiedTimeB, setCopiedTimeB] = React.useState("");
+
+  setTimeout(() => {
+    setCopiedTimeT(false);
+    setCopiedTimeB(false);
+  }, 2000);
+
+  const copiedT = () => navigator.clipboard.writeText(nearState.accountId);
+  const copiedB = () => navigator.clipboard.writeText(nearState.accountId);
+  const popUpT = () => setCopiedTimeT(true);
+  const popUpB = () => setCopiedTimeB(true);
+  
+
+  //  setQrCode(QRCode.toDataUrl('abc'))
+
   return (
     <Box
       height="739.8px"
@@ -66,9 +86,7 @@ function RecieveToken(props) {
               w="8.25425px"
               h="10.275px"
             />
-            <Text color="#FFFFFF4D">
-              Back
-            </Text>
+            <Text color="#FFFFFF4D">Back</Text>
           </Flex>
           <Text
             color="#FFFFFF"
@@ -102,11 +120,12 @@ function RecieveToken(props) {
             </Text>
           </Center>
           <Center mb="21.92px">
-            <Image
-              src="../resources/Group 14694.png"
+            {/* <Image
+              src={qrcode}
               w="102.75px"
               h="102.75px"
-            />
+            /> */}
+            <QRCodeSVG size="102.75px" value={nearState.accountId} />
           </Center>
           <Center mb="22.605px">
             <Text
@@ -131,7 +150,6 @@ function RecieveToken(props) {
               h="50.69"
               backgroundColor="#FFFFFF0D"
               borderRadius="10.275"
-
             >
               <Text
                 textAlign="center"
@@ -144,60 +162,85 @@ function RecieveToken(props) {
               >
                 e8e9f38940951e644a64a4ca90dcc67108b8f50343d58e1
               </Text>
-        
-              <Image src="../resources/Group23.png" w="10.65px" h="13.7px" cursor="pointer"/>
-            
+
+              <Image
+                onClick={() => {
+                  copiedT();
+                  popUpT();
+                }}
+                src="../resources/Group23.png"
+                w="10.65px"
+                h="13.7px"
+                cursor="pointer"
+              />
+              {copiedTimeT && (
+                <Text
+                  position="fixed"
+                  ml="156px"
+                  color="white"
+                  bgColor="black"
+                  py={2}
+                  px={2}
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="500"
+                  fontSize="9.59px"
+                  borderRadius="5px"
+                >
+                  Copied
+                </Text>
+              )}
             </Flex>
           </Center>
 
           <Center>
             {/* <Flex flexDirection="column" alligItems="center"> */}
-            <Box 
+            <Box
               // padding= "10.96px"
-      
+
               padding="10.96px 16.44px"
-             w="191.8px"
+              w="191.8px"
               h="38.36"
               backgroundColor="#FFFFFF0D"
               borderRadius="10.275"
             >
-                
-                <Center   mb="10.96px">
+              <Center mb="10.96px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="600"
+                  fontSize="10.96px"
+                  color="#FFFFFF"
+                >
+                  Invoice
+                </Text>
+              </Center>
+            </Box>
+          </Center>
+          <Center>
+            <Flex gap="65.76px">
               <Text
                 fontFamily="Poppins"
                 fontStyle="normal"
-                fontWeight="600"
-                fontSize="10.96px"
-                color="#FFFFFF"
-              >
-                Invoice
-              </Text>
-              </Center>
-             
-            
-            </Box>
-        
-          </Center>
-          <Center>
-          <Flex  gap="65.76px">
-                <Text
-                 fontFamily="Poppins"
-                 fontStyle="normal"
-                 fontWeight="500"
-                 fontSize="9.59px"
-                 color="#FFFFFF4D"
+                fontWeight="500"
+                fontSize="9.59px"
+                color="#FFFFFF4D"
                 ml="24.88px"
-
-                >Available balanace</Text>
-                <Text
-                 fontFamily="Poppins"
-                 fontStyle="normal"
-                 fontWeight="400"
-                 fontSize="9.59px"
-                 color="#FFFFFF4D"
-                 mr="24.88px"
-                >102.4 AEX</Text>
-              </Flex>
+              >
+                Available balanace
+              </Text>
+              <Text
+                fontFamily="Poppins"
+                fontStyle="normal"
+                fontWeight="400"
+                fontSize="9.59px"
+                color="#FFFFFF4D"
+                mr="24.88px"
+              >
+                {nearState.aexBalance}  AEX
+              
+              </Text>
+            </Flex>
           </Center>
         </Flex>
       </Center>
@@ -221,11 +264,7 @@ function RecieveToken(props) {
             </Text>
           </Center>
           <Center mb="21.92px">
-            <Image
-              src="../resources/Group 14694.png"
-              w="102.75px"
-              h="102.75px"
-            />
+            <QRCodeSVG size="102.75px" value={nearState.accountId} />
           </Center>
           <Center mb="22.605px">
             <Text
@@ -250,7 +289,6 @@ function RecieveToken(props) {
               h="50.69"
               backgroundColor="#FFFFFF0D"
               borderRadius="10.275"
-
             >
               <Text
                 textAlign="center"
@@ -261,61 +299,89 @@ function RecieveToken(props) {
                 color="#FFFFFF"
                 w="142.48px"
               >
-              e8e9f38940951e644a64a4ca90dcc67108b8f50343d58e1
+                e8e9f38940951e644a64a4ca90dcc67108b8f50343d58e1
               </Text>
-        
-              <Image src="../resources/Group23.png" w="10.65px" h="13.7px" cursor="pointer"/>
-            
+
+              <Image
+               onClick={() => {
+                copiedB();
+                popUpB();
+              }}
+                src="../resources/Group23.png"
+                w="10.65px"
+                h="13.7px"
+                cursor="pointer"
+               
+              />
+                  {copiedTimeB && (
+                <Text
+                  position="fixed"
+                  ml="156px"
+                  color="white"
+                  bgColor="black"
+                  py={2}
+                  px={2}
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="500"
+                  fontSize="9.59px"
+                  borderRadius="5px"
+                >
+                  Copied
+                </Text>
+              )}
+
             </Flex>
           </Center>
 
           <Center>
             {/* <Flex flexDirection="column" alligItems="center"> */}
-            <Box 
+            <Box
               // padding= "10.96px"
               gap="14.0425px"
               padding="10.96px 16.44px"
               w="191.8px"
-             
               h="38.36"
               backgroundColor="#FFFFFF0D"
               borderRadius="10.275"
             >
-                
-                <Center   mb="10.96px">
-              <Text
-                fontFamily="Poppins"
-                fontStyle="normal"
-                fontWeight="600"
-                fontSize="10.96px"
-                color="#FFFFFF"
-              >
-                Invoice
-              </Text>
+              <Center mb="10.96px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="600"
+                  fontSize="10.96px"
+                  color="#FFFFFF"
+                >
+                  Invoice
+                </Text>
               </Center>
             </Box>
           </Center>
           <Center>
-          <Flex  >
-                <Text
-                 fontFamily="Poppins"
-                 fontStyle="normal"
-                 fontWeight="500"
-                 fontSize="9.59px"
-                 color="#FFFFFF4D"
+            <Flex>
+              <Text
+                fontFamily="Poppins"
+                fontStyle="normal"
+                fontWeight="500"
+                fontSize="9.59px"
+                color="#FFFFFF4D"
                 ml="24.88px"
                 mr="58.91"
-
-                >Available balanace</Text>
-                <Text
-                 fontFamily="Poppins"
-                 fontStyle="normal"
-                 fontWeight="400"
-                 fontSize="9.59px"
-                 color="#FFFFFF4D"
-                 mr="24.88px"
-                >102.4 NEAR</Text>
-              </Flex>
+              >
+                Available balanace
+              </Text>
+              <Text
+                fontFamily="Poppins"
+                fontStyle="normal"
+                fontWeight="400"
+                fontSize="9.59px"
+                color="#FFFFFF4D"
+                mr="24.88px"
+              >
+                102.4 NEAR
+              </Text>
+            </Flex>
           </Center>
         </Flex>
       </Center>

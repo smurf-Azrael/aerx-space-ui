@@ -38,6 +38,10 @@ function NewProfile(props) {
 
   isLogout ? (zIndex = 1) : (zIndex = -6)
 
+  let profileImage
+  nearState.profile.profileImg == "" ? profileImage= "../resources/Rectangle 321a.png" : profileImage= nearState.profile.profileImg
+  console.log("test",nearState.profile)
+
   return isCircle ? (
     <CircleList toggle={props.wallet} />
   ) : (
@@ -51,7 +55,7 @@ function NewProfile(props) {
         w="257.56px"
         // bgColor="rgba(0, 0, 0, 0.1)"
         // bgColor="#191919"
-        //bgImage={`url('${nearState.profile.profileImg}')`}
+        bgImage={`url('${profileImage}')`}
         fontFamily="Poppins"
         bgRepeat="no-repeat"
         bgSize="257.56px 378.12px"
@@ -91,7 +95,7 @@ function NewProfile(props) {
           bgGradient="linear(to-b, #1f1f1f 0%, #191919 100%)"
         >
           <Text fontSize="21.92px" color="#ffffff" fontWeight="700">
-            Pavel Dantsev
+            {nearState.profile.fullName}
           </Text>
           <Text
             fontSize="12.33px"
@@ -100,7 +104,7 @@ function NewProfile(props) {
             fontStyle="italic"
             color="#FFFFFFB2"
           >
-            pashq.aerx
+            {nearState.profile.username}
           </Text>
           <Flex justifyContent="center" gap="5.48px">
             <Image src={"../resources/Ellipse 702a.png"} />

@@ -284,11 +284,11 @@ export function logout(nearState: NearStoreType) {
     }
     // reset store
     nearState.walletConnection.signOut();
-    //remove connection
-    nearState.removeConnection();
-    nearState.removeWalletConnection();
+    // //remove connection
+    // nearState.removeConnection();
+    // nearState.removeWalletConnection();
     // reload page
-    window.location.replace(window.location.origin + window.location.pathname);
+    window.location.replace(window.location.origin);
 }
 
 //Todo: create custom url/page for error 401 or 404(incase user didn't approve connection or insufficient balance)
@@ -298,10 +298,15 @@ export async function loginToken(nearState: NearStoreType) {
         //Todo: alert users if this ever happens
     }
     //Todo: change contract to profile
-    await nearState.walletConnection.requestSignIn({
-        contractId: process.env.TOKEN_CONTRACT_NAME,
-        successUrl: `${window.location.origin}/settings/profile`,
-        failureUrl: `${window.location.origin}/error`,
+    //if user hasn't sign out redirect to their profile else redirect to registration form and handle the profile redirect on registration page onload
+    if (nearState.profile?.userId != "" && nearState.profile?.username != "") {
+        window.location.replace(window.location.origin + "/profile")
+    } else {
+        await nearState.walletConnection?.requestSignIn({
+            contractId: process.env.TOKEN_CONTRACT_NAME,
+            successUrl: `${window.location.origin}/settings/profile`,
+            failureUrl: `${window.location.origin}/error`,
+        }
+        );
     }
-    );
 }

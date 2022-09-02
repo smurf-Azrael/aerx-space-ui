@@ -99,7 +99,7 @@ const HeroSection: React.FC = () => {
               {/* <Image width="100" src="resources\Group 5401.png" className="group1-a" /> */}
             </Box>
           <Box>
-            <Image src="../resources/saly-2.png" />
+            <Image src="resources/saly-2.png" />
             <Image width="100" src="resources\Group 5401.png" className="group1-a" mt="-286px" />
 
           </Box>

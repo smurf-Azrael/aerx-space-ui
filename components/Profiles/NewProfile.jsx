@@ -21,7 +21,7 @@ import LogOut from "./LogOut";
 
 function NewProfile(props) {
   const [isCircle, setCircle] = React.useState(false);
-  const [ isLogout, setLogout ] = React.useState(false);
+  const [isLogout, setLogout] = React.useState(false);
 
   const { ellipse4, ellipse5 } = useSelector(getUserState);
   const nearState = nearStore((state) => state);
@@ -39,13 +39,12 @@ function NewProfile(props) {
   isLogout ? (zIndex = 1) : (zIndex = -6)
 
   let profileImage
-  nearState.profile.profileImg == "" ? profileImage= "../resources/Rectangle 321a.png" : profileImage= nearState.profile.profileImg
-  console.log("test",nearState.profile)
+  nearState.profile.profileImg == "" ? profileImage = "../resources/Rectangle 321a.png" : profileImage = nearState.profile.profileImg
 
   return isCircle ? (
     <CircleList toggle={props.wallet} />
   ) : (
-    <Box w="257.56px" h="739.8px" bgColor="#191919"   
+    <Box w="257.56px" h="739.8px" bgColor="#191919"
 
 
     >
@@ -61,8 +60,8 @@ function NewProfile(props) {
         bgSize="257.56px 378.12px"
         position="absolute"
         top="0"
-      
-        // bgPosition="top center"
+
+      // bgPosition="top center"
       >
         <Image
           src={"../resources/Group 14756.png"}

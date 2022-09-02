@@ -94,6 +94,7 @@ const nearStore = create<NearStoreType>((set) => ({
     setSuccessfulTransfer: (successfulTransfer: any) => set((state) => ({ ...state, successfulTransfer })),
     removeSuccessfulTransfer: () => set((state) => ({ ...state, successfulTransfer: null })),
 
+
 }));
 
 export { nearStore };

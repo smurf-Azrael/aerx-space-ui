@@ -2,8 +2,6 @@ import React from "react";
 import Image from "next/image";
 import ProfileSettingForm from "../../../components/Forms/Profile";
 
-
-
 const ProfileSettings: React.FC = () => {
   return (
     <div className="w-full h-screen bg-black flex justify-around items-center poppins">
@@ -21,7 +19,3 @@ const ProfileSettings: React.FC = () => {
 
 
 export default ProfileSettings;
-
-function nearState(nearState: any) {
-  throw new Error("Function not implemented.");
-}

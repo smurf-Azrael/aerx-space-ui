@@ -15,22 +15,36 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import { MinusIcon } from "@chakra-ui/icons";
-import { nearStore } from "../../store/near"; 
-import CircleList from "./CircleList"
-
+import { nearStore } from "../../store/near";
+import CircleList from "./CircleList";
+import LogOut from "./LogOut";
 
 function NewProfile(props) {
-  const [isCircle,setCircle] = React.useState(false)
+  const [isCircle, setCircle] = React.useState(false);
+  const [ isLogout, setLogout ] = React.useState(false);
+
   const { ellipse4, ellipse5 } = useSelector(getUserState);
   const nearState = nearStore((state) => state);
 
-  const switchCircle= (props) => {
-    setCircle((prevState) => !prevState)
+  const switchCircle = (props) => {
+    setCircle((prevState) => !prevState);
+  };
+  const logOutUser = () => {
+    setLogout((prevState) => !prevState)
   }
 
-  return (
-    isCircle ? <CircleList toggle={props.wallet} /> :
-    <Box w="257.56px" h="739.8px" bgColor="#191919" >
+
+  let zIndex;
+
+  isLogout ? (zIndex = 1) : (zIndex = -6)
+
+  return isCircle ? (
+    <CircleList toggle={props.wallet} />
+  ) : (
+    <Box w="257.56px" h="739.8px" bgColor="#191919"   
+
+
+    >
       {/* main profile */}
       <Box
         h="428.81px"
@@ -43,6 +57,7 @@ function NewProfile(props) {
         bgSize="257.56px 378.12px"
         position="absolute"
         top="0"
+      
         // bgPosition="top center"
       >
         <Image
@@ -51,6 +66,7 @@ function NewProfile(props) {
           mt="16.44px"
           ml="16.44px"
           cursor="pointer"
+          onClick={() => props.toggle()}
         />
         <Flex
           position="absolute"
@@ -299,7 +315,6 @@ function NewProfile(props) {
             cursor="pointer"
           >
             {nearState.aexBalance} AEX
-
           </Text>
           <Flex>
             <div
@@ -326,7 +341,7 @@ function NewProfile(props) {
         mr-[10.275px]
 
        "
-                onClick={props.wallet}
+              onClick={props.wallet}
             >
               <Image
                 src={"resources/Upload.png"}
@@ -344,7 +359,7 @@ function NewProfile(props) {
         mr-[10.275px]
 
        "
-                onClick={props.wallet}
+              onClick={props.wallet}
             >
               <Image
                 src={"resources/Frame 5556.png"}
@@ -362,7 +377,7 @@ function NewProfile(props) {
         mr-[10.275px]
 
        "
-                onClick={props.wallet}
+              onClick={props.wallet}
             >
               <Image
                 src={"resources/plant 1.png"}
@@ -487,11 +502,13 @@ function NewProfile(props) {
             borderRadius="100px"
             boxSizing="border-box"
             cursor="pointer"
+            onClick={logOutUser}
           >
             <Image src={"../resources/Logout.png"} w="21.92px" h="21.92px" />
           </Flex>
         </Flex>
       </Box>
+      <LogOut zIndex={zIndex} revert={logOutUser} />
     </Box>
   );
 }

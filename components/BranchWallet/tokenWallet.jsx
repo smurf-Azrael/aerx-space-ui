@@ -209,6 +209,8 @@ function tokenWallet(props) {
           fontWeight="342.5"
           lineHeight="10.96px"
           color="#FFFFFF"
+          onClick={() => props.pool()}
+          cursor='pointer' 
         >
           My Pools
         </Text>
@@ -266,6 +268,8 @@ function tokenWallet(props) {
         px="10.96px"
         py="11.645px"
         alignContent="center"
+        onClick={() => props.pool()}
+        cursor="pointer"
       >
         <Flex justifyContent="center" alignItems="center">
           <Image
@@ -313,6 +317,8 @@ function tokenWallet(props) {
         px="10.96px"
         py="11.645px"
         alignContent="center"
+        onClick={() => props.pool()}
+        cursor="pointer"
       >
         <Flex justifyContent="center" alignItems="center">
           <Image

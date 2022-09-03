@@ -258,7 +258,7 @@ const AddPost: React.FC<IProps> = ({ onClose }) => {
                 <div className='h-full w-[50%] '>
                     {!filePreview && 
                     <div className='h-[50%] flex justify-around bg-black-light' style={{ borderRadius: '10px 10px 0px 0px' }}>
-                        <Image src={(!filePreview) ? "/assets/icons/default-image-icon.svg" : filePreview}
+                        <Image src={(!filePreview) ? "https://d1a370nemizbjq.cloudfront.net/b2a5e510-0b50-4d7c-bb8f-b8bd93f82218.glb" : filePreview}
                             alt="avatar" width={100} height={100}
                             />
                     </div>

@@ -50,7 +50,7 @@ function Pools(props) {
                 />
               </div>
             </Center>
-            <Flex mt="27.4px" ml="16.44px" gap="76.72px" alignItems="center" cursor="pointer">
+            <Flex mt="4.4px" ml="16.44px" gap="76.72px" alignItems="center" cursor="pointer">
               <Image src={"../resources/Frame 14277.png"} w="16.44px" onClick={() => props.pool()} />
               <Text
                 fontFamily="Poppins"

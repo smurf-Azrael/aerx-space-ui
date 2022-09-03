@@ -23,6 +23,10 @@ import { MinusIcon } from '@chakra-ui/icons'
 const ImagesCarousel = (props) => {
   const dispatch = useDispatch();
   const { ellipse4, ellipse5 } = useSelector(getUserState);
+  const [isCircle, setCircle] = React.useState(false);
+  const switchCircle = (props) => {
+    setCircle((prevState) => !prevState);
+  };
 
 
   return (
@@ -45,7 +49,7 @@ const ImagesCarousel = (props) => {
   
         mt-2
        "
-        onClick=""
+       onClick={switchCircle}
       >
         <MinusIcon
             w="21.92px"

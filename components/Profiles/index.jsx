@@ -93,17 +93,17 @@ function index() {
         <div>
           {!isOpenWallet ? (
             <div>
-              <NewProfile
+              {/* <NewProfile
                 toggle={toggleClick}
                 doubleClick={doubleClick}
                 wallet={openWallet}
-              />
-              {/* <ProfileSection toggle={toggleClick}  />
+              /> */}
+              <ProfileSection toggle={toggleClick}  />
             <ImagesCarousel doubleClick={doubleClick} />
             <WalletsHead wallet={openWallet} />
             <NftValues />
-            <Notifications /> */}
-              {/* <tokenWallet /> */}
+            <Notifications />
+              <tokenWallet />
             </div>
           ) : (
             <div>

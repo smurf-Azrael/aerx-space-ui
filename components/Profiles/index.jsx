@@ -15,15 +15,18 @@ import ExchangeToken from "../BranchWallet/ExchangeToken";
 import NewSendToken from "../BranchWallet/NewSendToken";
 import AddLiquidity from "../BranchWallet/AddLiquidity";
 import RecieveToken from "../BranchWallet/RecieveToken";
-import NewProfile from "./NewProfile";
+
 
 import { useState } from "react";
+import CircleList from "./CircleList";
+import LogOut from "./LogOut";
+
 
 // type Props = {
 // }
 // const [toggle,setToggle] = React.useState<boolean>(false)
 
-function index() {
+function Index() {
   const [isToggle, setToggle] = useState(false);
   const [doubleclicked, setDoubleClicked] = useState(false);
   const [isOpenWallet, setOpenWallet] = useState(false);
@@ -37,6 +40,20 @@ function index() {
   const [isLiquidity, setLiquidity] = React.useState(false);
 
   const [isRecieved, setRecieved] = React.useState(false);
+  const [isCircle, setCircle] = React.useState(false);
+
+  const [isLogout, setLogout] = React.useState(false);
+  const logOutUser = () => {
+    setLogout((prevState) => !prevState)
+  }
+
+  let zIndex;
+  isLogout ? (zIndex = 1) : (zIndex = -6)
+
+  const switchCircle = () => {
+    setCircle((prevState) => !prevState);
+    setToggle((prevState) => !prevState)
+  };
 
   const changeUpload = () => {
     setUpload((prevState) => !prevState);
@@ -53,12 +70,18 @@ function index() {
   const changeRecieve = () => {
     setRecieved((prevState) => !prevState);
   };
+  
+
 
   // change toggle state
   const toggleClick = () => {
     setToggle((prevState) => !prevState);
     // change toggle state
   };
+  let index
+  // isToggle  ? index= -1 : index=1
+  isCircle  ? index= -1 : index=1
+
 
   const doubleClick = (e) => {
     if (e.detail == 2) {
@@ -74,6 +97,7 @@ function index() {
     setOpenWallet((prevState) => !prevState);
     console.log(isOpenWallet);
   };
+  
 
   const wallet = (
     <Wallets
@@ -91,7 +115,7 @@ function index() {
     <div id="profile" className=" bg-[black] flex">
       {isToggle && (
         <div>
-          {!isOpenWallet ? (
+           {!isOpenWallet ? (
             <div>
               {/* <NewProfile
                 toggle={toggleClick}
@@ -99,10 +123,10 @@ function index() {
                 wallet={openWallet}
               /> */}
               <ProfileSection toggle={toggleClick}  />
-            <ImagesCarousel doubleClick={doubleClick} />
+            <ImagesCarousel doubleClick={doubleClick} switch={switchCircle} />
             <WalletsHead wallet={openWallet} />
             <NftValues />
-            <Notifications />
+            <Notifications logOutUser={logOutUser} />
               <tokenWallet />
             </div>
           ) : (
@@ -131,8 +155,14 @@ function index() {
           )}
         </div>
       )}
+      { isCircle && <CircleList 
+    switched={switchCircle} 
+      
+      /> }
+      <LogOut zIndex={zIndex} revert={logOutUser} />
 
-      {!isToggle && <Collapse toggle={toggleClick} Toggle={isToggle} />}
+
+      {!isToggle && <Collapse toggle={toggleClick} Toggle={isToggle} circle={isCircle} index={index}/>}
       <ChatRoom circle={doubleclicked} removeCircle={removeCircle} />
 
       <div className=" w-[59%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
@@ -143,8 +173,9 @@ function index() {
       </div>
 
       <Circle circle={doubleclicked} removeCircle={removeCircle} />
+      
     </div>
   );
 }
 
-export default index;
+export default Index;

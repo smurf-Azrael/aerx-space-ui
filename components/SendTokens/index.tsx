@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import  Modal  from '../Modal';
+import DealFlow from './flows/Deal';
 import InitializeTransaction from './flows/InitializeTransaction';
 import SendFlow from './flows/Send';
 
@@ -13,6 +14,7 @@ const SendTokens : React.FC<IProps> = ({onClose}) => {
             <div>
                {flow === 0 && <InitializeTransaction setFlow={setFlow} />}
                {flow === 1 && <SendFlow  onClose={onClose}/>}
+               {flow === 3 && <DealFlow onClose={onClose}/>}
             </div>
         </Modal>
     )

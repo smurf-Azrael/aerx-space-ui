@@ -21,7 +21,7 @@ function RecieveToken(props) {
   setTimeout(() => {
     setCopiedTimeT(false);
     setCopiedTimeB(false);
-  }, 2000);
+  }, 3000);
 
   const copiedT = () => navigator.clipboard.writeText(nearState.accountId);
   const copiedB = () => navigator.clipboard.writeText(nearState.accountId);

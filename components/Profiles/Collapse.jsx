@@ -7,6 +7,8 @@ import { ChevronRightIcon } from '@chakra-ui/icons'
 
 function Collapse(props) {
   // {/* <Wallets toggle={props.toggle} left={props.left} /> */}
+  let zIndex
+
   return (
     <Flex
       h="739.8px"
@@ -17,6 +19,7 @@ function Collapse(props) {
       top="0"
       pt="20.55px"
       pb="16.44px"
+      zIndex={props.index}
     >
       <Flex
         flexDirection="column"

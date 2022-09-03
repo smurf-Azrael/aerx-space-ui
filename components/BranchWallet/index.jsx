@@ -16,6 +16,7 @@ import SharePage from "./SharePage";
 import ConfirmationPage from "./ConfirmationPage";
 
 import tokenWallet from "./tokenWallet";
+import NewProfile from "./NewProfile";
 
 
 

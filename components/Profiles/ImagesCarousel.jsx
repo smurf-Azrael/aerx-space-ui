@@ -25,6 +25,7 @@ const ImagesCarousel = (props) => {
   const { ellipse4, ellipse5 } = useSelector(getUserState);
 
 
+
   return (
     <Box
       bgColor="#1F1F1F;
@@ -45,7 +46,7 @@ const ImagesCarousel = (props) => {
   
         mt-2
        "
-        onClick=""
+    onClick={props.switch}
       >
         <MinusIcon
             w="21.92px"

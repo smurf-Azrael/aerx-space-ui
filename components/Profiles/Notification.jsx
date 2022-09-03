@@ -15,12 +15,15 @@ import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import { nearStore } from "../../store/near";
 import { MinusIcon } from '@chakra-ui/icons'
+import LogOut from "./LogOut";
+
 
 
 // type Props = {}
 
-const Notification = () => {
+const Notification = (props) => {
   const nearState = nearStore((state) => state);
+
 
   const dispatch = useDispatch();
   const {
@@ -113,6 +116,8 @@ const Notification = () => {
           borderColor="rgba(255, 255, 255, 0.1);"
           borderRadius="100%"
           padding="5px"
+          cursor="pointer"
+          onClick={props.logOutUser}
         >
           <Image src={nearState.profile.profileImg} w="21.92px" h="21.92px" borderRadius="100%" />
         </Box>
@@ -126,6 +131,8 @@ const Notification = () => {
           <Image src={"resources/Setting.png"} w="17.35105px" />
         </Box>
       </Center>
+      
+
     </Box>
   );
 };

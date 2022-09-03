@@ -38,10 +38,25 @@ const nearStore = create<NearStoreType>((set) => ({
         set((state) => ({ ...state, pnftContract })),
     removeNFTContract: () => set((state) => ({ ...state, pnftContract: null })),
 
-    profile: null,
-    setProfile: (profile: any) => set((state) => ({ ...state, profile })),
-    removeProfile: () => set((state) => ({ ...state, profile: null })),
+    profile: {
+        userId: "",
+        username: "",
+        fullName: "",
+        aboutMe: "",
+        profileImg: "",
 
+    },
+    setProfile: (profile: any) => set((state) => ({ ...state, profile })),
+    removeProfile: () => set((state) => ({
+        ...state, profile: {
+            userId: "",
+            username: "",
+            fullName: "",
+            aboutMe: "",
+            profileImg: "",
+
+        }
+    })),
     lastRes: null,
     setLastRes: (lastRes: any) => set((state) => ({ ...state, lastRes })),
     removeLastRes: () => set((state) => ({ ...state, lastRes: null })),
@@ -78,6 +93,7 @@ const nearStore = create<NearStoreType>((set) => ({
     successfulTransfer: null,
     setSuccessfulTransfer: (successfulTransfer: any) => set((state) => ({ ...state, successfulTransfer })),
     removeSuccessfulTransfer: () => set((state) => ({ ...state, successfulTransfer: null })),
+
 
 }));
 

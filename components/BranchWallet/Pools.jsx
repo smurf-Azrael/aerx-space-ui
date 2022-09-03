@@ -8,7 +8,7 @@ import {
   FormControl,
   Input,
 } from "@chakra-ui/react";
-import AddLiquidities from "./AddLiquidity";
+import NewAddLiquidity from "./NewAddLiquidity";
 
 import { MinusIcon } from '@chakra-ui/icons'
 
@@ -17,9 +17,7 @@ function Pools(props) {
 
   const [isAddLiquidity, setAddLiquidity] = React.useState(false);
 
-  const newPools = () => {
-    setNewPool((prevState) => !prevState);
-  }
+
 
   const AddLiquidity = () => {
     setAddLiquidity((prevState) => !prevState);
@@ -28,7 +26,7 @@ function Pools(props) {
   return (
     <>
       {
-        isAddLiquidity ? <AddLiquidities liquidity={AddLiquidity} toggleWallet={props.toggleWallet} /> :
+        isAddLiquidity ? <NewAddLiquidity liquidity={AddLiquidity} toggleWallet={props.toggleWallet} /> :
           <Box w="257.56px" h="739.8px" bgColor="#1F1F1F" position="absolute" top="0">
             <Center>
               <div
@@ -52,7 +50,7 @@ function Pools(props) {
                 />
               </div>
             </Center>
-            <Flex mt="27.4px" ml="16.44px" gap="76.72px" alignItems="center" cursor="pointer">
+            <Flex mt="4.4px" ml="16.44px" gap="76.72px" alignItems="center" cursor="pointer">
               <Image src={"../resources/Frame 14277.png"} w="16.44px" onClick={() => props.pool()} />
               <Text
                 fontFamily="Poppins"

@@ -163,14 +163,14 @@ function Index() {
 
 
       {!isToggle && <Collapse toggle={toggleClick} Toggle={isToggle} circle={isCircle} index={index}/>}
-      <ChatRoom circle={doubleclicked} removeCircle={removeCircle} />
+      {/* <ChatRoom circle={doubleclicked} removeCircle={removeCircle} /> */}
 
-      <div className=" w-[59%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
+      {/* <div className=" w-[59%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
         <FlowFeeds />
-      </div>
-      <div className=" w-[39%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
+      </div> */}
+      {/* <div className=" w-[39%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
         <Space />
-      </div>
+      </div> */}
 
       <Circle circle={doubleclicked} removeCircle={removeCircle} />
       

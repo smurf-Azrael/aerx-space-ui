@@ -9,9 +9,11 @@ import { IPFSDataType } from "../../../hooks/usePinata";
 const shajs = require('sha.js');
 import { nearStore } from '../../../store/near';
 import { ProfileType } from "../../../types/stores";
+import { useRouter } from "next/router";
 
 
 const ProfileSettingForm: React.FC = () => {
+    const router = useRouter();
     const [file, setFile] = useState<File>();
     const [filePreview, setFilePreview] = useState<string>();
     const [ipfsData, setIpfsData] = useState<IPFSDataType>({
@@ -151,7 +153,7 @@ const ProfileSettingForm: React.FC = () => {
                         </div>
 
 
-                        <div className="w-full  flex flex-col justify-around">
+                        <div className="w-full  flex flex-col justify-around" onClick={() => router.push('/create-avatar')}>
                             <Image src="/assets/icons/3d-account-icon.svg" alt="profile-avatar" width={40} height={40} />
                             <label className="text-white text-center">3D avatar</label>
                         </div>

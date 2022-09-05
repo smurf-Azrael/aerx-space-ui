@@ -24,9 +24,9 @@ const InitializeTransaction: React.FC<IProps> = ({setFlow}) => {
                     />
                     <label className=' text-white text-sm mt-3'>Request</label>
                 </div>
-                <div className='flex flex-col justify-center' onClick={() => setFlow(3)}>
+                <div className='flex flex-col justify-center cursor-pointer' onClick={() => setFlow(3)}>
                     <Image src="/assets/icons/deal-transaction-icon.svg" alt="deal transaction" width={35} height={35} />
-                    <label className=' text-white text-sm mt-3'>Deal</label>
+                    <label className=' text-white text-sm mt-3 cursor-pointer'>Deal</label>
                 </div>
             </div>
         </div>

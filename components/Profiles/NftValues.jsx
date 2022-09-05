@@ -41,17 +41,17 @@ const NftValues = () => {
   } = useSelector(getUserState);
   return (
     <Box
-      bgColor="#282828"
+      bgColor="#242424"
       width="257.56px"
       marginLeft="0"
-      borderTopRadius="34.25px"
+      // borderTopRadius="34.25px"
       position="absolute"
-      h="245.23px"
-      top="494.57px"
+      h="145.23px"
+      top="545.57px"
 
     >
       <Center>
-     <div
+     {/* <div
         className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
@@ -70,11 +70,11 @@ const NftValues = () => {
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
           />
-      </div>
+      </div> */}
       </Center>
 
-      <Flex mt="8.22px" ml="16.44px" alignItems="center">
-        <Text
+      <Flex  ml="16.44px" alignItems="center">
+        {/* <Text
           fontWeight="500"
           fontSize="10.96px"
           color="rgba(255, 255, 255, 0.3);"
@@ -82,8 +82,8 @@ const NftValues = () => {
           fontFamily="Poppins"
         >
           Values
-        </Text>
-        <Flex>
+        </Text> */}
+        {/* <Flex>
           <Image src={dot} alt="" w="5.48px" h="5.48px" mr="5.48px" />
           <Image
             src={" resources/Rectangle blank.png"}
@@ -98,10 +98,10 @@ const NftValues = () => {
             h="5.48px"
             mr="5.48px"
           />
-        </Flex>
+        </Flex> */}
       </Flex>
 
-      <Flex mt="13.7px" ml="16.44px" overflow="hidden">
+      <Flex mt="" ml="16.44px" overflow="hidden">
         <Box marginRight="10.96px" position="relative">
           <Flex position="absolute" left="30.825px" top="28.77px">
             <Image src={"resources/Ticket Star.png"} w="13.7px" h="12.33px" />
@@ -149,6 +149,7 @@ const NftValues = () => {
           <Flex position="absolute" left="30.825px" top="28.77px">
             <Image src={"resources/Fill 1.png"} w="13.7px" h="12.33px" />
             <Text
+
               fontWeight="400"
               color="#ffffff"
               fontSize="10.96px"

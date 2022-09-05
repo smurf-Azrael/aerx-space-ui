@@ -54,7 +54,7 @@ const Notification = (props) => {
       marginLeft="0"
       borderTopRadius="50px"
       h="76.72px"
-      top="662.395px"
+      top="665.595px"
     
     >
       <Center>

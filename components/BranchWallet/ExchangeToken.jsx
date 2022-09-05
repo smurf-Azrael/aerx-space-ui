@@ -17,6 +17,8 @@ function Exchange(props) {
     near: "",
     aex: "",
   });
+  const [tolerance, setTolerance] = React.useState(0.1);
+
 
   const swap = () => {
     setExchange((prevState) => !prevState);
@@ -26,20 +28,14 @@ function Exchange(props) {
       ...prevState,
       [event.target.name]: event.target.value,
     }));
-    console.log(swapValue);
   };
 
-  const [tolerance, setTolerance] = React.useState(0.1);
 
   const slipPage = (slip) => {
     setTolerance(slip);
-
-    console.log(tolerance);
   };
   const slipInput = (event) => {
     setTolerance(event.target.value);
-
-    console.log(tolerance);
   };
 
   const swapToken = () => {
@@ -487,7 +483,7 @@ function Exchange(props) {
           fontSize="9.59px"
         >
           <Text color="rgba(255, 255, 255, 0.3)">Minimum received</Text>
-          {!isExchange ? (
+          {isExchange ? (
             <Text
               fontFamily="Poppins"
               fontWeight="400"
@@ -536,7 +532,7 @@ function Exchange(props) {
         </Button>
       </Center>
       <Center mt="5px">
-        {!isExchange ? (
+        {/* {isExchange ? (
           <Text
             fontFamily="Poppins"
             fontWeight="400"
@@ -554,7 +550,7 @@ function Exchange(props) {
           >
             minimuim aex recieved :{minimumAex}
           </Text>
-        )}
+        )} */}
       </Center>
     </Box>
   );

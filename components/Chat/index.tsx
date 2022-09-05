@@ -142,7 +142,7 @@ const Chat: React.FC = () => {
     const { chat, flow } = useSelector(selectModules)
 
     return (
-        <div className='w-full h-[100%] bg-black-dark rounded-[10px] flex gap-2'>
+        <div className='w-full h-[100%] bg-black-dark rounded-[10px] flex gap-2 '>
             {!chat.minimized && 
            <div className='w-[45%] rounded-[10px] bg-black-light h-full p-4'
              style={{

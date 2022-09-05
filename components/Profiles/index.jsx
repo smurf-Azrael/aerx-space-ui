@@ -48,7 +48,7 @@ function Index() {
   }
 
   let zIndex;
-  isLogout ? (zIndex = 1) : (zIndex = -6)
+  isLogout ? (zIndex = 1) : (zIndex = -8)
 
   const switchCircle = () => {
     setCircle((prevState) => !prevState);
@@ -112,7 +112,7 @@ function Index() {
     />
   );
   return (
-    <div id="profile" className=" bg-[black] flex  h-[100vh]">
+    <div id="profile" className=" bg-[black] flex  h-[100vh] ">
       {isToggle && (
         <div>
            {!isOpenWallet ? (
@@ -163,14 +163,14 @@ function Index() {
 
 
       {!isToggle && <Collapse toggle={toggleClick} Toggle={isToggle} circle={isCircle} index={index}/>}
-      <ChatRoom circle={doubleclicked} removeCircle={removeCircle} />
+      {/* <ChatRoom circle={doubleclicked} removeCircle={removeCircle} /> */}
 
-      <div className=" w-[59%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
+      {/* <div className=" w-[59%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
         <FlowFeeds />
-      </div>
-      <div className=" w-[39%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
+      </div> */}
+      {/* <div className=" w-[39%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
         <Space />
-      </div>
+      </div> */}
 
       <Circle circle={doubleclicked} removeCircle={removeCircle} />
       

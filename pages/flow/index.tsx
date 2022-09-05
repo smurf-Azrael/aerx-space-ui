@@ -36,7 +36,7 @@ const Flow: React.FC = () => {
     <div className="w-full h-screen bg-black p-6 flow">
     
       <div className="flex justify-between">
-      <Box top="0" left="0" position="absolute">
+      <Box top="0" left="0" position="absolute" zIndex="6" >
     <Index />
   </Box>
         {!chat.collapsed && (

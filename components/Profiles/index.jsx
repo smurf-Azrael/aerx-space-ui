@@ -48,7 +48,7 @@ function Index() {
   }
 
   let zIndex;
-  isLogout ? (zIndex = 1) : (zIndex = -6)
+  isLogout ? (zIndex = 1) : (zIndex = -8)
 
   const switchCircle = () => {
     setCircle((prevState) => !prevState);
@@ -112,7 +112,7 @@ function Index() {
     />
   );
   return (
-    <div id="profile" className=" bg-[black] flex  h-[100vh]">
+    <div id="profile" className=" bg-[black] flex  h-[100vh] ">
       {isToggle && (
         <div>
            {!isOpenWallet ? (

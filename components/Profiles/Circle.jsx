@@ -7,7 +7,7 @@ import { nearStore } from "../../store/near";
 const Circle = (props) => {
   const nearState = nearStore((state) => state);
 
-  let zIndex = props.circle ? "2" : "-8" 
+  let zIndex = props.circle ? "-2" : "-8" 
 
  
 
@@ -24,7 +24,7 @@ const Circle = (props) => {
       zIndex={zIndex}
       className="circleModal"
     >
-      {/* <Flex position="absolute" flexDirection="column" gap="16.44px" ml="19.18px" mt="46.58px" zIndex='2'>
+      <Flex position="absolute" flexDirection="column" gap="16.44px" ml="19.18px" mt="46.58px" zIndex='2'>
         <Box
           width="27.4px"
           height="27.4px"
@@ -238,7 +238,7 @@ const Circle = (props) => {
           </Text>
         </Button>
       </Flex>
-      </ Center> */}
+      </ Center>
     </Box>
   );
 };

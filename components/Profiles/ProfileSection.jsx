@@ -38,7 +38,7 @@ const ProfileSection = (props) => {
       bgColor="#191919;
       "
       w="257.56px"
-      height="355.29px"
+      height="325.29px"
       top="0"
       // position="absolute"
       zIndex="2"

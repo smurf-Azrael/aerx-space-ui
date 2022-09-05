@@ -83,12 +83,12 @@ function SendTokens(props) {
 
     amount.length < 1 ? (bgColor = "#FFFFFF1D;") : (bgColor = "#6054F0");
     amount.length < 1 ? (disabled = true) : (disabled = false);
-  if(amount <= nearState.aexBalance){
-    disabled = false
-  } else {
-    disabled = true
+  // if(amount <= nearState.aexBalance){
+  //   disabled = false
+  // } else {
+  //   disabled = true
 
-  }
+  // }
 
   if (isProceed) {
     colorChange = "#19C486";

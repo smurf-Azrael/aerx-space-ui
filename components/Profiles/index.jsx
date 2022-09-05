@@ -16,11 +16,9 @@ import NewSendToken from "../BranchWallet/NewSendToken";
 import AddLiquidity from "../BranchWallet/AddLiquidity";
 import RecieveToken from "../BranchWallet/RecieveToken";
 
-
 import { useState } from "react";
 import CircleList from "./CircleList";
 import LogOut from "./LogOut";
-
 
 // type Props = {
 // }
@@ -44,15 +42,15 @@ function Index() {
 
   const [isLogout, setLogout] = React.useState(false);
   const logOutUser = () => {
-    setLogout((prevState) => !prevState)
-  }
+    setLogout((prevState) => !prevState);
+  };
 
   let zIndex;
-  isLogout ? (zIndex = 1) : (zIndex = -8)
+  isLogout ? (zIndex = 1) : (zIndex = -8);
 
   const switchCircle = () => {
     setCircle((prevState) => !prevState);
-    setToggle((prevState) => !prevState)
+    setToggle((prevState) => !prevState);
   };
 
   const changeUpload = () => {
@@ -70,18 +68,15 @@ function Index() {
   const changeRecieve = () => {
     setRecieved((prevState) => !prevState);
   };
-  
-
 
   // change toggle state
   const toggleClick = () => {
     setToggle((prevState) => !prevState);
     // change toggle state
   };
-  let index
+  let index;
   // isToggle  ? index= -1 : index=1
-  isCircle  ? index= -1 : index=1
-
+  isCircle ? (index = -1) : (index = 1);
 
   const doubleClick = (e) => {
     if (e.detail == 2) {
@@ -97,7 +92,6 @@ function Index() {
     setOpenWallet((prevState) => !prevState);
     console.log(isOpenWallet);
   };
-  
 
   const wallet = (
     <Wallets
@@ -112,28 +106,35 @@ function Index() {
     />
   );
   return (
-    <div id="profile" className=" bg-[black] flex  h-[100vh] ">
+    <div id="profile" className=" bg-[black] flex  h-[100vh] overflow-hidden ">
       {isToggle && (
         <div>
-           {!isOpenWallet ? (
+          {!isOpenWallet ? (
             <div>
               {/* <NewProfile
                 toggle={toggleClick}
                 doubleClick={doubleClick}
                 wallet={openWallet}
               /> */}
-              <ProfileSection toggle={toggleClick}  />
-            <ImagesCarousel doubleClick={doubleClick} switch={switchCircle} />
-            <WalletsHead wallet={openWallet} />
-            <NftValues />
-            <Notifications logOutUser={logOutUser} />
-              <tokenWallet />
+              <ProfileSection toggle={toggleClick} />
+              <ImagesCarousel
+                doubleClick={doubleClick}
+                switch={switchCircle}
+                removeCircle={removeCircle}
+              />
+              <WalletsHead wallet={openWallet} />
+              <NftValues />
+              <Notifications logOutUser={logOutUser} />
+              {/* <tokenWallet /> */}
             </div>
           ) : (
             <div>
               {wallet}
               {isExchange && (
-                <ExchangeToken exchange={changeExchange} toggleWallet={openWallet} />
+                <ExchangeToken
+                  exchange={changeExchange}
+                  toggleWallet={openWallet}
+                />
               )}
               {isUpload && (
                 <NewSendToken upload={changeUpload} toggleWallet={openWallet} />
@@ -155,25 +156,19 @@ function Index() {
           )}
         </div>
       )}
-      { isCircle && <CircleList 
-    switched={switchCircle} 
-      
-      /> }
+      {isCircle && <CircleList switched={switchCircle} />}
       <LogOut zIndex={zIndex} revert={logOutUser} />
 
+      {!isToggle && (
+        <Collapse
+          toggle={toggleClick}
+          Toggle={isToggle}
+          circle={isCircle}
+          index={index}
+        />
+      )}
 
-      {!isToggle && <Collapse toggle={toggleClick} Toggle={isToggle} circle={isCircle} index={index}/>}
-      {/* <ChatRoom circle={doubleclicked} removeCircle={removeCircle} /> */}
-
-      {/* <div className=" w-[59%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
-        <FlowFeeds />
-      </div> */}
-      {/* <div className=" w-[39%] h-[100vh]  overflow-y-scroll poppins position-absolute left-542.52px">
-        <Space />
-      </div> */}
-
-      <Circle circle={doubleclicked} removeCircle={removeCircle} />
-      
+      <Circle circle={doubleclicked} remove={removeCircle} />
     </div>
   );
 }

@@ -42,8 +42,8 @@ const WalletHead = (props) => {
       marginLeft="0"
       borderTopRadius="34.25px"
       position="absolute"
-      h="327.43px"
-      top="412.37px"
+      h="127.43px"
+      top="455.37px"
     
     >
     

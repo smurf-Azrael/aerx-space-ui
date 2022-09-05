@@ -68,7 +68,7 @@ function tokenWallet(props) {
       </Text>
 
       <Center mb="16.44px" fontWeight="600">
-        <Flex gap="5.48px">
+        <Flex gap="5.48px" alignItems="center" justifyContent="center">
           <Text
             fontFamily="Poppins"
             lineHeight="100%"
@@ -78,7 +78,7 @@ function tokenWallet(props) {
           >
             {nearState.aexBalance}
           </Text>
-          <Text
+          {/* <Text
             h="21.92px"
             w="21.92px"
             fontFamily="Open Sans"
@@ -89,7 +89,9 @@ function tokenWallet(props) {
           >
             {" "}
             æ{" "}
-          </Text>
+          </Text> */}
+            <Image src="../resources/æ.png"  w="18.605px" h="12.605px"/>
+
         </Flex>
       </Center>
 

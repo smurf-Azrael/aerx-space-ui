@@ -112,7 +112,7 @@ function Index() {
     />
   );
   return (
-    <div id="profile" className=" bg-[black] flex">
+    <div id="profile" className=" bg-[black] flex  h-[100vh]">
       {isToggle && (
         <div>
            {!isOpenWallet ? (

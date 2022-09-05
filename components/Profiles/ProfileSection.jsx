@@ -31,7 +31,7 @@ const ProfileSection = (props) => {
       bgImage={`url('${nearState.profile.profileImg}')`}
       bgRepeat="no-repeat"
       bgPosition="30 0"
-      bgSize="257.56px 297.29px"
+      bgSize="257.56px 325.29px"
       // bgGradient=" linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))"
 
       bgColor="#191919;
@@ -42,6 +42,7 @@ const ProfileSection = (props) => {
       // position="absolute"
       zIndex="2"
       className="profileSection"
+
     >
       {/* <Image src={'../resources/Rectangle 3212.png'} position="absolute" zIndex="-2" /> */}
       <Flex flexDirection="column" gap="10.96px" ml="16.44px" mt="21.92px" cursor="pointer">
@@ -155,7 +156,9 @@ const ProfileSection = (props) => {
             {nearState.profile.fullName}
           </Heading>
 
-          <Flex alignItems="center" flexDirection="column">
+          <Flex alignItems="center" flexDirection="column"
+          
+          >
             <Text
               fontSize="12.33px"
               fontFamily="Poppins"
@@ -169,7 +172,9 @@ const ProfileSection = (props) => {
               {nearState.profile.username}
             </Text>
 
-            <Flex>
+            <Flex
+            
+            >
               <Image src={ellipse3} marginRight={2} w="10.96px" />
               <Text
                 color="#FFFFFF80"
@@ -180,6 +185,7 @@ const ProfileSection = (props) => {
                 Aura: 2k
               </Text>
             </Flex>
+            
           </Flex>
         </Box>
       </Flex>

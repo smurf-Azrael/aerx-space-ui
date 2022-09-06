@@ -300,13 +300,13 @@ export async function loginToken(nearState: NearStoreType) {
     //Todo: change contract to profile
     //if user hasn't sign out redirect to their profile else redirect to registration form and handle the profile redirect on registration page onload
     if (nearState.profile?.userId != "" && nearState.profile?.username != "") {
-            const isUserRegistered = await nearState.pnftContract?.has_registered({user_id: nearState.accountId} as any);
-            if (isUserRegistered) {
-              window.location.replace(window.location.origin + "/profile")
-            }
-            else{
-              window.location.replace(window.location.origin + "/settings/profile")
-            }
+        const isUserRegistered = await nearState.pnftContract?.has_registered({ user_id: nearState.accountId } as any);
+        if (isUserRegistered) {
+            window.location.replace(window.location.origin + "/flow")
+        }
+        else {
+            window.location.replace(window.location.origin + "/settings/profile")
+        }
     } else {
         await nearState.walletConnection?.requestSignIn({
             contractId: process.env.TOKEN_CONTRACT_NAME,

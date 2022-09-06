@@ -130,8 +130,8 @@ const Chat: React.FC = () => {
     }
 
     useEffect(() => {
-       formMessageItem();
-    },[profiles])
+        formMessageItem();
+    }, [profiles])
 
     const formMessageItem = () => {
         const messageItems: Array<IMessageItem> = [];
@@ -155,7 +155,7 @@ const Chat: React.FC = () => {
 
     const handleSetActiveMessage = async (index: number) => {
         setActiveMessage(index);
-        initChat(chats[index].accountId, nearState.accountId);
+        initChat(nearState.accountId, chats[index].accountId);
     }
 
     return (

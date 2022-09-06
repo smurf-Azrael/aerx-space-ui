@@ -38,7 +38,7 @@ const WalletHead = (props) => {
     
     <Box
       bgColor="#242424"
-      width="257.56px"
+      width="300px"
       marginLeft="0"
       borderTopRadius="34.25px"
       position="absolute"
@@ -98,6 +98,7 @@ const WalletHead = (props) => {
         w-[16.44px]
         h-[16.44px]
         mr-[10.275px]
+        ml-[60.275px]
 
        "
       >

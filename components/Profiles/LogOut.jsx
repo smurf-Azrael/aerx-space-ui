@@ -13,22 +13,17 @@ function LogOut(props) {
   return (
 
     <Box
-      position="absolute"
-      top="284.275px"
-      left="21.92px"
-      bgColor="#191919"
-      width="213.72px"
-      height="147.96px"
-      borderRadius="13.7px"
-      zIndex={props.zIndex}
+      // position="absolute"
+      // top="284.275px"
+      // left="21.92px"
+      // bgColor="#191919"
+      // width="213.72px"
+      // height="147.96px"
+      // borderRadius="13.7px"
+      // zIndex="-6"
 
-    //   backdropFilter='auto'
-    //   backdropInvert='100%'
-    //   backdropBlur='2px'
-    //   bg='black'
-    //   backdropFilter='blur'
     >
-      <Image
+      {/* <Image
         src="resources/Group 14018.png"
         w="11.645px"
         h="11.645px"
@@ -83,7 +78,7 @@ function LogOut(props) {
             >Yes</Text>
           </Flex>
         </Box>
-      </Flex>
+      </Flex> */}
     </Box>
 
   );

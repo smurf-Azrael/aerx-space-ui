@@ -31,13 +31,13 @@ const ProfileSection = (props) => {
       bgImage={`url('${nearState.profile.profileImg}')`}
       bgRepeat="no-repeat"
       bgPosition="30 0"
-      bgSize="257.56px 325.29px"
+      bgSize="300px"
     
       // bgGradient=" linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))"
 
       bgColor="#191919;
       "
-      w="257.56px"
+      width="300px"
       height="325.29px"
       top="0"
       // position="absolute"

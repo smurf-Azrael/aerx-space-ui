@@ -23,15 +23,13 @@ function SendTokens(props) {
 
   const handleAmount = (event) => {
     const value = event.target.value;
-    console.log("int: ", parseInt(value, 10))
     if (parseInt(value, 10) > nearState.aexBalance) {
       setAmountColor("#DB3333")
       setAmount(value);
     } else {
       setAmountColor("rgba(255, 255, 255, 0.3)")
+      setAmount(value);
     }
-
-
   };
   const conversion = (amount / 111) * 4.16
   const handleUser = async (event) => {
@@ -49,8 +47,6 @@ function SendTokens(props) {
   };
 
   const transferAex = async () => {
-    console.log("is proceed final: ", isProceed);
-
     console.log("Send button clicked");
     console.log("Details: ", amount, receiver);
 
@@ -84,6 +80,9 @@ function SendTokens(props) {
   if (isProceed) {
     colorChange = "#19C486";
     disabled = false
+    if (amount == "") {
+      disabled = true
+    }
     if (amountColor == "#DB3333") {
       disabled = true;
     }
@@ -194,7 +193,7 @@ function SendTokens(props) {
             type="number"
 
             placeholder="0"
-            onChange={(e) => handleAmount(e)}
+            onChange={handleAmount}
             style={{
               backgroundColor: "#191a1b",
               color: amountColor,
@@ -202,7 +201,6 @@ function SendTokens(props) {
               height: "21.92px",
 
             }}
-            color={amountColor}
 
           />
         </div>

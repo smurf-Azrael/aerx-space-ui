@@ -6,12 +6,14 @@ import {
 } from "react-redux";
 import modulesSlice from "./slices/modulesSlices";
 import postsSlice from "./slices/postsSlice";
+import chargePostEventsSlice from "./slices/chargePostEventsSlice";
 
 export const store = configureStore({
   reducer: {
     images: imageSlice,
     modules: modulesSlice,
     posts: postsSlice,
+    chargePostEvents: chargePostEventsSlice,
   },
 });
 

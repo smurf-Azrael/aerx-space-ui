@@ -1,10 +1,13 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Message } from '../../types/Message'
 import { EMessageType } from '../../enums/EMessageType';
 import { useDispatch, useSelector } from '../../store/store';
 import { collapseChat, minimizeChat, selectModules } from '../../store/slices/modulesSlices';
 import SendTokens from '../SendTokens';
+import { IMessageItem } from '.';
+import { listBuckets, sendMessage, getChat } from '../../lib/aerxChat'
+import { nearStore } from '../../store/near';
 
 const PrimaryHeader: React.FC = () => {
     const {chat} = useSelector(selectModules);
@@ -39,17 +42,19 @@ const PrimaryHeader: React.FC = () => {
     )
 }
 
-const SecondaryHeader: React.FC = () => {
+const SecondaryHeader: React.FC<{
+    activeMessage: IMessageItem
+}> = ({activeMessage}) => {
     return (
          <div className='flex justify-between items-center mt-2 px-3 py-2'>
             <div className='flex items-center gap-4 cursor-pointer '>
                 <div>
-                    <Image src={"/assets/images/avatar-1.svg"} width={40} height={40} alt="Avatar" />
+                    <Image src={activeMessage?.avatar || "/assets/images/avatar-1.svg"} width={40} height={40} alt="Avatar" className='rounded-full' />
                 </div>
                 <div>
                     <div className='flex justify-between'>
                         <label className='text-white text-bold text-[14px]'>
-                            Peter White
+                           {activeMessage?.name}
                         </label>
                        
                     </div>
@@ -251,30 +256,60 @@ const MessagesWrapper: React.FC = () => {
 }
 
 const SendMessage: React.FC<{
-    onSend: () => void
-}> = ({onSend}) => {
+    onSend: () => void,
+    activeReceiver: IMessageItem
+}> = ({onSend, activeReceiver}) => {
+    const [message, setMessage] = useState<string>('');
+    const nearState = nearStore((state) => state);
+    
+    const handleSendMessage = async () => {
+        // const response = await sendMessage(nearState.profile?.userId, activeReceiver.accountId, message);
+        // console.log("sent message .....")
+        // console.log(JSON.stringify(response));
+        // sendMessage('1', '2', 'Hello');
+        getChat('1','2')
+    }
+   
     return (
-        <div className='flex justify-between'>
-            <div className='flex gap-3'>
+        <div className='flex justify-between '>
+            <div className='flex gap-3 w-[80%]'>
             <Image src="/assets/icons/tag-icon.svg" alt="Tag" width={20} height={20} />
-            <input type="text" placeholder="Type message..." width={20} height={20} className=".placeholder-black-light bg-transparent focus:outline-none w-[70%] text-white text-sm" />
+            <textarea
+             placeholder="Type message..." 
+             className=".placeholder-black-light bg-transparent focus:outline-none w-[90%]
+              text-white text-[11px] mt-4 " style={{
+                resize: 'none',
+              }} 
+              onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        handleSendMessage();
+                    }
+                }}
+              />
             </div>
+
+            <div className='w-[15%] '>
             <Image src="/assets/icons/send-message-icon.svg" alt="send message" width={40} height={40}
              className="cursor-pointer" onClick={onSend} />
+             </div>
         </div>
     )
 }
 
-const ChatRoom: React.FC = () => {
+const ChatRoom: React.FC<{
+    activeMessage: IMessageItem
+}> = ({activeMessage}) => {
     const [initializeSendToken, setInitializeSendToken] = useState<boolean>(false);
     return (
         <>
         <div className='p-2'>
-            <PrimaryHeader/>
-            <SecondaryHeader />
+            <PrimaryHeader />
+            <SecondaryHeader activeMessage={activeMessage} />
             <div className='h-[75vh] flex flex-col justify-between'>
             <MessagesWrapper />
-            <SendMessage onSend={() => setInitializeSendToken(true)} />
+            <SendMessage onSend={() => setInitializeSendToken(true)} 
+             activeReceiver={activeMessage} />
             </div>
         </div>
         {initializeSendToken && <SendTokens onClose={() => setInitializeSendToken(false)} />}

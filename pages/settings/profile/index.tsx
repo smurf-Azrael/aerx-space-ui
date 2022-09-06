@@ -22,9 +22,8 @@ const ProfileSettings: React.FC = () => {
   }
 
   useEffect(() => {
-    initNearConnection(state);
     checkUser();
-  }, []);
+  }, [state.accountId, state.pnftContract]);
 
   return (
     <div className="w-full h-screen bg-black flex justify-around items-center poppins">

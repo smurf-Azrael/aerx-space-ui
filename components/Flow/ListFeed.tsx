@@ -1,5 +1,6 @@
+import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import { tempoFeed, videoFeed } from '../../helpers/data/feeds';
 import { initNearConnection } from '../../lib/auth';
 import { nearStore } from '../../store/near';
@@ -9,11 +10,38 @@ import { generateRandomColor } from '../../helpers/utils/generateRadomColor';
 import { useDispatch, useSelector } from '../../store/store';
 import { useGetPosts } from '../../hooks/useGetPosts';
 import { selectPosts } from '../../store/slices/postsSlice';
+import ChargePost from '../ChargePost';
+import useLongPress from '../../hooks/useLongPress';
+import { selectChargePostEvent } from '../../store/slices/chargePostEventsSlice';
 
 // coverImage, postOwner, nftId, title, description
-const TextPost: React.FC<Feed> = ({ metadata, owner_id, owner_profile, profile }) => {
+interface IProps {
+    feed: Feed,
+    setShowCharge: (show:boolean) => void,
+    handleOnClick: (e:any) => void,
+    handleOnMouseDown: (e:any) => void,
+    handleOnMouseUp: (e:any) => void,
+    handleOnTouchStart: (e:any) => void,
+    handleOnTouchEnd: (e:any) => void,
+}
+const TextPost: React.FC<IProps> = ({ 
+    feed, 
+    setShowCharge,
+    handleOnClick,
+    handleOnMouseDown,
+    handleOnMouseUp,
+    handleOnTouchStart,
+    handleOnTouchEnd
+ }) => {
+    const {metadata, owner_id, owner_profile, profile} = feed;
     const bgImage = metadata?.media;
     const randomColor = generateRandomColor();
+
+    const { action, handlers } = useLongPress();
+    const { click, longPress } = useSelector(selectChargePostEvent)
+    const dispatch = useDispatch();
+
+
     return (
         <div className='w-full h-[40vh] flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2' style={{
             backgroundImage: `url(${bgImage})`,
@@ -54,7 +82,15 @@ const TextPost: React.FC<Feed> = ({ metadata, owner_id, owner_profile, profile }
                     </div>
 
                     <div>
-                        <Image src="/assets/icons/send-message-icon.svg" alt="comment" width={25} height={25} />
+                        <Image src="/assets/icons/send-message-icon.svg" 
+                        alt="comment" width={25} height={25}
+                        className="cursor-pointer"
+                        onClick={handleOnClick}
+                        onMouseDown={handleOnMouseDown}
+                        onMouseUp={handleOnMouseUp}
+                        onTouchStart={handleOnTouchStart}
+                        onTouchEnd={handleOnTouchEnd}
+                        />
                     </div>
                 </div>
             </div>
@@ -172,6 +208,62 @@ const ListFeeds: React.FC = () => {
     const { feeds } = useSelector(selectPosts)
     const nearState: any = nearStore((state) => state);
     const dispatch = useDispatch();
+    const [showCharge, setShowCharge] = useState<boolean>(false);
+
+
+
+
+    /* Start of event tracking */
+    const [action, setAction] = useState('click');
+    const timerRef: any = useRef();
+    const isLongPress: any = useRef();
+  
+    function startPressTimer() {
+      isLongPress.current = false;
+      timerRef.current = setTimeout(() => {
+        isLongPress.current = true;
+        setAction('longpress');
+      }, 500)
+    }
+  
+    function handleOnClick(e:any) {
+      console.log('handleOnClick');
+      if (isLongPress.current ) {
+        setShowCharge(true);
+        console.log('Is long press - not continuing.');
+        setAction('click');
+        return;
+      }
+      handleSimpleCharge();
+      setAction('click')
+    }
+  
+    function handleOnMouseDown() {
+      console.log('handleOnMouseDown');
+      startPressTimer();
+    }
+  
+    function handleOnMouseUp() {
+      console.log('handleOnMouseUp');
+      clearTimeout(timerRef.current);
+    }
+  
+    function handleOnTouchStart() {
+      console.log('handleOnTouchStart');
+      startPressTimer();
+    }
+  
+    function handleOnTouchEnd() {
+      if ( action === 'longpress' ) return;
+      console.log('handleOnTouchEnd');
+      clearTimeout(timerRef.current);
+    }
+  
+    /*  End of event tracking */
+
+
+
+
     useEffect(() => {
         if (isLoading) {
             initNearConnection(nearState);
@@ -188,6 +280,13 @@ const ListFeeds: React.FC = () => {
             manipulateFeeds(feeds);
         }
     }, [feeds])
+
+
+    /*  handle charging */
+    const handleSimpleCharge = async () => {
+     toast.success('Post charged successfully')
+    }
+    /*  end of handle charging*/
 
     const manipulateFeeds = async (feeds: Array<Feed>) => {
         const newList = [...feeds].reverse();
@@ -211,6 +310,8 @@ const ListFeeds: React.FC = () => {
 
 
     return (
+        <>
+        <Toaster />
         <div className='w-full  flex  flex-wrap gap-2 gap-y-3'>
             {posts.map((post: Feed, index: number) => (
                 <div key={index}
@@ -219,7 +320,16 @@ const ListFeeds: React.FC = () => {
                             (post.type === 'video') ? '38%' : '38%'
                     }}>
                     {post.type === 'text' &&
-                        <TextPost {...post} />
+                        <TextPost 
+                        feed={post} 
+                        setShowCharge={setShowCharge}
+
+                        handleOnClick={handleOnClick}
+                        handleOnMouseDown={handleOnMouseDown}
+                        handleOnMouseUp={handleOnMouseUp}
+                        handleOnTouchStart={handleOnTouchStart}
+                        handleOnTouchEnd={handleOnTouchEnd}
+                        />
                     }
                     {post.type === 'video' &&
                         <VideoPost {...post} />
@@ -230,6 +340,8 @@ const ListFeeds: React.FC = () => {
                 </div>
             ))}
         </div>
+        {showCharge && <ChargePost onClose={() => setShowCharge(false)} />}
+        </>
     )
 }
 export default ListFeeds;

@@ -10,7 +10,6 @@ import {
   Button,
   color,
 } from "@chakra-ui/react";
-import SendingTokens from "./SendingTokens";
 import { MinusIcon } from "@chakra-ui/icons";
 import { nearStore } from "../../store/near";
 
@@ -20,22 +19,21 @@ function SendTokens(props) {
   const [amount, setAmount] = React.useState("");
   const [receiver, setReceiver] = React.useState("");
   const [isProceed, setProceed] = React.useState(false);
-  // const [color, setColor] = React.useState("rgba(255, 255, 255, 0.3)");
+  const [amountColor, setAmountColor] = React.useState("rgba(255, 255, 255, 0.3)");
 
   const handleAmount = (event) => {
-    const value = event.target.value
-    // value <= nearState.aexBalance ? "#DB3333"
-    // if (value > nearState.aexBalance){
-    //   setColor("#DB3333")
-    // }else {
-    //   setColor("rgba(255, 255, 255, 0.3)")
-    // }
-    
-    
-    setAmount(value);
+    const value = event.target.value;
+    console.log("int: ", parseInt(value, 10))
+    if (parseInt(value, 10) > nearState.aexBalance) {
+      setAmountColor("#DB3333")
+      setAmount(value);
+    } else {
+      setAmountColor("rgba(255, 255, 255, 0.3)")
+    }
+
 
   };
-  const conversion =  (amount/111) * 4.16
+  const conversion = (amount / 111) * 4.16
   const handleUser = async (event) => {
     const value = event.target.value;
     const isRegistered = await nearState.pnftContract.has_registered({
@@ -59,7 +57,7 @@ function SendTokens(props) {
     try {
       await nearState.tokenContract.ft_transfer({
         receiver_id: receiver,
-        amount: amount + "000000000000000000000000" ,
+        amount: amount + "000000000000000000000000",
         memo: "AEX Transfer",
       },
         "300000000000000",
@@ -71,28 +69,27 @@ function SendTokens(props) {
     } catch (error) {
       console.log("Transfer not successful: ", error)
       //show error page
-    }    
+    }
   };
 
-  const handleClick = () => {
-    setProceed((prevState) => !prevState);
-  };
   let bgColor;
   let disabled;
   let colorChange
 
-    amount.length < 1 ? (bgColor = "#FFFFFF1D;") : (bgColor = "#6054F0");
-    amount.length < 1 ? (disabled = true) : (disabled = false);
-  // if(amount <= nearState.aexBalance){
-  //   disabled = false
-  // } else {
-  //   disabled = true
+  amount.length < 1 ? (bgColor = "#FFFFFF1D;") : (bgColor = "#6054F0");
+  amount.length < 1 ? (disabled = true) : (disabled = false);
 
-  // }
+
 
   if (isProceed) {
     colorChange = "#19C486";
     disabled = false
+    if (amountColor == "#DB3333") {
+      disabled = true;
+    }
+    if (receiver == nearState.accountId) {
+      disabled = true;
+    }
   } else {
     colorChange = "#DB3333";
     disabled = true
@@ -195,18 +192,18 @@ function SendTokens(props) {
         <div>
           <input
             type="number"
-       
+
             placeholder="0"
             onChange={(e) => handleAmount(e)}
             style={{
               backgroundColor: "#191a1b",
-              color: "rgba(255, 255, 255, 0.3)",
+              color: amountColor,
               width: "65.075px",
               height: "21.92px",
-           
+
             }}
-            min="1" 
-            max="5"
+            color={amountColor}
+
           />
         </div>
       </Flex>

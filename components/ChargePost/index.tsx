@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from '../Modal';
 import ReactSimpleRange from '../Elements/SimpleSlider/ReactSimpleRange'
 import Image from 'next/image';
 import Button from '../Elements/Button';
+import { nearStore } from '../../store/near';
 
-const ChargePost: React.FC<{onClose: () => void}> = ({onClose}) => {
+const ChargePost: React.FC<{
+    onClose: () => void, 
+    onCharge: (value: number) => void,
+}> = ({onClose, onCharge}) => {
     const [value, setValue] = useState<number>(0);
+    const nearState:any = nearStore((state) => state);
+    const accountBalance = nearState?.aexBalance;
+
     return (
         <Modal onClose={() => onClose()}>
         <div className='w-[20vw]  px-6 pb-6'>
@@ -19,17 +26,17 @@ const ChargePost: React.FC<{onClose: () => void}> = ({onClose}) => {
         <div className='mt-2'>
         <ReactSimpleRange
          min={0}
-         max={100}
+         max={accountBalance}
          trackColor={'#FFE660'}
          thumbColor={'#ffff'}
-         onChange={(value:any) => setValue(value?.ratio)}
+         onChange={(value:any) => setValue(parseInt(value?.ratio))}
          />
          </div>
         <div className='mt-8'>
          <Button 
           icon="/assets/icons/right-arrow-icon.svg"
           label='Confirm'
-          onClick={() => onClose()}
+          onClick={() => onCharge(value)}
          />
         </div>
         </div>

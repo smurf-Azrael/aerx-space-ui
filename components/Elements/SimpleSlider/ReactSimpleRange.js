@@ -12,6 +12,7 @@ import {
 import SliderThumb from "./SliderThumb";
 import SliderLabel from "./SliderLabel";
 import SliderTrack from "./SliderTrack";
+import { nearStore } from "../../../store/near";
 
 function noOp() {}
 
@@ -106,6 +107,8 @@ const ReactSimpleRange = (props) => {
         });
         document.removeEventListener("touchend", handleInteractionEnd);
     };
+
+    const nearState = nearStore((state) => state);
 
     const updateSliderValue = (event, eventType) => {
         const { max, min, vertical } = props;

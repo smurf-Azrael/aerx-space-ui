@@ -58,7 +58,6 @@ function NewProfile(props) {
         fontFamily="Poppins"
         bgRepeat="no-repeat"
         bgSize="257.56px 378.12px"
-        position="absolute"
         top="0"
 
       // bgPosition="top center"

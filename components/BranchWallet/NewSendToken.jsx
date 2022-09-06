@@ -8,8 +8,8 @@ import {
   Select,
   Input,
   Button,
+  color,
 } from "@chakra-ui/react";
-import SendingTokens from "./SendingTokens";
 import { MinusIcon } from "@chakra-ui/icons";
 import { nearStore } from "../../store/near";
 
@@ -17,24 +17,47 @@ function SendTokens(props) {
   const nearState = nearStore((state) => state);
 
   const [amount, setAmount] = React.useState("");
-  const [receiver, setReceiver] = React.useState("")
+  const [receiver, setReceiver] = React.useState("");
   const [isProceed, setProceed] = React.useState(false);
+  const [amountColor, setAmountColor] = React.useState("rgba(255, 255, 255, 0.3)");
 
   const handleAmount = (event) => {
-    setAmount(event.target.value);
+    const value = event.target.value;
+    console.log("int: ", parseInt(value, 10))
+    if (parseInt(value, 10) > nearState.aexBalance) {
+      setAmountColor("#DB3333")
+      setAmount(value);
+    } else {
+      setAmountColor("rgba(255, 255, 255, 0.3)")
+    }
+
+
   };
-  const handleUser = (event) => {
-    setReceiver(event.target.value)
-  
-  }
+  const conversion = (amount / 111) * 4.16
+  const handleUser = async (event) => {
+    const value = event.target.value;
+    const isRegistered = await nearState.pnftContract.has_registered({
+      user_id: value,
+    });
+    console.log("registered: ", isRegistered);
+    if (isRegistered) {
+      setProceed(true);
+      setReceiver(value);
+    } else {
+      setProceed(false);
+    }
+  };
 
   const transferAex = async () => {
-    console.log("Send button clicked")
-    console.log("Details: ", amount,receiver)
+    console.log("is proceed final: ", isProceed);
+
+    console.log("Send button clicked");
+    console.log("Details: ", amount, receiver);
+
     try {
       await nearState.tokenContract.ft_transfer({
         receiver_id: receiver,
-        amount: amount + "000000000000000000000000" ,
+        amount: amount + "000000000000000000000000",
         memo: "AEX Transfer",
       },
         "300000000000000",
@@ -47,18 +70,32 @@ function SendTokens(props) {
       console.log("Transfer not successful: ", error)
       //show error page
     }
+  };
+
+  let bgColor;
+  let disabled;
+  let colorChange
+
+  amount.length < 1 ? (bgColor = "#FFFFFF1D;") : (bgColor = "#6054F0");
+  amount.length < 1 ? (disabled = true) : (disabled = false);
+
+
+
+  if (isProceed) {
+    colorChange = "#19C486";
+    disabled = false
+    if (amountColor == "#DB3333") {
+      disabled = true;
+    }
+    if (receiver == nearState.accountId) {
+      disabled = true;
+    }
+  } else {
+    colorChange = "#DB3333";
+    disabled = true
 
   }
 
-  const handleClick = () => {
-    setProceed((prevState) => !prevState);
-  };
-  let bgColor;
-  let disabled;
-  const propsColor =
-    amount.length < 1 ? (bgColor = "#FFFFFF1D;") : (bgColor = "#6054F0");
-  const propsDisabled =
-    amount.length < 1 ? (disabled = true) : (disabled = false);
 
   return (
     <Box
@@ -155,29 +192,31 @@ function SendTokens(props) {
         <div>
           <input
             type="number"
+
             placeholder="0"
-          onChange={(e) => handleAmount(e)}
+            onChange={(e) => handleAmount(e)}
             style={{
               backgroundColor: "#191a1b",
-              color: "rgba(255, 255, 255, 0.3)",
+              color: amountColor,
               width: "65.075px",
               height: "21.92px",
+
             }}
+            color={amountColor}
+
           />
         </div>
-
-
       </Flex>
       <Center fontFamily="Poppins" mb="10.96px">
         <Text fontSize="10.96px" color="rgba(255, 255, 255, 0.3)">
-          ≈ $155.13 USD
+          ≈ {conversion} USD
         </Text>
       </Center>
 
       <Box mb="16.44px">
         <Input
-          placeholder="pashq.testnet"
-          color="#DB3333"
+          placeholder="account id"
+          color={colorChange}
           fontFamily="Poppins"
           fontSize="10.96px"
           alignSelf="center"
@@ -187,20 +226,36 @@ function SendTokens(props) {
           borderRadius="10.275px"
           marginInline="32.88px"
           border="2px"
-          borderColor="#DB3333"
+          borderColor={colorChange}
           paddingInline="16.44px"
           fontWeight="500"
           onChange={(e) => handleUser(e)}
+          _focusVisible={{
+            outline: "none",
+          }}
         />
-        <Image
-          src={"../resources/akar-icons_circle-check.png"}
-          w="21.92px"
-          h="21.92px"
-          position="relative"
-          left="190px"
-          top="-30px"
-          cursor="pointer"
-        />
+        {isProceed && (
+          <Image
+            src={"../resources/akar-icons_circle-check1.png"}
+            w="21.92px"
+            h="21.92px"
+            position="relative"
+            left="190px"
+            top="-30px"
+            cursor="pointer"
+          />
+        )}
+        {!isProceed && (
+          <Image
+            src={"../resources/akar-icons_circle-check.png"}
+            w="21.92px"
+            h="21.92px"
+            position="relative"
+            left="190px"
+            top="-30px"
+            cursor="pointer"
+          />
+        )}
       </Box>
 
       <Center mb="21.92px">
@@ -242,10 +297,10 @@ function SendTokens(props) {
   );
 }
 
-
 export default SendTokens;
 
-        {/* <div>
+{
+  /* <div>
           <select
             style={{
               backgroundColor: "#191a1b",
@@ -278,9 +333,11 @@ export default SendTokens;
               </label>
             </option>
           </select>
-        </div> */}
+        </div> */
+}
 
-        {/* <div>
+{
+  /* <div>
           <img src="../resources/Vector 976.png" alt="" />
         </div>
 
@@ -299,4 +356,5 @@ export default SendTokens;
               height: "21.92px",
             }}
           />
-        </div> */}
+        </div> */
+}

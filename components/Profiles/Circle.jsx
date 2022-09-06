@@ -1,13 +1,16 @@
 import React from "react";
 import { Box, Flex, Image, Text, Button, Heading, Center } from "@chakra-ui/react";
 import { nearStore } from "../../store/near";
+import { produceWithPatches } from "immer";
 
 // type Props = {}
 
 const Circle = (props) => {
   const nearState = nearStore((state) => state);
 
-  let zIndex = props.circle ? "2" : "-8" 
+  let display = props.circle ? "block" : "none"
+  
+
 
  
 
@@ -21,10 +24,11 @@ const Circle = (props) => {
       top="108.915"
       left="102.75px"
       px="auto"
-      zIndex={zIndex}
+      // zIndex="-4"
       className="circleModal"
+      display={display}
     >
-      {/* <Flex position="absolute" flexDirection="column" gap="16.44px" ml="19.18px" mt="46.58px" zIndex='2'>
+      <Flex position="absolute" flexDirection="column" gap="16.44px" ml="19.18px" mt="46.58px" zIndex='2' onDoubleClick={(e) => props.onDoubleClick(e)}>
         <Box
           width="27.4px"
           height="27.4px"
@@ -238,7 +242,7 @@ const Circle = (props) => {
           </Text>
         </Button>
       </Flex>
-      </ Center> */}
+      </ Center>
     </Box>
   );
 };

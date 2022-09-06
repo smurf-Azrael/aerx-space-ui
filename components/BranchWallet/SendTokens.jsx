@@ -29,7 +29,18 @@ function SendTokens(props) {
     console.log(amount)
   }
   const handleUser = (event) => {
-    setReceiver(event.target.value)
+    const value = event.target.value
+    try {
+      nearState.pnftContract.has_registered({
+        user_id:value
+      })
+    } catch (error) {
+      console.log("error body :" ,error.body)
+      console.log("error" ,error)
+
+    }
+    setReceiver(value)
+
   
   }
     
@@ -178,7 +189,7 @@ function SendTokens(props) {
           fontSize="10.96px"
           fontWeight="400"
           color="#ffffff4d"
-          onChange={(e) => handleUser(e)}
+          onChange={handleUser(e)}
         />
 
         <Center mb="21.92px">

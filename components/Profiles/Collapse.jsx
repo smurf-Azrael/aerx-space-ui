@@ -62,7 +62,7 @@ function Collapse(props) {
           h="32px"
           mb="19.865px"
         />
-        <Image src={"../resources/Frame 14046.png"} w="21.92px" h="21.92px" />
+        {/* <Image src={"../resources/Frame 14046.png"} w="21.92px" h="21.92px" /> */}
       </Flex>
 
       <div

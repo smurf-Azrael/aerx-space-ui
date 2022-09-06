@@ -10,7 +10,7 @@ const WalletIndex = () => {
         // <Pools/>
         <div>
             {/* <RecieveToken /> */}
-            <LogOut />
+            {/* <LogOut /> */}
         </div>
 
     );

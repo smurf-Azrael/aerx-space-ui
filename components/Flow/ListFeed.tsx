@@ -17,8 +17,7 @@ import { selectChargePostEvent } from '../../store/slices/chargePostEventsSlice'
 // coverImage, postOwner, nftId, title, description
 interface IProps {
     feed: Feed,
-    setShowCharge: (show:boolean) => void,
-    handleOnClick: (e:any) => void,
+    handleOnClick: (e:any, feed: Feed) => void,
     handleOnMouseDown: (e:any) => void,
     handleOnMouseUp: (e:any) => void,
     handleOnTouchStart: (e:any) => void,
@@ -26,7 +25,6 @@ interface IProps {
 }
 const TextPost: React.FC<IProps> = ({ 
     feed, 
-    setShowCharge,
     handleOnClick,
     handleOnMouseDown,
     handleOnMouseUp,
@@ -80,18 +78,20 @@ const TextPost: React.FC<IProps> = ({
                             <Image src="/assets/icons/save-post-icon.svg" alt="comment" width={20} height={20} />
                         </div>
                     </div>
-
+                    
+                    {!feed?.metadata?.title.includes('AERX ProfileNFT for') && 
                     <div>
                         <Image src="/assets/icons/send-message-icon.svg" 
                         alt="comment" width={25} height={25}
                         className="cursor-pointer"
-                        onClick={handleOnClick}
+                        onClick={(e) => handleOnClick(e, feed)}
                         onMouseDown={handleOnMouseDown}
                         onMouseUp={handleOnMouseUp}
                         onTouchStart={handleOnTouchStart}
                         onTouchEnd={handleOnTouchEnd}
                         />
                     </div>
+                    }
                 </div>
             </div>
         </div>
@@ -210,8 +210,8 @@ const ListFeeds: React.FC = () => {
     const dispatch = useDispatch();
     const [showCharge, setShowCharge] = useState<boolean>(false);
 
-
-
+    /* clicked post */
+    const [activePost, setActivePost] = useState<Feed>();
 
     /* Start of event tracking */
     const [action, setAction] = useState('click');
@@ -236,6 +236,11 @@ const ListFeeds: React.FC = () => {
       }
       handleSimpleCharge();
       setAction('click')
+    }
+
+    function onClick(e:any, post:Feed) {
+      setActivePost(post);
+      handleOnClick(e);
     }
   
     function handleOnMouseDown() {
@@ -284,7 +289,23 @@ const ListFeeds: React.FC = () => {
 
     /*  handle charging */
     const handleSimpleCharge = async () => {
+     /* call the contract method to do simple charge */
+     const post_id = activePost?.post_id;
+     alert('simple charge -  post_id: '+post_id);
+
+     /*After this toast will be applied for success, customize it for error*/
      toast.success('Post charged successfully')
+    }
+
+    const handleValueBasedCharge = async (valueToCharge: number) => {
+       /* call the contract method to do simple charge */
+        const post_id = activePost?.post_id;
+        console.log("value to charge: "+valueToCharge+" post_id: "+post_id);
+        
+        /* after close the modal and toast for success or error */
+        setShowCharge(false);
+        toast.success('Post charged successfully');
+
     }
     /*  end of handle charging*/
 
@@ -322,9 +343,7 @@ const ListFeeds: React.FC = () => {
                     {post.type === 'text' &&
                         <TextPost 
                         feed={post} 
-                        setShowCharge={setShowCharge}
-
-                        handleOnClick={handleOnClick}
+                        handleOnClick={(e: any, feed: Feed) => onClick(e, feed)}
                         handleOnMouseDown={handleOnMouseDown}
                         handleOnMouseUp={handleOnMouseUp}
                         handleOnTouchStart={handleOnTouchStart}
@@ -340,7 +359,10 @@ const ListFeeds: React.FC = () => {
                 </div>
             ))}
         </div>
-        {showCharge && <ChargePost onClose={() => setShowCharge(false)} />}
+        {showCharge && <ChargePost 
+         onClose={() => setShowCharge(false)}
+         onCharge={handleValueBasedCharge}
+         />}
         </>
     )
 }

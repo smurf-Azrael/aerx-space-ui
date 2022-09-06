@@ -263,11 +263,9 @@ const SendMessage: React.FC<{
     const nearState = nearStore((state) => state);
     
     const handleSendMessage = async () => {
-        // const response = await sendMessage(nearState.profile?.userId, activeReceiver.accountId, message);
-        // console.log("sent message .....")
-        // console.log(JSON.stringify(response));
-        // sendMessage('1', '2', 'Hello');
-        getChat('1','2')
+        const response = await sendMessage(nearState.profile?.userId, activeReceiver.accountId, message);
+        console.log("sent message .....")
+        console.log(JSON.stringify(response));
     }
    
     return (

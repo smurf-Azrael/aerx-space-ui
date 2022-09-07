@@ -116,7 +116,10 @@ function Index() {
                 doubleClick={doubleClick}
                 wallet={openWallet}
               /> */}
-              <ProfileSection toggle={toggleClick} />
+              <ProfileSection toggle={toggleClick} doubleClick={doubleClick}
+                removeCircle={removeCircle}
+              
+              />
               <ImagesCarousel
                 doubleClick={doubleClick}
                 switch={switchCircle}

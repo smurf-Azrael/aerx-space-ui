@@ -11,7 +11,7 @@ function Collapse(props) {
 
   return (
     <Flex
-      h="739.8px"
+      h="755.8px"
       w="41.1px"
       justifyItems="center"
       flexDirection="column"
@@ -27,8 +27,9 @@ function Collapse(props) {
         justifyItems="center"
         alignItems="center"
       >
+        <Image src="../resources/æ.png"  w="21.92px" h="14.385px"mb="19.865px"/>
        
-        <Image src={"../resources/Frame 5449.png"} w="21.92px" mb="19.865px" />
+        {/* <Image src={"../resources/Frame 5449.png"} w="21.92px" mb="19.865px" /> */}
         {/* <Text fontFamily="Open Sans" fontWeight="800" color="white" w="21.92px" h="21px">æ</Text> */}
         <Image
           src={"../resources/Vector 38.png"}
@@ -70,8 +71,8 @@ function Collapse(props) {
         onClick={props.toggle}
       >
         <Image
-          src="resources/Frame 14290.png"
-        
+          src="resources/Frame 14290.png" w="8px" h="16px" ml="8px"
+             
         />
         {/* <ChevronRightIcon 
        
@@ -82,7 +83,7 @@ function Collapse(props) {
           /> */}
       </div>
 
-      <Flex flexDirection="column" gap="10.96px" alignItems="center">
+      <Flex flexDirection="column" gap="10.96px" alignItems="center" mt="42px">
         <Box
           border="1px solid rgba(255, 255, 255, 0.1)"
           borderRadius="100%"

@@ -1,16 +1,9 @@
 import React from "react";
-import {
-  Box,
-  Image,
-  Text,
-  Heading,
-  Flex,
-
-} from "@chakra-ui/react";
+import { Box, Image, Text, Heading, Flex } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import { nearStore } from "../../store/near";
-import LogOut from "./LogOut"
+import LogOut from "./LogOut";
 
 // type Props = {};
 
@@ -18,12 +11,7 @@ const ProfileSection = (props) => {
   const nearState = nearStore((state) => state);
 
   const dispatch = useDispatch();
-  const {
-    ellipse3,
-    logoP,
-    frameP1,
-    frameP2,
-  } = useSelector(getUserState);
+  const { ellipse3, logoP, frameP1, frameP2 } = useSelector(getUserState);
 
   return (
     <Flex
@@ -31,40 +19,47 @@ const ProfileSection = (props) => {
       bgImage={`url('${nearState.profile.profileImg}')`}
       bgRepeat="no-repeat"
       bgPosition="30 0"
-      bgSize="300px"
-    
+      bgSize="257.56px 325.29px"
+      onDoubleClick={(e) => props.doubleClick(e)}
       // bgGradient=" linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))"
-
+      cursor="pointer"
       bgColor="#191919;
       "
-      width="300px"
-      height="325.29px"
+      w="257.56px"
+      height="45%"
       top="0"
       // position="absolute"
       zIndex="2"
       className="profileSection"
-
+      // bgColor="white"
     >
       {/* <Image src={'../resources/Rectangle 3212.png'} position="absolute" zIndex="-2" /> */}
-      <Flex flexDirection="column" gap="10.96px" ml="16.44px" mt="21.92px" cursor="pointer">
+      <Flex
+        flexDirection="column"
+        gap="10.96px"
+        ml="16.44px"
+        mt="21.92px"
+        cursor="pointer"
+      >
         <Box
-          bgColor="#6054F0"
+          color="#6054F0"
           width="27.4px"
           height="27.4px"
           border="2px solid"
-          borderColor="#6054F0"
+        bgColor="#FFFFFF"
+        borderColor="#FFFFFF"
           borderRadius="6.85px"
           onClick={() => props.toggle()}
         >
           <Image
-            src="../resources/Frame 14297.png"
+            src="../resources/Frame 14290.svg"
             w="18px"
             py="5px"
             px="auto"
             pl="4px"
           />
         </Box>
-{/*        
+        {/*        
         <Box
           width="27.4px"
           height="27.4px"
@@ -141,44 +136,52 @@ const ProfileSection = (props) => {
         </Box> */}
       </Flex>
       {/* end */}
-
-      <Flex flexDirection="column" alignItems="center" mx="auto"
-      
-      >
+   
+      <Flex flexDirection="column" alignItems="center" mx="auto" >
         <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
-        <Box mt="176.045px">
+        <Box mt="176.045px" >
           <Heading
             fontSize="21.92px"
             color="#FFFFFF"
             fontFamily="Poppins"
-            fontWeight={700}
+            fontWeight="700"
             fontStyle="normal"
             lineHeight="100%"
+            textAlign="center"
+            letterSpacing="-0.02em"
+            mt="55px"
           >
             {nearState.profile.fullName}
           </Heading>
 
-          <Flex alignItems="center" flexDirection="column"
-          
+          <Flex
+            alignItems="center"
+            justifyContent="center"
+            gap="16px"
+            // mt="55px"
           >
             <Text
               fontSize="12.33px"
               fontFamily="Poppins"
               fontStyle="italic"
               color="#FFFFFFB2"
-              fontWeight={400}
+              fontWeight="400"
               letterSpacing="-0.02em"
               marginTop="5.48px"
               mb="11.645px"
+              mt="12px"
+              lineHeight=" 100%"
+    /* identical to box height, or 18px */
+
+ 
             >
               {nearState.profile.username}
             </Text>
 
             <Flex
-      // boxShadow = "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
-      // boxShadow = "rgba(0, 0, 0, 0.25) 30px 154px 155px,  10px -212px 130px, rgba(0, 0, 0, 0.12) 10px 24px 6px, rgba(0, 0, 0, 0.17) 12px 12px 13px, rgba(0, 0, 0, 0.09) 10px -13px 65px"
-            
+            // boxShadow = "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+            // boxShadow = "rgba(0, 0, 0, 0.25) 30px 154px 155px,  10px -212px 130px, rgba(0, 0, 0, 0.12) 10px 24px 6px, rgba(0, 0, 0, 0.17) 12px 12px 13px, rgba(0, 0, 0, 0.09) 10px -13px 65px"
             >
               <Image src={ellipse3} marginRight={2} w="10.96px" />
               <Text
@@ -186,25 +189,24 @@ const ProfileSection = (props) => {
                 fontFamily="Poppins"
                 fontWeight="500"
                 fontSize="9.59px"
+                lineHeight="100%"
+/* identical to box height, or 14px */
+
+                letterSpacin="-0.02em"
               >
                 Aura: 2k
               </Text>
             </Flex>
             <Box
-      // bgGradient="linear(to-b, #1f1f1f 0%, #191919 100%)"
-        w="261.56px"
-        position="absolute"
-        top="295px"
-        h="34px"
-    
-       
-
-          
-          >
-.
-          </Box>
+              // bgGradient="linear(to-b, #1f1f1f 0%, #191919 100%)"
+              w="261.56px"
+              position="absolute"
+              top="295px"
+              h="34px"
+            >
+              .
+            </Box>
           </Flex>
-  
         </Box>
       </Flex>
       {/* end */}

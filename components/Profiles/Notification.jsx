@@ -50,11 +50,11 @@ const Notification = (props) => {
     <Box
       position="absolute"
       bgColor="#303030;"
-      w="300px"
+      width="257.56px"
       marginLeft="0"
       borderTopRadius="50px"
-      h="76.72px"
-      top="665.595px"
+      h="11%"
+      top="89%"
     
     >
       <Center>

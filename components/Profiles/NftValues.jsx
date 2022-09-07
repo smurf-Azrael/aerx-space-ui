@@ -42,12 +42,12 @@ const NftValues = () => {
   return (
     <Box
       bgColor="#242424"
-      w="300px"
+      width="257.56px"
       marginLeft="0"
       // borderTopRadius="34.25px"
       position="absolute"
-      h="145.23px"
-      top="545.57px"
+      h="23%"
+      top="73%"
 
     >
       <Center>

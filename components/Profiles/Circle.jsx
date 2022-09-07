@@ -28,8 +28,8 @@ const Circle = (props) => {
       className="circleModal"
       display={display}
     >
-      <Flex position="absolute" flexDirection="column" gap="16.44px" ml="19.18px" mt="46.58px" zIndex='2' onDoubleClick={(e) => props.onDoubleClick(e)}>
-        <Box
+      <Flex position="absolute" flexDirection="column" gap="20.42px" ml="19.18px" mt="16.44px" zIndex='2' onDoubleClick={(e) => props.onDoubleClick(e)}>
+        {/* <Box
           width="27.4px"
           height="27.4px"
           border="2px solid"
@@ -64,19 +64,23 @@ const Circle = (props) => {
             borderRadius="100%"
             src={"../resources/Ellipse 2.png"}
           />
-        </Box>
+        </Box> */}
+          <Image src={'../resources/Group 5450.png'}  w="13.37805px" h="21.92px" />
+ 
+       <Image src={'../resources/Send2.svg'}    w="21.92px" h="21.92px" />
+       <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" />
       </Flex>
 
       <Flex position="absolute" flexDirection="column" gap="16.44px" ml="248.47005px" mt="46.54px" alignItems="center" zIndex='2'>
-       <Image src={'../resources/Group 5450.png'}  w="13.37805px" h="21.92px" />
+       {/* <Image src={'../resources/Group 5450.png'}  w="13.37805px" h="21.92px" />
        <Image src={'../resources/Frame 13920.png'}  w="21.92px" h="21.92px" />
        <Image src={'../resources/Send.svg'}    w="21.92px" h="21.92px" />
-       <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" />
+       <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" /> */}
       </Flex>
 
 
       <Image
-           onClick={(e) => props.removeCircle(e)}
+           onClick={(e) => props.remove(e)}
 
         src={"../resources/Frame 139.png"}
         position="absolute"
@@ -85,6 +89,7 @@ const Circle = (props) => {
         top="15.07685px"
         right="10.96px"
         zIndex="2"
+        cursor="pointer"
       />
 
       <Box

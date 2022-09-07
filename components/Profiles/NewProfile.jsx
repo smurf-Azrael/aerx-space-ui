@@ -51,7 +51,7 @@ function NewProfile(props) {
       {/* main profile */}
       <Box
         h="428.81px"
-        w="300px"
+        w="257.56px"
         // bgColor="rgba(0, 0, 0, 0.1)"
         // bgColor="#191919"
         bgImage={`url('${profileImage}')`}

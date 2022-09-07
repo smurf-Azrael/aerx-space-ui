@@ -23,6 +23,7 @@ const CreatePostForm: React.FC<{setFileToPreview: (fileURL: string) => void, ear
     const handlePost = async (e: { preventDefault: () => void; }) => {
         if(isLoading) return;
         e.preventDefault();
+        if(earnPost) return postEarn2Gether();
         let postToMint;
         if(!nearState.postDetails.body || nearState.postDetails.body.length === 0) return toast.error("Please enter a description");
       
@@ -108,6 +109,24 @@ const CreatePostForm: React.FC<{setFileToPreview: (fileURL: string) => void, ear
         }
     }
 
+    /*  post earn to gether post */
+    const postEarn2Gether = async () => {
+        let postToMint = {
+            title: (!nearState?.postDetails?.title || (nearState.postDetails.title = "" && !earnPost?.metadata?.title)) ?   `AERX-postNFT for ${nearState.profile?.username}` 
+            : (earnPost?.metadata?.title) ? earnPost?.metadata?.title : nearState?.postDetails?.title,
+            description:  nearState?.postDetails?.body || earnPost?.metadata?.description,
+            media: nearState?.postDetails?.media || earnPost?.metadata?.media,
+            media_hash: nearState?.postDetails?.mediaHash || earnPost?.metadata?.media_hash,
+            issued_at: new Date().toISOString(),
+            //extra will be used to handle the toghether with on the create post
+        }
+        try {
+
+        }
+        catch{
+            
+        }
+    }
     return (
         <div>
             <Toaster/>

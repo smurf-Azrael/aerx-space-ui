@@ -43,7 +43,7 @@ const TextPost: React.FC<IProps> = ({
 
 
     return (
-        <div className='w-full h-[40vh] flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2' style={{
+        <div className='w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2' style={{
             backgroundImage: `url(${bgImage})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',

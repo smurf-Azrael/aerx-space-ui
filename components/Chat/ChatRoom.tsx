@@ -193,7 +193,7 @@ const MessagesWrapper: React.FC<{activeReceiver: IMessageItem}> = ({ activeRecei
     },[activeReceiver])
 
     const getMessages = async () => {
-        alert("get messages "+activeReceiver?.accountId+" "+nearState.accountId)
+        // alert("get messages "+activeReceiver?.accountId+" "+nearState.accountId)
         const messages = await getChat(activeReceiver?.accountId, nearState.accountId);
         console.log("messages ...", messages);
     }
@@ -278,8 +278,7 @@ const SendMessage: React.FC<{
     const nearState = nearStore((state) => state);
 
     const handleSendMessage = async () => {
-        const response = await sendMessage(nearState.accountId, activeReceiver.accountId, message);
-        console.log("sent message .....")
+        const response = await sendMessage(nearState.accountId, activeReceiver.accountId, ' AEX-MESSAGE- MESSAGE-SENDER-'+nearState.accountId+" MESSAGE-"+message);
         console.log(JSON.stringify(response));
     }
 

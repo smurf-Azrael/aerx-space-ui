@@ -49,7 +49,7 @@ const ChatHeader: React.FC = () => {
 
 const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, message, isActive, onClick }) => {
     return (
-        <div onClick={onClick} className={`mt-2 ${isActive ? 'bg-[#2b2b2b] rounded-[10px]' : ''} px-3 py-2`}>
+        <div onClick={onClick} className={`mt-2 mr-1 ${isActive ? 'bg-[#2b2b2b] rounded-[10px]' : ''} px-3 py-2`}>
             <div className='flex items-center gap-2 cursor-pointer '>
                 <div className='w-[25%] '>
                     <Image src={avatar} width={40} height={40} alt="Avatar" className='rounded-full' />

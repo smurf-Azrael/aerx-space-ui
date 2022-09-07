@@ -15,6 +15,9 @@ import useLongPress from '../../hooks/useLongPress';
 import { selectChargePostEvent } from '../../store/slices/chargePostEventsSlice';
 import { error } from 'console';
 import { getBalance } from '../../lib/aexContract';
+import SharePost from '../SharePost';
+import { Feedback } from 'aws-sdk/clients/applicationinsights';
+
 
 // coverImage, postOwner, nftId, title, description
 interface IProps {
@@ -24,6 +27,7 @@ interface IProps {
     handleOnMouseUp: (e: any) => void,
     handleOnTouchStart: (e: any) => void,
     handleOnTouchEnd: (e: any) => void,
+    initializeShare: (feed: Feed) => void,
 }
 const TextPost: React.FC<IProps> = ({
     feed,
@@ -31,19 +35,15 @@ const TextPost: React.FC<IProps> = ({
     handleOnMouseDown,
     handleOnMouseUp,
     handleOnTouchStart,
-    handleOnTouchEnd
+    handleOnTouchEnd,
+    initializeShare
 }) => {
     const { metadata, owner_id, owner_profile, profile } = feed;
     const bgImage = metadata?.media;
     const randomColor = generateRandomColor();
 
-    const { action, handlers } = useLongPress();
-    const { click, longPress } = useSelector(selectChargePostEvent)
-    const dispatch = useDispatch();
-
-
     return (
-        <div className='w-full h-[40vh] flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2' style={{
+        <div className='w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2' style={{
             backgroundImage: `url(${bgImage})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
@@ -70,14 +70,17 @@ const TextPost: React.FC<IProps> = ({
 
                 <div className='flex justify-between mt-2 items-center'>
                     <div className='flex gap-3 items-center'>
-                        <div>
-                            <Image src="/assets/icons/comment-icon.svg" alt="comment" width={20} height={20} />
+                        <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
+                            <Image className='cursor-pointer' src="/assets/icons/comment-icon.svg" alt="comment" width={20} height={20} />
                         </div>
-                        <div>
-                            <Image src="/assets/icons/share-icon.svg" alt="comment" width={20} height={20} />
+                        <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
+                            <Image src="/assets/icons/share-icon.svg" alt="share"   width={20} height={20}
+                             className='cursor-pointer '
+                             onClick={(e) => initializeShare(feed)} 
+                            />
                         </div>
-                        <div>
-                            <Image src="/assets/icons/save-post-icon.svg" alt="comment" width={20} height={20} />
+                        <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
+                            <Image className='cursor-pointer' src="/assets/icons/save-post-icon.svg" alt="save" width={20} height={20} />
                         </div>
                     </div>
 
@@ -204,13 +207,17 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
 }
 
 
-const ListFeeds: React.FC = () => {
+const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [posts, setPosts] = useState<Array<Feed>>([]);
+    const [postsClone, setPostsClone] = useState<Array<Feed>>([]);
     const { feeds } = useSelector(selectPosts)
     const nearState: any = nearStore((state) => state);
     const dispatch = useDispatch();
     const [showCharge, setShowCharge] = useState<boolean>(false);
+    const [showShare, setShowShare] = useState<boolean>(false);
+    const [sharablePost, setSharablePost] = useState<Feed | null>(null);
+   
 
     /* clicked post */
     const [activePost, setActivePost] = useState<Feed>();
@@ -284,7 +291,7 @@ const ListFeeds: React.FC = () => {
 
     useEffect(() => {
         if (feeds.length > 0) {
-            manipulateFeeds(feeds);
+            manipulateFeeds(feeds, false);
         }
     }, [feeds])
 
@@ -337,7 +344,7 @@ const ListFeeds: React.FC = () => {
     }
     /*  end of handle charging*/
 
-    const manipulateFeeds = async (feeds: Array<Feed>) => {
+    const manipulateFeeds = async (feeds: Array<Feed>, forClone:boolean) => {
         const newList = [...feeds].reverse();
         let manipulatedFeeds: Feed[] = [];
         let row = 1;
@@ -352,17 +359,42 @@ const ListFeeds: React.FC = () => {
             }
             row += 1;
             if (index === newList.length - 1) {
-                setPosts(manipulatedFeeds);
+                if(!forClone){
+                    setPosts(manipulatedFeeds);
+                    setPostsClone(manipulatedFeeds)
+                }
+                else{
+                    setPostsClone(manipulatedFeeds);
+                }
             }
         })
     }
 
+    useEffect(() => {
+        handleSearchByPostTitle(searchKey);
+    },[searchKey])
+
+    const handleSearchByPostTitle = (searchKey: string) => {
+        if(searchKey === '' || searchKey === null || searchKey?.replace(/\s/g, "").length === 0){
+            setPostsClone(posts);
+            return;
+        }
+        const filteredPosts = postsClone.filter((post: Feed) => {
+            return post.metadata.title.toLowerCase().includes(searchKey.toLowerCase());
+        })
+        manipulateFeeds(filteredPosts, true);
+    }
+
+    const initializeShare = (feed: Feed) => {
+        setSharablePost(feed);
+        setShowShare(true);
+    }
 
     return (
         <>
             <Toaster />
             <div className='w-full  flex  flex-wrap gap-2 gap-y-3'>
-                {posts.map((post: Feed, index: number) => (
+                {postsClone.map((post: Feed, index: number) => (
                     <div key={index}
                         style={{
                             width: (post.type === 'text') ? '60%' :
@@ -376,6 +408,7 @@ const ListFeeds: React.FC = () => {
                                 handleOnMouseUp={handleOnMouseUp}
                                 handleOnTouchStart={handleOnTouchStart}
                                 handleOnTouchEnd={handleOnTouchEnd}
+                                initializeShare={initializeShare}
                             />
                         }
                         {post.type === 'video' &&
@@ -391,6 +424,7 @@ const ListFeeds: React.FC = () => {
                 onClose={() => setShowCharge(false)}
                 onCharge={handleValueBasedCharge}
             />}
+            {showShare && <SharePost post={sharablePost as Feed} onClose={() => setShowShare(false)} />}
         </>
     )
 }

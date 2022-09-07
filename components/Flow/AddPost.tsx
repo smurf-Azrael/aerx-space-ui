@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import toast, {Toaster} from 'react-hot-toast';
 import { pinToPinata } from '../../lib/pinata';
 import { nearStore } from '../../store/near';
+import { Post } from '../../types/Post';
 const shajs = require('sha.js');
 
 interface IProps {
@@ -12,7 +13,7 @@ interface IProps {
 }
 
 
-const CreatePostForm: React.FC<{setFileToPreview: (fileURL: string) => void}> = ({setFileToPreview}) => {
+const CreatePostForm: React.FC<{setFileToPreview: (fileURL: string) => void, earnPost: any}> = ({setFileToPreview, earnPost}) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [filePreview, setFilePreview] = useState<string>();
@@ -120,6 +121,7 @@ const CreatePostForm: React.FC<{setFileToPreview: (fileURL: string) => void}> = 
                     <input placeholder='Post title'
                         className='focus:outline-none border-none text-white w-full bg-transparent text-sm mt-4'
                         onChange={updateTitle}
+                        defaultValue={earnPost ? earnPost.metadata.title : ""}
                     />
                     <div className='bg-white opacity-[15%] p-[0.5px] mt-4' />
                 </div>
@@ -243,14 +245,30 @@ const CreatePostForm: React.FC<{setFileToPreview: (fileURL: string) => void}> = 
 const AddPost: React.FC<IProps> = ({ onClose }) => {
     const [filePreview, setFilePreview] = useState<string>();
     const nearState = nearStore((state) => state);
+    const router = useRouter();
+    const [earnPost, setEarnPost] = useState<any>();
+    const { earn2gether } = router.query;
     const updateBody = (e: any) => {
         const val = e.currentTarget.value;
         if (val != "") {
             nearState.postDetails.body = val;
         }
-
     }
 
+    useEffect(() => {
+        if(earn2gether){
+            getPost();
+        }
+    },[earn2gether])
+
+    const getPost = async () => {
+        const post = await nearState?.profileContract?.post_details({ user_id: nearState?.accountId, post_id: earn2gether as string });
+        if(!post) return;
+        if(post?.metadata?.media){
+            setFilePreview(post?.metadata?.media);
+        }
+        setEarnPost(post)
+    }
 
     return (
         <div className='w-full  h-[94vh] flex'>
@@ -258,7 +276,8 @@ const AddPost: React.FC<IProps> = ({ onClose }) => {
                 <div className='h-full w-[50%] '>
                     {!filePreview && 
                     <div className='h-[50%] flex justify-around bg-black-light' style={{ borderRadius: '10px 10px 0px 0px' }}>
-                        <Image src={(!filePreview) ? "https://d1a370nemizbjq.cloudfront.net/b2a5e510-0b50-4d7c-bb8f-b8bd93f82218.glb" : filePreview}
+                        <Image src={
+                            (!filePreview) ? "/assets/icons/default-image-icon.svg" : filePreview}
                             alt="avatar" width={100} height={100}
                             />
                     </div>
@@ -282,6 +301,7 @@ const AddPost: React.FC<IProps> = ({ onClose }) => {
                                 color: 'white'
                             }}
                             onChange={updateBody}
+                            defaultValue={(earnPost) ? earnPost.metadata.description : ''}
 
                         />
                     </div>
@@ -297,7 +317,7 @@ const AddPost: React.FC<IProps> = ({ onClose }) => {
                             />
                         </div>
 
-                        <CreatePostForm setFileToPreview={setFilePreview} />
+                        <CreatePostForm earnPost={earnPost}  setFileToPreview={setFilePreview} />
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import { on } from 'events';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react'
 import { collapseFlow } from '../../store/slices/modulesSlices';
 import { useDispatch } from '../../store/store';
@@ -31,6 +32,12 @@ const SearchInput: React.FC<Props> = ({backgroundColor='bg-black-dark', placehol
 
 const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
     const dispatch = useDispatch();
+    const router = useRouter();
+    const { earn2gether} = router.query;
+
+    if(earn2gether){
+      onAddPost();
+    }
     
     const onCollapse = () => {
       dispatch(collapseFlow());

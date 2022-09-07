@@ -73,8 +73,9 @@ const SecondaryHeader: React.FC<{
     )
 }
 
-const MessagesWrapper: React.FC = () => {
+const MessagesWrapper: React.FC<{activeReceiver: IMessageItem}> = ({ activeReceiver }) => {
     const userId: string = '2';
+    const nearState = nearStore((state) => state);
     const messages: Array<Message> = [
         {
             id: '1',
@@ -183,6 +184,20 @@ const MessagesWrapper: React.FC = () => {
             type: EMessageType.TEXT
         }
     ];
+
+    /* get messages */
+    const [chatMessages, setChatMessages] = useState<Array<IMessageItem>>([]);
+
+    useEffect(() => {
+    getMessages();
+    },[activeReceiver])
+
+    const getMessages = async () => {
+        alert("get messages "+activeReceiver?.accountId+" "+nearState.accountId)
+        const messages = await getChat(activeReceiver?.accountId, nearState.accountId);
+        console.log("messages ...", messages);
+    }
+    /* end get messages*/
 
     const RenderSenderMessage: React.FC<{ content: string, type: EMessageType }> = ({ content, type }) => {
         return (
@@ -305,7 +320,7 @@ const ChatRoom: React.FC<{
                 <PrimaryHeader />
                 <SecondaryHeader activeMessage={activeMessage} />
                 <div className='h-[75vh] flex flex-col justify-between'>
-                    <MessagesWrapper />
+                    <MessagesWrapper activeReceiver={activeMessage} />
                     <SendMessage onSend={() => setInitializeSendToken(true)}
                         activeReceiver={activeMessage} />
                 </div>

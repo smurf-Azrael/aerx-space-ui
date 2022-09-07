@@ -25,10 +25,10 @@ const ImagesCarousel = (props) => {
       bgColor="#1F1F1F;
       "
       // borderTopRadius="34.25px"
-      w="300px"
+      width="257.56px"
       position="absolute"
-      h="242.51px"
-      top="325.29px"
+      h="35%"
+      top="43.3%"
       borderRadius="50px 50px 0px 0px"
       
     >

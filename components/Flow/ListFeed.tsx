@@ -13,27 +13,27 @@ import { selectPosts } from '../../store/slices/postsSlice';
 import ChargePost from '../ChargePost';
 import useLongPress from '../../hooks/useLongPress';
 import { selectChargePostEvent } from '../../store/slices/chargePostEventsSlice';
+import { error } from 'console';
+import { getBalance } from '../../lib/aexContract';
 
 // coverImage, postOwner, nftId, title, description
 interface IProps {
     feed: Feed,
-    setShowCharge: (show:boolean) => void,
-    handleOnClick: (e:any) => void,
-    handleOnMouseDown: (e:any) => void,
-    handleOnMouseUp: (e:any) => void,
-    handleOnTouchStart: (e:any) => void,
-    handleOnTouchEnd: (e:any) => void,
+    handleOnClick: (e: any, feed: Feed) => void,
+    handleOnMouseDown: (e: any) => void,
+    handleOnMouseUp: (e: any) => void,
+    handleOnTouchStart: (e: any) => void,
+    handleOnTouchEnd: (e: any) => void,
 }
-const TextPost: React.FC<IProps> = ({ 
-    feed, 
-    setShowCharge,
+const TextPost: React.FC<IProps> = ({
+    feed,
     handleOnClick,
     handleOnMouseDown,
     handleOnMouseUp,
     handleOnTouchStart,
     handleOnTouchEnd
- }) => {
-    const {metadata, owner_id, owner_profile, profile} = feed;
+}) => {
+    const { metadata, owner_id, owner_profile, profile } = feed;
     const bgImage = metadata?.media;
     const randomColor = generateRandomColor();
 
@@ -81,17 +81,19 @@ const TextPost: React.FC<IProps> = ({
                         </div>
                     </div>
 
-                    <div>
-                        <Image src="/assets/icons/send-message-icon.svg" 
-                        alt="comment" width={25} height={25}
-                        className="cursor-pointer"
-                        onClick={handleOnClick}
-                        onMouseDown={handleOnMouseDown}
-                        onMouseUp={handleOnMouseUp}
-                        onTouchStart={handleOnTouchStart}
-                        onTouchEnd={handleOnTouchEnd}
-                        />
-                    </div>
+                    {!feed?.metadata?.title.includes('AERX ProfileNFT for') &&
+                        <div>
+                            <Image src="/assets/icons/send-message-icon.svg"
+                                alt="comment" width={25} height={25}
+                                className="cursor-pointer"
+                                onClick={(e) => handleOnClick(e, feed)}
+                                onMouseDown={handleOnMouseDown}
+                                onMouseUp={handleOnMouseUp}
+                                onTouchStart={handleOnTouchStart}
+                                onTouchEnd={handleOnTouchEnd}
+                            />
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -210,55 +212,60 @@ const ListFeeds: React.FC = () => {
     const dispatch = useDispatch();
     const [showCharge, setShowCharge] = useState<boolean>(false);
 
-
-
+    /* clicked post */
+    const [activePost, setActivePost] = useState<Feed>();
 
     /* Start of event tracking */
     const [action, setAction] = useState('click');
     const timerRef: any = useRef();
     const isLongPress: any = useRef();
-  
+
     function startPressTimer() {
-      isLongPress.current = false;
-      timerRef.current = setTimeout(() => {
-        isLongPress.current = true;
-        setAction('longpress');
-      }, 500)
+        isLongPress.current = false;
+        timerRef.current = setTimeout(() => {
+            isLongPress.current = true;
+            setAction('longpress');
+        }, 500)
     }
-  
-    function handleOnClick(e:any) {
-      console.log('handleOnClick');
-      if (isLongPress.current ) {
-        setShowCharge(true);
-        console.log('Is long press - not continuing.');
-        setAction('click');
-        return;
-      }
-      handleSimpleCharge();
-      setAction('click')
+
+    function handleOnClick(e: any) {
+        console.log('handleOnClick');
+        if (isLongPress.current) {
+            setShowCharge(true);
+            console.log('Is long press - not continuing.');
+            setAction('click');
+            return;
+        }
+        handleSimpleCharge();
+        setAction('click')
     }
-  
+
+    function onClick(e: any, post: Feed) {
+        setActivePost(post);
+        handleOnClick(e);
+    }
+
     function handleOnMouseDown() {
-      console.log('handleOnMouseDown');
-      startPressTimer();
+        console.log('handleOnMouseDown');
+        startPressTimer();
     }
-  
+
     function handleOnMouseUp() {
-      console.log('handleOnMouseUp');
-      clearTimeout(timerRef.current);
+        console.log('handleOnMouseUp');
+        clearTimeout(timerRef.current);
     }
-  
+
     function handleOnTouchStart() {
-      console.log('handleOnTouchStart');
-      startPressTimer();
+        console.log('handleOnTouchStart');
+        startPressTimer();
     }
-  
+
     function handleOnTouchEnd() {
-      if ( action === 'longpress' ) return;
-      console.log('handleOnTouchEnd');
-      clearTimeout(timerRef.current);
+        if (action === 'longpress') return;
+        console.log('handleOnTouchEnd');
+        clearTimeout(timerRef.current);
     }
-  
+
     /*  End of event tracking */
 
 
@@ -281,10 +288,52 @@ const ListFeeds: React.FC = () => {
         }
     }, [feeds])
 
-
+    //Todo: fix the post id conflict, make charge button disabled after clicking
     /*  handle charging */
     const handleSimpleCharge = async () => {
-     toast.success('Post charged successfully')
+        /* call the contract method to do simple charge */
+        const post_id = Number(activePost?.post_id);
+        try {
+            await nearState.pnftContract?.charge({
+                charger_id: nearState.accountId,
+                post_id: post_id,
+                amount: "1000000000000000000000000",
+            },
+                "300000000000000"
+            ).then(() => {
+                getBalance(nearState)
+            })
+            console.log("Post Charged successfully")
+            toast.success('Post charged successfully')
+        } catch (err) {
+            console.error("Unable to charge post due to: ", err)
+            toast.error('Unable to charge post')
+        }
+    }
+
+    //Todo: make confirm button disabled after clicking
+    const handleValueBasedCharge = async (valueToCharge: number) => {
+        /* call the contract method to do simple charge */
+        const post_id = Number(activePost?.post_id);
+        /* after close the modal and toast for success or error */
+        try {
+            await nearState.pnftContract?.charge({
+                charger_id: nearState.accountId,
+                post_id: post_id,
+                amount: `${valueToCharge}` + "000000000000000000000000",
+            },
+                "300000000000000"
+            ).then(() => {
+                getBalance(nearState)
+            })
+            console.log("Post Charged successfully")
+            toast.success('Post charged successfully')
+        } catch (err) {
+            console.error("Unable to charge post due to: ", err)
+            toast.error('Unable to charge post')
+        }
+        setShowCharge(false);
+
     }
     /*  end of handle charging*/
 
@@ -311,36 +360,37 @@ const ListFeeds: React.FC = () => {
 
     return (
         <>
-        <Toaster />
-        <div className='w-full  flex  flex-wrap gap-2 gap-y-3'>
-            {posts.map((post: Feed, index: number) => (
-                <div key={index}
-                    style={{
-                        width: (post.type === 'text') ? '60%' :
-                            (post.type === 'video') ? '38%' : '38%'
-                    }}>
-                    {post.type === 'text' &&
-                        <TextPost 
-                        feed={post} 
-                        setShowCharge={setShowCharge}
-
-                        handleOnClick={handleOnClick}
-                        handleOnMouseDown={handleOnMouseDown}
-                        handleOnMouseUp={handleOnMouseUp}
-                        handleOnTouchStart={handleOnTouchStart}
-                        handleOnTouchEnd={handleOnTouchEnd}
-                        />
-                    }
-                    {post.type === 'video' &&
-                        <VideoPost {...post} />
-                    }
-                    {post.type === 'tempo' &&
-                        <TempoPost {...post} />
-                    }
-                </div>
-            ))}
-        </div>
-        {showCharge && <ChargePost onClose={() => setShowCharge(false)} />}
+            <Toaster />
+            <div className='w-full  flex  flex-wrap gap-2 gap-y-3'>
+                {posts.map((post: Feed, index: number) => (
+                    <div key={index}
+                        style={{
+                            width: (post.type === 'text') ? '60%' :
+                                (post.type === 'video') ? '38%' : '38%'
+                        }}>
+                        {post.type === 'text' &&
+                            <TextPost
+                                feed={post}
+                                handleOnClick={(e: any, feed: Feed) => onClick(e, feed)}
+                                handleOnMouseDown={handleOnMouseDown}
+                                handleOnMouseUp={handleOnMouseUp}
+                                handleOnTouchStart={handleOnTouchStart}
+                                handleOnTouchEnd={handleOnTouchEnd}
+                            />
+                        }
+                        {post.type === 'video' &&
+                            <VideoPost {...post} />
+                        }
+                        {post.type === 'tempo' &&
+                            <TempoPost {...post} />
+                        }
+                    </div>
+                ))}
+            </div>
+            {showCharge && <ChargePost
+                onClose={() => setShowCharge(false)}
+                onCharge={handleValueBasedCharge}
+            />}
         </>
     )
 }

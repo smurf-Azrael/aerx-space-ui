@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
+import { initChat } from '../../lib/aerxChat';
 import { nearStore } from '../../store/near';
 import { selectModules } from '../../store/slices/modulesSlices';
 import { useSelector } from '../../store/store';
@@ -129,8 +130,8 @@ const Chat: React.FC = () => {
     }
 
     useEffect(() => {
-       formMessageItem();
-    },[profiles])
+        formMessageItem();
+    }, [profiles])
 
     const formMessageItem = () => {
         const messageItems: Array<IMessageItem> = [];
@@ -152,6 +153,11 @@ const Chat: React.FC = () => {
         setChats(messageItems);
     }
 
+    const handleSetActiveMessage = async (index: number) => {
+        setActiveMessage(index);
+        initChat(nearState.accountId, chats[index].accountId);
+    }
+
     return (
         <div className='w-full h-[100%] bg-black-dark rounded-[10px] flex gap-2 '>
             {!chat.minimized &&
@@ -171,7 +177,7 @@ const Chat: React.FC = () => {
                         </div>
                         <div className="bg-redd-500 h-full overflow-y-scroll">
                             {chats.map((message, index) => (
-                                <MessageItem onClick={() => setActiveMessage(index)} key={index} {...message} isActive={activeMessage === index ? true : false} />
+                                <MessageItem onClick={() => handleSetActiveMessage(index)} key={index} {...message} isActive={activeMessage === index ? true : false} />
                             ))
                             }
                         </div>

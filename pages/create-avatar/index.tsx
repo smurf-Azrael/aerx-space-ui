@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
+// import { OrbitControls, useGLTF } from "@react-three/drei";
 
 const Create3DAvatar = () => {
   const subdomain = 'aerx' // See section about becoming a partner
@@ -69,6 +70,9 @@ const Create3DAvatar = () => {
     }
   }, [showIFrame])
 
+  // const { scene } = useGLTF(`${avatarUrl}`);
+  // console.log("Scene: ", scene)
+
   return (
     <div className="App">
       <div className="topBar">
@@ -95,3 +99,4 @@ const Create3DAvatar = () => {
 }
 
 export default Create3DAvatar;
+

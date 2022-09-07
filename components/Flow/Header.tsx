@@ -1,3 +1,4 @@
+import { on } from 'events';
 import Image from 'next/image';
 import React from 'react'
 import { collapseFlow } from '../../store/slices/modulesSlices';
@@ -5,26 +6,30 @@ import { useDispatch } from '../../store/store';
 
 export interface Props {
     backgroundColor?:string,
-    placeholder?: string
+    placeholder?: string,
+    onChange: (value:string) => void,
 }
 
 export interface HeaderProps {
-    onAddPost: () => void
+    onAddPost: () => void,
+    onSearch: (searchValue: string) => void
 }
-const SearchInput: React.FC<Props> = ({backgroundColor='bg-black-dark', placeholder="Search user" }) => {
+const SearchInput: React.FC<Props> = ({backgroundColor='bg-black-dark', placeholder="Search user", onChange }) => {
     return (
         <div className={`${backgroundColor}  px-[8px] py-1 rounded-md flex items-center  gap-2 w-full`}>
             <div className='mt-1'>
             <Image src={'/assets/icons/search-input-icon.svg'}  width={20} height={20} alt="Search" />
             </div>
             <div>
-              <input type="text" placeholder={placeholder} className='text-white bg-transparent text-sm focus:outline-none' style={{}} />
+              <input type="text" placeholder={placeholder} className='text-white bg-transparent text-sm focus:outline-none' style={{}}
+               onChange={(e) => onChange(e.target.value)}
+              />
             </div>
         </div>
     )
 }
 
-const FlowHeader: React.FC<HeaderProps> = ({onAddPost}) => {
+const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
     const dispatch = useDispatch();
     
     const onCollapse = () => {
@@ -40,7 +45,11 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost}) => {
 
            <div className='flex w-[50%] gap-2 '>
            <div className='w-[75%]'>
-             <SearchInput backgroundColor='bg-black-light' placeholder="Search"/>
+             <SearchInput 
+             backgroundColor='bg-black-light' 
+             placeholder="Search" 
+             onChange={onSearch}
+              />
            </div>
            <div className='bg-black-light p-1  px-2 rounded-[10px] items-center flex  h-[35px]'>
              <Image src='/assets/icons/flash-icon.svg' alt="total posts" width={20} height={20} />

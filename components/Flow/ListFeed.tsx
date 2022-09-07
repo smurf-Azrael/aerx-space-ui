@@ -204,9 +204,10 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
 }
 
 
-const ListFeeds: React.FC = () => {
+const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [posts, setPosts] = useState<Array<Feed>>([]);
+    const [postsClone, setPostsClone] = useState<Array<Feed>>([]);
     const { feeds } = useSelector(selectPosts)
     const nearState: any = nearStore((state) => state);
     const dispatch = useDispatch();
@@ -284,7 +285,7 @@ const ListFeeds: React.FC = () => {
 
     useEffect(() => {
         if (feeds.length > 0) {
-            manipulateFeeds(feeds);
+            manipulateFeeds(feeds, false);
         }
     }, [feeds])
 
@@ -337,7 +338,7 @@ const ListFeeds: React.FC = () => {
     }
     /*  end of handle charging*/
 
-    const manipulateFeeds = async (feeds: Array<Feed>) => {
+    const manipulateFeeds = async (feeds: Array<Feed>, forClone:boolean) => {
         const newList = [...feeds].reverse();
         let manipulatedFeeds: Feed[] = [];
         let row = 1;
@@ -352,9 +353,30 @@ const ListFeeds: React.FC = () => {
             }
             row += 1;
             if (index === newList.length - 1) {
-                setPosts(manipulatedFeeds);
+                if(!forClone){
+                    setPosts(manipulatedFeeds);
+                    setPostsClone(manipulatedFeeds)
+                }
+                else{
+                    setPostsClone(manipulatedFeeds);
+                }
             }
         })
+    }
+
+    useEffect(() => {
+        handleSearchByPostTitle(searchKey);
+    },[searchKey])
+
+    const handleSearchByPostTitle = (searchKey: string) => {
+        if(searchKey === '' || searchKey === null || searchKey?.replace(/\s/g, "").length === 0){
+            setPostsClone(posts);
+            return;
+        }
+        const filteredPosts = postsClone.filter((post: Feed) => {
+            return post.metadata.title.toLowerCase().includes(searchKey.toLowerCase());
+        })
+        manipulateFeeds(filteredPosts, true);
     }
 
 
@@ -362,7 +384,7 @@ const ListFeeds: React.FC = () => {
         <>
             <Toaster />
             <div className='w-full  flex  flex-wrap gap-2 gap-y-3'>
-                {posts.map((post: Feed, index: number) => (
+                {postsClone.map((post: Feed, index: number) => (
                     <div key={index}
                         style={{
                             width: (post.type === 'text') ? '60%' :

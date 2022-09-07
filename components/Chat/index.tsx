@@ -21,7 +21,7 @@ export interface IMessageItem {
 
 
 
-const ChatHeader: React.FC = () => {
+const ChatHeader: React.FC<{onChange: (searchValue:string) => void}> = ({ onChange }) => {
     const [isPersonalActive, setIsPersonalActive] = useState<boolean>(true);
     return (
         <div className=''>
@@ -41,7 +41,7 @@ const ChatHeader: React.FC = () => {
                 </div>
             </div>
             <div className='mt-4'>
-                <SearchInput />
+                <SearchInput onChange={onChange} />
             </div>
         </div>
     )
@@ -81,6 +81,7 @@ const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, messa
 
 const Chat: React.FC = () => {
     const [chats, setChats] = useState<Array<IMessageItem>>([]);
+    const [chatsClone, setChatsClone] = useState<Array<IMessageItem>>([]);
 
 
     const [activeMessage, setActiveMessage] = useState<number>(0);
@@ -146,16 +147,21 @@ const Chat: React.FC = () => {
             }
             messageItems.push(messageItem);
         })
-        console.log("profiles ... ")
-        console.log(profiles)
-        console.log("message items ..")
-        console.log(messageItems);
         setChats(messageItems);
+        setChatsClone(messageItems);
     }
 
     const handleSetActiveMessage = async (index: number) => {
         setActiveMessage(index);
         initChat(nearState.accountId, chats[index].accountId);
+    }
+
+    const handleSearchName = async (searchValue: string) => {
+        if(searchValue === '' || searchValue === null || searchValue.replace(/\s/g, "").length === 0) {
+            return setChatsClone(chats);
+        } 
+        const filteredChats = chatsClone.filter((chat: IMessageItem) => chat.name.toLowerCase().includes(searchValue.toLowerCase()));
+        setChatsClone(filteredChats);
     }
 
     return (
@@ -166,7 +172,7 @@ const Chat: React.FC = () => {
                         width: (flow.collapsed) ? "30%" : ""
                     }}
                 >
-                    <ChatHeader />
+                    <ChatHeader onChange={handleSearchName}/>
 
                     <div className='h-[80%] '>
                         <div className='flex gap-2 mt-4'>
@@ -176,7 +182,7 @@ const Chat: React.FC = () => {
                             <label className='text-[14px] text-white opacity-[15%]'>All Charts</label>
                         </div>
                         <div className="bg-redd-500 h-full overflow-y-scroll">
-                            {chats.map((message, index) => (
+                            {chatsClone.map((message, index) => (
                                 <MessageItem onClick={() => handleSetActiveMessage(index)} key={index} {...message} isActive={activeMessage === index ? true : false} />
                             ))
                             }

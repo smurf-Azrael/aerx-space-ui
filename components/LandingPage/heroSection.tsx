@@ -20,7 +20,15 @@ const HeroSection: React.FC = () => {
   }
   return (
     
-      <Container maxWidth="container.xlg">
+      <Container maxWidth="container.xlg"
+      bgImage="url('../resources/Group 5420.png')"
+      bgRepeat="no-repeat"
+      bgPosition="center"
+      bgSize="100%"
+
+
+      
+      >
         <Flex
           alignItems="center"
           py="30"
@@ -41,7 +49,7 @@ const HeroSection: React.FC = () => {
         >
           {/* bgGradient="linear(to-l,12% #FFFFFF)" */}
           <Box   
-       
+       width={739}
           
           >
             <Heading

@@ -81,7 +81,7 @@ const WalletHead = (props) => {
       >
         Wallet
       </Text>
-      <Flex ml="16.44px" mt="10.96px" alignItems="center">
+      <Flex ml="16.44px" mt="2%" alignItems="center">
         <Text
           fontSize="16.44px"
           fontWeight="700"

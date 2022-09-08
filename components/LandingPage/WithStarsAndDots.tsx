@@ -14,7 +14,7 @@ const WithStarsAndDots = (props: Props) => {
     <Image src={"../resources/Ellipse 718.png"} position="absolute" w="36px" h="36px" top="250px" left="1380px" />
     <Image src={"../resources/Star 4.png"} position="absolute" w="34px" h="34px" top="140px" left="874px" />
     {/* <Image src={"../resources/Star 3.png"} position="absolute" w="58px" h="58px" top="336px" left="2px" /> */}
-    <Image src={"../resources/Star 2.png"} position="absolute" w="58px" h="58px" top="623px" left="1322px"   />
+    {/* <Image src={"../resources/Star 2.png"} position="absolute" w="58px" h="58px" top="623px" left="1322px"   /> */}
     <Image src={"../resources/Ellipse 71.png"} position="absolute" w="21px" h="21px" top="159px" left="30px"  />
     <Image src={"../resources/Ellipse 66.png"} position="absolute" w="20px" h="19px" top="619.23px" left="712.73px"  />
 

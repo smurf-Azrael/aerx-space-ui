@@ -61,7 +61,7 @@ function index() {
   />
   return (
 
-    <div h="100vh" bgColor="black">
+    <div className=" bg-[#242424] flex  h-[100vh] overflow-hidden ">
       <Collapse toggle={toggleClick} Toggle={isToggle} />
       {isToggle && (
         <div>

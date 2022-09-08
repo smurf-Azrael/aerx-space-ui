@@ -11,7 +11,7 @@ function Collapse(props) {
 
   return (
     <Flex
-      h="755.8px"
+      h="100%"
       w="41.1px"
       justifyItems="center"
       flexDirection="column"

@@ -8,7 +8,12 @@ const SectionTwo: React.FC = () => {
   const { saly3, saly4, fly1, fly2, fly3, star } = useSelector(getUserState);
   return (
     <Box>
-      <Container maxWidth="container.xlg">
+      <Container maxWidth="container.xlg"
+            bgImage="url('../resources/Group 5421.png')"
+            bgRepeat="no-repeat"
+            bgPosition="center"
+            bgSize="100%"
+      >
         <Flex
           marginRight="95px"
           marginLeft="95px"

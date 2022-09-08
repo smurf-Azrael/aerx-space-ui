@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Image, Text, Heading, Flex } from "@chakra-ui/react";
+import { Box, Image, Text, Heading, Flex,Button } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import { nearStore } from "../../store/near";
@@ -19,7 +19,7 @@ const ProfileSection = (props) => {
       bgImage={`url('${nearState.profile.profileImg}')`}
       bgRepeat="no-repeat"
       bgPosition="30 0"
-      bgSize="257.56px 325.29px"
+      bgSize="100% 100%"
       onDoubleClick={(e) => props.doubleClick(e)}
       // bgGradient=" linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))"
       cursor="pointer"
@@ -140,7 +140,7 @@ const ProfileSection = (props) => {
       <Flex flexDirection="column" alignItems="center" mx="auto" >
         <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
-        <Box mt="176.045px" >
+        <Box mt="185%" >
           <Heading
             fontSize="21.92px"
             color="#FFFFFF"
@@ -150,7 +150,7 @@ const ProfileSection = (props) => {
             lineHeight="100%"
             textAlign="center"
             letterSpacing="-0.02em"
-            mt="55px"
+            mt="25px"
           >
             {nearState.profile.fullName}
           </Heading>
@@ -211,9 +211,28 @@ const ProfileSection = (props) => {
       </Flex>
       {/* end */}
 
-      <Flex flexDirection="column" gap="21.92px" mr="14.385px" mt="21.92px">
+      <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px">
+        <Button 
+        bgColor="#5A5A5A"
+        p="4px"
+        borderRadius="8px"
+        >
         <Image src={frameP1} w="32.88px" h="32.88px" />
-        <Image src={frameP2} w="32.88px" h="32.88px" />
+        </Button>
+        <Button 
+        bgColor="#5A5A5A"
+        p="4px"
+        borderRadius="8px"
+        >
+        <Image src={frameP2} w="22.88px" h="22.88px" />
+        </Button>
+        <Button 
+        bgColor="#5A5A5A"
+        p="4px"
+        borderRadius="8px"
+        >
+        <Image src="../resources/Frame 14281.png" w="22.88px" h="22.88px" />
+        </Button>
       </Flex>
     </Flex>
 

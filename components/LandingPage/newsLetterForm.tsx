@@ -27,7 +27,12 @@ const NewsLetterForm: React.FC = () => {
     return (
     
     <Box className='form'>
-        <Container maxWidth="container.xlg" mt="209px">
+        <Container maxWidth="container.xlg" mt="209px"
+              bgImage="url('../resources/Group 5421.png')"
+              bgRepeat="no-repeat"
+              bgPosition="center"
+              bgSize="100%"
+        >
         <Flex display='flex' alignItems="center" py="30" flexDirection="row" marginRight='95px' marginLeft="95px"
          
         >

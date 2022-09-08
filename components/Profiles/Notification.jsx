@@ -23,7 +23,13 @@ import LogOut from "./LogOut";
 
 const Notification = (props) => {
   const nearState = nearStore((state) => state);
+  const [isLogout, setLogout] = React.useState(false);
+  const logOutUser = () => {
+    setLogout((prevState) => !prevState);
+  };
 
+  let zIndex;
+  isLogout ? (zIndex = 1) : (zIndex = -8);
 
   const dispatch = useDispatch();
   const {
@@ -47,6 +53,7 @@ const Notification = (props) => {
   } = useSelector(getUserState);
 
   return (
+    
     <Box
       position="absolute"
       bgColor="#303030;"
@@ -57,6 +64,8 @@ const Notification = (props) => {
       top="89%"
     
     >
+      <LogOut zIndex={zIndex} revert={logOutUser} />
+
       <Center>
          <div
         className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
@@ -117,7 +126,7 @@ const Notification = (props) => {
           borderRadius="100%"
           padding="5px"
           cursor="pointer"
-          onClick={props.logOutUser}
+          onClick={logOutUser}
         >
           <Image src={nearState.profile.profileImg} w="21.92px" h="21.92px" borderRadius="100%" />
         </Box>

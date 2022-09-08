@@ -106,7 +106,8 @@ function Index() {
     />
   );
   return (
-    <div id="profile" className=" bg-[black] flex  h-[100vh] overflow-hidden ">
+    <div id="profile" className=" bg-[#242424] flex  h-[100vh] overflow-hidden ">
+
       {isToggle && (
         <div>
           {!isOpenWallet ? (
@@ -160,7 +161,6 @@ function Index() {
         </div>
       )}
       {isCircle && <CircleList switched={switchCircle} />}
-      <LogOut zIndex={zIndex} revert={logOutUser} />
 
       {!isToggle && (
         <Collapse

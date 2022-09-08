@@ -14,7 +14,7 @@ function tokenWallet(props) {
     <Box
       w="257.56px"
       s
-      h="739.8px"
+      h="100vh"
       bgColor="#1f1f1f"
       // position="absolute"
       top="0"

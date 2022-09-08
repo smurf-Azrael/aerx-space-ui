@@ -13,17 +13,18 @@ function LogOut(props) {
   return (
 
     <Box
-      // position="absolute"
-      // top="284.275px"
-      // left="21.92px"
-      // bgColor="#191919"
-      // width="213.72px"
-      // height="147.96px"
-      // borderRadius="13.7px"
-      // zIndex="-6"
+      position="fixed"
+      top="284.275px"
+      left="21.92px"
+      bgColor="#191919"
+      width="213.72px"
+      height="147.96px"
+      borderRadius="13.7px"
+      zIndex={props.zIndex}
+      
 
     >
-      {/* <Image
+      <Image
         src="resources/Group 14018.png"
         w="11.645px"
         h="11.645px"
@@ -33,7 +34,8 @@ function LogOut(props) {
         cursor="pointer"
 
       />
-      <Flex flexDirection="column" alignItems="center">
+      <Flex flexDirection="column" alignItems="center"
+      >
         <Text
 
           fontWeight="500"
@@ -78,7 +80,7 @@ function LogOut(props) {
             >Yes</Text>
           </Flex>
         </Box>
-      </Flex> */}
+      </Flex>
     </Box>
 
   );

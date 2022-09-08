@@ -141,7 +141,7 @@ const NftValues = () => {
           <Image
             src={"resources/Rectangle 3421.png"}
             maxWidth="95.9px"
-            height="102.065px"
+            height="100%"
           />
         </Box>
 
@@ -185,7 +185,7 @@ const NftValues = () => {
           <Image
             src={"resources/Rectangle 3527.png"}
             maxWidth="95.9px"
-            height="102.065px"
+            height="100%"
           />
         </Box>
 
@@ -227,7 +227,7 @@ const NftValues = () => {
           <Image
             src={"resources/Rectangle 3421.png"}
             maxWidth="95.9px"
-            height="102.065px"
+            height="100%"
           />
         </Box>
       </Flex>

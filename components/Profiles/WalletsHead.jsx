@@ -43,7 +43,7 @@ const WalletHead = (props) => {
       borderTopRadius="34.25px"
       position="absolute"
       h="15%"
-      top="62%"
+      top="64%"
     
     >
     
@@ -81,7 +81,7 @@ const WalletHead = (props) => {
       >
         Wallet
       </Text>
-      <Flex ml="16.44px" mt="2%" alignItems="center">
+      <Flex ml="16.44px" mt="2%" alignItems="center" gap="32px">
         <Text
           fontSize="16.44px"
           fontWeight="700"
@@ -91,7 +91,7 @@ const WalletHead = (props) => {
         >
           {nearState.aexBalance} AEX
         </Text>
-        <Flex>
+        <Flex >
         <div
         className="cursor-pointer  hover:bg-[#ffffff39]
         background-#1F1F1F

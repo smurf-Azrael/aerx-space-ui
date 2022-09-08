@@ -47,7 +47,7 @@ const NftValues = () => {
       // borderTopRadius="34.25px"
       position="absolute"
       h="23%"
-      top="73%"
+      top="74%"
 
     >
       <Center>

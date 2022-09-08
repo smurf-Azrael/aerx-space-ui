@@ -60,8 +60,8 @@ const Notification = (props) => {
       width="257.56px"
       marginLeft="0"
       borderTopRadius="50px"
-      h="11%"
-      top="89%"
+      h="10%"
+      top="90%"
     
     >
       <LogOut zIndex={zIndex} revert={logOutUser} />

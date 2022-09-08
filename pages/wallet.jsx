@@ -1,5 +1,5 @@
 // import Pools from "../components/Pools";
-import LogOut from "../components/Profiles/LogOut"
+import Profile from "../components/Profiles/Profile"
 
 
 const WalletIndex = () => {
@@ -11,6 +11,7 @@ const WalletIndex = () => {
         <div>
             {/* <RecieveToken /> */}
             {/* <LogOut /> */}
+            <Profile/>
         </div>
 
     );

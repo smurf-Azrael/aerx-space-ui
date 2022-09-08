@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileSection from "./ProfileSection";
+import Profile from "./Profile";
 import ImagesCarousel from "./ImagesCarousel";
 import Notifications from "./Notification";
 import NftValues from "./NftValues";
@@ -112,12 +112,16 @@ function Index() {
         <div>
           {!isOpenWallet ? (
             <div>
-              {/* <NewProfile
+              <Profile
                 toggle={toggleClick}
                 doubleClick={doubleClick}
                 wallet={openWallet}
-              /> */}
-              <ProfileSection toggle={toggleClick} doubleClick={doubleClick}
+                removeCircle={removeCircle}
+                switch={switchCircle}
+                logOutUser={logOutUser} 
+              
+              />
+              {/* <ProfileSection toggle={toggleClick} doubleClick={doubleClick}
                 removeCircle={removeCircle}
               
               />
@@ -128,7 +132,7 @@ function Index() {
               />
               <WalletsHead wallet={openWallet} />
               <NftValues />
-              <Notifications logOutUser={logOutUser} />
+              <Notifications logOutUser={logOutUser} /> */}
               {/* <tokenWallet /> */}
             </div>
           ) : (

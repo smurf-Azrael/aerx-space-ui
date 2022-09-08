@@ -14,19 +14,22 @@ const ProfileSection = (props) => {
   const { ellipse3, logoP, frameP1, frameP2 } = useSelector(getUserState);
 
   return (
+    
     <Flex
       id=""
       bgImage={`url('${nearState.profile.profileImg}')`}
       bgRepeat="no-repeat"
       bgPosition="30 0"
-      bgSize="100% 92%"
+      // bgSize="contain"
       onDoubleClick={(e) => props.doubleClick(e)}
       // bgGradient=" linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))"
       cursor="pointer"
       bgColor="#191919;
       "
+        backgroundSize="100% 100%"
+
       w="257.56px"
-      height="45%"
+      height="150%"
       top="0"
       // position="absolute"
       zIndex="2"
@@ -140,7 +143,7 @@ const ProfileSection = (props) => {
       <Flex flexDirection="column" alignItems="center" mx="auto" >
         <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
-        <Box mt="185%" >
+        <Box  h="235px" >
           <Heading
             fontSize="21.92px"
             color="#FFFFFF"
@@ -212,27 +215,37 @@ const ProfileSection = (props) => {
       {/* end */}
 
       <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px">
-        <Button 
+      <Image src={frameP1} w="28.88px" h="28.88px" position="absolute" mt="2%" ml="1%" />
+        <Box 
+        bgColor="#5A5A5A"
+        p="1px"
+        borderRadius="8px"
+        opacity="15%"
+        w="34px"
+        h="34px"
+        >
+        </Box>
+        <Image src={frameP2} w="24.88px" h="24.88px"  position="absolute" mt="20%" ml="2%"/>
+        <Box 
         bgColor="#5A5A5A"
         p="4px"
         borderRadius="8px"
+        opacity="15%"
+        w="34px"
+        h="34px"
         >
-        <Image src={frameP1} w="32.88px" h="32.88px" />
-        </Button>
-        <Button 
+        </Box>
+        <Image src="../resources/Frame 14281.png" w="22.88px" h="22.88px" position="absolute" mt="37%" ml="2%" />
+        <Box 
         bgColor="#5A5A5A"
         p="4px"
         borderRadius="8px"
+        w="34px"
+        h="34px"
+        opacity="15%"
+
         >
-        <Image src={frameP2} w="22.88px" h="22.88px" />
-        </Button>
-        <Button 
-        bgColor="#5A5A5A"
-        p="4px"
-        borderRadius="8px"
-        >
-        <Image src="../resources/Frame 14281.png" w="22.88px" h="22.88px" />
-        </Button>
+        </Box>
       </Flex>
     </Flex>
 

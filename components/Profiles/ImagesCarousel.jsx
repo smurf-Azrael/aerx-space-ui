@@ -28,7 +28,7 @@ const ImagesCarousel = (props) => {
       width="257.56px"
       position="absolute"
       h="35%"
-      top="43.3%"
+      top="46%"
       borderRadius="50px 50px 0px 0px"
       
     >

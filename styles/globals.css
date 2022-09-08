@@ -53,34 +53,7 @@ a {
   }
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-
-
-.nft-container::-webkit-scrollbar-track {
-  background: #6054F0; 
-}
- 
-/* Handle */
-.nft-container::-webkit-scrollbar-thumb {
-  background: #6054F0; 
-}
-
-/* Handle on hover */
-.nft-container::-webkit-scrollbar-thumb:hover {
-  background: #6054F0; 
-}
 
 .topBar {
   align-items: center;
@@ -111,4 +84,27 @@ a {
   width: 100%;
   height: calc(100vh - 100px);
   /* color: #252525 */
+}
+
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  /* display: none; */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--lightestgrey); 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.174); 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.149); 
 }

@@ -77,7 +77,7 @@ const Flow: React.FC = () => {
 
         {!space.collapsed && (
           <div className="w-[18%] h-[94vh]">
-            <Space />
+            {/* <Space /> */}
           </div>
         )}
       </div>

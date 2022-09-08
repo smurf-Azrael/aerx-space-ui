@@ -11,7 +11,7 @@ function Collapse(props) {
 
   return (
     <Flex
-      h="100%"
+      h="100vh"
       w="41.1px"
       justifyItems="center"
       flexDirection="column"
@@ -67,7 +67,7 @@ function Collapse(props) {
       </Flex>
 
       <div
-        className="mb-[247.97px] color-[white]  rounded-[10.275px] cursor-pointer mx-auto  flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[67.13px] align-center"
+        className="mb-[450%] color-[white]  rounded-[10.275px] cursor-pointer mx-auto  flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[77.13px] align-center"
         onClick={props.toggle}
       >
         <Image

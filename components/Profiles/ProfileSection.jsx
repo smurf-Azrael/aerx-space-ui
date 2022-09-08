@@ -19,7 +19,7 @@ const ProfileSection = (props) => {
       bgImage={`url('${nearState.profile.profileImg}')`}
       bgRepeat="no-repeat"
       bgPosition="30 0"
-      bgSize="100% 100%"
+      bgSize="100% 92%"
       onDoubleClick={(e) => props.doubleClick(e)}
       // bgGradient=" linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))"
       cursor="pointer"

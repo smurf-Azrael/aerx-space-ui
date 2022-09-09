@@ -49,8 +49,8 @@ function Index() {
   isLogout ? (zIndex = 1) : (zIndex = -8);
 
   const switchCircle = () => {
-    setCircle((prevState) => !prevState);
-    setToggle((prevState) => !prevState);
+    setCircle((prevState) => prevState);
+    // setToggle((prevState) => !prevState);
   };
 
   const changeUpload = () => {
@@ -75,8 +75,11 @@ function Index() {
     // change toggle state
   };
   let index;
+  
   // isToggle  ? index= -1 : index=1
-  isCircle ? (index = -1) : (index = 1);
+  isCircle ? (index = 1) : (index = -1);
+  !isCircle ? (index = -1) : (index = 1);
+
 
   const doubleClick = (e) => {
     if (e.detail == 2) {
@@ -165,14 +168,26 @@ function Index() {
           )}
         </div>
       )}
-      {isCircle && <CircleList switched={switchCircle} />}
+      {isCircle ? <CircleList switched={switchCircle} /> :
+      
+      <Profile
+      toggle={toggleClick}
+      doubleClick={doubleClick}
+      wallet={openWallet}
+      removeCircle={removeCircle}
+      switch={switchCircle}
+      logOutUser={logOutUser} 
+    
+    />
+      }
 
-      {!isToggle && (
+      {isToggle && (
         <Collapsable
           toggle={toggleClick}
           Toggle={isToggle}
           circle={isCircle}
           index={index}
+          display={display}
         />
       )}
 

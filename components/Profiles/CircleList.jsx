@@ -3,6 +3,7 @@ import { Box, Text, Center, Flex, Image } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
 
 function CircleList(props) {
+  props.setter((prevState) => !prevState)
   
   return (
     <Box
@@ -11,6 +12,7 @@ function CircleList(props) {
       bgColor="#1f1f1f"
     //   position="absolute"
     //   top="0"
+    // zIndex="6"
       fontFamily="poppins"
     >
          

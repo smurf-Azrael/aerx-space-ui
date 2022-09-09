@@ -10,7 +10,7 @@ import {
   selectModules,
 } from "../../store/slices/modulesSlices";
 import { useDispatch, useSelector } from "../../store/store";
-import Index from "../../components/Profiles";
+import Index from "../../components/Profiles/index";
 import { Box } from "@chakra-ui/react";
 
 const Flow: React.FC = () => {

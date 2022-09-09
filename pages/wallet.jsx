@@ -1,5 +1,5 @@
 // import Pools from "../components/Pools";
-import Profile from "../components/Profiles/Profile"
+import Collapsable from "../components/Profiles/collapsable"
 
 
 const WalletIndex = () => {
@@ -11,7 +11,7 @@ const WalletIndex = () => {
         <div>
             {/* <RecieveToken /> */}
             {/* <LogOut /> */}
-            <Profile/>
+            <Collapsable />
         </div>
 
     );

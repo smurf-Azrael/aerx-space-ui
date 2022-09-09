@@ -14,19 +14,18 @@ import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import LogOut from "./LogOut";
 
-
 function Profile(props) {
   const nearState = nearStore((state) => state);
   const dispatch = useDispatch();
   const { ellipse4, ellipse5, ellipse3, logoP, frameP1, frameP2 } =
     useSelector(getUserState);
-    const [isLogout, setLogout] = React.useState(false);
-    const logOutUser = () => {
-      setLogout((prevState) => !prevState);
-    };
-  
-    let zIndex;
-    isLogout ? (zIndex = 1) : (zIndex = -8);
+  const [isLogout, setLogout] = React.useState(false);
+  const logOutUser = () => {
+    setLogout((prevState) => !prevState);
+  };
+
+  let zIndex;
+  isLogout ? (zIndex = 1) : (zIndex = -8);
 
   return (
     <Box h="100%" w="257.56px" bgColor="#191919" position="absolute">
@@ -39,38 +38,37 @@ function Profile(props) {
         backgroundSize="100% 100%"
         height="45%"
         width="100%"
-   
       >
-           <Flex
-        flexDirection="column"
-        gap="10.96px"
-        ml="16.44px"
-        mt="21.92px"
-        cursor="pointer"
-      >
-        <Box
-          color="#6054F0"
-          width="27.4px"
-          height="27.4px"
-          border="2px solid"
-        bgColor="#FFFFFF"
-        borderColor="#FFFFFF"
-          borderRadius="6.85px"
-          onClick={() => props.toggle()}
+        <Flex
+          flexDirection="column"
+          gap="10.96px"
+          ml="16.44px"
+          mt="21.92px"
+          cursor="pointer"
         >
-          <Image
-            src="../resources/Frame 14290.svg"
-            w="18px"
-            py="5px"
-            px="auto"
-            pl="4px"
-          />
-        </Box>
+          <Box
+            color="#6054F0"
+            width="27.4px"
+            height="27.4px"
+            border="2px solid"
+            bgColor="#FFFFFF"
+            borderColor="#FFFFFF"
+            borderRadius="6.85px"
+            onClick={() => props.toggle()}
+          >
+            <Image
+              src="../resources/Frame 14290.svg"
+              w="18px"
+              py="5px"
+              px="auto"
+              pl="4px"
+            />
+          </Box>
         </Flex>
         <Flex flexDirection="column" alignItems="center" mx="auto" gap="60%">
           <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
-          <Box h="235px" >
+          <Box h="235px">
             <Heading
               fontSize="21.92px"
               color="#FFFFFF"
@@ -81,6 +79,7 @@ function Profile(props) {
               textAlign="center"
               letterSpacing="-0.02em"
               mt="25px"
+              textTransform="capitalize"
             >
               {nearState.profile.fullName}
             </Heading>
@@ -120,7 +119,7 @@ function Profile(props) {
                   lineHeight="100%"
                   /* identical to box height, or 14px */
 
-                  letterSpacin="-0.02em"
+                  letterSpacing="-0.02em"
                 >
                   Aura: 2k
                 </Text>
@@ -137,72 +136,84 @@ function Profile(props) {
             </Flex>
           </Box>
         </Flex>
-        <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px" opacity="15%">
-      <Image src={frameP1} w="28.88px" h="28.88px" position="absolute" mt="2%" ml="1%" />
-        <Box 
-        bgColor="#5A5A5A"
-        p="1px"
-        borderRadius="8px"
-        opacity="15%"
-        w="34px"
-        h="34px"
-        >
-        </Box>
-        <Image src={frameP2} w="24.88px" h="24.88px"  position="absolute" mt="20%" ml="2%"/>
-        <Box 
-        bgColor="#5A5A5A"
-        p="4px"
-        borderRadius="8px"
-        opacity="15%"
-        w="34px"
-        h="34px"
-        >
-        </Box>
-        <Image src="../resources/Frame 14281.png" w="22.88px" h="22.88px" position="absolute" mt="37%" ml="2%" />
-        <Box 
-        bgColor="#5A5A5A"
-        p="4px"
-        borderRadius="8px"
-        w="34px"
-        h="34px"
-        opacity="15%"
+        <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px">
+          {/* first */}
+          <Image
+            src={frameP1}
+            w="28.88px"
+            h="28.88px"
+            position="absolute"
+            mt="1.5%"
+            ml="1%"
+          />
+          <Image
+            src="../resources/Squircle.png"
+            opacity="15%"
+            w="34px"
+            h="34px"
+          />
+          {/* second */}
+          <Image
+            src={frameP2}
+            w="24.88px"
+            h="24.88px"
+            position="absolute"
+            mt="19.5%"
+            ml="2%"
+          />
 
-        >
-        </Box>
-      </Flex>
+          <Image
+            src="../resources/Squircle.png"
+            opacity="15%"
+            w="34px"
+            h="34px"
+          />
+          {/* third*/}
+          <Image
+            src="../resources/Frame 14281.png"
+            w="22.88px"
+            h="22.88px"
+            position="absolute"
+            mt="37%"
+            ml="2%"
+          />
+          <Image
+            src="../resources/Squircle.png"
+            opacity="15%"
+            w="34px"
+            h="34px"
+          />
+        </Flex>
       </Flex>
       {/* profile */}
       {/* image carousel  */}
       <Flex
         bgColor="#1F1F1F"
         borderRadius="50px 50px 0px 0px"
-        height="15%"
+        height="21%"
         flexDirection="column"
-      
-
       >
         <Center>
-         <div
-              className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+          <div
+            className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
         mt-2
         "
-
-              onClick={props.switch}
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </div>
-            </Center>
+            onClick={props.switch}
+          >
+            <MinusIcon
+              w="21.92px"
+              bgColor="rgba(255, 255, 255, 0.3);"
+              height="2px"
+            />
+            <MinusIcon
+              w="21.92px"
+              bgColor="rgba(255, 255, 255, 0.3);"
+              height="2px"
+            />
+          </div>
+        </Center>
         <Text
           marginLeft="16.44px"
           marginTop="2%"
@@ -228,9 +239,9 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             width="auto"
-              onDoubleClick={(e) => props.doubleClick(e)}
+            onDoubleClick={(e) => props.doubleClick(e)}
             cursor="pointer"
-              onClick={props.remove}
+            onClick={props.remove}
           >
             <Image
               src={ellipse4}
@@ -254,8 +265,8 @@ function Profile(props) {
             alignItems="center"
             width="auto"
             cursor="pointer"
-              onDoubleClick={(e) => props.doubleClick(e)}
-              onClick={props.remove}
+            onDoubleClick={(e) => props.doubleClick(e)}
+            onClick={props.remove}
           >
             <Image
               src={ellipse5}
@@ -278,9 +289,9 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             width="auto"
-              onDoubleClick={(e) => props.doubleClick(e)}
+            onDoubleClick={(e) => props.doubleClick(e)}
             cursor="pointer"
-              onClick={props.remove}
+            onClick={props.remove}
           >
             <Image
               src={ellipse4}
@@ -302,9 +313,9 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             width="auto"
-              onDoubleClick={(e) => props.doubleClick(e)}
+            onDoubleClick={(e) => props.doubleClick(e)}
             cursor="pointer"
-              onClick={props.remove}
+            onClick={props.remove}
           >
             <Image
               src={ellipse4}
@@ -341,7 +352,6 @@ function Profile(props) {
         gap-0.5
         mt-2
         "
-
               onClick={props.wallet}
             >
               <MinusIcon
@@ -401,7 +411,7 @@ function Profile(props) {
         mr-[10.275px]
 
        "
-                   onClick={props.wallet}
+                onClick={props.wallet}
               >
                 <Image
                   src={"resources/Upload.png"}
@@ -419,7 +429,7 @@ function Profile(props) {
         mr-[10.275px]
 
        "
-                   onClick={props.wallet}
+                onClick={props.wallet}
               >
                 <Image
                   src={"resources/Frame 5556.png"}
@@ -437,7 +447,7 @@ function Profile(props) {
         mr-[10.275px]
 
        "
-                   onClick={props.wallet}
+                onClick={props.wallet}
               >
                 <Image
                   src={"resources/plant 1.png"}
@@ -673,7 +683,7 @@ function Profile(props) {
               borderRadius="100%"
               padding="5px"
               cursor="pointer"
-                onClick={logOutUser}
+              onClick={logOutUser}
             >
               <Image
                 src={nearState.profile.profileImg}

@@ -36,7 +36,7 @@ const Header: React.FC = () => {
 
     >
 
-      <Image src="../resources/aerx_logo-removebg-preview 1 (Traced) copy.svg" alt="logo" w="125px" h="47px" />
+      <Image src="../resources/aerx_logo-removebg-preview 1 (Traced) copy.svg" alt="logo" w="85.625px" h="32.195px" />
 
 
 

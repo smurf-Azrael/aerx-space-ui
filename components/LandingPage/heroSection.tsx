@@ -19,101 +19,134 @@ const HeroSection: React.FC = () => {
     console.log("welcome to arex");
   }
   return (
-    
-      <Container maxWidth="container.xlg" 
-      bgImage="url('../resources/Group 111.png') "
+    <Container
+      maxWidth="container.xlg"
+      // bgImage="url('../resources/Group 123.png') "
+      // bgRepeat="no-repeat"
+      // bgPosition="center"
+      // // bgGradient="linear(to-l, #7928CA, #FF0080)"
+      // height="100vh"
+      // bgSize="contain"
+      bgImage="url('../resources/Group 123.png') "
       bgRepeat="no-repeat"
-      bgPosition="center"
-      // bgGradient="linear(to-l, #7928CA, #FF0080)"
-      height="100vh"
-      bgSize="cover"
-      >
-        <Flex
-          alignItems="center"
-          py="30"
-          flexDirection="row"
-          marginRight="95px"
-          marginLeft="95px"
-          // bgImage="url('../resources/Ellipse 727.png'),  url('../resources/Ellipse 616.png') "
-          // bgRepeat="no-repeat"
-          // bgPosition="top right, center left"
-          // // bgGradient="linear(to-l, #7928CA, #FF0080)"
-          // height="80vh"
-          // bgSize="40%"
-          // bgColor="#16FF02"
-          // filter='blur(345px)'
-          // opacity="0.2px"
-        
-          
-        >
-          {/* bgGradient="linear(to-l,12% #FFFFFF)" */}
-          <Box   
-       
-          
-          >
-            <Heading
-              fontSize="76px"
-              lineHeight="114px"
-              fontWeight="600"
-              fontFamily="Poppins"
-              color="#322E65"
-            >
-              <Image src="resources\Welcome.png" />
-              {/* Welcome to Aerx */}
-            </Heading>
-            <Text
-              fontSize="24px"
-              fontStyle="italic"
-              fontWeight={300}
-              fontFamily="Poppins"
-              color="#322E65CC"
-              lineHeight="36px"
-            >
-                <Image src="resources\web3.png"  mt={3}/>
+      bgPosition="center top"
+      bgSize="contain"
+    >
+      <Flex
+        alignItems="center"
+        py="30"
+        flexDirection="row"
+        marginRight="95px"
+        marginLeft="95px"
+     
+        mt="-9%"
+        height="100vh"
 
-              {/* web3.0 media social platform */}
-            </Text>
-            <Text
-              fontSize="24px"
-              lineHeight="36px"
-              fontWeight="300"
-              mt="48px"
-              width={525}
-              color="#322E6580"
-            >
-              <Image src="resources\aerxcont.png" />
-              {/* Aerx is a web 3 social media platform with a <br /> fundamentally
+        // bgImage="url('../resources/Ellipse 727.png'),  url('../resources/Ellipse 616.png') "
+        // bgRepeat="no-repeat"
+        // bgPosition="top right, center left"
+        // // bgGradient="linear(to-l, #7928CA, #FF0080)"
+        // height="80vh"
+        // bgSize="40%"
+        // bgColor="#16FF02"
+        // filter='blur(345px)'
+        // opacity="0.2px"
+      >
+        {/* bgGradient="linear(to-l,12% #FFFFFF)" */}
+        <Box>
+          <Heading
+            fontSize="76px"
+            lineHeight="114px"
+            fontWeight="600"
+            fontFamily="Poppins"
+            color="#322E65"
+          >
+            <Image src="resources\Welcome.png" w="421.275px" ml="7%" />
+            {/* Welcome to Aerx */}
+          </Heading>
+          <Text
+            fontSize="24px"
+            fontStyle="italic"
+            fontWeight={300}
+            fontFamily="Poppins"
+            color="#322E65CC"
+            lineHeight="36px"
+          >
+            <Image src="resources\web3.png" w="243.175px" ml="7%" mt={3} />
+
+            {/* web3.0 media social platform */}
+          </Text>
+          <Text
+            fontSize="24px"
+            lineHeight="36px"
+            fontWeight="300"
+            mt="48px"
+            width={525}
+            color="#322E6580"
+          >
+            <Image
+              src="resources\aerxcont.png"
+              ml="7%"
+              w="367.16px"
+              h="73.98px"
+            />
+            {/* Aerx is a web 3 social media platform with a <br /> fundamentally
               new approach to <br />
               monetization of user content */}
-            </Text>
-            <Button
-              bgColor="#8D00FF"
-              className="button"
-              py="12px"
-              px="40px"
+          </Text>
+          <Box
+            bgColor="#8D00FF"
+            className="button"
+            fontFamily="Poppins"
+            borderRadius={50}
+            fontWeight="600"
+            color="white"
+            onClick={authentication}
+            mt="56px"
+            ml="7%"
+            cursor="pointer"
+            w="159.605px"
+            h="46.58"
+            // justifyContent="center"
+            pt="2%"
+            pl="32.88"
+          >
+            <Text
               fontFamily="Poppins"
-              borderRadius={50}
+              fontStyle="normal"
               fontWeight="600"
-              color="white"
-              onClick={authentication}
-              mt="56px"
+              fontSize="16.44px"
+              lineHeight="24.66px"
+              pt="auto"
+              color="#FFFFFF"
             >
               Get started
-            </Button>
+            </Text>
           </Box>
-          
-            <Box marginLeft="135px" marginTop="-125px" >
-              {/* <Image width="100" src="resources\Group 5401.png" className="group1-a" /> */}
-            </Box>
-          <Box>
-            <Image src="resources/saly-2.png" mt="-34px"/>
-            <Image width="100" src="resources\Group 5401.png" className="group1-a" mt="-234px" />
+        </Box>
 
-          </Box>
-        </Flex>
-      </Container>
-    
+        <Box marginLeft="135px" marginTop="-125px">
+          {/* <Image width="100" src="resources\Group 5401.png" className="group1-a" /> */}
+        </Box>
+        <Box ml="12%">
+          <Image
+            src="resources/saly-2.png"
+            mt="-8%"
+            w="358.255px"
+            h="390.45px"
+          />
+          <Image
+            width="100"
+            src="resources\Group 5401.png"
+            className="group1-a"
+            mt="-48%"
+            ml="1%"
+            w="108.23px"
+            h="108.23px"
+          />
+        </Box>
+      </Flex>
+    </Container>
   );
 };
 export default HeroSection;
-

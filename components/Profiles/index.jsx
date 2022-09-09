@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import ImagesCarousel from "./ImagesCarousel";
 import Notifications from "./Notification";
 import NftValues from "./NftValues";
-import Collapse from "./Collapse";
+import Collapsable from "./Collapsable";
 import FlowFeeds from "../Flow/index";
 import Circle from "./Circle";
 import ChatRoom from "../Chat/ChatRoom";
@@ -168,7 +168,7 @@ function Index() {
       {isCircle && <CircleList switched={switchCircle} />}
 
       {!isToggle && (
-        <Collapse
+        <Collapsable
           toggle={toggleClick}
           Toggle={isToggle}
           circle={isCircle}

@@ -15,7 +15,7 @@ const Index = () => {
 return (
   < Box overflow="hidden" maxWidth="1920px" bg="white"  bgGradient="linear(to-r11%,FFFFFF 11%)">
     {/* <Box boxSizing="border-box" position="absolute"  top="-383-px" left="811px" w="797px" h="797px" bgImage="url('../resources/Ellipse 727.png')"></Box> */}
-    {/* <WithStarsAndDots /> */}
+    <WithStarsAndDots />
    
     <Header />
     <HeroSection />

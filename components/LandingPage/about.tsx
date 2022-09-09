@@ -4,7 +4,8 @@ import {
   Heading,
   Center,
   Container,
-  Button
+  Button,
+  Box
 } from "@chakra-ui/react";
 import WithStar from "./WithStars";
 import WithDots from "./WithDots";
@@ -30,15 +31,15 @@ const About: React.FC = () => {
                      color="#322E65;"
                      mb="64px">
                {/* About project */}
-               <Image src='resources\About project.png' />
+               <Image src='resources\About project.png' w="277.425px" />
                 </Heading>  
             </Center>
             <Center>
-                <Button margin="auto" position="absolute" bgColor="#8D00FF;
+                <Box margin="auto" position="absolute" cursor="pointer" bgColor="#8D00FF;
 ">
-                    <Image src={polygon} />
-                </Button>
-                    <Image src={frame} width="1320px" height="633px"/>
+                    <Image src={polygon}/>
+                </Box>
+                    <Image src={frame} width="1120px" height="633px"/>
             </Center>
             </Container >
             

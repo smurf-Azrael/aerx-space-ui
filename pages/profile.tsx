@@ -1,4 +1,4 @@
-import Profiles from "../components/Profiles";
+import Profiles from "../components/Profiles/index";
 
 
 const Profile = () => {

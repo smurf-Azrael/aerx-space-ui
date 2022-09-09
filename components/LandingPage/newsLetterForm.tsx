@@ -28,7 +28,7 @@ const NewsLetterForm: React.FC = () => {
     
     <Box className='form'>
         <Container maxWidth="container.xlg" mt="209px"
-              bgImage="url('../resources/Group 5421.png')"
+              bgImage="url('../resources/Group 5419.png')"
               bgRepeat="no-repeat"
               bgPosition="center"
               bgSize="100%"

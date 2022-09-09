@@ -21,18 +21,47 @@ const HeroSection: React.FC = () => {
   return (
     <Container
       maxWidth="container.xlg"
-      // bgImage="url('../resources/Group 123.png') "
-      // bgRepeat="no-repeat"
-      // bgPosition="center"
-      // // bgGradient="linear(to-l, #7928CA, #FF0080)"
-      // height="100vh"
-      // bgSize="contain"
-      bgImage="url('../resources/Group 123.png') "
-      bgRepeat="no-repeat"
-      bgPosition="center top"
-      bgSize="contain"
+      
     >
-      <Flex
+     <Box w="1920" h="953"    bgImage="url('../resources/Frame 22415.png') "
+        bgRepeat="no-repeat"
+        bgPosition="center top"
+        bgSize="contain">
+     <Box
+            bgColor="#8D00FF"
+            className="button"
+            fontFamily="Poppins"
+            borderRadius={50}
+            fontWeight="600"
+            color="white"
+            onClick={authentication}
+            top="86%"
+            left="16%"
+            cursor="pointer"
+            w="159.605px"
+            h="46.58"
+            // justifyContent="center"
+            pt="13px"
+            pl="32.88"
+            position ="absolute"
+          >
+            <Text
+              fontFamily="Poppins"
+              fontStyle="normal"
+              fontWeight="600"
+              fontSize="16.44px"
+              lineHeight="24.66px"
+              pt="-8%"
+              color="#FFFFFF"
+            pl="2%"
+
+
+            >
+              Get started
+            </Text>
+          </Box>
+     </Box>
+     {/* <Flex
         alignItems="center"
         py="30"
         flexDirection="row"
@@ -42,19 +71,11 @@ const HeroSection: React.FC = () => {
         mt="-9%"
         height="100vh"
 
-        // bgImage="url('../resources/Ellipse 727.png'),  url('../resources/Ellipse 616.png') "
-        // bgRepeat="no-repeat"
-        // bgPosition="top right, center left"
-        // // bgGradient="linear(to-l, #7928CA, #FF0080)"
-        // height="80vh"
-        // bgSize="40%"
-        // bgColor="#16FF02"
-        // filter='blur(345px)'
-        // opacity="0.2px"
-      >
+    
+      > */}
         {/* bgGradient="linear(to-l,12% #FFFFFF)" */}
-        <Box>
-          <Heading
+        {/* <Box> */}
+          {/* <Heading
             fontSize="76px"
             lineHeight="114px"
             fontWeight="600"
@@ -62,9 +83,9 @@ const HeroSection: React.FC = () => {
             color="#322E65"
           >
             <Image src="resources\Welcome.png" w="421.275px" ml="7%" />
-            {/* Welcome to Aerx */}
-          </Heading>
-          <Text
+            Welcome to Aerx
+          </Heading> */}
+          {/* <Text
             fontSize="24px"
             fontStyle="italic"
             fontWeight={300}
@@ -74,27 +95,27 @@ const HeroSection: React.FC = () => {
           >
             <Image src="resources\web3.png" w="243.175px" ml="7%" mt={3} />
 
-            {/* web3.0 media social platform */}
-          </Text>
-          <Text
+         
+          </Text> */}
+          {/* <Text
             fontSize="24px"
             lineHeight="36px"
             fontWeight="300"
             mt="48px"
             width={525}
             color="#322E6580"
-          >
-            <Image
+          > */}
+            {/* <Image
               src="resources\aerxcont.png"
               ml="7%"
               w="367.16px"
               h="73.98px"
-            />
+            /> */}
             {/* Aerx is a web 3 social media platform with a <br /> fundamentally
               new approach to <br />
               monetization of user content */}
-          </Text>
-          <Box
+          {/* </Text> */}
+          {/* <Box
             bgColor="#8D00FF"
             className="button"
             fontFamily="Poppins"
@@ -123,12 +144,12 @@ const HeroSection: React.FC = () => {
               Get started
             </Text>
           </Box>
-        </Box>
+        </Box> */}
 
-        <Box marginLeft="135px" marginTop="-125px">
-          {/* <Image width="100" src="resources\Group 5401.png" className="group1-a" /> */}
-        </Box>
-        <Box ml="12%">
+        {/* <Box marginLeft="135px" marginTop="-125px">
+          <Image width="100" src="resources\Group 5401.png" className="group1-a" />
+        </Box> */}
+        {/* <Box ml="12%">
           <Image
             src="resources/saly-2.png"
             mt="-8%"
@@ -144,8 +165,8 @@ const HeroSection: React.FC = () => {
             w="108.23px"
             h="108.23px"
           />
-        </Box>
-      </Flex>
+        </Box> */}
+      {/* </Flex> */}
     </Container>
   );
 };

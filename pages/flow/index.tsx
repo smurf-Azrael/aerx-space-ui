@@ -33,15 +33,15 @@ const Flow: React.FC = () => {
  
 
     
-    <div className="w-full h-screen bg-black p-6 flow">
+    <div className="w-full h-screen bg-black p-6 flow ">
     
       <div className="flex justify-between">
       <Box top="0" left="0" position="absolute" zIndex="6"  >
     <Index />
-  </Box>
+  </Box >
         {!chat.collapsed && (
           <div
-            className="w-[39%] h-[94vh] ml-[20px]"
+            className="w-[39%] h-[94vh] ml-[20px] ]"
             style={{
               width: chat.minimized ? "19.5%" : flow.collapsed ? "75%" : "",
               marginLeft: chat.minimized ? "5%" : "",

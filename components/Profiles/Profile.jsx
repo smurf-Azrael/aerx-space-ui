@@ -39,6 +39,7 @@ function Profile(props) {
         backgroundSize="100% 100%"
         height="45%"
         width="100%"
+   
       >
            <Flex
         flexDirection="column"
@@ -66,7 +67,7 @@ function Profile(props) {
           />
         </Box>
         </Flex>
-        <Flex flexDirection="column" alignItems="center" mx="auto" gap="61%">
+        <Flex flexDirection="column" alignItems="center" mx="auto" gap="60%">
           <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
           <Box h="235px" >
@@ -136,7 +137,7 @@ function Profile(props) {
             </Flex>
           </Box>
         </Flex>
-        <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px">
+        <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px" opacity="15%">
       <Image src={frameP1} w="28.88px" h="28.88px" position="absolute" mt="2%" ml="1%" />
         <Box 
         bgColor="#5A5A5A"
@@ -365,7 +366,7 @@ function Profile(props) {
           >
             Wallet
           </Text>
-          <Flex ml="16.44px" mt="2%" alignItems="center" gap="32px">
+          <Flex ml="16.44px" alignItems="center" gap="32px">
             <Text
               fontSize="16.44px"
               fontWeight="700"

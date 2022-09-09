@@ -106,7 +106,8 @@ function Index() {
     />
   );
   return (
-    <div id="profile" className=" bg-[#242424] flex  h-[100vh] overflow-hidden ">
+      
+        <div id="profile" className=" bg-[#242424] flex  h-[100vh] overflow-hidden ">
 
       {isToggle && (
         <div>

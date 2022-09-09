@@ -23,11 +23,11 @@ function Collapse(props) {
     >
       <Flex
         flexDirection="column"
-        mb="139.21255px"
+        mb="169.21255px"
         justifyItems="center"
         alignItems="center"
       >
-        <Image src="../resources/æ.png"  w="21.92px" h="14.385px"mb="19.865px"/>
+        <Image src="../resources/æ.png"  w="21.92px" h="14.385px"mb="59.865px"/>
        
         {/* <Image src={"../resources/Frame 5449.png"} w="21.92px" mb="19.865px" /> */}
         {/* <Text fontFamily="Open Sans" fontWeight="800" color="white" w="21.92px" h="21px">æ</Text> */}
@@ -67,7 +67,7 @@ function Collapse(props) {
       </Flex>
 
       <div
-        className="mb-[450%] color-[white]  rounded-[10.275px] cursor-pointer mx-auto  flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[77.13px] align-center"
+        className=" color-[white]  rounded-[10.275px] cursor-pointer mx-auto  flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[77.13px] "
         onClick={props.toggle}
       >
         <Image
@@ -83,7 +83,7 @@ function Collapse(props) {
           /> */}
       </div>
 
-      <Flex flexDirection="column" gap="10.96px" alignItems="center" mt="42px">
+      <Flex flexDirection="column" gap="10.96px" alignItems="center" mt="451%">
         <Box
           border="1px solid rgba(255, 255, 255, 0.1)"
           borderRadius="100%"

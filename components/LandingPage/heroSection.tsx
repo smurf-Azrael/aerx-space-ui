@@ -20,14 +20,13 @@ const HeroSection: React.FC = () => {
   }
   return (
     
-      <Container maxWidth="container.xlg"
-      bgImage="url('../resources/Group 5420.png')"
+      <Container maxWidth="container.xlg" 
+      bgImage="url('../resources/Group 111.png') "
       bgRepeat="no-repeat"
       bgPosition="center"
-      bgSize="100%"
-
-
-      
+      // bgGradient="linear(to-l, #7928CA, #FF0080)"
+      height="100vh"
+      bgSize="cover"
       >
         <Flex
           alignItems="center"
@@ -35,12 +34,12 @@ const HeroSection: React.FC = () => {
           flexDirection="row"
           marginRight="95px"
           marginLeft="95px"
-          bgImage="url('../resources/Ellipse 727.png'),  url('../resources/Ellipse 616.png') "
-          bgRepeat="no-repeat"
-          bgPosition="top right, center left"
-          // bgGradient="linear(to-l, #7928CA, #FF0080)"
-          height="80vh"
-          bgSize="40%"
+          // bgImage="url('../resources/Ellipse 727.png'),  url('../resources/Ellipse 616.png') "
+          // bgRepeat="no-repeat"
+          // bgPosition="top right, center left"
+          // // bgGradient="linear(to-l, #7928CA, #FF0080)"
+          // height="80vh"
+          // bgSize="40%"
           // bgColor="#16FF02"
           // filter='blur(345px)'
           // opacity="0.2px"
@@ -49,7 +48,7 @@ const HeroSection: React.FC = () => {
         >
           {/* bgGradient="linear(to-l,12% #FFFFFF)" */}
           <Box   
-       width={739}
+       
           
           >
             <Heading
@@ -107,8 +106,8 @@ const HeroSection: React.FC = () => {
               {/* <Image width="100" src="resources\Group 5401.png" className="group1-a" /> */}
             </Box>
           <Box>
-            <Image src="resources/saly-1.png" />
-            <Image width="100" src="resources\Group 5401.png" className="group1-a" mt="-286px" />
+            <Image src="resources/saly-2.png" mt="-34px"/>
+            <Image width="100" src="resources\Group 5401.png" className="group1-a" mt="-234px" />
 
           </Box>
         </Flex>

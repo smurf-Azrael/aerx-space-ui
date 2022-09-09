@@ -9,7 +9,7 @@ const SectionTwo: React.FC = () => {
   return (
     <Box>
       <Container maxWidth="container.xlg"
-            bgImage="url('../resources/Group 5421.png')"
+            bgImage="url('../resources/Group 5418.png')"
             bgRepeat="no-repeat"
             bgPosition="center"
             bgSize="100%"

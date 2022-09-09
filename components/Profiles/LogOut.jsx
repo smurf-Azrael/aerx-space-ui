@@ -11,6 +11,7 @@ function LogOut(props) {
 
   }
   return (
+    <Box h="100%"  bgColor="#191919" position="absolute">
 
     <Box
       position="fixed"
@@ -81,6 +82,7 @@ function LogOut(props) {
           </Flex>
         </Box>
       </Flex>
+    </Box>
     </Box>
 
   );

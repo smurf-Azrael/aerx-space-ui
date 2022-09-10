@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import LogOut from "./LogOut";
 import CircleList from "./CircleList";
+import Circle from "./Circle";
 
 
 function Profile(props) {
@@ -27,7 +28,9 @@ function Profile(props) {
   };
 
   let zIndex;
+  let backdrop;
   isLogout ? (zIndex = 1) : (zIndex = -8);
+  isLogout ? (backdrop = 1) : (backdrop=-1)
   const [circ,setCirc] = React.useState(false)
   const remCirc = () => {
     setCirc((prevState) => !prevState)
@@ -38,17 +41,26 @@ function Profile(props) {
   props.shadow ? disabled=true : disabled=false
 //   props.shadow ? opacity=`` : opacity="none"
 const mouseDown= (e) => {
-    props.doubleClick(e)
-    console.log('okkky')
+    return(
+
+  <Circle/>
+  )
 }
 
 
   return (
     
     circ ? <CircleList  remove={remCirc} /> :
+<Flex 
+  
 
-    <Box h="100%" w="257.56px" bgColor="#191919" position="absolute" 
-    
+>
+
+    <Box  bgColor="#191919" position="absolute" 
+    h="100%" w="257.56px"
+   
+     
+
     >
       {/* profile */}
       <Flex
@@ -648,8 +660,8 @@ const mouseDown= (e) => {
           h="10%"
           top="90%"
         >
-          <LogOut zIndex={zIndex} revert={setLogout} log={isLogout}  />
-
+   
+          
           <Center>
             <div
               className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
@@ -741,7 +753,17 @@ const mouseDown= (e) => {
       {/* end of wallet head */}
 
       {/* end */}
+
     </Box>
+<Flex h="100%" position="fixed" zIndex={backdrop}
+ w="282.905px" bg="#000000B2"
+>
+.
+</Flex>
+    <LogOut zIndex={zIndex} revert={setLogout} log={isLogout}    />
+
+    </Flex>
+
   );
 }
 

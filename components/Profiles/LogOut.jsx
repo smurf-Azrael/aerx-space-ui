@@ -24,17 +24,7 @@ function LogOut(props) {
   let index = props.log ? 4 : "none";
   let width = props.log ? 655 : "none";
   return (
-<Flex
-//  bgColor="#000000B2"
-//  width="257.56px"
-//  height="100%"
 
-//  position="fixed"
-//  zIndex="1"
-//  top="0"
-
-
->
     <Box
       position="fixed"
       top="284.275px"
@@ -44,6 +34,7 @@ function LogOut(props) {
       height="147.96px"
       borderRadius="13.7px"
       zIndex={props.zIndex}
+     
     >
     
       <Flex  
@@ -113,7 +104,7 @@ function LogOut(props) {
           </Box>
         </Flex>
         </Box>
-        </Flex>
+      
   );
 }
 

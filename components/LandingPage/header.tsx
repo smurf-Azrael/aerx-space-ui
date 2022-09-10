@@ -32,7 +32,7 @@ const Header: React.FC = () => {
       overflow="hidden"
       marginInline="150px"
       mt={6}
-      mb="60px"
+      // mb="60px"
 
     >
 

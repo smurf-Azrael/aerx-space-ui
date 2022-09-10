@@ -36,7 +36,7 @@ const HeroSection: React.FC = () => {
             fontWeight="600"
             color="white"
             onClick={authentication}
-            top="86%"
+            top="75%"
             left="16%"
             cursor="pointer"
             w="159.605px"

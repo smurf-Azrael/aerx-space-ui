@@ -54,22 +54,22 @@ const Flow: React.FC = () => {
         {!flow.collapsed && (
           <div
             className=" w-[39%] h-[94vh] overflow-y-scroll"
-            style={{
-              width:
-                chat.minimized && !space.collapsed
-                  ? "55%"
-                  : chat.collapsed && !space.collapsed
-                  ? "75%"
-                  : space.collapsed && chat.minimized
-                  ? "73%"
-                  : space.collapsed && chat.default
-                  ? "58%"
-                  : space.collapsed && chat.collapsed
-                  ? "95%"
-                  : "",
-              padding: space.collapsed && chat.collapsed ? "0% 10%" : "",
-              marginLeft: chat.collapsed ? "5%" : "",
-            }}
+            // style={{
+            //   width:
+            //     chat.minimized && !space.collapsed
+            //       ? "55%"
+            //       : chat.collapsed && !space.collapsed
+            //       ? "75%"
+            //       : space.collapsed && chat.minimized
+            //       ? "73%"
+            //       : space.collapsed && chat.default
+            //       ? "58%"
+            //       : space.collapsed && chat.collapsed
+            //       ? "95%"
+            //       : "",
+            //   padding: space.collapsed && chat.collapsed ? "0% 10%" : "",
+            //   marginLeft: chat.collapsed ? "5%" : "",
+            // }}
           >
             <FlowFeeds />
           </div>

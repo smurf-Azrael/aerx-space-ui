@@ -4,10 +4,10 @@ export type Message = {
     id: string,
     sender: {
         id: string,
-        name: string,
-        avatar: string,
+        name?: string,
+        avatar?: string,
     },
-    recipient: {
+    recipient?: {
         id: string,
         name: string,
         avatar: string,

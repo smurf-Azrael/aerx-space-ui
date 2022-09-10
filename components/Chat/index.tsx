@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
-import { initChat } from '../../lib/aerxChat';
+import { getChat, initChat } from '../../lib/aerxChat';
 import { nearStore } from '../../store/near';
+import { setDirectMessages } from '../../store/slices/messagesSlice';
 import { selectModules } from '../../store/slices/modulesSlices';
-import { useSelector } from '../../store/store';
+import { setActiveReceiver } from '../../store/slices/receiverSlice';
+import { useDispatch, useSelector } from '../../store/store';
 import { Feed, Post } from '../../types/Post';
 import SearchInput from '../SearchInput';
 import ChatRoom from './ChatRoom';
@@ -80,6 +82,7 @@ const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, messa
 }
 
 const Chat: React.FC = () => {
+    const dispatch = useDispatch();
     const [chats, setChats] = useState<Array<IMessageItem>>([]);
     const [chatsClone, setChatsClone] = useState<Array<IMessageItem>>([]);
 
@@ -153,7 +156,11 @@ const Chat: React.FC = () => {
 
     const handleSetActiveMessage = async (index: number) => {
         setActiveMessage(index);
-        initChat(nearState.accountId, chats[index].accountId);
+        dispatch(setActiveReceiver(chats[index].accountId));
+        const messagesExists = await getChat(nearState.accountId, chats[index].accountId, dispatch);
+        console.log("chats exists .....")
+        console.log(messagesExists)
+        // initChat(nearState.accountId, chats[index].accountId);
     }
 
     const handleSearchName = async (searchValue: string) => {
@@ -204,10 +211,10 @@ const Chat: React.FC = () => {
                 </div>
             }
             <div className='w-[55%]'
-                style={{
-                    width: (chat.minimized) ? "100%" :
-                        (flow.collapsed) ? "70%" : "",
-                }}
+                // style={{
+                //     width: (chat.minimized) ? "100%" :
+                //         (flow.collapsed) ? "70%" : "",
+                // }}
             >
                 <ChatRoom activeMessage={chats[activeMessage]} />
             </div>

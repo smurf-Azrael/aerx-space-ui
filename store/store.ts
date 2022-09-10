@@ -7,6 +7,8 @@ import {
 import modulesSlice from "./slices/modulesSlices";
 import postsSlice from "./slices/postsSlice";
 import chargePostEventsSlice from "./slices/chargePostEventsSlice";
+import messagesSlice from "./slices/messagesSlice";
+import activeReceiverSlice  from "./slices/receiverSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     modules: modulesSlice,
     posts: postsSlice,
     chargePostEvents: chargePostEventsSlice,
+    messages: messagesSlice,
+    activeReceiver: activeReceiverSlice
   },
 });
 

@@ -3,7 +3,7 @@ import { Box, Text, Center, Flex, Image } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
 
 function CircleList(props) {
-  props.setter((prevState) => !prevState)
+  
   
   return (
     <Box
@@ -24,7 +24,7 @@ function CircleList(props) {
         mt-2
         "
         
-        onClick={props.switched}
+        onClick={props.remove}
       >
         <MinusIcon
             w="21.92px"

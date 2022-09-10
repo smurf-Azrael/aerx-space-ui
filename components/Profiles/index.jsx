@@ -26,7 +26,7 @@ import LogOut from "./LogOut";
 
 function Index() {
   const [isToggle, setToggle] = useState(false);
-  const [doubleclicked, setDoubleClicked] = useState(false);
+  const [doubleClicked, setDoubleClicked] = useState(false);
   const [isOpenWallet, setOpenWallet] = useState(false);
 
   const [isUpload, setUpload] = React.useState(false);
@@ -41,6 +41,11 @@ function Index() {
   const [isCircle, setCircle] = React.useState(false);
 
   const [isLogout, setLogout] = React.useState(false);
+
+
+
+
+
   const logOutUser = () => {
     setLogout((prevState) => !prevState);
   };
@@ -49,8 +54,7 @@ function Index() {
   isLogout ? (zIndex = 1) : (zIndex = -8);
 
   const switchCircle = () => {
-    setCircle((prevState) => prevState);
-    // setToggle((prevState) => !prevState);
+    setCircle((prevState) => !prevState);
   };
 
   const changeUpload = () => {
@@ -78,12 +82,12 @@ function Index() {
   
   // isToggle  ? index= -1 : index=1
   isCircle ? (index = 1) : (index = -1);
-  !isCircle ? (index = -1) : (index = 1);
 
 
   const doubleClick = (e) => {
     if (e.detail == 2) {
       setDoubleClicked((prevState) => !prevState);
+   
     }
   };
   const removeCircle = (e) => {
@@ -123,6 +127,11 @@ function Index() {
                 removeCircle={removeCircle}
                 switch={switchCircle}
                 logOutUser={logOutUser} 
+                shadow={doubleClicked}
+                m={setDoubleClicked}
+          
+              
+
               
               />
               {/* <ProfileSection toggle={toggleClick} doubleClick={doubleClick}
@@ -168,30 +177,19 @@ function Index() {
           )}
         </div>
       )}
-      {isCircle ? <CircleList switched={switchCircle} /> :
-      
-      <Profile
-      toggle={toggleClick}
-      doubleClick={doubleClick}
-      wallet={openWallet}
-      removeCircle={removeCircle}
-      switch={switchCircle}
-      logOutUser={logOutUser} 
-    
-    />
-      }
+      {/* {!isCircle && <CircleList switched={switchCircle} />} */}
 
-      {isToggle && (
+      {!isToggle && (
         <Collapsable
           toggle={toggleClick}
           Toggle={isToggle}
           circle={isCircle}
           index={index}
-          display={display}
+     
         />
       )}
 
-      <Circle circle={doubleclicked} remove={removeCircle} />
+      {doubleClicked && <Circle circle={doubleClicked} remove={removeCircle}  />}
     </div>
   );
 }

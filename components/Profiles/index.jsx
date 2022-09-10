@@ -149,7 +149,7 @@ function Index() {
               {/* <tokenWallet /> */}
             </div>
           ) : (
-            <div>
+            <div className=" h-[100vh]">
               {wallet}
               {isExchange && (
                 <ExchangeToken

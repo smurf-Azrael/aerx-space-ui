@@ -45,7 +45,7 @@ const mouseDown= (e) => {
 
   return (
     
-    circ ? <CircleList  remove={remCirc}/> :
+    circ ? <CircleList  remove={remCirc} /> :
 
     <Box h="100%" w="257.56px" bgColor="#191919" position="absolute" 
     
@@ -247,7 +247,7 @@ const mouseDown= (e) => {
           fontWeight="500"
           fontSize="10.96px"
           color="rgba(255, 255, 255, 0.3);"
-          // height={21}
+          height={21}
           fontFamily="Poppins"
           overflow="hidden"
         >
@@ -393,6 +393,7 @@ const mouseDown= (e) => {
               />
             </div>
           </Center>
+          <Flex flexDirection="column">
           <Text
             marginLeft="16.44px"
             marginTop="8.22px"
@@ -403,13 +404,15 @@ const mouseDown= (e) => {
           >
             Wallet
           </Text>
-          <Flex ml="16.44px" alignItems="center" gap="32px">
+          <Flex  gap="12%" justifyContent="space-between" mt="2%" alignItems="center">
             <Text
+            marginLeft="16.44px"
+
               fontSize="16.44px"
               fontWeight="700"
               color="#ffffff"
               fontFamily="Poppins"
-              mr="30.14px"
+            //   mr="30.14px"
             >
               {nearState.aexBalance} AEX
             </Text>
@@ -486,6 +489,7 @@ const mouseDown= (e) => {
               </div>
             </Flex>
           </Flex>
+          </Flex>
         </Box>
         <Box
           bgColor="#242424"
@@ -545,7 +549,7 @@ const mouseDown= (e) => {
             </Box>
 
             <Box marginRight="16px" position="relative">
-              <Flex position="absolute" left="30.825px" top="28.77px">
+              <Flex position="absolute" left="22.825px" top="28.77px">
                 <Image src={"resources/Fill 1.png"} w="13.7px" h="12.33px" />
                 <Text
                   fontWeight="400"
@@ -644,7 +648,7 @@ const mouseDown= (e) => {
           h="10%"
           top="90%"
         >
-          <LogOut zIndex={zIndex} revert={logOutUser} log={isLogout} />
+          <LogOut zIndex={zIndex} revert={setLogout} log={isLogout}  />
 
           <Center>
             <div

@@ -3,7 +3,7 @@ import React from 'react'
 function RecievedToken() {
   return (
  <Box 
- height="739.8px"
+ height="100%"
  w="257.56px"
  bgColor="#1f1f1f"
  position="absolute"

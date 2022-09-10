@@ -50,8 +50,7 @@ function Exchange(props) {
   const minimumAex = calculatedAexOutput - calcDifferenceAex;
   const minimumNear = calculatedNearOutput - calcDifferenceNear;
 
-  console.log(minimumAex)
-
+ 
   let color1 = "#FFFFFF4D;";
   let color2 = "#FFFFFF4D;";
   let color3 = "#FFFFFF4D;";
@@ -67,7 +66,7 @@ function Exchange(props) {
 
   return (
     <Box
-      height="739.8px"
+      height="100%"
       w="257.56px"
       bgColor="#1f1f1f"
       position="absolute"

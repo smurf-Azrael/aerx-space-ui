@@ -11,6 +11,8 @@ function collapsable(props) {
       flexDirection="column"
       gap="10%"
       zIndex={props.index}
+      justifyContent="space-between"
+      alignItems="center"
 
 
     >
@@ -18,7 +20,7 @@ function collapsable(props) {
         flexDirection="column"
         gap="19.865px"
         alignItems="center"
-        justifyContent="center"
+        
       >
         <Image src="../resources/æ.png" mt="65%" w="21.92px" h="14.385px" />
         <Image

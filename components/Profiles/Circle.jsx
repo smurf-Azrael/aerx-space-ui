@@ -9,24 +9,37 @@ const Circle = (props) => {
   const nearState = nearStore((state) => state);
 
   let display = props.circle ? "block" : "none"
+  let index = props.circle ? 1 : "none"
+  let width = props.circle ? 655 : "none"
   
 
 
  
 
   return (
+    <Box 
+    w={width}
+    bg="#000000B2;
+    "
+    // opacity="15%"
+    zIndex={index}
+    
+    >
     <Box
+ 
+
       w="282.905px"
       h="467.17px"
-      position="absolute"
+      position="fixed"
       borderRadius="20px"
       bgColor="#191919"
       top="108.915"
       left="102.75px"
       px="auto"
-      // zIndex="-4"
+      // zIndex="1"
       className="circleModal"
       display={display}
+     
     >
       <Flex position="absolute" flexDirection="column" gap="20.42px" ml="19.18px" mt="16.44px" zIndex='2' onDoubleClick={(e) => props.onDoubleClick(e)}>
         {/* <Box
@@ -248,6 +261,8 @@ const Circle = (props) => {
         </Button>
       </Flex>
       </ Center>
+    </Box>
+
     </Box>
   );
 };

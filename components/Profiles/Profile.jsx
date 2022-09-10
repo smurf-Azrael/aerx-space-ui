@@ -13,6 +13,8 @@ import { MinusIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import LogOut from "./LogOut";
+import CircleList from "./CircleList";
+
 
 function Profile(props) {
   const nearState = nearStore((state) => state);
@@ -26,9 +28,28 @@ function Profile(props) {
 
   let zIndex;
   isLogout ? (zIndex = 1) : (zIndex = -8);
+  const [circ,setCirc] = React.useState(false)
+  const remCirc = () => {
+    setCirc((prevState) => !prevState)
+  }
+  let disabled
+  let opacity
+
+  props.shadow ? disabled=true : disabled=false
+//   props.shadow ? opacity=`` : opacity="none"
+const mouseDown= (e) => {
+    props.doubleClick(e)
+    console.log('okkky')
+}
+
 
   return (
-    <Box h="100%" w="257.56px" bgColor="#191919" position="absolute">
+    
+    circ ? <CircleList  remove={remCirc}/> :
+
+    <Box h="100%" w="257.56px" bgColor="#191919" position="absolute" 
+    
+    >
       {/* profile */}
       <Flex
         bgImage={`url('${nearState.profile.profileImg}')`}
@@ -38,6 +59,12 @@ function Profile(props) {
         backgroundSize="100% 100%"
         height="45%"
         width="100%"
+        
+      onMouseDown={(e) => props.doubleClick(e)}
+
+      onDoubleClick={(e) => props.doubleClick(e)}
+      cursor="pointer"
+
       >
         <Flex
           flexDirection="column"
@@ -200,7 +227,7 @@ function Profile(props) {
         gap-0.5
         mt-2
         "
-            onClick={props.switch}
+            onClick={remCirc}
           >
             <MinusIcon
               w="21.92px"
@@ -617,7 +644,7 @@ function Profile(props) {
           h="10%"
           top="90%"
         >
-          <LogOut zIndex={zIndex} revert={logOutUser} />
+          <LogOut zIndex={zIndex} revert={logOutUser} log={isLogout} />
 
           <Center>
             <div

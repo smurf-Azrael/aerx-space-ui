@@ -21,7 +21,7 @@ const SectionOne: React.FC = () => {
         <Box>
             {/* <Container maxWidth="container.xlg"  > */}
             
-            <Flex   marginTop="239px" 
+            <Flex    
              bgImage="url('../resources/Group 5392.png')"
              bgRepeat="no-repeat"
              bgPosition="center left"

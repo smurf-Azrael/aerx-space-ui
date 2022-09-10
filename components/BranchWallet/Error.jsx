@@ -3,7 +3,7 @@ import {Box, Text, Center, Image, Button} from '@chakra-ui/react'
 
 function Error() {
   return (
-    <Box w="257.56px" h="739.8px" bgColor="#1F1F1F" position="absolute" top="0">
+    <Box w="257.56px" h="100%" bgColor="#1F1F1F" position="absolute" top="0">
         <Center>
           <Box
             w="21.92px"

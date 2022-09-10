@@ -11,6 +11,8 @@ const Circle = (props) => {
   let display = props.circle ? "block" : "none"
   let index = props.circle ? 1 : "none"
   let width = props.circle ? 655 : "none"
+
+
   
 
 
@@ -148,6 +150,8 @@ const Circle = (props) => {
           fontWeight="400px"
           letterSpacing="-0.02em"
           mb="9.59px"
+          textTransform="capitalize"
+
         >
           {nearState.profile.username}
         </Text>

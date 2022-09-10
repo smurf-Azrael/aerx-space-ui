@@ -17,6 +17,9 @@ function LogOut(props) {
     console.log("Yes on logout button clicked");
     logout(nearState);
   };
+  const setLogout = () => {
+    props.revert((prevState) => !prevState)
+  }
 
   let index = props.log ? 4 : "none";
   let width = props.log ? 655 : "none";
@@ -31,16 +34,24 @@ function LogOut(props) {
       height="147.96px"
       borderRadius="13.7px"
       zIndex={props.zIndex}
+     
     >
+    
+      <Flex  
+         cursor="pointer"
+      >
         <Image
           src="resources/Group 14018.png"
           w="11.645px"
           h="11.645px"
           ml="190.44px"
           mt="15.08px"
-          onClick={props.revert}
-          cursor="pointer"
+          onClick={() => props.revert()}
+
+
+       
         />
+        </Flex>
         <Flex flexDirection="column" alignItems="center">
           <Text
             fontWeight="500"
@@ -76,7 +87,7 @@ function LogOut(props) {
               pt="8.7px"
               gap="6.85"
               alignItems="center"
-              onClick={handleLogout}
+              onClick={() => handleLogout()}
             >
               <Image src={"../resources/Logout.png"} w="9.59px" h="13.7px" />
               <Text
@@ -92,9 +103,8 @@ function LogOut(props) {
             </Flex>
           </Box>
         </Flex>
-        
-
-    </Box>
+        </Box>
+      
   );
 }
 

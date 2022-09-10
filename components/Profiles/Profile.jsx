@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import LogOut from "./LogOut";
 import CircleList from "./CircleList";
+import Circle from "./Circle";
 
 
 function Profile(props) {
@@ -27,7 +28,9 @@ function Profile(props) {
   };
 
   let zIndex;
+  let backdrop;
   isLogout ? (zIndex = 1) : (zIndex = -8);
+  isLogout ? (backdrop = 1) : (backdrop=-1)
   const [circ,setCirc] = React.useState(false)
   const remCirc = () => {
     setCirc((prevState) => !prevState)
@@ -38,17 +41,26 @@ function Profile(props) {
   props.shadow ? disabled=true : disabled=false
 //   props.shadow ? opacity=`` : opacity="none"
 const mouseDown= (e) => {
-    props.doubleClick(e)
-    console.log('okkky')
+    return(
+
+  <Circle/>
+  )
 }
 
 
   return (
     
-    circ ? <CircleList  remove={remCirc}/> :
+    circ ? <CircleList  remove={remCirc} /> :
+<Flex 
+  
 
-    <Box h="100%" w="257.56px" bgColor="#191919" position="absolute" 
-    
+>
+
+    <Box  bgColor="#191919" position="absolute" 
+    h="100%" w="257.56px"
+   
+     
+
     >
       {/* profile */}
       <Flex
@@ -247,7 +259,7 @@ const mouseDown= (e) => {
           fontWeight="500"
           fontSize="10.96px"
           color="rgba(255, 255, 255, 0.3);"
-          // height={21}
+          height={21}
           fontFamily="Poppins"
           overflow="hidden"
         >
@@ -393,6 +405,7 @@ const mouseDown= (e) => {
               />
             </div>
           </Center>
+          <Flex flexDirection="column">
           <Text
             marginLeft="16.44px"
             marginTop="8.22px"
@@ -403,13 +416,15 @@ const mouseDown= (e) => {
           >
             Wallet
           </Text>
-          <Flex ml="16.44px" alignItems="center" gap="32px">
+          <Flex  gap="12%" justifyContent="space-between" mt="2%" alignItems="center">
             <Text
+            marginLeft="16.44px"
+
               fontSize="16.44px"
               fontWeight="700"
               color="#ffffff"
               fontFamily="Poppins"
-              mr="30.14px"
+            //   mr="30.14px"
             >
               {nearState.aexBalance} AEX
             </Text>
@@ -486,6 +501,7 @@ const mouseDown= (e) => {
               </div>
             </Flex>
           </Flex>
+          </Flex>
         </Box>
         <Box
           bgColor="#242424"
@@ -545,7 +561,7 @@ const mouseDown= (e) => {
             </Box>
 
             <Box marginRight="16px" position="relative">
-              <Flex position="absolute" left="30.825px" top="28.77px">
+              <Flex position="absolute" left="22.825px" top="28.77px">
                 <Image src={"resources/Fill 1.png"} w="13.7px" h="12.33px" />
                 <Text
                   fontWeight="400"
@@ -644,8 +660,8 @@ const mouseDown= (e) => {
           h="10%"
           top="90%"
         >
-          <LogOut zIndex={zIndex} revert={logOutUser} log={isLogout} />
-
+   
+          
           <Center>
             <div
               className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
@@ -737,7 +753,17 @@ const mouseDown= (e) => {
       {/* end of wallet head */}
 
       {/* end */}
+
     </Box>
+<Flex h="100%" position="fixed" zIndex={backdrop}
+ w="282.905px" bg="#000000B2"
+>
+.
+</Flex>
+    <LogOut zIndex={zIndex} revert={setLogout} log={isLogout}    />
+
+    </Flex>
+
   );
 }
 

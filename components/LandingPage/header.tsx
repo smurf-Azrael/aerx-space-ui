@@ -54,10 +54,10 @@ const Header: React.FC = () => {
 ">
           Features
         </Text>
-        <Text fontFamily="Poppins" fontWeight="400" color="rgba(50, 46, 101, 0.5);
+        {/* <Text fontFamily="Poppins" fontWeight="400" color="rgba(50, 46, 101, 0.5);
 " >
           About us
-        </Text>
+        </Text> */}
       </Flex>
 
       <Flex alignItems="center" marginLeft="auto" gap="56px">

@@ -18,19 +18,29 @@ const SectionOne: React.FC = () => {
     const dispatch = useDispatch();
     const { group2,group3,handWriting,star } = useSelector(getUserState);
     return (
-        <Box>
-            {/* <Container maxWidth="container.xlg"  > */}
+       
+     
+
+      
+       
+            <Container maxWidth="container.xlg"  
+              bgImage="url('../resources/Group 54164.png')"
+              bgRepeat="no-repeat"
+              bgPosition="top right"
+              bgSize="contain"
+            >
             
-            <Flex    
-             bgImage="url('../resources/Group 5392.png')"
-             bgRepeat="no-repeat"
-             bgPosition="center left"
-             bgSize="80%"
+            <Flex   
+           bgImage="url('../resources/Group 5392.png')"
+           bgRepeat="no-repeat"
+           bgPosition="center left"
+           bgSize="80%"
              gap='51px'
              
              height="100vh"
             >
                  <Box mr={0} width={585}>
+                    {/* <Image src='../resources/Group 5392.png'/> */}
                 </Box> 
                 <Box width={739} className='monetize' marginLeft="125px">
                     <Heading   fontStyle="italic"
@@ -81,8 +91,8 @@ const SectionOne: React.FC = () => {
                 </Box>          
             </Flex>
         
-            {/* </Container > */}
-        </Box>
+            </Container >
+    
         
 
     )

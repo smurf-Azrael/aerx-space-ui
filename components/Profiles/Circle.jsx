@@ -139,6 +139,8 @@ const Circle = (props) => {
           fontStyle="normal"
           lineHeight="21.92px"
           mb="4.795px"
+          textTransform="capitalize"
+
         >
           {nearState.profile.fullName}
         </Heading>
@@ -150,7 +152,6 @@ const Circle = (props) => {
           fontWeight="400px"
           letterSpacing="-0.02em"
           mb="9.59px"
-          textTransform="capitalize"
 
         >
           {nearState.profile.username}

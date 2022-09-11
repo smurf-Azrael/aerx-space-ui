@@ -43,17 +43,23 @@ const Flow: React.FC = () => {
           <div
             className="w-[39%] h-[94vh] ml-[20px] ]"
             style={{
-              width: chat.minimized ? "19.5%" : flow.collapsed ? "75%" : "",
-              marginLeft: chat.minimized ? "5%" : "",
+              width: chat.minimized ? "19.5%" : "",
+              // marginLeft: chat.minimized ? "5%" : "",
             }}
           >
             <Chat />
           </div>
         )}
 
+        {
+          chat.collapsed && 
+          <div className='w-[39%]'>
+          </div>
+        }
+
         {!flow.collapsed && (
           <div
-            className=" w-[39%] h-[94vh] overflow-y-scroll"
+            className=" w-[42%] h-[94vh] overflow-y-scroll"
             // style={{
             //   width:
             //     chat.minimized && !space.collapsed
@@ -76,7 +82,7 @@ const Flow: React.FC = () => {
         )}
 
         {!space.collapsed && (
-          <div className="w-[18%] h-[94vh]">
+          <div className="w-[15%] h-[94vh]">
             {/* <Space /> */}
           </div>
         )}

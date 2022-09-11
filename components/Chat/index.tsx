@@ -176,7 +176,7 @@ const Chat: React.FC = () => {
             {!chat.minimized &&
                 <div className='w-[45%] h-full rounded-[10px] bg-black-light  p-4'
                     style={{
-                        width: (flow.collapsed) ? "30%" : ""
+                        // width: (chat.minimized) ? "0%" : ""
                     }}
                 >
                     <ChatHeader onChange={handleSearchName}/>
@@ -210,11 +210,10 @@ const Chat: React.FC = () => {
                     </div> */}
                 </div>
             }
-            <div className='w-[55%]'
-                // style={{
-                //     width: (chat.minimized) ? "100%" :
-                //         (flow.collapsed) ? "70%" : "",
-                // }}
+            <div className='w-[55%] h-full'
+                style={{
+                    width: (chat.minimized) ? "100%" : "",
+                }}
             >
                 <ChatRoom activeMessage={chats[activeMessage]} />
             </div>

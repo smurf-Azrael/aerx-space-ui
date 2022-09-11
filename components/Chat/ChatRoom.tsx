@@ -250,7 +250,7 @@ const MessagesWrapper: React.FC<{activeReceiver: IMessageItem}> = ({ activeRecei
     }
 
     return (
-        <div>
+        <div className='h-[90%] '>
             {messages.map(({ sender, recipient, content, type, createdAt }: Message, index: number) => (
                 <div key={index} className="mt-4">
                     {type !== EMessageType.ACTION &&
@@ -340,7 +340,7 @@ const ChatRoom: React.FC<{
             <div className='p-2'>
                 <PrimaryHeader />
                 <SecondaryHeader activeMessage={activeMessage} />
-                <div className='h-[75vh] flex flex-col justify-between'>
+                <div className='h-[72vh] flex flex-col justify-between'>
                     <MessagesWrapper activeReceiver={activeMessage} />
                     <SendMessage onSend={() => setInitializeSendToken(true)}
                         activeReceiver={activeMessage} />

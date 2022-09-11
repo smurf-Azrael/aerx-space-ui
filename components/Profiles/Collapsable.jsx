@@ -1,36 +1,28 @@
-import { useState } from "react";
+import React from "react";
 import { Box, Image, Text, Center, Flex, Button } from "@chakra-ui/react";
-import WalletHead from "./WalletsHead";
-import { ChevronRightIcon } from '@chakra-ui/icons'
 
-
-
-function Collapse(props) {
-  // {/* <Wallets toggle={props.toggle} left={props.left} /> */}
-  let zIndex
-
+function collapsable(props) {
   return (
     <Flex
-      h="100vh"
-      w="41.1px"
-      justifyItems="center"
-      flexDirection="column"
+      h="100%"
       bgColor="#232323;"
-      top="0"
-      pt="20.55px"
-      pb="16.44px"
+      position="absolute"
+      w="41.1px"
+      flexDirection="column"
+      gap="10%"
       zIndex={props.index}
+      justifyContent="space-between"
+      alignItems="center"
+
+
     >
       <Flex
         flexDirection="column"
-        mb="169.21255px"
-        justifyItems="center"
+        gap="19.865px"
         alignItems="center"
+        
       >
-        <Image src="../resources/æ.png"  w="21.92px" h="14.385px"mb="59.865px"/>
-       
-        {/* <Image src={"../resources/Frame 5449.png"} w="21.92px" mb="19.865px" /> */}
-        {/* <Text fontFamily="Open Sans" fontWeight="800" color="white" w="21.92px" h="21px">æ</Text> */}
+        <Image src="../resources/æ.png" mt="65%" w="21.92px" h="14.385px" />
         <Image
           src={"../resources/Vector 38.png"}
           bgColor="rgba(255, 255, 255, 0.05);"
@@ -41,7 +33,6 @@ function Collapse(props) {
           h="32px"
           mb="4.11px"
         />
-
         <Image
           src={"../resources/Frame 14042.png"}
           bgColor="rgba(255, 255, 255, 0.05);"
@@ -52,7 +43,6 @@ function Collapse(props) {
           h="32px"
           mb="4.11px"
         />
-
         <Image
           src={"../resources/Frame 14289.png"}
           bgColor="rgba(255, 255, 255, 0.05);"
@@ -63,25 +53,15 @@ function Collapse(props) {
           h="32px"
           mb="19.865px"
         />
-        {/* <Image src={"../resources/Frame 14046.png"} w="21.92px" h="21.92px" /> */}
       </Flex>
-
-      <div
-        className=" color-[white]  rounded-[10.275px] cursor-pointer mx-auto  flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[77.13px] "
-        onClick={props.toggle}
-      >
-        <Image
-          src="resources/Frame 14290.png" w="8px" h="16px" ml="8px"
-             
-        />
-        {/* <ChevronRightIcon 
-       
-          width="36.44px"
-          height="36.44px"
-          ml="-5px"
-          color="#FFFFFF"
-          /> */}
-      </div>
+      <Flex>
+        <div
+          className=" color-[white]  rounded-[10.275px] cursor-pointer mx-auto  flex items-center bg-[#ffffff16] hover:bg-[#ffffff39] w-[24.66px] h-[77.13px] "
+          onClick={props.toggle}
+        >
+          <Image src="resources/Frame 14290.png" w="8px" h="16px" ml="8px" />
+        </div>
+      </Flex>
 
       <Flex flexDirection="column" gap="10.96px" alignItems="center" mt="451%">
         <Box
@@ -121,4 +101,4 @@ function Collapse(props) {
   );
 }
 
-export default Collapse;
+export default collapsable;

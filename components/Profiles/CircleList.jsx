@@ -4,6 +4,7 @@ import { MinusIcon } from "@chakra-ui/icons";
 
 function CircleList(props) {
   
+  
   return (
     <Box
       height="739.8px"
@@ -11,6 +12,7 @@ function CircleList(props) {
       bgColor="#1f1f1f"
     //   position="absolute"
     //   top="0"
+    // zIndex="6"
       fontFamily="poppins"
     >
          
@@ -22,7 +24,7 @@ function CircleList(props) {
         mt-2
         "
         
-        onClick={props.switched}
+        onClick={props.remove}
       >
         <MinusIcon
             w="21.92px"

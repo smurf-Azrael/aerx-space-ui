@@ -32,11 +32,11 @@ const Header: React.FC = () => {
       overflow="hidden"
       marginInline="150px"
       mt={6}
-      mb="60px"
+     
 
     >
 
-      <Image src="../resources/aerx_logo-removebg-preview 1 (Traced) copy.svg" alt="logo" w="125px" h="47px" />
+      <Image src="../resources/aerx_logo-removebg-preview 1 (Traced) copy.svg" alt="logo" w="85px" h="47px" ml="8%"/>
 
 
 

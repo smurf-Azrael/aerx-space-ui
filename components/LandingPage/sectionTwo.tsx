@@ -7,12 +7,14 @@ const SectionTwo: React.FC = () => {
   const dispatch = useDispatch();
   const { saly3, saly4, fly1, fly2, fly3, star } = useSelector(getUserState);
   return (
-    <Box>
+    <Box
+    bgImage="url('../resources/Group 541843.png') "
+    bgRepeat="no-repeat"
+    bgPosition="100%  1%"
+    bgSize="contain"
+    >
       <Container maxWidth="container.xlg"
-            bgImage="url('../resources/Group 5421.png')"
-            bgRepeat="no-repeat"
-            bgPosition="center"
-            bgSize="100%"
+      
       >
         <Flex
           marginRight="95px"

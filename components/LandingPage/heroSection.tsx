@@ -19,102 +19,52 @@ const HeroSection: React.FC = () => {
     console.log("welcome to arex");
   }
   return (
-    
-      <Container maxWidth="container.xlg"
-      bgImage="url('../resources/Group 5420.png')"
-      bgRepeat="no-repeat"
-      bgPosition="center"
-      bgSize="100%"
-
-
+    <Container
+      maxWidth="container.xlg"
       
-      >
-        <Flex
-          alignItems="center"
-          py="30"
-          flexDirection="row"
-          marginRight="95px"
-          marginLeft="95px"
-          bgImage="url('../resources/Ellipse 727.png'),  url('../resources/Ellipse 616.png') "
-          bgRepeat="no-repeat"
-          bgPosition="top right, center left"
-          // bgGradient="linear(to-l, #7928CA, #FF0080)"
-          height="80vh"
-          bgSize="40%"
-          // bgColor="#16FF02"
-          // filter='blur(345px)'
-          // opacity="0.2px"
-        
-          
+    >
+     <Box w="1920" h="953"    
+     bgImage="url('../resources/Frame 22415.png') "
+        bgRepeat="no-repeat"
+        bgPosition="100%  1%"
+        bgSize="contain"
         >
-          {/* bgGradient="linear(to-l,12% #FFFFFF)" */}
-          <Box   
-       width={739}
-          
+     <Box
+            bgColor="#8D00FF"
+            className="button"
+            fontFamily="Poppins"
+            borderRadius={50}
+            fontWeight="600"
+            color="white"
+            onClick={authentication}
+            top="75%"
+            left="16%"
+            cursor="pointer"
+            w="159.605px"
+            h="46.58"
+            // justifyContent="center"
+            pt="13px"
+            pl="32.88"
+            position ="absolute"
           >
-            <Heading
-              fontSize="76px"
-              lineHeight="114px"
-              fontWeight="600"
-              fontFamily="Poppins"
-              color="#322E65"
-            >
-              <Image src="resources\Welcome.png" />
-              {/* Welcome to Aerx */}
-            </Heading>
             <Text
-              fontSize="24px"
-              fontStyle="italic"
-              fontWeight={300}
               fontFamily="Poppins"
-              color="#322E65CC"
-              lineHeight="36px"
-            >
-                <Image src="resources\web3.png"  mt={3}/>
+              fontStyle="normal"
+              fontWeight="600"
+              fontSize="16.44px"
+              lineHeight="24.66px"
+              pt="-8%"
+              color="#FFFFFF"
+            pl="2%"
 
-              {/* web3.0 media social platform */}
-            </Text>
-            <Text
-              fontSize="24px"
-              lineHeight="36px"
-              fontWeight="300"
-              mt="48px"
-              width={525}
-              color="#322E6580"
-            >
-              <Image src="resources\aerxcont.png" />
-              {/* Aerx is a web 3 social media platform with a <br /> fundamentally
-              new approach to <br />
-              monetization of user content */}
-            </Text>
-            <Button
-              bgColor="#8D00FF"
-              className="button"
-              py="12px"
-              px="40px"
-              fontFamily="Poppins"
-              borderRadius={50}
-              fontWeight="600"
-              color="white"
-              onClick={authentication}
-              mt="56px"
+
             >
               Get started
-            </Button>
+            </Text>
           </Box>
-          
-            <Box marginLeft="135px" marginTop="-125px" >
-              {/* <Image width="100" src="resources\Group 5401.png" className="group1-a" /> */}
-            </Box>
-          <Box>
-            <Image src="resources/saly-1.png" />
-            <Image width="100" src="resources\Group 5401.png" className="group1-a" mt="-286px" />
-
-          </Box>
-        </Flex>
-      </Container>
+     </Box>
     
+    </Container>
   );
 };
 export default HeroSection;
-

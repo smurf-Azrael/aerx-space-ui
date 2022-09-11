@@ -13,6 +13,8 @@ import { MinusIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import LogOut from "./LogOut";
+import CircleList from "./CircleList";
+import Circle from "./Circle";
 
 
 function Profile(props) {
@@ -20,16 +22,46 @@ function Profile(props) {
   const dispatch = useDispatch();
   const { ellipse4, ellipse5, ellipse3, logoP, frameP1, frameP2 } =
     useSelector(getUserState);
-    const [isLogout, setLogout] = React.useState(false);
-    const logOutUser = () => {
-      setLogout((prevState) => !prevState);
-    };
-  
-    let zIndex;
-    isLogout ? (zIndex = 1) : (zIndex = -8);
+  const [isLogout, setLogout] = React.useState(false);
+  const logOutUser = () => {
+    setLogout((prevState) => !prevState);
+  };
+
+  let zIndex;
+  let backdrop;
+  isLogout ? (zIndex = 1) : (zIndex = -8);
+  isLogout ? (backdrop = 1) : (backdrop=-1)
+  const [circ,setCirc] = React.useState(false)
+  const remCirc = () => {
+    setCirc((prevState) => !prevState)
+  }
+  let disabled
+  let opacity
+
+  props.shadow ? disabled=true : disabled=false
+//   props.shadow ? opacity=`` : opacity="none"
+const mouseDown= (e) => {
+    return(
+
+  <Circle/>
+  )
+}
+
 
   return (
-    <Box h="100%" w="257.56px" bgColor="#191919" position="absolute">
+    
+    circ ? <CircleList  remove={remCirc} /> :
+<Flex 
+  
+
+>
+
+    <Box  bgColor="#191919" position="absolute" 
+    h="100%" w="257.56px"
+   
+     
+
+    >
       {/* profile */}
       <Flex
         bgImage={`url('${nearState.profile.profileImg}')`}
@@ -39,37 +71,43 @@ function Profile(props) {
         backgroundSize="100% 100%"
         height="45%"
         width="100%"
+        
+      onMouseDown={(e) => props.doubleClick(e)}
+
+      onDoubleClick={(e) => props.doubleClick(e)}
+      cursor="pointer"
+
       >
-           <Flex
-        flexDirection="column"
-        gap="10.96px"
-        ml="16.44px"
-        mt="21.92px"
-        cursor="pointer"
-      >
-        <Box
-          color="#6054F0"
-          width="27.4px"
-          height="27.4px"
-          border="2px solid"
-        bgColor="#FFFFFF"
-        borderColor="#FFFFFF"
-          borderRadius="6.85px"
-          onClick={() => props.toggle()}
+        <Flex
+          flexDirection="column"
+          gap="10.96px"
+          ml="16.44px"
+          mt="21.92px"
+          cursor="pointer"
         >
-          <Image
-            src="../resources/Frame 14290.svg"
-            w="18px"
-            py="5px"
-            px="auto"
-            pl="4px"
-          />
-        </Box>
+          <Box
+            color="#6054F0"
+            width="27.4px"
+            height="27.4px"
+            border="2px solid"
+            bgColor="#FFFFFF"
+            borderColor="#FFFFFF"
+            borderRadius="6.85px"
+            onClick={() => props.toggle()}
+          >
+            <Image
+              src="../resources/Frame 14290.svg"
+              w="18px"
+              py="5px"
+              px="auto"
+              pl="4px"
+            />
+          </Box>
         </Flex>
-        <Flex flexDirection="column" alignItems="center" mx="auto" gap="61%">
+        <Flex flexDirection="column" alignItems="center" mx="auto" gap="60%">
           <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
-          <Box h="235px" >
+          <Box h="235px">
             <Heading
               fontSize="21.92px"
               color="#FFFFFF"
@@ -80,6 +118,7 @@ function Profile(props) {
               textAlign="center"
               letterSpacing="-0.02em"
               mt="25px"
+              textTransform="capitalize"
             >
               {nearState.profile.fullName}
             </Heading>
@@ -119,7 +158,7 @@ function Profile(props) {
                   lineHeight="100%"
                   /* identical to box height, or 14px */
 
-                  letterSpacin="-0.02em"
+                  letterSpacing="-0.02em"
                 >
                   Aura: 2k
                 </Text>
@@ -137,78 +176,90 @@ function Profile(props) {
           </Box>
         </Flex>
         <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px">
-      <Image src={frameP1} w="28.88px" h="28.88px" position="absolute" mt="2%" ml="1%" />
-        <Box 
-        bgColor="#5A5A5A"
-        p="1px"
-        borderRadius="8px"
-        opacity="15%"
-        w="34px"
-        h="34px"
-        >
-        </Box>
-        <Image src={frameP2} w="24.88px" h="24.88px"  position="absolute" mt="20%" ml="2%"/>
-        <Box 
-        bgColor="#5A5A5A"
-        p="4px"
-        borderRadius="8px"
-        opacity="15%"
-        w="34px"
-        h="34px"
-        >
-        </Box>
-        <Image src="../resources/Frame 14281.png" w="22.88px" h="22.88px" position="absolute" mt="37%" ml="2%" />
-        <Box 
-        bgColor="#5A5A5A"
-        p="4px"
-        borderRadius="8px"
-        w="34px"
-        h="34px"
-        opacity="15%"
+          {/* first */}
+          <Image
+            src={frameP1}
+            w="28.88px"
+            h="28.88px"
+            position="absolute"
+            mt="1.5%"
+            ml="1%"
+          />
+          <Image
+            src="../resources/Squircle.png"
+            opacity="15%"
+            w="34px"
+            h="34px"
+          />
+          {/* second */}
+          <Image
+            src={frameP2}
+            w="24.88px"
+            h="24.88px"
+            position="absolute"
+            mt="19.5%"
+            ml="2%"
+          />
 
-        >
-        </Box>
-      </Flex>
+          <Image
+            src="../resources/Squircle.png"
+            opacity="15%"
+            w="34px"
+            h="34px"
+          />
+          {/* third*/}
+          <Image
+            src="../resources/Frame 14281.png"
+            w="22.88px"
+            h="22.88px"
+            position="absolute"
+            mt="37%"
+            ml="2%"
+          />
+          <Image
+            src="../resources/Squircle.png"
+            opacity="15%"
+            w="34px"
+            h="34px"
+          />
+        </Flex>
       </Flex>
       {/* profile */}
       {/* image carousel  */}
       <Flex
         bgColor="#1F1F1F"
         borderRadius="50px 50px 0px 0px"
-        height="15%"
+        height="21%"
         flexDirection="column"
-      
-
       >
         <Center>
-         <div
-              className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+          <div
+            className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
         mt-2
         "
-
-              onClick={props.switch}
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </div>
-            </Center>
+            onClick={remCirc}
+          >
+            <MinusIcon
+              w="21.92px"
+              bgColor="rgba(255, 255, 255, 0.3);"
+              height="2px"
+            />
+            <MinusIcon
+              w="21.92px"
+              bgColor="rgba(255, 255, 255, 0.3);"
+              height="2px"
+            />
+          </div>
+        </Center>
         <Text
           marginLeft="16.44px"
           marginTop="2%"
           fontWeight="500"
           fontSize="10.96px"
           color="rgba(255, 255, 255, 0.3);"
-          // height={21}
+          height={21}
           fontFamily="Poppins"
           overflow="hidden"
         >
@@ -227,9 +278,9 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             width="auto"
-              onDoubleClick={(e) => props.doubleClick(e)}
+            onDoubleClick={(e) => props.doubleClick(e)}
             cursor="pointer"
-              onClick={props.remove}
+            onClick={props.remove}
           >
             <Image
               src={ellipse4}
@@ -253,8 +304,8 @@ function Profile(props) {
             alignItems="center"
             width="auto"
             cursor="pointer"
-              onDoubleClick={(e) => props.doubleClick(e)}
-              onClick={props.remove}
+            onDoubleClick={(e) => props.doubleClick(e)}
+            onClick={props.remove}
           >
             <Image
               src={ellipse5}
@@ -277,9 +328,9 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             width="auto"
-              onDoubleClick={(e) => props.doubleClick(e)}
+            onDoubleClick={(e) => props.doubleClick(e)}
             cursor="pointer"
-              onClick={props.remove}
+            onClick={props.remove}
           >
             <Image
               src={ellipse4}
@@ -301,9 +352,9 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             width="auto"
-              onDoubleClick={(e) => props.doubleClick(e)}
+            onDoubleClick={(e) => props.doubleClick(e)}
             cursor="pointer"
-              onClick={props.remove}
+            onClick={props.remove}
           >
             <Image
               src={ellipse4}
@@ -340,7 +391,6 @@ function Profile(props) {
         gap-0.5
         mt-2
         "
-
               onClick={props.wallet}
             >
               <MinusIcon
@@ -355,6 +405,7 @@ function Profile(props) {
               />
             </div>
           </Center>
+          <Flex flexDirection="column">
           <Text
             marginLeft="16.44px"
             marginTop="8.22px"
@@ -365,13 +416,15 @@ function Profile(props) {
           >
             Wallet
           </Text>
-          <Flex ml="16.44px" mt="2%" alignItems="center" gap="32px">
+          <Flex  gap="12%" justifyContent="space-between" mt="2%" alignItems="center">
             <Text
+            marginLeft="16.44px"
+
               fontSize="16.44px"
               fontWeight="700"
               color="#ffffff"
               fontFamily="Poppins"
-              mr="30.14px"
+            //   mr="30.14px"
             >
               {nearState.aexBalance} AEX
             </Text>
@@ -400,7 +453,7 @@ function Profile(props) {
         mr-[10.275px]
 
        "
-                   onClick={props.wallet}
+                onClick={props.wallet}
               >
                 <Image
                   src={"resources/Upload.png"}
@@ -418,7 +471,7 @@ function Profile(props) {
         mr-[10.275px]
 
        "
-                   onClick={props.wallet}
+                onClick={props.wallet}
               >
                 <Image
                   src={"resources/Frame 5556.png"}
@@ -436,7 +489,7 @@ function Profile(props) {
         mr-[10.275px]
 
        "
-                   onClick={props.wallet}
+                onClick={props.wallet}
               >
                 <Image
                   src={"resources/plant 1.png"}
@@ -447,6 +500,7 @@ function Profile(props) {
                 />
               </div>
             </Flex>
+          </Flex>
           </Flex>
         </Box>
         <Box
@@ -507,7 +561,7 @@ function Profile(props) {
             </Box>
 
             <Box marginRight="16px" position="relative">
-              <Flex position="absolute" left="30.825px" top="28.77px">
+              <Flex position="absolute" left="22.825px" top="28.77px">
                 <Image src={"resources/Fill 1.png"} w="13.7px" h="12.33px" />
                 <Text
                   fontWeight="400"
@@ -606,8 +660,8 @@ function Profile(props) {
           h="10%"
           top="90%"
         >
-          <LogOut zIndex={zIndex} revert={logOutUser} />
-
+   
+          
           <Center>
             <div
               className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
@@ -672,7 +726,7 @@ function Profile(props) {
               borderRadius="100%"
               padding="5px"
               cursor="pointer"
-                onClick={logOutUser}
+              onClick={logOutUser}
             >
               <Image
                 src={nearState.profile.profileImg}
@@ -699,7 +753,17 @@ function Profile(props) {
       {/* end of wallet head */}
 
       {/* end */}
+
     </Box>
+<Flex h="100%" position="fixed" zIndex={backdrop}
+ w="282.905px" bg="#000000B2"
+>
+.
+</Flex>
+    <LogOut zIndex={zIndex} revert={setLogout} log={isLogout}    />
+
+    </Flex>
+
   );
 }
 

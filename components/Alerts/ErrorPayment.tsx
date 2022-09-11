@@ -4,9 +4,10 @@ import Button from '../Elements/Button';
 
 interface IProps{
     onClose: () => void;
+    message?: string;
 }
 
-const ErrorPayment: React.FC<IProps> = ({onClose}) => {
+const ErrorPayment: React.FC<IProps> = ({onClose, message}) => {
     return (
          <div className='w-[300px] px-4 flex justify-center flex-col gap-5'>
             <div className='w-full flex justify-center'>
@@ -18,7 +19,7 @@ const ErrorPayment: React.FC<IProps> = ({onClose}) => {
                     <label className='text-[12px] font-bold text-danger' style={{fontWeight:'bold'}}>Something went wrong...</label>
                 </div>
                 <div className='flex justify-center'>
-                    <label className='text-[12px] mt-[3px] text-white opacity-[30%]'>Error reason. Please try again</label>
+                    <label className='text-[12px] mt-[3px] text-white opacity-[30%]'>{!message ? 'Error reason. Please try again' : `${message}`}</label>
                 </div>
             </div>
             <div className='pb-4'>

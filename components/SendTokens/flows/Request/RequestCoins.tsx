@@ -9,38 +9,19 @@ import StepIndicator from '../../../StepIndicator';
 interface IProps {
     setTransactionStatus: (status: 'pending' | 'success' | 'failed') => void;
 }
-const SendCoins: React.FC<IProps> = ({ setTransactionStatus }) => {
+const RequestCoins: React.FC<IProps> = ({ setTransactionStatus }) => {
     const { accountId } = useSelector(selectActiveReceiver)
     const nearState = nearStore((state) => state)
     const [loading, setLoading] = useState<boolean>(false);
     const [coins, setCoins] = useState<string>();
 
     const handleSend = async () => {
-        if (loading) return;
-        setLoading(true);
-        try {
-            const resp = await nearState.tokenContract.ft_transfer(
-                {
-                    receiver_id: accountId,
-                    amount: coins,
-                    memo: `From ${nearState.accountId}  to ${accountId} at ${new Date().toLocaleString()}`
-                }
-            )
-            setLoading(false)
-            console.log("Sent token ....")
-            console.log(resp)
-            setTransactionStatus('success')
-        }
-        catch (e) {
-            setLoading(false)
-            setTransactionStatus('failed')
-            console.log(e)
-        }
+        setTransactionStatus('success')
     }
     return (
         <div className='w-[300px]'>
             <div className='w-full flex justify-around'>
-                <label className='text-white'>Send coins</label>
+                <label className='text-white'>Invoice</label>
             </div>
 
             <div className='w-full mt-6'>
@@ -58,14 +39,11 @@ const SendCoins: React.FC<IProps> = ({ setTransactionStatus }) => {
                             />
                         </div>
                     </div>
-                    <div className='mt-2 flex justify-between'>
-                        <label className='text-[11px] text-white opacity-[30%]'>Available to send</label>
-                        <label className='text-[11px] text-white opacity-[30%]'>{nearState?.aexBalance} AEX</label>
-                    </div>
-                    <div className='mt-4'>
+                    
+                    <div className='mt-6'>
                         <Button
                             icon={!loading ? '/assets/icons/right-arrow-icon.svg' : ''}
-                            label={loading ? 'Sending...' : 'Send'}
+                            label={loading ? 'Requesting...' : 'Request'}
                             onClick={() => handleSend()}
                         />
                     </div>
@@ -82,4 +60,4 @@ const SendCoins: React.FC<IProps> = ({ setTransactionStatus }) => {
     )
 }
 
-export default SendCoins;
+export default RequestCoins;

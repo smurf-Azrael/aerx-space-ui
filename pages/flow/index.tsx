@@ -43,40 +43,46 @@ const Flow: React.FC = () => {
           <div
             className="w-[39%] h-[94vh] ml-[20px] ]"
             style={{
-              width: chat.minimized ? "19.5%" : flow.collapsed ? "75%" : "",
-              marginLeft: chat.minimized ? "5%" : "",
+              width: chat.minimized ? "19.5%" : "",
+              // marginLeft: chat.minimized ? "5%" : "",
             }}
           >
             <Chat />
           </div>
         )}
 
+        {
+          chat.collapsed && 
+          <div className='w-[39%]'>
+          </div>
+        }
+
         {!flow.collapsed && (
           <div
-            className=" w-[39%] h-[94vh] overflow-y-scroll"
-            style={{
-              width:
-                chat.minimized && !space.collapsed
-                  ? "55%"
-                  : chat.collapsed && !space.collapsed
-                  ? "75%"
-                  : space.collapsed && chat.minimized
-                  ? "73%"
-                  : space.collapsed && chat.default
-                  ? "58%"
-                  : space.collapsed && chat.collapsed
-                  ? "95%"
-                  : "",
-              padding: space.collapsed && chat.collapsed ? "0% 10%" : "",
-              marginLeft: chat.collapsed ? "5%" : "",
-            }}
+            className=" w-[42%] h-[94vh] overflow-y-scroll"
+            // style={{
+            //   width:
+            //     chat.minimized && !space.collapsed
+            //       ? "55%"
+            //       : chat.collapsed && !space.collapsed
+            //       ? "75%"
+            //       : space.collapsed && chat.minimized
+            //       ? "73%"
+            //       : space.collapsed && chat.default
+            //       ? "58%"
+            //       : space.collapsed && chat.collapsed
+            //       ? "95%"
+            //       : "",
+            //   padding: space.collapsed && chat.collapsed ? "0% 10%" : "",
+            //   marginLeft: chat.collapsed ? "5%" : "",
+            // }}
           >
             <FlowFeeds />
           </div>
         )}
 
         {!space.collapsed && (
-          <div className="w-[18%] h-[94vh]">
+          <div className="w-[15%] h-[94vh]">
             {/* <Space /> */}
           </div>
         )}

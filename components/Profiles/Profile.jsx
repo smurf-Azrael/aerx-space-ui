@@ -177,10 +177,17 @@ const mouseDown= (e) => {
         </Flex>
         <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px">
           {/* first */}
-     
+          <Image
+            src={frameP1}
+            w="24.88px"
+            h="24.88px"
+            position="absolute"
+            mt="1.5%"
+            ml="2%"
+          />
           <Image
             src="../resources/Squircle.png"
-            opacity="15%"
+            // opacity="15%"
             w="34px"
             h="34px"
           />
@@ -196,7 +203,7 @@ const mouseDown= (e) => {
 
           <Image
             src="../resources/Squircle.png"
-            opacity="15%"
+            // opacity="15%"
             w="34px"
             h="34px"
           />
@@ -211,7 +218,7 @@ const mouseDown= (e) => {
           />
           <Image
             src="../resources/Squircle.png"
-            opacity="15%"
+            // opacity="15%"
             w="34px"
             h="34px"
           />
@@ -338,7 +345,7 @@ const mouseDown= (e) => {
               fontWeight="400"
               color="#ffffff"
             >
-              Work
+              Friends
             </Text>
           </Flex>
           <Flex
@@ -362,7 +369,7 @@ const mouseDown= (e) => {
               fontWeight="400"
               color="#ffffff"
             >
-              Work
+              Followers
             </Text>
           </Flex>
         </Flex>
@@ -652,46 +659,29 @@ const mouseDown= (e) => {
           borderTopRadius="50px"
           h="10%"
           top="90%"
+          
         >
    
           
-          <Center>
-            <div
-              className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
-        background-#1F1F1F
-        gap-0.5
-     
-        mt-2
-       "
-              onClick=""
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </div>
-          </Center>
+ 
 
           <Center
             display="flex"
             marginTop="8.22px"
-            mb="5px"
+            // mb="5px"
             gap="21.92px"
             ml="28px"
+            pt="4px"
           >
             <Box
               border="1px"
               borderColor="rgba(255, 255, 255, 0.1);"
               borderRadius="100%"
               padding="3.8px"
+
             >
-              <Flex alignItems="center" justifyItems="center">
+              <Flex alignItems="center" justifyItems="center" 
+               >
                 <Text
                   color="#ffffff"
                   marginTop={-4}

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import  Modal  from '../Modal';
 import DealFlow from './flows/Deal';
 import InitializeTransaction from './flows/InitializeTransaction';
+import RequestFlow from './flows/Request';
 import SendFlow from './flows/Send';
 
 interface IProps{
@@ -14,6 +15,7 @@ const SendTokens : React.FC<IProps> = ({onClose}) => {
             <div>
                {flow === 0 && <InitializeTransaction setFlow={setFlow} />}
                {flow === 1 && <SendFlow  onClose={onClose}/>}
+               {flow === 2 && <RequestFlow  onClose={onClose}/>}
                {flow === 3 && <DealFlow onClose={onClose}/>}
             </div>
         </Modal>

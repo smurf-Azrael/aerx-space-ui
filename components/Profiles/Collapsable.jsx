@@ -1,7 +1,10 @@
 import React from "react";
 import { Box, Image, Text, Center, Flex, Button } from "@chakra-ui/react";
+import { useDispatch } from "../../store/store";
+import { expandChat, expandFlow } from "../../store/slices/modulesSlices";
 
 function collapsable(props) {
+  const dispatch = useDispatch();
   return (
     <Flex
       h="100%"
@@ -32,6 +35,8 @@ function collapsable(props) {
           w="32px"
           h="32px"
           mb="4.11px"
+          cursor={"pointer"}
+          onClick={() => dispatch(expandFlow())}
         />
         <Image
           src={"../resources/Frame 14042.png"}
@@ -42,6 +47,9 @@ function collapsable(props) {
           w="32px"
           h="32px"
           mb="4.11px"
+          cursor={"pointer"}
+          onClick={() => dispatch(expandChat())}
+
         />
         <Image
           src={"../resources/Frame 14289.png"}
@@ -51,6 +59,7 @@ function collapsable(props) {
           borderRadius="10.275px"
           w="32px"
           h="32px"
+          cursor={"pointer"}
           mb="19.865px"
         />
       </Flex>

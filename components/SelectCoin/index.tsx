@@ -9,16 +9,8 @@ const SelectCoin: React.FC = () => {
     const coins: Coin[] = [
         {
             logo: '/assets/icons/ae-coin-icon.svg',
-            name: 'AE'
+            name: 'AEX'
         },
-        {
-            logo: '/assets/icons/ae-coin-icon.svg',
-            name: 'AE 2'
-        },
-        {
-            logo: '/assets/icons/ae-coin-icon.svg',
-            name: 'AE 3'
-        }
     ]
 
     const [activeCoin, setActiveCoin] = useState(coins[0]);

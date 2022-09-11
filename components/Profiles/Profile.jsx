@@ -177,14 +177,7 @@ const mouseDown= (e) => {
         </Flex>
         <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px">
           {/* first */}
-          <Image
-            src={frameP1}
-            w="28.88px"
-            h="28.88px"
-            position="absolute"
-            mt="1.5%"
-            ml="1%"
-          />
+     
           <Image
             src="../resources/Squircle.png"
             opacity="15%"

@@ -1,4 +1,4 @@
-import Profiles from "../components/Profiles/index";
+import NewPool from "../components/BranchWallet/NewPool";
 
 
 const Profile = () => {
@@ -6,7 +6,7 @@ const Profile = () => {
 
     return (
         <div className="profile background-black poppins">
-            <Profiles />
+            <NewPool />
         </div>
     );
 };

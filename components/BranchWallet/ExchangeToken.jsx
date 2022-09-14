@@ -12,8 +12,7 @@ import {
 import { MinusIcon } from "@chakra-ui/icons";
 import { nearStore } from '../../store/near';
 import { Big } from "big.js";
-import { getAexPrice, getEquivalentAex } from '../../lib/aexPriceCalculator';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 function Exchange(props) {
   const [isExchange, setExchange] = React.useState(false);

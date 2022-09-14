@@ -153,14 +153,25 @@ export type DexContract = Contract & {
         account_id: string;
         pool_id: number;
     }) => Promise<number>;
-    connect_or_get_balance: (arg: {}, gas: string) => Promise<any>;
+    get_pool: (arg: { pool_id: number }) => Promise<any>;
+    get_price_from_pool: (arg: {
+        pool_id: number; token_id: string;
+    }) => Promise<number>;
+    get_return_amount_in_u128: (arg: {
+        pool_id: number,
+        amount_to_swap: string,
+        token_from: string,
+        token_to: string,
+    }) => Promise<number>;
+    register_or_get_balance: (arg: {}, gas: string, deposit: string) => Promise<any>;
     create_pool: (
         arg: {
-            token_from: string;
-            token_to: string;
+            first_token_contract_id: string;
+            sencond_token_contract_id: string;
             total_fee_percentage: number;
         },
         gas: string,
+        deposit: string,
     ) => Promise<any>;
     lend: (
         arg: {
@@ -178,8 +189,9 @@ export type DexContract = Contract & {
             pool_id: number;
             token_to: string;
             amount: string;
-            min_expected: string;
+            min_expected: any;
         },
         gas: string,
-    ) => Promise<number>;
+        deposit: string,
+    ) => Promise<any>;
 };

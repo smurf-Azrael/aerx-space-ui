@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
 import { nearStore } from "../../store/near";
+import { Big } from "big.js";
 
 function SendTokens(props) {
   const nearState = nearStore((state) => state);
@@ -23,12 +24,13 @@ function SendTokens(props) {
 
   const handleAmount = (event) => {
     const value = event.target.value;
-    if (parseInt(value, 10) > nearState.aexBalance) {
-      setAmountColor("#DB3333")
-      setAmount(value);
-    } else {
+    if (value > 0 && value <= nearState.aexBalance) {
       setAmountColor("rgba(255, 255, 255, 0.3)")
-      setAmount(value);
+      const inputBigN = new Big(value || 0);
+      const formattedInput = inputBigN.mul("10e23").toFixed(0);
+      setAmount(formattedInput);
+    } else {
+      setAmountColor("#DB3333")
     }
   };
   const conversion = (amount / 111) * 4.16
@@ -37,7 +39,6 @@ function SendTokens(props) {
     const isRegistered = await nearState.pnftContract.has_registered({
       user_id: value,
     });
-    console.log("registered: ", isRegistered);
     if (isRegistered) {
       setProceed(true);
       setReceiver(value);
@@ -49,11 +50,10 @@ function SendTokens(props) {
   const transferAex = async () => {
     console.log("Send button clicked");
     console.log("Details: ", amount, receiver);
-
     try {
       await nearState.tokenContract.ft_transfer({
         receiver_id: receiver,
-        amount: amount + "000000000000000000000000",
+        amount: amount,
         memo: "AEX Transfer",
       },
         "300000000000000",
@@ -191,7 +191,6 @@ function SendTokens(props) {
         <div>
           <input
             type="number"
-
             placeholder="0"
             onChange={handleAmount}
             style={{

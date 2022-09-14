@@ -24,7 +24,7 @@ export async function getBalance(state: { tokenContract: { ft_balance_of: (arg0:
         });
     console.log("Your Balance :", balance);
     const blnc = new Big(balance || 0);
-    const formatted = blnc.div("10e23").toFixed(1);
+    const formatted = blnc.div("10e23").toFixed(3);
     if (formatted !== state.aexBalance) {
         state.setAexBalance(formatted);
     }

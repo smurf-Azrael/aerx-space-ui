@@ -15,6 +15,7 @@ import { getUserState, setImages } from "../../store/slices/imageSlices";
 import LogOut from "./LogOut";
 import CircleList from "./CircleList";
 import Circle from "./Circle";
+import { expandChat, expandFlow } from "../../store/slices/modulesSlices";
 
 
 function Profile(props) {
@@ -34,6 +35,7 @@ function Profile(props) {
   const [circ,setCirc] = React.useState(false)
   const remCirc = () => {
     setCirc((prevState) => !prevState)
+    console.log('done',circ)
   }
   let disabled
   let opacity
@@ -72,7 +74,7 @@ const mouseDown= (e) => {
         height="45%"
         width="100%"
         
-      onMouseDown={(e) => props.doubleClick(e)}
+  
 
       onDoubleClick={(e) => props.doubleClick(e)}
       cursor="pointer"
@@ -177,6 +179,11 @@ const mouseDown= (e) => {
         </Flex>
         <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px">
           {/* first */}
+          <Box
+          cursor="pointer"
+          onClick={() => dispatch(expandFlow())}
+          
+          >
           <Image
             src={frameP1}
             w="24.88px"
@@ -191,13 +198,18 @@ const mouseDown= (e) => {
             w="34px"
             h="34px"
           />
+          </Box>
           {/* second */}
+          <Box
+            cursor={"pointer"}
+            onClick={() => dispatch(expandChat())}
+          >
           <Image
             src={frameP2}
             w="24.88px"
             h="24.88px"
             position="absolute"
-            mt="19.5%"
+            mt="1.5%"
             ml="2%"
           />
 
@@ -207,6 +219,7 @@ const mouseDown= (e) => {
             w="34px"
             h="34px"
           />
+          </Box>
           {/* third*/}
           <Image
             src="../resources/Frame 14281.png"
@@ -233,26 +246,26 @@ const mouseDown= (e) => {
         flexDirection="column"
       >
         <Center>
-          <div
-            className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+            <div
+              className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
         mt-2
         "
-            onClick={remCirc}
-          >
-            <MinusIcon
-              w="21.92px"
-              bgColor="rgba(255, 255, 255, 0.3);"
-              height="2px"
-            />
-            <MinusIcon
-              w="21.92px"
-              bgColor="rgba(255, 255, 255, 0.3);"
-              height="2px"
-            />
-          </div>
-        </Center>
+              onClick={remCirc}
+            >
+              <MinusIcon
+                w="21.92px"
+                bgColor="rgba(255, 255, 255, 0.3);"
+                height="2px"
+              />
+              <MinusIcon
+                w="21.92px"
+                bgColor="rgba(255, 255, 255, 0.3);"
+                height="2px"
+              />
+            </div>
+          </Center>
         <Text
           marginLeft="16.44px"
           marginTop="2%"

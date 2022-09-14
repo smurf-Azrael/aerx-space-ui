@@ -20,7 +20,7 @@ function NewPool(props) {
         mb-[26.825px]
         mt-2
         "
-        onClick={props.toggleWallet}
+        onClick={props.toggle}
       >
         <MinusIcon
             w="21.92px"
@@ -42,7 +42,7 @@ function NewPool(props) {
         fontSize="10.96px"
         fontWeight="400"
       >
-        <Flex gap="5.48px" alignItems="center" mb="137px" onClick={() => props.newPool()}>
+        <Flex gap="5.48px" alignItems="center" mb="137px" onClick={() => props.addPool()} cursor="pointer">
           <Image
             src={"../resources/Arrow - Right1.png"}
             color="#FFFFFF4D;"

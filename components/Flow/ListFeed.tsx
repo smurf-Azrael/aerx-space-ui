@@ -43,14 +43,14 @@ const TextPost: React.FC<IProps> = ({
     const randomColor = generateRandomColor();
 
     return (
-        <div className='w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2' style={{
+        <div className='w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2 ' style={{
             backgroundImage: `url(${bgImage})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundColor: `${randomColor}`
         }}>
-            <div className='flex justify-between items-center'>
-                <div className='flex gap-2 items-center'>
+            <div className='sticky top-2 flex justify-between items-center' >
+                <div className=' flex gap-2 items-center'>
                     <Image src={profile?.metadata?.media as string ||
                         "/assets/images/avatar-1.svg"}
                         className='w-8 h-8 rounded-full'
@@ -65,9 +65,12 @@ const TextPost: React.FC<IProps> = ({
             </div>
 
             <div>
+                <div className='overflow-y-scroll'>
                 <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
+                <div className='h-[135px] overflow-y-scroll'>
                 <p className='text-sm text-white mt-2'>{metadata?.description} </p>
-
+                </div>
+                </div>
                 <div className='flex justify-between mt-2 items-center'>
                     <div className='flex gap-3 items-center'>
                         <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>

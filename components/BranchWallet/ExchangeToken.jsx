@@ -97,7 +97,7 @@ function Exchange(props) {
       </Center>
 
       <Flex
-        mb="94.53px"
+        mb="22%"
         mx="16.44px"
         gap="160.29px"
         alignItems="center"

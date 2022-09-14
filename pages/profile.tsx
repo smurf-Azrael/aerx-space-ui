@@ -6,7 +6,7 @@ const Profile = () => {
 
     return (
         <div className="profile background-black poppins">
-            <NewPool />
+            {/* <NewPool /> */}
         </div>
     );
 };

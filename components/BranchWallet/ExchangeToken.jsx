@@ -10,60 +10,246 @@ import {
   PseudoBox,
 } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
+import { nearStore } from '../../store/near';
+import { Big } from "big.js";
+import { getAexPrice, getEquivalentAex } from '../../lib/aexPriceCalculator';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Exchange(props) {
   const [isExchange, setExchange] = React.useState(false);
-  const [swapValue, setSwapValue] = React.useState({
-    near: "",
-    aex: "",
-  });
+  const [convertedNear, setConvertedNear] = React.useState(0);
+  const [convertedAex, setconvertedAex] = React.useState(0);
+  const [minimumNear, setMinimumNear] = React.useState(0);
+  const [minimumAex, setMinimumAex] = React.useState(0);
   const [tolerance, setTolerance] = React.useState(0.1);
+  const [expectedReturnNear, setExpectedReturnNear] = React.useState();
+  const [expectedReturnAex, setExpectedReturnAex] = React.useState();
+  const [minExpectedNear, setMinExpectedNear] = React.useState();
+  const [minExpectedAex, setMinExpectedAex] = React.useState();
+  const [amountToSwapNear, setAmountToSwapNear] = React.useState("");
+  const [amountToSwapAex, setAmountToSwapAex] = React.useState("");
+  const [amountToSwapOther, setAmountToSwapOther] = React.useState("");
+  const [tokenFrom, setTokenFrom] = React.useState("aextestnew.mohzcrea8me.testnet");
+  const [pointerColour, setPointerColour] = React.useState({
+    colour1: "#ffffff",
+    colour2: "#FFFFFF4D;",
+    colour3: "#FFFFFF4D;",
+  });
+  const [inputonFocus, setInputonFocus] = React.useState(false);
+  const nearState = nearStore((state) => state);
 
+  const swapCapture = () => {
+    if (tokenFrom == "aextestnew.mohzcrea8me.testnet") {
+      setTokenFrom("near.near")
+    } else {
+      setTokenFrom("aextestnew.mohzcrea8me.testnet")
+    }
+  }
 
   const swap = () => {
     setExchange((prevState) => !prevState);
   };
-  const handleSwap = (event) => {
-    setSwapValue((prevState) => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
-    }));
+
+  const handleSwapAex = async (e) => {
+    if (tokenFrom == "aextestnew.mohzcrea8me.testnet") {
+      setAmountToSwapAex(`${e.target.value}`);
+      const inputBigN = new Big(e.target.value || 0);
+      const formattedInput = inputBigN.mul("10e23").toFixed(0);
+      const expectedReturn = await nearState.DexContract.get_return_amount_in_u128({
+        pool_id: 1, amount_to_swap: formattedInput, token_from: "aextestnew.mohzcrea8me.testnet", token_to: "near.near"
+      });
+      const priceFromPool = await nearState.DexContract.get_price_from_pool({
+        pool_id: 1, token_id: "aextestnew.mohzcrea8me.testnet"
+      })
+      setExpectedReturnNear(expectedReturn)
+      const slippagePercentage = tolerance / 100;
+      const slippageAmount = slippagePercentage * expectedReturn;
+      const minReturn = expectedReturn - slippageAmount;
+      setMinExpectedNear(minReturn)
+      const PriceBigN = new Big(priceFromPool || 0);
+      const formattedPrice = PriceBigN.div("10e23").toFixed(4);
+      if (0 >= formattedPrice) {
+        const Price = parseFloat(priceFromPool / 1000000000000000000000000).toFixed(4);
+        const calculatedOutput = Price * e.target.value;
+        setConvertedNear(parseFloat(calculatedOutput).toFixed(4));
+        const slippagePercentageEffect = slippagePercentage * calculatedOutput;
+        const amountDueToSlippage = calculatedOutput - slippagePercentageEffect;
+        setMinimumNear(parseFloat(amountDueToSlippage).toFixed(4));
+
+      } else {
+        const calculatedOutput = formattedPrice * e.target.value;
+        setConvertedNear(parseFloat(calculatedOutput).toFixed(4));
+        const slippagePercentage = tolerance / 100;
+        const slippagePercentageEffect = slippagePercentage * calculatedOutput;
+        const amountDueToSlippage = calculatedOutput - slippagePercentageEffect;
+        setMinimumNear(parseFloat(amountDueToSlippage).toFixed(4));
+      }
+    }
   };
 
+  const getMinimumNear = () => {
+    const slippagePercentage = tolerance / 100;
+    const slippageAmount = slippagePercentage * expectedReturnNear;
+    const minReturn = expectedReturnNear - slippageAmount;
+    setMinExpectedNear(minReturn)
+    const slippagePercentageEffect = slippagePercentage * convertedNear;
+    const amountDueToSlippage = convertedNear - slippagePercentageEffect;
+    setMinimumNear(parseFloat(amountDueToSlippage).toFixed(4));
+  }
 
-  const slipPage = (slip) => {
-    setTolerance(slip);
+  const handleSwapNear = async (e) => {
+    if (tokenFrom == "near.near") {
+      setAmountToSwapNear(e.target.value);
+      const inputBigN = new Big(e.target.value || 0);
+      const formattedInput = inputBigN.mul("10e23").toFixed(0);
+      const expectedReturn = await nearState.DexContract.get_return_amount_in_u128({
+        pool_id: 1, amount_to_swap: formattedInput, token_from: "near.near", token_to: "aextestnew.mohzcrea8me.testnet"
+      });
+      const priceFromPool = await nearState.DexContract.get_price_from_pool({
+        pool_id: 1, token_id: "near.near"
+      });
+      setExpectedReturnAex(expectedReturn)
+      const slippagePercentage = tolerance / 100;
+      const slippageAmount = slippagePercentage * expectedReturn;
+      const minReturn = expectedReturn - slippageAmount;
+      setMinExpectedAex(minReturn)
+      const PriceBigN = new Big(priceFromPool || 0);
+      const formattedPrice = PriceBigN.div("10e23").toFixed(4);
+      if (0 >= formattedPrice) {
+        const Price = parseFloat(priceFromPool / 1000000000000000000000000).toFixed(4);
+        const calculatedOutput = Price * e.target.value;
+        setconvertedAex(parseFloat(calculatedOutput).toFixed(4));
+        const slippagePercentageEffect = slippagePercentage * calculatedOutput;
+        const amountDueToSlippage = calculatedOutput - slippagePercentageEffect;
+        setMinimumAex(parseFloat(amountDueToSlippage).toFixed(4));
+      } else {
+        const calculatedOutput = formattedPrice * e.target.value;
+        setconvertedAex(parseFloat(calculatedOutput).toFixed(4));
+        const slippagePercentage = tolerance / 100;
+        const slippagePercentageEffect = slippagePercentage * calculatedOutput;
+        const amountDueToSlippage = calculatedOutput - slippagePercentageEffect;
+        setMinimumAex(parseFloat(amountDueToSlippage).toFixed(4));
+      }
+    } else {
+      setAmountToSwapOther(e.target.value)
+      //Todo: handle convertion
+    }
+
   };
-  const slipInput = (event) => {
-    setTolerance(event.target.value);
+  const getMinimumAex = () => {
+    const slippagePercentage = tolerance / 100;
+    const slippageAmount = slippagePercentage * expectedReturnAex;
+    const minReturn = expectedReturnAex - slippageAmount;
+    setMinExpectedAex(minReturn)
+    const slippagePercentageEffect = slippagePercentage * convertedAex;
+    const amountDueToSlippage = convertedAex - slippagePercentageEffect;
+    setMinimumAex(parseFloat(amountDueToSlippage).toFixed(4));
   };
 
-  const swapToken = () => {
+  const slippageCoverForClick = (slip) => {
+    setTolerance(slip)
+    handlePointerColour(slip)
+    setInputonFocus(false)
+  };
+
+  const handlePointerColour = (slip) => {
+    if (slip == 0.1) {
+      setPointerColour({
+        colour1: "#ffffff",
+        colour2: "#FFFFFF4D;",
+        colour3: "#FFFFFF4D;",
+      })
+    }
+    if (slip == 0.5) {
+      setPointerColour({
+        colour1: "#FFFFFF4D;",
+        colour2: "#ffffff",
+        colour3: "#FFFFFF4D;",
+      })
+    }
+    if (slip == 1) {
+      setPointerColour({
+        colour1: "#FFFFFF4D;",
+        colour2: "#FFFFFF4D;",
+        colour3: "#ffffff",
+      })
+    }
+
+  }
+
+  const handleSlippageCoverForClick = () => {
+    getMinimumNear();
+    getMinimumAex();
+  }
+
+
+  const slippageCoverForInput = (e) => {
+    //Todo: warn user of frontruning if higher than 9
+    setInputonFocus(true)
+    setPointerColour({
+      colour1: "#FFFFFF4D;",
+      colour2: "#FFFFFF4D;",
+      colour3: "#FFFFFF4D;",
+    })
+    if (e.target.value > 100) {
+      setTolerance(100)
+    } else (
+      setTolerance(e.target.value)
+    )
+
+  };
+
+  const handleSlippageCoverForInput = () => {
+    getMinimumNear();
+    getMinimumAex();
+  }
+
+
+  //Todo: handle min expected due to slippage
+  const swapToOrFromAex = async () => {
     console.log("Swap button has been clicked");
-    console.log("minimum Aex: ", minimumAex);
-    console.log("minimum Near: ", minimumNear);
+    if (tokenFrom == "near.near") {
+      if (amountToSwapNear > 0) {
+        try {
+          await nearState.DexContract.swap_aex({
+            pool_id: 1,
+            token_to: "aextestnew.mohzcrea8me.testnet",
+            amount: `${amountToSwapNear * 1000000000000000000000000} `,
+            min_expected: minExpectedAex,
+          },
+            "300000000000000",
+            `${amountToSwapNear * 1000000000000000000000000}`
+          )
+          toast.success("Successfully swapped NEAR to AEX")
+        } catch (err) {
+          toast.error("Unable to swap NEAR to AEX")
+          console.log("Unable to swap NEAR to AEX due to: ", err)
+        }
+      }
+    }
+
+    if (tokenFrom == "aextestnew.mohzcrea8me.testnet") {
+      if (amountToSwapAex > 0) {
+        try {
+          await nearState.DexContract.swap_aex({
+            pool_id: 1,
+            token_to: "near.near",
+            amount: `${amountToSwapAex * 1000000000000000000000000}`,
+            min_expected: minExpectedNear,
+          },
+            "300000000000000",
+            "1"
+          )
+          toast.success("Successfully swapped AEX to NEAR")
+          console.log("Successfully swapped AEX to NEAR")
+        } catch (err) {
+          toast.error("Unable to swap AEX to NEAR")
+          console.log("Unable to swap AEX to NEAR due to: ", err)
+        }
+      }
+    }
   };
 
-  const calculatedAexOutput = swapValue.aex / 111;
-  const calculatedNearOutput = 111 * swapValue.near;
-  const tolerancePercentage = tolerance / 100;
-  const calcDifferenceAex = tolerancePercentage * calculatedAexOutput;
-  const calcDifferenceNear = tolerancePercentage * calculatedNearOutput;
-  const minimumAex = calculatedAexOutput - calcDifferenceAex;
-  const minimumNear = calculatedNearOutput - calcDifferenceNear;
-
-  let color1 = "#FFFFFF4D;";
-  let color2 = "#FFFFFF4D;";
-  let color3 = "#FFFFFF4D;";
-  if (tolerance === 0.1) {
-    color1 = "#ffffff";
-  }
-  if (tolerance === 0.5) {
-    color2 = "#ffffff";
-  }
-  if (tolerance === 1) {
-    color3 = "#ffffff";
-  }
 
   return (
     <Box
@@ -97,7 +283,7 @@ function Exchange(props) {
       </Center>
 
       <Flex
-        mb="22%"
+        mb="94.53px"
         mx="16.44px"
         gap="160.29px"
         alignItems="center"
@@ -170,7 +356,7 @@ function Exchange(props) {
 
           <div style={{ display: "flex", alignItems: "center" }}>
             <input
-              onChange={handleSwap}
+              onChange={handleSwapNear}
               type="number"
               placeholder="0"
               name="near"
@@ -220,7 +406,7 @@ function Exchange(props) {
 
           <div style={{ display: "flex", alignItems: "center" }}>
             <input
-              onChange={handleSwap}
+              onChange={handleSwapAex}
               type="number"
               name="aex"
               placeholder="0"
@@ -263,32 +449,35 @@ function Exchange(props) {
           h="38.36px"
         >
           <Text
-            color={color1}
+            color={pointerColour.colour1}
             cursor="pointer"
-            onClick={() => slipPage(0.1)}
+            onClick={handleSlippageCoverForClick}
+            onClickCapture={() => slippageCoverForClick(0.1)}
             mr="19.18px"
           >
             0.1%
           </Text>
 
           <Text
-            color={color2}
+            color={pointerColour.colour2}
             // ml="39.045px"
             mr="19.18px"
             cursor="pointer"
-            onClick={() => slipPage(0.5)}
+            onClick={handleSlippageCoverForClick}
+            onClickCapture={() => slippageCoverForClick(0.5)}
           >
             0.5%
           </Text>
 
-          <Text color={color3} cursor="pointer" onClick={() => slipPage(1)}>
+          <Text color={pointerColour.colour3} cursor="pointer" onClick={handleSlippageCoverForClick} onClickCapture={() => slippageCoverForClick(1)}>
             1%
           </Text>
         </Flex>
-
         <input
-          onChange={slipInput}
+          onInput={handleSlippageCoverForInput}
+          onInputCapture={slippageCoverForInput}
           type="number"
+          name="slippageInputTag"
           style={{
             color: "#6054f0",
             textAlign: "center",
@@ -298,7 +487,7 @@ function Exchange(props) {
             height: "38.36px",
             borderRadius: "10.275px",
           }}
-        />
+        ></input>
       </Flex>
 
       {/* INPUT BEFORE SLIPPAGE TOLLERNCE ENDS */}
@@ -327,7 +516,8 @@ function Exchange(props) {
           w="16.44px"
           h="16.44px"
           cursor="pointer"
-          onClick={() => swap()}
+          onClickCapture={swapCapture}
+          onClick={swap}
         />
 
         <Box
@@ -377,7 +567,7 @@ function Exchange(props) {
             <input
               disabled="true"
               type="number"
-              placeholder={calculatedNearOutput}
+              placeholder={convertedAex}
               style={{
                 backgroundColor: "#191a1b",
                 color: "rgba(255, 255, 255, 0.3)",
@@ -427,7 +617,7 @@ function Exchange(props) {
             <input
               disabled="true"
               cursor="not-allowed"
-              placeholder={calculatedAexOutput}
+              placeholder={convertedNear}
               type="number
             "
               style={{
@@ -490,7 +680,7 @@ function Exchange(props) {
               fontSize="9.59"
               color="#FFFFFF4D"
             >
-              {minimumNear}
+              {minimumAex}
             </Text>
           ) : (
             <Text
@@ -499,7 +689,7 @@ function Exchange(props) {
               fontSize="9.59"
               color="#FFFFFF4D"
             >
-              {minimumAex}
+              {minimumNear}
             </Text>
           )}
           {/* <Text color="#ffffff">3.9666666</Text> */}
@@ -524,7 +714,7 @@ function Exchange(props) {
           bgColor="#6054F0;"
           w="191.8px"
           h="38.36px"
-          onClick={swapToken}
+          onClick={swapToOrFromAex}
           cursor="pointer"
         >
           <Image src={"../resources/Frame 5556.png"} mr="5.48px" />
@@ -548,12 +738,13 @@ function Exchange(props) {
             fontSize="9.59"
             color="#FFFFFF4D"
           >
-            minimuim aex recieved :{minimumAex}
+            minimuim aex recieved :{m}
           </Text>
         )} */}
       </Center>
     </Box>
   );
 }
+import { from } from "form-data";
 
 export default Exchange;

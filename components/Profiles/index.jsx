@@ -19,12 +19,15 @@ import RecieveToken from "../BranchWallet/RecieveToken";
 import { useState } from "react";
 import CircleList from "./CircleList";
 import LogOut from "./LogOut";
+import { useDispatch } from "../../store/store";
+import { triggerSidebar } from "../../store/slices/modulesSlices";
 
 // type Props = {
 // }
 // const [toggle,setToggle] = React.useState<boolean>(false)
 
 function Index() {
+  const dispatch = useDispatch();
   const [isToggle, setToggle] = useState(false);
   const [doubleClicked, setDoubleClicked] = useState(false);
   const [isOpenWallet, setOpenWallet] = useState(false);
@@ -75,6 +78,8 @@ function Index() {
 
   // change toggle state
   const toggleClick = () => {
+    // toggle state
+    dispatch(triggerSidebar());
     setToggle((prevState) => !prevState);
     // change toggle state
   };

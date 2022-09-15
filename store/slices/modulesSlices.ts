@@ -15,6 +15,9 @@ export type ModulesState = {
     },
     collections: {
         collapsed: boolean
+    },
+    sidebar: {
+        collapsed: boolean
     }
 }
 
@@ -32,6 +35,9 @@ const initialState: ModulesState = {
     },
     collections: {
         collapsed: false,
+    },
+    sidebar: {
+        collapsed: true,
     }
 }
 
@@ -66,6 +72,9 @@ export const expandCollections = createAsyncThunk('modules/expandCollections',
     async () => {}
 );
 
+export const triggerSidebar = createAsyncThunk('modules/triggerSidebar',
+    async () => {}
+);
 export const modulesSlice = createSlice({
     name: 'modules',
     initialState,
@@ -111,7 +120,11 @@ export const modulesSlice = createSlice({
         ).addCase(expandCollections.fulfilled, (state, action) => {
             state.collections.collapsed = false;
         }
-        );
+        )
+        .addCase(triggerSidebar.fulfilled, (state, action) => {
+            state.sidebar.collapsed = !state.sidebar.collapsed;
+        }
+        )
     }
     })
 

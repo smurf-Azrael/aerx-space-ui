@@ -88,7 +88,7 @@ const Chat: React.FC = () => {
 
 
     const [activeMessage, setActiveMessage] = useState<number>(0);
-    const { chat, flow } = useSelector(selectModules)
+    const { chat, sidebar } = useSelector(selectModules)
     const nearState: any = nearStore((state) => state);
     const [profilePosts, setProfilePosts] = useState<any>([]);
     const [profiles, setProfiles] = useState<Array<Feed>>([]);
@@ -173,7 +173,7 @@ const Chat: React.FC = () => {
 
     return (
         <div className='w-full h-[100%] bg-black-dark rounded-[10px] flex gap-2 '>
-            {!chat.minimized &&
+            {!chat.minimized && sidebar.collapsed &&
                 <div className='w-[45%] h-full rounded-[10px] bg-black-light  p-4'
                     style={{
                         // width: (chat.minimized) ? "0%" : ""
@@ -212,7 +212,7 @@ const Chat: React.FC = () => {
             }
             <div className='w-[55%] h-full'
                 style={{
-                    width: (chat.minimized) ? "100%" : "",
+                    width: (chat.minimized || !sidebar.collapsed) ? "100%" : "",
                 }}
             >
                 <ChatRoom activeMessage={chats[activeMessage]} />

@@ -217,9 +217,9 @@ const loadDexContrat = (
     account: ConnectedWalletAccount,
 ) => {
     const dexContract = new Contract(account, DEX_CONTRACT_NAME, {
-        viewMethods: ["all_pools", "get_user_share"],
+        viewMethods: ["all_pools", "get_user_share", "get_pool", "get_price_from_pool", "get_return_amount_in_u128"],
         changeMethods: [
-            "connect_or_get_balance",
+            "register_or_get_balance",
             "create_pool",
             "lend",
             "swap_aex",

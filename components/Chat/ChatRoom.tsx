@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from '../../store/store';
 import { collapseChat, minimizeChat, selectModules } from '../../store/slices/modulesSlices';
 import SendTokens from '../SendTokens';
 import { IMessageItem } from '.';
-import { listBuckets, sendMessage, getChat } from '../../lib/aerxChat'
 import { nearStore } from '../../store/near';
 import { selectMessages, setDirectMessages } from '../../store/slices/messagesSlice';
+const { Readable } = require("stream")
 
 const PrimaryHeader: React.FC = () => {
     const { chat } = useSelector(selectModules);
@@ -74,133 +74,12 @@ const SecondaryHeader: React.FC<{
     )
 }
 
-const MessagesWrapper: React.FC<{activeReceiver: IMessageItem}> = ({ activeReceiver }) => {
+const MessagesWrapper: React.FC<{ activeReceiver: IMessageItem }> = ({ activeReceiver }) => {
     const userId: string = '2';
     const nearState = nearStore((state) => state);
-    const dispatch =  useDispatch();
-    // const messages: Array<Message> = [
-    //     {
-    //         id: '1',
-    //         sender: {
-    //             id: '1',
-    //             name: 'Peter White',
-    //             avatar: '/assets/images/avatar-1.svg'
-    //         },
-    //         recipient: {
-    //             id: '2',
-    //             name: 'John Doe',
-    //             avatar: '/assets/images/avatar-2.svg'
-    //         },
-    //         content: 'Lorem ipsum dolor sit amet, consectet adipiscing elit ut aliquam.',
-    //         type: EMessageType.TEXT
-    //     },
-    //     {
-    //         id: '1',
-    //         sender: {
-    //             id: '2',
-    //             name: 'Lorem ipsum dolor sit amet, consectet adipiscing elit ut aliquam.',
-    //             avatar: '/assets/images/avatar-1.svg'
-    //         },
-    //         recipient: {
-    //             id: '1',
-    //             name: 'John Doe',
-    //             avatar: '/assets/images/avatar-2.svg'
-    //         },
-    //         content: 'Hello, how are you?',
-    //         type: EMessageType.TEXT
-    //     },
-    //     {
-    //         id: '1',
-    //         sender: {
-    //             id: '2',
-    //             name: 'Lorem ipsum dolor sit amet, consectet adipiscing elit ut aliquam.',
-    //             avatar: '/assets/images/avatar-1.svg'
-    //         },
-    //         recipient: {
-    //             id: '1',
-    //             name: 'John Doe',
-    //             avatar: '/assets/images/avatar-2.svg'
-    //         },
-    //         content: 'Consectet adipiscing',
-    //         type: EMessageType.TEXT
-    //     },
-    //     {
-    //         id: '1',
-    //         sender: {
-    //             id: '1',
-    //             name: 'Peter White',
-    //             avatar: '/assets/images/avatar-1.svg'
-    //         },
-    //         recipient: {
-    //             id: '2',
-    //             name: 'John Doe',
-    //             avatar: '/assets/images/avatar-2.svg'
-    //         },
-    //         content: '+12 786 ae',
-    //         type: EMessageType.ACTION,
-    //         createdAt: '02:00'
-    //     },
-    //     {
-    //         id: '1',
-    //         sender: {
-    //             id: '1',
-    //             name: 'Peter White',
-    //             avatar: '/assets/images/avatar-1.svg'
-    //         },
-    //         recipient: {
-    //             id: '2',
-    //             name: 'John Doe',
-    //             avatar: '/assets/images/avatar-2.svg'
-    //         },
-    //         content: '+12 786 ae',
-    //         type: EMessageType.AUDIO
-    //     },
-    //     {
-    //         id: '1',
-    //         sender: {
-    //             id: '2',
-    //             name: 'Lorem ipsum dolor sit amet, consectet adipiscing elit ut aliquam.',
-    //             avatar: '/assets/images/avatar-1.svg'
-    //         },
-    //         recipient: {
-    //             id: '1',
-    //             name: 'John Doe',
-    //             avatar: '/assets/images/avatar-2.svg'
-    //         },
-    //         content: 'Consectet adipiscing elit ut aliquam.',
-    //         type: EMessageType.TEXT
-    //     },
-    //     {
-    //         id: '1',
-    //         sender: {
-    //             id: '1',
-    //             name: 'Peter White',
-    //             avatar: '/assets/images/avatar-1.svg'
-    //         },
-    //         recipient: {
-    //             id: '2',
-    //             name: 'John Doe',
-    //             avatar: '/assets/images/avatar-2.svg'
-    //         },
-    //         content: 'Lorem ipsum dolor sit amet, consectet adipiscing elit ut aliquam.',
-    //         type: EMessageType.TEXT
-    //     }
-    // ];
+    const dispatch = useDispatch();
+    const { messages } = useSelector(selectMessages)
 
-    const {messages} = useSelector(selectMessages)
-
-    /* get messages */
-    const [chatMessages, setChatMessages] = useState<Array<IMessageItem>>([]);
-
-    useEffect(() => {
-    getMessages();
-    },[activeReceiver])
-
-    const getMessages = async () => {
-        // alert("get messages "+activeReceiver?.accountId+" "+nearState.accountId)
-        const messages = await getChat(activeReceiver?.accountId, nearState.accountId, dispatch);
-    }
-    /* end get messages*/
 
     const RenderSenderMessage: React.FC<{ content: string, type: EMessageType }> = ({ content, type }) => {
         return (
@@ -256,7 +135,7 @@ const MessagesWrapper: React.FC<{activeReceiver: IMessageItem}> = ({ activeRecei
                     {type !== EMessageType.ACTION &&
                         <>
                             {sender?.id === nearState.accountId &&
-                                <RenderSenderMessage content={content} type={type} />
+                                <RenderSenderMessage content={nearState.prevChats} type={type} />
                             }
                             {sender?.id !== nearState.accountId &&
                                 <RenderRecipientMessage content={content} type={type} />
@@ -277,29 +156,167 @@ const SendMessage: React.FC<{
     onSend: () => void,
     activeReceiver: IMessageItem
 }> = ({ onSend, activeReceiver }) => {
-    const { messages } = useSelector(selectMessages)
-    const dispatch = useDispatch();
     const [message, setMessage] = useState<string>('');
+    const [prevChatsBetweenUsers, setPrevChatsBetweenUsers] = useState<string>('');
+    const [prevChats, setPrevChats] = useState<string>();
     const nearState = nearStore((state) => state);
 
-    const handleSendMessage = async () => {
-        // alert("send message "+activeReceiver?.accountId+" "+nearState.accountId)
-        const response = await sendMessage(nearState.accountId, activeReceiver.accountId,message);
-        let messagesClone = [...messages];
-        const newMessage: Message = {
-            id: Math.random().toString(36).substring(7),
-            sender: {
-                id: nearState.accountId,
-                name: nearState.accountId,
-            },
-            type: EMessageType.TEXT,
-            content: message,
-            createdAt: new Date().toISOString()
+    const AWS = require('aws-sdk');
+    const filebase = new AWS.S3({
+        endpoint: 'https://s3.filebase.com',
+        signatureVersion: 'v4',
+        accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
+
+    });
+
+    const initChat = (caller: string, receiver: string, message: string) => {
+        const aerx_chat = {
+            Bucket: "aerx-chats",
+            Key: `aerx-chat between ${[caller, receiver]}`,
+            Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]`,
+            ContentType: "aerx-chat",
+            Metadata: {
+                sender: `${caller} `,
+                receiver: `${receiver} `,
+            }
         }
-        messagesClone.push(newMessage);
-        dispatch(setDirectMessages(messagesClone));
-        let txtArea = document.getElementById('textarea') as HTMLTextAreaElement;
-        txtArea.value = '';
+        filebase.putObject(aerx_chat, (err: any, data: any) => {
+            if (err) {
+                console.log("Error! unable to upload chat ", err.stack)
+            } else {
+                console.log("Chat uploaded succesfully ", data)
+            }
+        })
+    }
+
+    const getChat = (caller: string, receiver: string) => {
+        const params = {
+            Key: `aerx-chat between ${caller},${receiver}`,
+            Bucket: "aerx-chats"
+        };
+        try {
+            return filebase.getObject(params, (err: any, data: any) => {
+                if (err) {
+                    const param = {
+                        Key: `aerx-chat between ${receiver},${caller}`,
+                        Bucket: "aerx-chats"
+                    };
+                    filebase.getObject(param, (err: any, data: any) => {
+                        if (err) {
+                            console.log("Chat does not exist")
+                        } else {
+                            const prevChat = Buffer.from(data.Body, 'utf8').toString();
+                            nearState.setPrevChats(prevChat)
+                            setPrevChats(prevChat)
+                            return prevChat;
+                        }
+                    });
+                } else {
+                    const prevChat = Buffer.from(data.Body, 'utf8').toString();
+                    nearState.setPrevChats(prevChat)
+                    setPrevChats(prevChat)
+                    return prevChat;
+                }
+            })
+        } catch (err) {
+            console.error("try caught error: ", err);
+
+        }
+
+    }
+
+    //Todo: use a function to handle the init chat on second try
+    const sendMessage = async (caller: string, receiver: string, message: string) => {
+        const params = {
+            Key: `aerx-chat between ${caller},${receiver}`,
+            Bucket: "aerx-chats"
+        };
+        try {
+            filebase.getObject(params, (err: any, data: any) => {
+                if (err) {
+                    const param = {
+                        Key: `aerx-chat between ${receiver},${caller}`,
+                        Bucket: "aerx-chats"
+                    };
+                    filebase.getObject(param, (err: any, data: any) => {
+                        if (err) {
+                            console.log("Chat does not exist")
+                        } else {
+                            const prevChat = Buffer.from(data.Body, 'utf8').toString();
+                            const aerx_chat = {
+                                Bucket: "aerx-chats",
+                                Key: `aerx-chat between ${[caller, receiver]}`,
+                                Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]` + " " + "\n" + `${prevChat}`,
+                                ContentType: "aerx-chat",
+                                Metadata: {
+                                    sender: `${caller} `,
+                                    receiver: `${receiver} `,
+                                }
+                            };
+                            filebase.putObject(aerx_chat, (err: any, data: any) => {
+                                if (err) {
+                                    console.log("Error! unable to upload chat ", err.stack)
+                                } else {
+                                    console.log("Chat uploaded succesfully ", data)
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    const prevChat = Buffer.from(data.Body, 'utf8').toString();
+                    const aerx_chat = {
+                        Bucket: "aerx-chats",
+                        Key: `aerx-chat between ${[caller, receiver]}`,
+                        Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]` + " " + "\n" + `${prevChat}`,
+                        ContentType: "aerx-chat",
+                        Metadata: {
+                            sender: `${caller} `,
+                            receiver: `${receiver} `,
+                        }
+                    };
+                    filebase.putObject(aerx_chat, (err: any, data: any) => {
+                        if (err) {
+                            console.log("Error! unable to upload chat ", err.stack)
+                        } else {
+                            console.log("Chat uploaded succesfully ", data)
+                        }
+                    });
+                }
+            })
+        } catch (err) {
+            console.error("try caught error: ", err);
+
+        }
+
+    }
+
+
+
+    const handleSendMessageCapture = async () => {
+        await getChat(nearState.accountId, activeReceiver.accountId);
+    }
+
+    const handleSendMessage = async () => {
+        console.log(activeReceiver.accountId)
+        if (nearState.prevChats == prevChats) {
+            try {
+                console.log("chat exist will send message")
+                await sendMessage(nearState.accountId, activeReceiver.accountId, message)
+            } catch (error) {
+                console.error("Error while sending message")
+            }
+
+        } else {
+            try {
+                console.log("chat does not exist will init message")
+                initChat(nearState.accountId, activeReceiver.accountId, message)
+            } catch (error) {
+                console.error("Error while initailizing chat")
+            }
+
+        }
+
     }
 
     return (
@@ -314,6 +331,12 @@ const SendMessage: React.FC<{
                         resize: 'none',
                     }}
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyDownCapture={(e) => {
+                        if (e.key === 'Enter') {
+                            handleSendMessageCapture();
+
+                        }
+                    }}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                             handleSendMessage();

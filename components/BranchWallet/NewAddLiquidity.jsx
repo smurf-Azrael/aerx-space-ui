@@ -11,38 +11,127 @@ import {
 } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
 import { nearStore } from "../../store/near";
+import { Big } from "big.js";
+import toast, { Toaster } from 'react-hot-toast';
 
 function NewAddLiquidity(props) {
+  const [deposit, setDeposit] = React.useState("");
+  const [convertedAex, setconvertedAex] = React.useState(0);
+  const [minimumAex, setMinimumAex] = React.useState(0);
+  const [tolerance, setTolerance] = React.useState(0.1);
+  const [pointerColour, setPointerColour] = React.useState({
+    colour1: "#ffffff",
+    colour2: "#FFFFFF4D;",
+    colour3: "#FFFFFF4D;",
+  });
   const nearState = nearStore((state) => state);
-  const addLiquidity = () => {
+  //Todo: handle min expected due to slippage
+  const lendNear = async () => {
+    console.log(`${deposit * 1000000000000000000000000}`)
     console.log("Add liquidity has been clicked");
-    // try {
-    //   nearState.DexContract.lend({
-    //     pool_id: 1,
-    //     token_id: "near.near",
-    //     amount: ,
-    //     min_expected: ,
-    //     equivalent_aex: ,
-    //   })
-    // } catch (error) {
-
-    // }
+    if (deposit > 0) {
+      try {
+        await nearState.DexContract.lend({
+          pool_id: 1,
+          token_id: "near.near",
+          equivalent_aex: `${convertedAex}`,
+        },
+          "300000000000000",
+          `${deposit * 1000000000000000000000000}`
+        );
+        toast.success("LIquidity added Successfully")
+        console.log("LIquidity added Successfully");
+      } catch (err) {
+        toast.error("Unable to add liquidity")
+        console.error("Unable to add liquidity due to: ", err)
+      }
+    }
   };
 
-  const [tolerance, setTolerance] = React.useState(0.1);
+  const handleSetDeposit = async (e) => {
+    const priceFromPool = await nearState.DexContract.get_price_from_pool({
+      pool_id: 1, token_id: "near.near"
+    });
+    const PriceBigN = new Big(priceFromPool || 0);
+    const formattedPrice = PriceBigN.div("10e23").toFixed(4);
+    if (0 >= formattedPrice) {
+      const Price = parseFloat(priceFromPool / 1000000000000000000000000).toFixed(4);
+      const calculatedOutput = Price * e.target.value;
+      setconvertedAex(parseFloat(calculatedOutput).toFixed(4));
+      const slippagePercentage = tolerance / 100;
+      const slippagePercentageEffect = slippagePercentage * calculatedOutput;
+      const amountDueToSlippage = calculatedOutput - slippagePercentageEffect;
+      setMinimumAex(parseFloat(amountDueToSlippage).toFixed(4));
+    } else {
+      const calculatedOutput = formattedPrice * e.target.value;
+      setconvertedAex(parseFloat(calculatedOutput).toFixed(4));
+      const slippagePercentage = tolerance / 100;
+      const slippagePercentageEffect = slippagePercentage * calculatedOutput;
+      const amountDueToSlippage = calculatedOutput - slippagePercentageEffect;
+      setMinimumAex(parseFloat(amountDueToSlippage).toFixed(4));
+    }
+  }
 
-  let color1 = "#FFFFFF4D;";
-  let color2 = "#FFFFFF4D;";
-  let color3 = "#FFFFFF4D;";
-  if (tolerance === 0.1) {
-    color1 = "#ffffff";
+  const getMinimumAex = () => {
+    const slippagePercentage = tolerance / 100;
+    const slippagePercentageEffect = slippagePercentage * convertedAex;
+    const amountDueToSlippage = convertedAex - slippagePercentageEffect;
+    setMinimumAex(parseFloat(amountDueToSlippage).toFixed(4));
+  };
+
+  const handleDepositCapture = (e) => {
+    setDeposit(`${e.target.value}`);
   }
-  if (tolerance === 0.5) {
-    color2 = "#ffffff";
+
+  const slippageCoverForClick = (slip) => {
+    setTolerance(slip)
+    handlePointerColour(slip)
+  };
+
+  const handlePointerColour = (slip) => {
+    if (slip == 0.1) {
+      setPointerColour({
+        colour1: "#ffffff",
+        colour2: "#FFFFFF4D;",
+        colour3: "#FFFFFF4D;",
+      })
+    }
+    if (slip == 0.5) {
+      setPointerColour({
+        colour1: "#FFFFFF4D;",
+        colour2: "#ffffff",
+        colour3: "#FFFFFF4D;",
+      })
+    }
+    if (slip == 1) {
+      setPointerColour({
+        colour1: "#FFFFFF4D;",
+        colour2: "#FFFFFF4D;",
+        colour3: "#ffffff",
+      })
+    }
+
   }
-  if (tolerance === 1) {
-    color3 = "#ffffff";
+
+
+  const handleSlippageCoverForClick = () => {
+    getMinimumAex();
   }
+
+
+  const slippageCoverForInput = (e) => {
+    //Todo: warn user of frontruning if higher than 9
+    if (e.target.value > 100) {
+      setTolerance(100)
+    } else (
+      setTolerance(e.target.value)
+    )
+  };
+
+  const handleSlippageCoverForInput = () => {
+    getMinimumAex();
+  }
+
 
   return (
     <Box
@@ -149,6 +238,8 @@ function NewAddLiquidity(props) {
           <input
             type="number"
             placeholder="0"
+            onChangeCapture={handleDepositCapture}
+            onChange={handleSetDeposit}
             style={{
               backgroundColor: "#191a1b",
               color: "rgba(255, 255, 255, 0.3)",
@@ -207,12 +298,13 @@ function NewAddLiquidity(props) {
         <div style={{ display: "flex", alignItems: "center" }}>
           <input
             type="number"
-            placeholder="0"
+            placeholder={convertedAex}
             style={{
               backgroundColor: "#191a1b",
               color: "rgba(255, 255, 255, 0.3)",
               width: "65.075px",
               height: "21.92px",
+              pointerEvents: "none",
             }}
           />
           <label style={{ color: "#FFFFFF26" }}>MAX</label>
@@ -249,31 +341,34 @@ function NewAddLiquidity(props) {
           h="38.36px"
         >
           <Text
-            color={color3}
+            color={pointerColour.colour1}
             cursor="pointer"
-            onClick={() => slipPage(0.1)}
+            onClickCapture={() => slippageCoverForClick(0.1)}
+            onClick={handleSlippageCoverForClick}
             mr="19.18px"
           >
             0.1%
           </Text>
 
           <Text
-            color={color2}
+            color={pointerColour.colour2}
             mr="19.18px"
             cursor="pointer"
-            onClick={() => slipPage(0.5)}
+            onClickCapture={() => slippageCoverForClick(0.5)}
+            onClick={handleSlippageCoverForClick}
           >
             0.5%
           </Text>
 
-          <Text color={color1} cursor="pointer" onClick={() => slipPage(1)}>
+          <Text color={pointerColour.colour3} cursor="pointer" onClickCapture={() => slippageCoverForClick(1)} onClick={handleSlippageCoverForClick}>
             1%
           </Text>
         </Flex>
 
         <input
-          value=""
           type="number"
+          onInput={handleSlippageCoverForInput}
+          onInputCapture={slippageCoverForInput}
           style={{
             color: "#6054f0",
             textAlign: "center",
@@ -298,6 +393,56 @@ function NewAddLiquidity(props) {
       >
         Slippage Tolerance
       </Text>
+      {/* SWAP DETAILS */}
+
+      <Text
+        textAlign="center"
+        mb="10.96px"
+        fontFamily="Poppins"
+        fontSize="10.96px"
+        fontWeight="342.5"
+        color="#ffffff"
+      >
+        Details
+      </Text>
+
+      <Flex
+        mb="27.4px"
+        w="191.8px"
+        mx="32.88px"
+        p="10.9px"
+        gap="10.96px"
+        flexDirection="column"
+        bgColor="#191a1b"
+        borderRadius="10.275px"
+      >
+        <Flex
+          justifyContent="space-between"
+          fontFamily="Poppins"
+          fontWeight="274"
+          fontSize="9.59px"
+        >
+          <Text color="rgba(255, 255, 255, 0.3)">Minimum received</Text>
+          <Text
+            fontFamily="Poppins"
+            fontWeight="400"
+            fontSize="9.59"
+            color="#FFFFFF4D"
+          >
+            {minimumAex}
+          </Text>
+          {/* <Text color="#ffffff">3.9666666</Text> */}
+        </Flex>
+        <Flex
+          justifyContent="space-between"
+          fontFamily="Poppins"
+          fontWeight="274"
+          fontSize="9.59px"
+        >
+          <Text color="rgba(255, 255, 255, 0.3)">Pool fee</Text>
+          <Text color="#ffffff">0.59% / 0.005 NEAR</Text>
+        </Flex>
+      </Flex>
 
       {/* BUTTON */}
 
@@ -311,7 +456,7 @@ function NewAddLiquidity(props) {
           w="191.8px"
           h="38.36px"
           letterSpacing="0.02px"
-          onClick={addLiquidity}
+          onClick={lendNear}
         >
           Add Liquidity
         </Button>

@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
-import { getChat, initChat } from '../../lib/aerxChat';
 import { nearStore } from '../../store/near';
 import { setDirectMessages } from '../../store/slices/messagesSlice';
 import { selectModules } from '../../store/slices/modulesSlices';
@@ -19,11 +18,12 @@ export interface IMessageItem {
     message: string,
     isActive?: boolean,
     onClick?: () => void;
+    onClickCapture?: () => void;
 }
 
 
 
-const ChatHeader: React.FC<{onChange: (searchValue:string) => void}> = ({ onChange }) => {
+const ChatHeader: React.FC<{ onChange: (searchValue: string) => void }> = ({ onChange }) => {
     const [isPersonalActive, setIsPersonalActive] = useState<boolean>(true);
     return (
         <div className=''>
@@ -48,10 +48,9 @@ const ChatHeader: React.FC<{onChange: (searchValue:string) => void}> = ({ onChan
         </div>
     )
 }
-
-const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, message, isActive, onClick }) => {
+const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, message, isActive, onClick, onClickCapture }) => {
     return (
-        <div onClick={onClick} className={`mt-2 mr-1 ${isActive ? 'bg-[#2b2b2b] rounded-[10px]' : ''} px-3 py-2`}>
+        <div onClickCapture={onClickCapture} onClick={onClick} className={`mt-2 mr-1 ${isActive ? 'bg-[#2b2b2b] rounded-[10px]' : ''} px-3 py-2`}>
             <div className='flex items-center gap-2 cursor-pointer '>
                 <div className='w-[25%] '>
                     <Image src={avatar} width={40} height={40} alt="Avatar" className='rounded-full' />
@@ -88,10 +87,12 @@ const Chat: React.FC = () => {
 
 
     const [activeMessage, setActiveMessage] = useState<number>(0);
-    const { chat, flow } = useSelector(selectModules)
+    const { chat, sidebar } = useSelector(selectModules)
     const nearState: any = nearStore((state) => state);
     const [profilePosts, setProfilePosts] = useState<any>([]);
     const [profiles, setProfiles] = useState<Array<Feed>>([]);
+    const [prevChats, setPrevChats] = useState<string>();
+
 
     useEffect(() => {
         if (nearState.pnftContract) {
@@ -154,32 +155,90 @@ const Chat: React.FC = () => {
         setChatsClone(messageItems);
     }
 
-    const handleSetActiveMessage = async (index: number) => {
+    const AWS = require('aws-sdk');
+    const filebase = new AWS.S3({
+        endpoint: 'https://s3.filebase.com',
+        signatureVersion: 'v4',
+        accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
+
+    });
+    const getChat = (caller: string, receiver: string) => {
+        const params = {
+            Key: `aerx-chat between ${caller},${receiver}`,
+            Bucket: "aerx-chats"
+        };
+        try {
+            return filebase.getObject(params, (err: any, data: any) => {
+                if (err) {
+                    const param = {
+                        Key: `aerx-chat between ${receiver},${caller}`,
+                        Bucket: "aerx-chats"
+                    };
+                    filebase.getObject(param, (err: any, data: any) => {
+                        if (err) {
+                            console.log("Chat does not exist")
+                        } else {
+                            const prevChat = Buffer.from(data.Body, 'utf8').toString();
+                            nearState.setPrevChats(prevChat)
+                            setPrevChats(prevChat)
+                            return prevChat;
+                        }
+                    });
+                } else {
+                    const prevChat = Buffer.from(data.Body, 'utf8').toString();
+                    nearState.setPrevChats(prevChat)
+                    setPrevChats(prevChat)
+                    return prevChat;
+                }
+            })
+        } catch (err) {
+            console.error("try caught error: ", err);
+
+        }
+
+    }
+
+    const handleSetActiveMessage = async () => {
+        if (nearState.prevChats != null && prevChats != null && nearState.prevChats == prevChats) {
+            const chatArray = nearState.prevChats.split("\n");
+            for (let i = 0; i < chatArray.length; i++) {
+                const json = JSON.parse(chatArray[i]);
+                console.log(json)
+                console.log("time: ", json[0])
+                console.log("sender: ", json[1])
+                console.log("message: ", json[2])
+            }
+            nearState.removePrevChats();
+        }
+
+    }
+
+    const handleCapture = async (index: number) => {
         setActiveMessage(index);
         dispatch(setActiveReceiver(chats[index].accountId));
-        const messagesExists = await getChat(nearState.accountId, chats[index].accountId, dispatch);
-        console.log("chats exists .....")
-        console.log(messagesExists)
-        // initChat(nearState.accountId, chats[index].accountId);
+        console.log(chats[index].accountId)
+        await getChat(nearState.accountId, chats[index].accountId);
     }
 
     const handleSearchName = async (searchValue: string) => {
-        if(searchValue === '' || searchValue === null || searchValue.replace(/\s/g, "").length === 0) {
+        if (searchValue === '' || searchValue === null || searchValue.replace(/\s/g, "").length === 0) {
             return setChatsClone(chats);
-        } 
+        }
         const filteredChats = chatsClone.filter((chat: IMessageItem) => chat.name.toLowerCase().includes(searchValue.toLowerCase()));
         setChatsClone(filteredChats);
     }
 
+
     return (
         <div className='w-full h-[100%] bg-black-dark rounded-[10px] flex gap-2 '>
-            {!chat.minimized &&
+            {!chat.minimized && sidebar.collapsed &&
                 <div className='w-[45%] h-full rounded-[10px] bg-black-light  p-4'
                     style={{
                         // width: (chat.minimized) ? "0%" : ""
                     }}
                 >
-                    <ChatHeader onChange={handleSearchName}/>
+                    <ChatHeader onChange={handleSearchName} />
 
                     <div className='h-[80%] '>
                         <div className='flex gap-2 mt-4'>
@@ -190,7 +249,7 @@ const Chat: React.FC = () => {
                         </div>
                         <div className="bg-redd-500 h-full overflow-y-scroll">
                             {chatsClone.map((message, index) => (
-                                <MessageItem onClick={() => handleSetActiveMessage(index)} key={index} {...message} isActive={activeMessage === index ? true : false} />
+                                <MessageItem onClickCapture={() => handleCapture(index)} key={index} {...message} isActive={activeMessage === index ? true : false} onClick={() => handleSetActiveMessage()} />
                             ))
                             }
                         </div>
@@ -212,7 +271,7 @@ const Chat: React.FC = () => {
             }
             <div className='w-[55%] h-full'
                 style={{
-                    width: (chat.minimized) ? "100%" : "",
+                    width: (chat.minimized || !sidebar.collapsed) ? "100%" : "",
                 }}
             >
                 <ChatRoom activeMessage={chats[activeMessage]} />

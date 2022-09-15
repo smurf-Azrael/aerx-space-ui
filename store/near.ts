@@ -90,9 +90,10 @@ const nearStore = create<NearStoreType>((set) => ({
             mediaHash: null
         }
     })),
-    successfulTransfer: null,
-    setSuccessfulTransfer: (successfulTransfer: any) => set((state) => ({ ...state, successfulTransfer })),
-    removeSuccessfulTransfer: () => set((state) => ({ ...state, successfulTransfer: null })),
+
+    prevChats: null,
+    setPrevChats: (prevChats: any) => set((state) => ({ ...state, prevChats })),
+    removePrevChats: () => set((state) => ({ ...state, prevChats: null })),
 
 
 }));

@@ -8,3 +8,4 @@ export const ENV_LIST = [
 ] as const;
 
 export type EnvType = typeof ENV_LIST[number] | NodeJS.ProcessEnv["NODE_ENV"];
+

@@ -15,7 +15,7 @@ import { Box } from "@chakra-ui/react";
 
 const Flow: React.FC = () => {
   const dispatch = useDispatch();
-  const { flow, chat, space, collections } = useSelector(selectModules);
+  const { flow, chat, space, sidebar } = useSelector(selectModules);
   const [flowWidth, setFlowWidth] = useState<string>();
   const handleChatClicked = () => {
     dispatch(expandChat());
@@ -39,11 +39,15 @@ const Flow: React.FC = () => {
       <Box top="0" left="0" position="absolute" zIndex="6"  >
     <Index />
   </Box >
+       {!sidebar.collapsed && 
+        <div className="w-[15%]">
+        </div>
+       }
         {!chat.collapsed && (
           <div
             className="w-[39%] h-[94vh] ml-[20px] ]"
             style={{
-              width: chat.minimized ? "19.5%" : "",
+              width: (chat.minimized || !sidebar.collapsed) ? "19.5%" : "",
               // marginLeft: chat.minimized ? "5%" : "",
             }}
           >

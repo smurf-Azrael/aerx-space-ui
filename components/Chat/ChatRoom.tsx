@@ -298,8 +298,9 @@ const SendMessage: React.FC<{
     }
 
     const handleSendMessage = async () => {
+        await getChat(nearState.accountId, activeReceiver.accountId);
         console.log(activeReceiver.accountId)
-        if (nearState.prevChats == prevChats) {
+        if (nearState.prevChats != null && prevChats != null) {
             try {
                 console.log("chat exist will send message")
                 await sendMessage(nearState.accountId, activeReceiver.accountId, message)

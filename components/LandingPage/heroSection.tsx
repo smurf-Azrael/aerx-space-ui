@@ -23,7 +23,7 @@ const HeroSection: React.FC = () => {
       maxWidth="container.xlg"
       
     >
-     <Box w="1920" h="953"    
+     <Box w="1920" h="743"    
      bgImage="url('../resources/Frame 22415.png') "
         bgRepeat="no-repeat"
         bgPosition="100%  1%"

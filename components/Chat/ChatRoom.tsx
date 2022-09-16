@@ -135,7 +135,7 @@ const MessagesWrapper: React.FC<{ activeReceiver: IMessageItem }> = ({ activeRec
                     {type !== EMessageType.ACTION &&
                         <>
                             {sender?.id === nearState.accountId &&
-                                <RenderSenderMessage content={nearState.prevChats} type={type} />
+                                <RenderSenderMessage content={content} type={type} />
                             }
                             {sender?.id !== nearState.accountId &&
                                 <RenderRecipientMessage content={content} type={type} />
@@ -160,6 +160,7 @@ const SendMessage: React.FC<{
     const [prevChatsBetweenUsers, setPrevChatsBetweenUsers] = useState<string>('');
     const [prevChats, setPrevChats] = useState<string>();
     const nearState = nearStore((state) => state);
+    const {messages}=  useSelector(selectMessages);
 
     const AWS = require('aws-sdk');
     const filebase = new AWS.S3({
@@ -294,7 +295,8 @@ const SendMessage: React.FC<{
 
 
     const handleSendMessageCapture = async () => {
-        await getChat(nearState.accountId, activeReceiver.accountId);
+        
+        // await getChat(nearState.accountId, activeReceiver.accountId);
     }
 
     const handleSendMessage = async () => {
@@ -315,9 +317,8 @@ const SendMessage: React.FC<{
             } catch (error) {
                 console.error("Error while initailizing chat")
             }
-
         }
-
+        (document.getElementById('textarea') as any).value = ''
     }
 
     return (

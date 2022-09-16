@@ -12,6 +12,7 @@ import WithDots from "./WithDots";
 
 import { useDispatch, useSelector } from '../../store/store';
 import {  getUserState, setImages } from '../../store/slices/imageSlices';
+import Link from 'next/link'
 
 
 const About: React.FC = () => {
@@ -37,7 +38,11 @@ const About: React.FC = () => {
             <Center>
                 <Box margin="auto" position="absolute" cursor="pointer" bgColor="#8D00FF;
 ">
+       <Link rel="stylesheet" href="https://drive.google.com/file/d/1nB_yGQycXbI2bXeNRNEYBDzrRwCv6yjA/view?usp=drivesdk" 
+              
+              >
                     <Image src={polygon}/>
+                    </Link>
                 </Box>
                     <Image src={frame} width="1120px" height="633px"/>
             </Center>

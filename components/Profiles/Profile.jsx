@@ -66,13 +66,36 @@ const mouseDown= (e) => {
     >
       {/* profile */}
       <Flex
-        bgImage={`url('${nearState.profile.profileImg}')`}
+
+        // className="
+        // linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
+        
+        // "
+        bgImage=
+        
+        { 
+              
+          `url('${nearState.profile.profileImg}')`
+        
+        }
         bgSize="contain"
         bgRepeat="no-repeat"
         bgPosition="30 0"
         backgroundSize="100% 100%"
         height="45%"
         width="100%"
+        backgroundColor="#000000"
+        // bgGradient={[
+        //   'linear(to-tr, teal.300, yellow.400)',
+        //   'linear(to-t, blue.200, teal.500)',
+        //   'linear(to-b, orange.100, purple.300)',
+        // ]}
+        // opacity="15%"
+        
+    
+     
+
+        // bgGradient="to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73"
         
   
 
@@ -80,6 +103,24 @@ const mouseDown= (e) => {
       cursor="pointer"
 
       >
+        <Box
+        width="100%"
+        position="absolute"
+        bgColor="#000000B2"
+        zIndex="2"
+        top="35%"
+        h="10%"
+         bgGradient={[
+          'linear(to-tr, whie.300, white.200)',
+          'linear(to-t, white.200, white.500)',
+          'linear(to-b, black.700, black.700)',
+          
+        ]}
+        opacity="45%"
+
+        >
+hi
+        </Box>
         <Flex
           flexDirection="column"
           gap="10.96px"

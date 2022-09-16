@@ -12,6 +12,12 @@ import {
   InputLeftElement,
   InputRightElement,
   InputGroup,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+
 } from "@chakra-ui/react";
 
 import WithStar from "./WithStars";
@@ -19,19 +25,20 @@ import WithDots from "./WithDots";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import emailjs from "@emailjs/browser";
+import Link from 'next/link'
 // import { AnyArray } from 'immer/dist/internal';
 
 const NewsLetterForm = () => {
   const dispatch = useDispatch();
-  const [status,setStatus] = React.useState("false")
+  const [status, setStatus] = React.useState("false");
   const { saly1, saly2, frame1, frame2, frame3, star } =
     useSelector(getUserState);
 
   const form = React.useRef();
-let a
+  let a;
   const sendEmail = (e) => {
     e.preventDefault();
-
+    GetStatus()
     emailjs
       .sendForm(
         "service_9v25bmq",
@@ -41,23 +48,47 @@ let a
       )
       .then(
         (result) => {
-            a=result.text === "ok" ? false: true
-            // setStatus((prevState) => !prevState)
+          if (result.text === "ok") {
+            setTimeout(() => {
+              // setStatus((prevState) => !prevState);
+            }, 2000);
+          }
           console.log(result.text);
         },
         (error) => {
           console.log(error.text);
         }
       );
+  GetStatus()
   };
-  let load
 
-  const GetStatus= () => {
-    setStatus((prevState) => !prevState)
-  }
+  let load;
+
+  const GetStatus = () => {
+    setStatus((prevState) => !prevState);
+  };
 
   return (
     <Box className="form">
+      {/* { status ?
+      <Alert status="success">
+        <AlertIcon />
+        <Box>
+          <AlertTitle>Success!</AlertTitle>
+          <AlertDescription>
+            Your application has been received. We will review your application
+            and respond within the next 48 hours.
+          </AlertDescription>
+        </Box>
+        <CloseButton
+          alignSelf="flex-start"
+          position="relative"
+          right={-1}
+          top={-1}
+          // onClick={onClose}
+        />
+      </Alert> : ""
+} */}
       <Container
         maxWidth="container.xlg"
         mt="209px"
@@ -118,7 +149,11 @@ let a
               <Image src="resources\subscribe.png" />
               {/* Kindly subscribe to our email news letter to get amazing information. */}
             </Text>
-            <form ref={form} onSubmit={sendEmail} >
+            <form
+              ref={form}
+              onSubmit={sendEmail}
+              // onClick={() => GetStatus()}
+            >
               <InputGroup width="50%">
                 <Input
                   name="user_email"
@@ -130,10 +165,7 @@ let a
                   placeholder="Enter your email here"
                   type="text"
                 />
-                <InputRightElement width=""
-
-                
-                >
+                <InputRightElement width="">
                   <Button
                     bgColor="#8D00FF"
                     borderRadius="100%"
@@ -144,32 +176,43 @@ let a
                     cursor="pointer"
                     ml="130%"
                     //  isLoading="false"
-                    // isLoading={status ? false: true}
-
+                    isLoading={status ? false : true}
                     type="submit"
-                    // onClick={GetStatus}
-                //   onSubmit={sendEmail}
 
+                      // onClick={() => GetStatus()}
                   >
                     {/* {show ? 'Hide' : 'Show'} */}
-                    <Image width={6} height={3} src={frame3}
-                 
-                    
-                    />
+                    <Image width={6} height={3} src={frame3} />
                   </Button>
                 </InputRightElement>
               </InputGroup>
             </form>
 
             <Box display="flex" flexDirection="row" mt={35} mb={55}>
+             
+              <Link rel="stylesheet" href="https://discord.gg/UqU39muz" 
+              
+              >
               <Image
                 src={frame1}
                 mr="32px"
                 color="#ebe8fe"
                 w="45px"
                 height="45px"
+              cursor="pointer"
+
               />
-              <Image src={frame2} color="#ebe8fe" w="48px" height="48px " />
+              </Link>
+            
+              <Link rel="stylesheet" href="https://t.me/aerx_int" 
+              
+              >
+              <Image src={frame2} color="#ebe8fe" w="48px" height="48px "
+              cursor="pointer"
+              
+              />
+              </Link>
+
             </Box>
           </Box>
         </Flex>

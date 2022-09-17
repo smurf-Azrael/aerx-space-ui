@@ -30,7 +30,7 @@ function Profile(props) {
   };
   const bgGradient = useColorModeValue(
     // "linear(#edf2f700, #edf2f720 15%, gray.100 90%)",
-    "linear(#1E202100, #1E202100 15%, lightblack 90%)",
+    "linear(180deg, rgba(25, 25, 25, 0) 0%,, #191919 100%)",
 );
 
   let zIndex;
@@ -60,9 +60,9 @@ function Profile(props) {
     height="100%"
     w="257.56px"
 
-    bgImage="url('../resources/pavel.png') "
+    // bgImage="url('../resources/pd.svg') "
 
-    // bgImage={`url('${nearState.profile.profileImg}')`}
+    bgImage={`url('${nearState.profile.profileImg}')`}
     bgSize="100% 45%"
     bgRepeat="no-repeat"
     bgPosition="top"
@@ -246,7 +246,7 @@ function Profile(props) {
         {/* image carousel  */}
         <Flex
           bgColor="#1F1F1F"
-          // borderRadius="50px 50px 0px 0px"
+          borderRadius="50px 50px 0px 0px"
           height="25%"
           flexDirection="column"
           backgroundGradient="linear-gradient(180deg, rgba(25, 25, 25, 0) 0%, #191919 100%)"

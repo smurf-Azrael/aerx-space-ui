@@ -229,12 +229,10 @@ const Chat: React.FC = () => {
     }
 
     const handleCapture = async (index: number) => {
-            // setActiveMessage(index);
-            // dispatch(setActiveReceiver(chats[index].accountId));
-            // dispatch(setDirectMessages([]))
-            // console.log(chats[index].accountId)
-            // await getChat(nearState.accountId, chats[index].accountId);
-            alert("hellos")
+            setActiveMessage(index);
+            dispatch(setActiveReceiver(chats[index].accountId));
+            dispatch(setDirectMessages([]))
+            await getChat(nearState.accountId, chats[index].accountId);
     }
 
     const handleSearchName = async (searchValue: string) => {

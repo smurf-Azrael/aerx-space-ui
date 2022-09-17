@@ -162,6 +162,8 @@ const SendMessage: React.FC<{
     const nearState = nearStore((state) => state);
     const {messages}=  useSelector(selectMessages);
 
+    const dispatch = useDispatch();
+
     const AWS = require('aws-sdk');
     const filebase = new AWS.S3({
         endpoint: 'https://s3.filebase.com',
@@ -295,13 +297,32 @@ const SendMessage: React.FC<{
 
 
     const handleSendMessageCapture = async () => {
-        
-        // await getChat(nearState.accountId, activeReceiver.accountId);
+        await getChat(nearState.accountId, activeReceiver.accountId);
     }
 
     const handleSendMessage = async () => {
         await getChat(nearState.accountId, activeReceiver.accountId);
         console.log(activeReceiver.accountId)
+
+        const newMessage: Message = {
+            id: Date.now().toString(),
+            sender: {
+                id: nearState.accountId,
+                name: nearState.accountId,
+            },
+            recipient: {
+                id: activeReceiver.accountId,
+                name: activeReceiver.name,
+                avatar: activeReceiver.avatar,
+            },
+            content: message,
+            createdAt: Date.now().toString(),
+            type: EMessageType.TEXT,
+        };
+
+        const newMessages = [...messages, newMessage];
+        dispatch(setDirectMessages(newMessages));
+        
         if (nearState.prevChats != null && prevChats != null) {
             try {
                 console.log("chat exist will send message")

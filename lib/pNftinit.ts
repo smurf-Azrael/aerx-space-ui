@@ -81,7 +81,7 @@ export async function contractFullAccessKey(
             "profile_by_id",
             "post_details",
             "get_all_posts",
-            "get_user_ids",
+            "get_users_ids",
             "repost_details",
             "get_all_repost",
         ],

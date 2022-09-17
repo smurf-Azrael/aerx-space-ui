@@ -47,7 +47,7 @@ const SectionOne: React.FC = () => {
                      fontSize="20px"
                      lineHeight="30px"
                      fontWeight='300'
-                     mt="32px"
+                    //  mt="32px"
                      color="#322E6580">
                       
                         <Image  src="../resources\Monetize11.png" mr={2}/>

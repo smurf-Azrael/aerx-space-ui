@@ -17,9 +17,7 @@ function LogOut(props) {
     console.log("Yes on logout button clicked");
     logout(nearState);
   };
-  const setLogout = () => {
-    props.revert((prevState) => !prevState)
-  }
+
 
   let index = props.log ? 4 : "none";
   let width = props.log ? 655 : "none";
@@ -46,7 +44,7 @@ function LogOut(props) {
           h="11.645px"
           ml="190.44px"
           mt="15.08px"
-          onClick={() => props.revert()}
+         
 
 
        

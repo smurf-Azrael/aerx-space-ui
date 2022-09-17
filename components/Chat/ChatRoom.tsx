@@ -173,6 +173,25 @@ const SendMessage: React.FC<{
 
     });
 
+    const initChat = (caller: string, receiver: string, message: string) => {
+        const aerx_chat = {
+            Bucket: "aerx-chats",
+            Key: `aerx-chat between ${[caller, receiver]}`,
+            Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]`,
+            ContentType: "aerx-chat",
+            Metadata: {
+                sender: `${caller} `,
+                receiver: `${receiver} `,
+            }
+        }
+        filebase.putObject(aerx_chat, (err: any, data: any) => {
+            if (err) {
+                console.log("Error! unable to upload chat ", err.stack)
+            } else {
+                console.log("Chat uploaded succesfully ", data)
+            }
+        })
+    }
 
     const getChat = (caller: string, receiver: string) => {
         const params = {
@@ -320,10 +339,21 @@ const SendMessage: React.FC<{
         const newMessages = [...messages, newMessage];
         dispatch(setDirectMessages(newMessages));
         
-        try {
-            await sendMessage(nearState.accountId, activeReceiver.accountId, message)
-        } catch (error) {
-            console.error("Error while sending message")
+        if (nearState.prevChats != null && prevChats != null) {
+            try {
+                console.log("chat exist will send message")
+                await sendMessage(nearState.accountId, activeReceiver.accountId, message)
+            } catch (error) {
+                console.error("Error while sending message")
+            }
+
+        } else {
+            try {
+                console.log("chat does not exist will init message")
+                initChat(nearState.accountId, activeReceiver.accountId, message)
+            } catch (error) {
+                console.error("Error while initailizing chat")
+            }
         }
         (document.getElementById('textarea') as any).value = ''
     }

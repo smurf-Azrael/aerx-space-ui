@@ -135,7 +135,7 @@ const MessagesWrapper: React.FC<{ activeReceiver: IMessageItem }> = ({ activeRec
                     {type !== EMessageType.ACTION &&
                         <>
                             {sender?.id === nearState.accountId &&
-                                <RenderSenderMessage content={nearState.prevChats} type={type} />
+                                <RenderSenderMessage content={content} type={type} />
                             }
                             {sender?.id !== nearState.accountId &&
                                 <RenderRecipientMessage content={content} type={type} />
@@ -160,6 +160,9 @@ const SendMessage: React.FC<{
     const [prevChatsBetweenUsers, setPrevChatsBetweenUsers] = useState<string>('');
     const [prevChats, setPrevChats] = useState<string>();
     const nearState = nearStore((state) => state);
+    const {messages}=  useSelector(selectMessages);
+
+    const dispatch = useDispatch();
 
     const AWS = require('aws-sdk');
     const filebase = new AWS.S3({
@@ -241,17 +244,33 @@ const SendMessage: React.FC<{
                     };
                     filebase.getObject(param, (err: any, data: any) => {
                         if (err) {
-                            console.log("Chat does not exist")
-                        } else {
-                            const prevChat = Buffer.from(data.Body, 'utf8').toString();
                             const aerx_chat = {
                                 Bucket: "aerx-chats",
                                 Key: `aerx-chat between ${[caller, receiver]}`,
-                                Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]` + " " + "\n" + `${prevChat}`,
+                                Body: "[" + `"${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"` + "]",
                                 ContentType: "aerx-chat",
                                 Metadata: {
                                     sender: `${caller} `,
                                     receiver: `${receiver} `,
+                                }
+                            }
+                            filebase.putObject(aerx_chat, (err: any, data: any) => {
+                                if (err) {
+                                    console.log("Error! unable to upload chat ", err.stack)
+                                } else {
+                                    console.log("Chat uploaded succesfully ", data)
+                                }
+                            })
+                        } else {
+                            const prevChat = Buffer.from(data.Body, 'utf8').toString();
+                            const aerx_chat = {
+                                Bucket: "aerx-chats",
+                                Key: `aerx-chat between ${[receiver, caller]}`,
+                                Body: "[" + `"${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"` + "]" + " " + "\n" + `${prevChat}`,
+                                ContentType: "aerx-chat",
+                                Metadata: {
+                                    sender: `${receiver} `,
+                                    receiver: `${caller} `,
                                 }
                             };
                             filebase.putObject(aerx_chat, (err: any, data: any) => {
@@ -268,7 +287,7 @@ const SendMessage: React.FC<{
                     const aerx_chat = {
                         Bucket: "aerx-chats",
                         Key: `aerx-chat between ${[caller, receiver]}`,
-                        Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]` + " " + "\n" + `${prevChat}`,
+                        Body: "[" + `"${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"` + "]" + " " + "\n" + `${prevChat}`,
                         ContentType: "aerx-chat",
                         Metadata: {
                             sender: `${caller} `,
@@ -300,6 +319,26 @@ const SendMessage: React.FC<{
     const handleSendMessage = async () => {
         await getChat(nearState.accountId, activeReceiver.accountId);
         console.log(activeReceiver.accountId)
+
+        const newMessage: Message = {
+            id: Date.now().toString(),
+            sender: {
+                id: nearState.accountId,
+                name: nearState.accountId,
+            },
+            recipient: {
+                id: activeReceiver.accountId,
+                name: activeReceiver.name,
+                avatar: activeReceiver.avatar,
+            },
+            content: message,
+            createdAt: Date.now().toString(),
+            type: EMessageType.TEXT,
+        };
+
+        const newMessages = [...messages, newMessage];
+        dispatch(setDirectMessages(newMessages));
+        
         if (nearState.prevChats != null && prevChats != null) {
             try {
                 console.log("chat exist will send message")
@@ -315,9 +354,8 @@ const SendMessage: React.FC<{
             } catch (error) {
                 console.error("Error while initailizing chat")
             }
-
         }
-
+        (document.getElementById('textarea') as any).value = ''
     }
 
     return (

@@ -108,7 +108,7 @@ const ProfileSettingForm: React.FC = () => {
           };
           nearState.setProfile(returnedProfile);
           console.log('Profile: ', returnedProfile);
-          window.location.replace(`${window.location.origin}/profile`);
+          window.location.replace(`${window.location.origin}/flow`);
         });
     } catch (error) {
       toast.error(`Unable to mint AERX profileNFT. Try again later`);
@@ -145,11 +145,10 @@ const ProfileSettingForm: React.FC = () => {
         <div
           className="h-[400px] w-[230px] bg-[#0000004d] p-2"
           style={{
-            background: `${
-              !avatarUrl
+            background: `${!avatarUrl
                 ? 'url("/assets/images/profile-avatar-cover.svg")'
                 : 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
-            }`,
+              }`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             borderRadius: '20px',
@@ -264,10 +263,10 @@ const ProfileSettingForm: React.FC = () => {
         <button
           disabled={
             !isValid ||
-            !touched.name ||
-            !touched.userName ||
-            !touched.bio ||
-            !file
+              !touched.name ||
+              !touched.userName ||
+              !touched.bio ||
+              !file
               ? true
               : false
           }
@@ -275,10 +274,10 @@ const ProfileSettingForm: React.FC = () => {
           className="text-white bg-purple p-2 rounded-[10px] w-[200px]"
           style={
             !isValid ||
-            !touched.name ||
-            !touched.userName ||
-            !touched.bio ||
-            !file
+              !touched.name ||
+              !touched.userName ||
+              !touched.bio ||
+              !file
               ? { opacity: 0.5 }
               : { opacity: 1 }
           }

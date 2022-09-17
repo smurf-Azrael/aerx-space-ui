@@ -7,6 +7,8 @@ import {
   Flex,
   Button,
   Center,
+  useColorModeValue,
+
 } from "@chakra-ui/react";
 import { nearStore } from "../../store/near";
 import { MinusIcon } from "@chakra-ui/icons";
@@ -26,6 +28,10 @@ function Profile(props) {
   const logOutUser = () => {
     setLogout((prevState) => !prevState);
   };
+  const bgGradient = useColorModeValue(
+    // "linear(#edf2f700, #edf2f720 15%, gray.100 90%)",
+    "linear(180deg, rgba(25, 25, 25, 0) 0%,, #191919 100%)",
+);
 
   let zIndex;
   let backdrop;
@@ -48,56 +54,49 @@ function Profile(props) {
   return circ ? (
     <CircleList remove={remCirc} />
   ) : (
-    <Flex>
+    <Flex
+    bgColor="#191919"
+    position="absolute"
+    height="100%"
+    w="257.56px"
+
+    // bgImage="url('../resources/pd.svg') "
+
+    bgImage={`url('${nearState.profile.profileImg}')`}
+    bgSize="100% 45%"
+    bgRepeat="no-repeat"
+    bgPosition="top"
+    // backgroundSize="100% 100%"
+    // bgGradient={bgGradient}
+
+   
+    
+    >
       <Box
-        bgColor="#191919"
-        position="absolute"
-        h="100%"
-        w="257.56px"
-        backgroundBlendMode=" saturation;"
+      
+   
+      
       >
         {/* profile */}
         <Flex
-          // className="
-          // linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
-
-          // "
-          bgImage={`url('${nearState.profile.profileImg}')`}
-          bgSize="contain"
-          bgRepeat="no-repeat"
-          bgPosition="30 0"
-          backgroundSize="100% 100%"
-          height="45%"
           width="100%"
-          backgroundColor="#000000"
+          // backgroundColor="#000000"
           onDoubleClick={(e) => props.doubleClick(e)}
           cursor="pointer"
-          // filter=" contrast(1.75)"
-        >
-          {/* <Box
-        width="100%"
-        position="absolute"
-        bgColor="#000000B2"
-        zIndex="2"
-        top="35%"
-        h="10%"
-         bgGradient={[
-          'linear(to-tr, whie.300, white.200)',
-          'linear(to-t, white.200, white.500)',
-          'linear(to-b, black.700, black.700)',
-          
-        ]}
-        opacity="15%"
+    bgGradient={bgGradient}
+    h="45%"
+
+
 
         >
-hi
-        </Box> */}
+          
           <Flex
             flexDirection="column"
             gap="10.96px"
             ml="16.44px"
             mt="21.92px"
             cursor="pointer"
+
           >
             <Box
               color="#6054F0"
@@ -118,7 +117,7 @@ hi
               />
             </Box>
           </Flex>
-          <Flex flexDirection="column" alignItems="center" mx="auto" gap="60%">
+          <Flex flexDirection="column" alignItems="center" gap="55%">
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
             <Box h="235px">
@@ -130,8 +129,9 @@ hi
                 fontStyle="normal"
                 lineHeight="100%"
                 textAlign="center"
-                letterSpacing="-0.02em"
-                mt="25px"
+                // letterSpacing="-0.02em"
+                mt="21px"
+                justifyContent="center"
                 textTransform="capitalize"
               >
                 {nearState.profile.fullName}
@@ -194,16 +194,16 @@ hi
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
               <Image
                 src={frameP1}
-                w="24.88px"
+                w="28.88px"
                 h="24.88px"
                 position="absolute"
                 mt="1.5%"
-                ml="2%"
+                // ml="2%"
               />
               <Image
                 src="../resources/Squircle.png"
                 // opacity="15%"
-                w="34px"
+                w="42px"
                 h="34px"
               />
             </Box>
@@ -221,7 +221,7 @@ hi
               <Image
                 src="../resources/Squircle.png"
                 // opacity="15%"
-                w="34px"
+                w="42px"
                 h="34px"
               />
             </Box>
@@ -237,7 +237,7 @@ hi
             <Image
               src="../resources/Squircle.png"
               // opacity="15%"
-              w="34px"
+              w="42px"
               h="34px"
             />
           </Flex>
@@ -247,30 +247,36 @@ hi
         <Flex
           bgColor="#1F1F1F"
           borderRadius="50px 50px 0px 0px"
-          height="21%"
+          height="25%"
           flexDirection="column"
-          filter="drop-shadow(0 -12mm 12mm #000000B2);"
+          backgroundGradient="linear-gradient(180deg, rgba(25, 25, 25, 0) 0%, #191919 100%)"
+      
         >
-          <Center>
-            <div
-              className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+          <Center
+          borderRadius="50px 50px 0px 0px"
+         
+          
+          >
+           <div
+                className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
-        mt-2
+        mt-4
+        te
         "
-              onClick={remCirc}
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </div>
+        onClick={remCirc}
+              >
+                <MinusIcon
+                  w="21.92px"
+                  bgColor="rgba(255, 255, 255, 0.3);"
+                  height="2px"
+                />
+                <MinusIcon
+                  w="21.92px"
+                  bgColor="rgba(255, 255, 255, 0.3);"
+                  height="2px"
+                />
+              </div>
           </Center>
           <Text
             marginLeft="16.44px"
@@ -762,7 +768,7 @@ hi
       >
         .
       </Flex>
-      <LogOut zIndex={zIndex} revert={setLogout} log={isLogout} />
+      <LogOut zIndex={zIndex}  log={isLogout} />
     </Flex>
   );
 }

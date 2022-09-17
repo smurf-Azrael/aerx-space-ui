@@ -367,3 +367,4 @@ const AddPost: React.FC<IProps> = ({ onClose }) => {
 }
 
 export default AddPost;
+

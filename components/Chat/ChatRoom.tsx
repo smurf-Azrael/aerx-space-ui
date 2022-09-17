@@ -170,25 +170,25 @@ const SendMessage: React.FC<{
 
     });
 
-    const initChat = (caller: string, receiver: string, message: string) => {
-        const aerx_chat = {
-            Bucket: "aerx-chats",
-            Key: `aerx-chat between ${[caller, receiver]}`,
-            Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]`,
-            ContentType: "aerx-chat",
-            Metadata: {
-                sender: `${caller} `,
-                receiver: `${receiver} `,
-            }
-        }
-        filebase.putObject(aerx_chat, (err: any, data: any) => {
-            if (err) {
-                console.log("Error! unable to upload chat ", err.stack)
-            } else {
-                console.log("Chat uploaded succesfully ", data)
-            }
-        })
-    }
+    // const initChat = (caller: string, receiver: string, message: string) => {
+    //     const aerx_chat = {
+    //         Bucket: "aerx-chats",
+    //         Key: `aerx-chat between ${[caller, receiver]}`,
+    //         Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]`,
+    //         ContentType: "aerx-chat",
+    //         Metadata: {
+    //             sender: `${caller} `,
+    //             receiver: `${receiver} `,
+    //         }
+    //     }
+    //     filebase.putObject(aerx_chat, (err: any, data: any) => {
+    //         if (err) {
+    //             console.log("Error! unable to upload chat ", err.stack)
+    //         } else {
+    //             console.log("Chat uploaded succesfully ", data)
+    //         }
+    //     })
+    // }
 
     const getChat = (caller: string, receiver: string) => {
         const params = {
@@ -241,7 +241,23 @@ const SendMessage: React.FC<{
                     };
                     filebase.getObject(param, (err: any, data: any) => {
                         if (err) {
-                            console.log("Chat does not exist")
+                            const aerx_chat = {
+                                Bucket: "aerx-chats",
+                                Key: `aerx-chat between ${[caller, receiver]}`,
+                                Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]`,
+                                ContentType: "aerx-chat",
+                                Metadata: {
+                                    sender: `${caller} `,
+                                    receiver: `${receiver} `,
+                                }
+                            }
+                            filebase.putObject(aerx_chat, (err: any, data: any) => {
+                                if (err) {
+                                    console.log("Error! unable to upload chat ", err.stack)
+                                } else {
+                                    console.log("Chat uploaded succesfully ", data)
+                                }
+                            })
                         } else {
                             const prevChat = Buffer.from(data.Body, 'utf8').toString();
                             const aerx_chat = {
@@ -300,22 +316,28 @@ const SendMessage: React.FC<{
     const handleSendMessage = async () => {
         await getChat(nearState.accountId, activeReceiver.accountId);
         console.log(activeReceiver.accountId)
-        if (nearState.prevChats != null && prevChats != null) {
-            try {
-                console.log("chat exist will send message")
-                await sendMessage(nearState.accountId, activeReceiver.accountId, message)
-            } catch (error) {
-                console.error("Error while sending message")
-            }
+        // if (nearState.prevChats != null && prevChats != null) {
+        //     try {
+        //         console.log("chat exist will send message")
+        //         await sendMessage(nearState.accountId, activeReceiver.accountId, message)
+        //     } catch (error) {
+        //         console.error("Error while sending message")
+        //     }
 
-        } else {
-            try {
-                console.log("chat does not exist will init message")
-                initChat(nearState.accountId, activeReceiver.accountId, message)
-            } catch (error) {
-                console.error("Error while initailizing chat")
-            }
+        // } else {
+        //     try {
+        //         console.log("chat does not exist will init message")
+        //         initChat(nearState.accountId, activeReceiver.accountId, message)
+        //     } catch (error) {
+        //         console.error("Error while initailizing chat")
+        //     }
 
+        // }
+        try {
+            console.log("chat exist will send message")
+            await sendMessage(nearState.accountId, activeReceiver.accountId, message)
+        } catch (error) {
+            console.error("Error while sending message")
         }
 
     }

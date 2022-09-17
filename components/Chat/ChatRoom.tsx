@@ -262,12 +262,12 @@ const SendMessage: React.FC<{
                             const prevChat = Buffer.from(data.Body, 'utf8').toString();
                             const aerx_chat = {
                                 Bucket: "aerx-chats",
-                                Key: `aerx-chat between ${[caller, receiver]}`,
+                                Key: `aerx-chat between ${[receiver, caller]}`,
                                 Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]` + " " + "\n" + `${prevChat}`,
                                 ContentType: "aerx-chat",
                                 Metadata: {
-                                    sender: `${caller} `,
-                                    receiver: `${receiver} `,
+                                    sender: `${receiver} `,
+                                    receiver: `${caller} `,
                                 }
                             };
                             filebase.putObject(aerx_chat, (err: any, data: any) => {

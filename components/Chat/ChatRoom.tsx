@@ -135,7 +135,7 @@ const MessagesWrapper: React.FC<{ activeReceiver: IMessageItem }> = ({ activeRec
                     {type !== EMessageType.ACTION &&
                         <>
                             {sender?.id === nearState.accountId &&
-                                <RenderSenderMessage content={nearState.prevChats} type={type} />
+                                <RenderSenderMessage content={content} type={type} />
                             }
                             {sender?.id !== nearState.accountId &&
                                 <RenderRecipientMessage content={content} type={type} />
@@ -160,6 +160,9 @@ const SendMessage: React.FC<{
     const [prevChatsBetweenUsers, setPrevChatsBetweenUsers] = useState<string>('');
     const [prevChats, setPrevChats] = useState<string>();
     const nearState = nearStore((state) => state);
+    const {messages}=  useSelector(selectMessages);
+
+    const dispatch = useDispatch();
 
     const AWS = require('aws-sdk');
     const filebase = new AWS.S3({
@@ -169,6 +172,7 @@ const SendMessage: React.FC<{
         secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
 
     });
+
 
     const getChat = (caller: string, receiver: string) => {
         const params = {
@@ -296,12 +300,32 @@ const SendMessage: React.FC<{
     const handleSendMessage = async () => {
         await getChat(nearState.accountId, activeReceiver.accountId);
         console.log(activeReceiver.accountId)
+
+        const newMessage: Message = {
+            id: Date.now().toString(),
+            sender: {
+                id: nearState.accountId,
+                name: nearState.accountId,
+            },
+            recipient: {
+                id: activeReceiver.accountId,
+                name: activeReceiver.name,
+                avatar: activeReceiver.avatar,
+            },
+            content: message,
+            createdAt: Date.now().toString(),
+            type: EMessageType.TEXT,
+        };
+
+        const newMessages = [...messages, newMessage];
+        dispatch(setDirectMessages(newMessages));
+        
         try {
             await sendMessage(nearState.accountId, activeReceiver.accountId, message)
         } catch (error) {
             console.error("Error while sending message")
         }
-
+        (document.getElementById('textarea') as any).value = ''
     }
 
     return (

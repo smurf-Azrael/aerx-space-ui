@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
+import { EMessageType } from '../../enums/EMessageType';
 import { nearStore } from '../../store/near';
 import { setDirectMessages } from '../../store/slices/messagesSlice';
 import { selectModules } from '../../store/slices/modulesSlices';
 import { setActiveReceiver } from '../../store/slices/receiverSlice';
 import { useDispatch, useSelector } from '../../store/store';
+import { Message } from '../../types/Message';
 import { Feed, Post } from '../../types/Post';
 import SearchInput from '../SearchInput';
 import ChatRoom from './ChatRoom';
@@ -84,8 +86,6 @@ const Chat: React.FC = () => {
     const dispatch = useDispatch();
     const [chats, setChats] = useState<Array<IMessageItem>>([]);
     const [chatsClone, setChatsClone] = useState<Array<IMessageItem>>([]);
-
-
     const [activeMessage, setActiveMessage] = useState<number>(0);
     const { chat, sidebar } = useSelector(selectModules)
     const nearState: any = nearStore((state) => state);
@@ -98,7 +98,7 @@ const Chat: React.FC = () => {
         if (nearState.pnftContract) {
             fetchUsers();
         }
-    }, [nearState])
+    }, [nearState.pnftContract])
 
     const fetchUsers = async () => {
         const posts = await nearState.pnftContract.get_all_posts({ user_id: nearState.accountId });
@@ -202,23 +202,37 @@ const Chat: React.FC = () => {
     const handleSetActiveMessage = async () => {
         if (nearState.prevChats != null && prevChats != null && nearState.prevChats == prevChats) {
             const chatArray = nearState.prevChats.split("\n");
+            let messages:Array<Message> = [];
             for (let i = 0; i < chatArray.length; i++) {
                 const json = JSON.parse(chatArray[i]);
                 console.log(json)
                 console.log("time: ", json[0])
                 console.log("sender: ", json[1])
                 console.log("message: ", json[2])
+                const message: Message = {
+                    id: Math.random().toString(36).substr(2, 9),
+                    sender: {
+                        id: json[1],
+                        name: json[1],
+                    },
+                    type: EMessageType.TEXT,
+                    content: json[2],
+                    createdAt: json[0],
+                }
+                messages.push(message);
             }
+            dispatch(setDirectMessages(messages.reverse()));
             nearState.removePrevChats();
+           
         }
 
     }
 
     const handleCapture = async (index: number) => {
-        setActiveMessage(index);
-        dispatch(setActiveReceiver(chats[index].accountId));
-        console.log(chats[index].accountId)
-        await getChat(nearState.accountId, chats[index].accountId);
+            setActiveMessage(index);
+            dispatch(setActiveReceiver(chats[index].accountId));
+            dispatch(setDirectMessages([]))
+            await getChat(nearState.accountId, chats[index].accountId);
     }
 
     const handleSearchName = async (searchValue: string) => {

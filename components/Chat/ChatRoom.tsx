@@ -244,17 +244,33 @@ const SendMessage: React.FC<{
                     };
                     filebase.getObject(param, (err: any, data: any) => {
                         if (err) {
-                            console.log("Chat does not exist")
-                        } else {
-                            const prevChat = Buffer.from(data.Body, 'utf8').toString();
                             const aerx_chat = {
                                 Bucket: "aerx-chats",
                                 Key: `aerx-chat between ${[caller, receiver]}`,
-                                Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]` + " " + "\n" + `${prevChat}`,
+                                Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]`,
                                 ContentType: "aerx-chat",
                                 Metadata: {
                                     sender: `${caller} `,
                                     receiver: `${receiver} `,
+                                }
+                            }
+                            filebase.putObject(aerx_chat, (err: any, data: any) => {
+                                if (err) {
+                                    console.log("Error! unable to upload chat ", err.stack)
+                                } else {
+                                    console.log("Chat uploaded succesfully ", data)
+                                }
+                            })
+                        } else {
+                            const prevChat = Buffer.from(data.Body, 'utf8').toString();
+                            const aerx_chat = {
+                                Bucket: "aerx-chats",
+                                Key: `aerx-chat between ${[receiver, caller]}`,
+                                Body: `["${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"]` + " " + "\n" + `${prevChat}`,
+                                ContentType: "aerx-chat",
+                                Metadata: {
+                                    sender: `${receiver} `,
+                                    receiver: `${caller} `,
                                 }
                             };
                             filebase.putObject(aerx_chat, (err: any, data: any) => {

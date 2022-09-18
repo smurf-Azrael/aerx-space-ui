@@ -17,15 +17,11 @@ export const setPostChargers = createAsyncThunk('postChargers/setPostChargers',
     post_id,
     chargers
   }: any,  thunkAPI) => {
-    // alert(chargers)
     let postChargers  = chargers.split("##") // ["user1", "user2", "user3"]
-    let existingPostChargers = initialState.postChargers;
     let postChargersObj = {
         post_id: post_id,
         chargers: postChargers
   }
-    // existingPostChargers.push(postChargersObj)
-    // alert(JSON.stringify(postChargersObj))
     return postChargersObj
   }
 );

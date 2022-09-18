@@ -8,7 +8,6 @@ import {
   Button,
   Center,
   useColorModeValue,
-
 } from "@chakra-ui/react";
 import { nearStore } from "../../store/near";
 import { MinusIcon } from "@chakra-ui/icons";
@@ -30,8 +29,8 @@ function Profile(props) {
   };
   const bgGradient = useColorModeValue(
     // "linear(#edf2f700, #edf2f720 15%, gray.100 90%)",
-    "linear(180deg, rgba(25, 25, 25, 0) 0%,, #191919 100%)",
-);
+    "linear(180deg, rgba(25, 25, 25, 0) 0%,, #191919 100%)"
+  );
 
   let zIndex;
   let backdrop;
@@ -55,48 +54,34 @@ function Profile(props) {
     <CircleList remove={remCirc} />
   ) : (
     <Flex
-    bgColor="#191919"
-    position="absolute"
-    height="100%"
-    w="257.56px"
-
-    // bgImage="url('../resources/pd.svg') "
-
-    bgImage={`url('${nearState.profile.profileImg}')`}
-    bgSize="100% 45%"
-    bgRepeat="no-repeat"
-    bgPosition="top"
-    // backgroundSize="100% 100%"
-    // bgGradient={bgGradient}
-
-   
-    
+      bgColor="#191919"
+      position="absolute"
+      height="100%"
+      w="257.56px"
+      // bgImage="url('../resources/pd.svg') "
+      bgImage={`url('${nearState.profile.profileImg}')`}
+      bgSize="100% 45%"
+      bgRepeat="no-repeat"
+      bgPosition="top"
+      // backgroundSize="100% 100%"
+      // bgGradient={bgGradient}
     >
-      <Box
-      
-   
-      
-      >
+      <Box>
         {/* profile */}
         <Flex
           width="100%"
           // backgroundColor="#000000"
           onDoubleClick={(e) => props.doubleClick(e)}
           cursor="pointer"
-    bgGradient={bgGradient}
-    h="45%"
-
-
-
+          bgGradient={bgGradient}
+          h="45%"
         >
-          
           <Flex
             flexDirection="column"
             gap="10.96px"
             ml="16.44px"
             mt="21.92px"
             cursor="pointer"
-
           >
             <Box
               color="#6054F0"
@@ -189,57 +174,18 @@ function Profile(props) {
               </Flex>
             </Box>
           </Flex>
-          <Flex flexDirection="column" gap="10.96px" mr="14.385px" mt="21.92px">
+          <Flex flexDirection="column" gap="10.96px" mr="8%" mt="21.92px">
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
-              <Image
-                src={frameP1}
-                w="28.88px"
-                h="24.88px"
-                position="absolute"
-                mt="1.5%"
-                // ml="2%"
-              />
-              <Image
-                src="../resources/Squircle.png"
-                // opacity="15%"
-                w="42px"
-                h="34px"
-              />
+              <Image src="../resources/Group 14948.png" />
             </Box>
             {/* second */}
             <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
-              <Image
-                src={frameP2}
-                w="24.88px"
-                h="24.88px"
-                position="absolute"
-                mt="1.5%"
-                ml="2%"
-              />
-
-              <Image
-                src="../resources/Squircle.png"
-                // opacity="15%"
-                w="42px"
-                h="34px"
-              />
+              <Image src="../resources/Group 14949.png" />
             </Box>
             {/* third*/}
-            <Image
-              src="../resources/Frame 14281.png"
-              w="22.88px"
-              h="22.88px"
-              position="absolute"
-              mt="37%"
-              ml="2%"
-            />
-            <Image
-              src="../resources/Squircle.png"
-              // opacity="15%"
-              w="42px"
-              h="34px"
-            />
+
+            <Image src="../resources/Group 14950.png"></Image>
           </Flex>
         </Flex>
         {/* profile */}
@@ -250,33 +196,28 @@ function Profile(props) {
           height="25%"
           flexDirection="column"
           backgroundGradient="linear-gradient(180deg, rgba(25, 25, 25, 0) 0%, #191919 100%)"
-      
         >
-          <Center
-          borderRadius="50px 50px 0px 0px"
-         
-          
-          >
-           <div
-                className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+          <Center borderRadius="50px 50px 0px 0px">
+            <div
+              className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
         mt-4
         te
         "
-        onClick={remCirc}
-              >
-                <MinusIcon
-                  w="21.92px"
-                  bgColor="rgba(255, 255, 255, 0.3);"
-                  height="2px"
-                />
-                <MinusIcon
-                  w="21.92px"
-                  bgColor="rgba(255, 255, 255, 0.3);"
-                  height="2px"
-                />
-              </div>
+              onClick={remCirc}
+            >
+              <MinusIcon
+                w="21.92px"
+                bgColor="rgba(255, 255, 255, 0.3);"
+                height="2px"
+              />
+              <MinusIcon
+                w="21.92px"
+                bgColor="rgba(255, 255, 255, 0.3);"
+                height="2px"
+              />
+            </div>
           </Center>
           <Text
             marginLeft="16.44px"
@@ -768,7 +709,7 @@ function Profile(props) {
       >
         .
       </Flex>
-      <LogOut zIndex={zIndex}  log={isLogout} />
+      <LogOut zIndex={zIndex} log={isLogout} />
     </Flex>
   );
 }

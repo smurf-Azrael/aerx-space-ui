@@ -143,7 +143,7 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
                     </div>
                 </div>
 
-                <div className='flex justify-between  items-center'>
+                <div className='flex justify-between mt-[-2%] items-center'>
                     <div className='flex gap-4 items-center'>
                         <div>
                             <Image src="/assets/icons/share-icon.svg" alt="Share" width={20} height={20} />

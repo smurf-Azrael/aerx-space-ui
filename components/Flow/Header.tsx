@@ -58,13 +58,13 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
              onChange={onSearch}
               />
            </div>
-           <div className='bg-black-light p-1  px-2 rounded-[10px] items-center flex w-[105px]  h-[40px] '>
+           <div className='bg-black-light p-1  px-2 rounded-[10px] items-center flex w-[25%]  h-[40px] '>
              <Image src='/assets/icons/flash-icon.svg' alt="total posts" width={20} height={20} />
              <label className='text-white text-sm text-center ml-[12px] '>31134</label>
            </div>
            </div>
 
-           <div className='flex gap-2 ml-[-45px] mt-2'>
+           <div className='flex gap-2 ml-[-7%] mt-2'>
            <div className='bg-black-light p-1 rounded-[10px] items-center justify-around flex w-[35px] h-[35px] mt-1 '>
             <Image src="/assets/icons/switch-icon.svg" alt="Switch accounts" width={20} height={20} />
            </div>

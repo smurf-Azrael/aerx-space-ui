@@ -21,6 +21,8 @@ export interface IMessageItem {
     isActive?: boolean,
     onClick?: () => void;
     onClickCapture?: () => void;
+    onPointerOver?: () => void;
+    onPointerOverCapture?: () => void;
 }
 
 
@@ -50,9 +52,9 @@ const ChatHeader: React.FC<{ onChange: (searchValue: string) => void }> = ({ onC
         </div>
     )
 }
-const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, message, isActive, onClick, onClickCapture }) => {
+const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, message, isActive, onClick, onClickCapture, onPointerOver, onPointerOverCapture }) => {
     return (
-        <div onClickCapture={onClickCapture} onClick={onClick} className={`mt-2 mr-1 ${isActive ? 'bg-[#2b2b2b] rounded-[10px]' : ''} px-3 py-2`}>
+        <div onClickCapture={onClickCapture} onClick={onClick} onPointerOver={onPointerOver} onPointerOverCapture={onPointerOverCapture} className={`mt-2 mr-1 ${isActive ? 'bg-[#2b2b2b] rounded-[10px]' : ''} px-3 py-2`}>
             <div className='flex items-center gap-2 cursor-pointer '>
                 <div className='w-[25%] '>
                     <Image src={avatar} width={40} height={40} alt="Avatar" className='rounded-full' />
@@ -92,6 +94,7 @@ const Chat: React.FC = () => {
     const [profilePosts, setProfilePosts] = useState<any>([]);
     const [profiles, setProfiles] = useState<Array<Feed>>([]);
     const [prevChats, setPrevChats] = useState<string>();
+    const [chatReceiver, setChatReceiver] = useState<string>("");
 
 
     useEffect(() => {
@@ -175,13 +178,14 @@ const Chat: React.FC = () => {
                         Key: `aerx-chat between ${receiver},${caller}`,
                         Bucket: "aerx-chats"
                     };
-                    filebase.getObject(param, (err: any, data: any) => {
+                    return filebase.getObject(param, (err: any, data: any) => {
                         if (err) {
                             console.log("Chat does not exist")
                         } else {
                             const prevChat = Buffer.from(data.Body, 'utf8').toString();
                             nearState.setPrevChats(prevChat)
                             setPrevChats(prevChat)
+                            nearState.setPrevChats(prevChat)
                             return prevChat;
                         }
                     });
@@ -198,42 +202,90 @@ const Chat: React.FC = () => {
         }
 
     }
-
-    const handleSetActiveMessage = async () => {
-        if (nearState.prevChats != null && prevChats != null && nearState.prevChats == prevChats) {
-            const chatArray = nearState.prevChats.split("\n");
-            let messages:Array<Message> = [];
-            for (let i = 0; i < chatArray.length; i++) {
-                const json = JSON.parse(chatArray[i]);
-                console.log(json)
-                console.log("time: ", json[0])
-                console.log("sender: ", json[1])
-                console.log("message: ", json[2])
-                const message: Message = {
-                    id: Math.random().toString(36).substr(2, 9),
-                    sender: {
-                        id: json[1],
-                        name: json[1],
-                    },
-                    type: EMessageType.TEXT,
-                    content: json[2],
-                    createdAt: json[0],
+    //Todo: Move aerx chat keycode to env
+    const handleSetActiveMessage = async (index: number) => {
+        const params = {
+            Key: `aerx-chat between ${nearState.accountId},${chats[index].accountId}`,
+            Bucket: "aerx-chats"
+        };
+        try {
+            await filebase.getObject(params, async (err: any, data: any) => {
+                if (err) {
+                    const param = {
+                        Key: `aerx-chat between ${chats[index].accountId},${nearState.accountId}`,
+                        Bucket: "aerx-chats"
+                    };
+                    await filebase.getObject(param, (err: any, data: any) => {
+                        if (err) {
+                            console.log("Chat does not exist")
+                        } else {
+                            const prevC = Buffer.from(data.Body, 'utf8').toString();
+                            console.log("prev c: ", prevC)
+                            const chatArray = prevC.split("##aerx-chat##");
+                            let messages: Array<Message> = [];
+                            for (let i = 0; i < chatArray.length; i++) {
+                                const chatArrayFormatted = chatArray[i].replaceAll("\n", " ")
+                                const json = JSON.parse(chatArrayFormatted);
+                                console.log(json)
+                                console.log("time: ", json[0])
+                                console.log("sender: ", json[1])
+                                console.log("message: ", json[2])
+                                const message: Message = {
+                                    id: Math.random().toString(36).substr(2, 9),
+                                    sender: {
+                                        id: json[1],
+                                        name: json[1],
+                                    },
+                                    type: EMessageType.TEXT,
+                                    content: json[2],
+                                    createdAt: json[0],
+                                }
+                                messages.push(message);
+                            }
+                            dispatch(setDirectMessages(messages.reverse()));
+                        }
+                    });
+                } else {
+                    const prevC = Buffer.from(data.Body, 'utf8').toString();
+                    console.log("prev c: ", prevC)
+                    const chatArray = prevC.split("##aerx-chat##");
+                    let messages: Array<Message> = [];
+                    for (let i = 0; i < chatArray.length; i++) {
+                        const chatArrayFormatted = chatArray[i].replaceAll("\n", " ")
+                        const json = JSON.parse(chatArrayFormatted);
+                        console.log(json)
+                        console.log("time: ", json[0])
+                        console.log("sender: ", json[1])
+                        console.log("message: ", json[2])
+                        const message: Message = {
+                            id: Math.random().toString(36).substr(2, 9),
+                            sender: {
+                                id: json[1],
+                                name: json[1],
+                            },
+                            type: EMessageType.TEXT,
+                            content: json[2],
+                            createdAt: json[0],
+                        }
+                        messages.push(message);
+                    }
+                    dispatch(setDirectMessages(messages.reverse()));
                 }
-                messages.push(message);
-            }
-            dispatch(setDirectMessages(messages.reverse()));
-            nearState.removePrevChats();
-           
+            })
+        } catch (err) {
+            console.error("try caught error: ", err);
+
         }
 
     }
 
     const handleCapture = async (index: number) => {
-            setActiveMessage(index);
-            dispatch(setActiveReceiver(chats[index].accountId));
-            dispatch(setDirectMessages([]))
-            await getChat(nearState.accountId, chats[index].accountId);
+        setActiveMessage(index);
+        dispatch(setActiveReceiver(chats[index].accountId));
+        dispatch(setDirectMessages([]))
     }
+
+
 
     const handleSearchName = async (searchValue: string) => {
         if (searchValue === '' || searchValue === null || searchValue.replace(/\s/g, "").length === 0) {
@@ -263,7 +315,7 @@ const Chat: React.FC = () => {
                         </div>
                         <div className="bg-redd-500 h-full overflow-y-scroll">
                             {chatsClone.map((message, index) => (
-                                <MessageItem onClickCapture={() => handleCapture(index)} key={index} {...message} isActive={activeMessage === index ? true : false} onClick={() => handleSetActiveMessage()} />
+                                <MessageItem onClickCapture={() => handleCapture(index)} key={index} {...message} isActive={activeMessage === index ? true : false} onClick={() => handleSetActiveMessage(index)} />
                             ))
                             }
                         </div>
@@ -290,7 +342,7 @@ const Chat: React.FC = () => {
             >
                 <ChatRoom activeMessage={chats[activeMessage]} />
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -17,6 +17,8 @@ import { error } from 'console';
 import { getBalance } from '../../lib/aexContract';
 import SharePost from '../SharePost';
 import { Feedback } from 'aws-sdk/clients/applicationinsights';
+import { getPostChargers, initPostChargersList } from '../../lib/chargeFilebase'
+import { selectPostChargers } from '../../store/slices/postChargesSlice';
 
 
 // coverImage, postOwner, nftId, title, description
@@ -41,6 +43,38 @@ const TextPost: React.FC<IProps> = ({
     const { metadata, owner_id, owner_profile, profile } = feed;
     const bgImage = metadata?.media;
     const randomColor = generateRandomColor();
+    const nearState = nearStore((state) => state);
+    const dispatch = useDispatch();
+    const {postChargers} = useSelector(selectPostChargers);
+    const [userCharged, setUserCharged] = useState<boolean>(false);
+
+    useEffect(() => {
+        getChargeStatus();
+    },[feed])
+
+    useEffect(() => {
+        findIfUserCharged();
+    },[postChargers])
+
+    const getChargeStatus = async () => {
+        const chargers = await getPostChargers(feed.post_id, false, dispatch);
+        console.log("post chargers", chargers);
+    }
+
+    const findIfUserCharged = async () => {
+        if(postChargers && postChargers.length > 0){
+            postChargers.forEach((charger) => {
+                if(charger.post_id == feed.post_id){
+                    const findIndex = charger.chargers.findIndex((charger) => charger == nearState.accountId);
+                    if(findIndex > -1){
+                        setUserCharged(true);
+                    }
+                }
+            })
+        }
+    }
+
+
 
     return (
         <div className='w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2 ' style={{
@@ -89,15 +123,26 @@ const TextPost: React.FC<IProps> = ({
 
                     {!feed?.metadata?.title.includes('AERX ProfileNFT for') &&
                         <div>
-                            <Image src="/assets/icons/send-message-icon.svg"
-                                alt="comment" width={25} height={25}
-                                className="cursor-pointer"
-                                onClick={(e) => handleOnClick(e, feed)}
-                                onMouseDown={handleOnMouseDown}
+                            {!userCharged && 
+                            <div className='charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
+                            <Image src="/assets/icons/not-charged-icon.svg"
+                            alt="charge post" width={15} height={15}
+                            className="cursor-pointer"
+                            onClick={(e) => handleOnClick(e, feed)}
+                            onMouseDown={handleOnMouseDown}
                                 onMouseUp={handleOnMouseUp}
                                 onTouchStart={handleOnTouchStart}
                                 onTouchEnd={handleOnTouchEnd}
+                                />
+                            </div>
+                            }
+                            {userCharged && 
+                            <div className='charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
+                            <Image src="/assets/icons/already-charged-icon.svg"
+                            alt="post rewarded" width={15} height={15}
                             />
+                            </div>
+                            }
                         </div>
                     }
                 </div>
@@ -110,7 +155,7 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
     return (
         <div className='relative w-full  h-[40vh] rounded-[20px]'>
 
-            <div className='w-full  h-full absolute rounded-[20px] '
+            <div className='w-full  h-full absolute rounded-[20px]'
                 style={{
                     backgroundImage: `url(${metadata?.media})`,
                     backgroundRepeat: 'no-repeat',
@@ -154,8 +199,10 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
 
                     </div>
 
-                    <div>
-                        <Image src="/assets/icons/send-message-icon.svg" alt="Send" width={25} height={25} />
+                    <div className='-mt-2 charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
+                            <Image src="/assets/icons/not-charged-icon.svg"
+                            alt="post rewarded" width={15} height={15}
+                            />
                     </div>
                 </div>
             </div>
@@ -199,8 +246,10 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
                     <div>
                         <Image src="/assets/icons/save-post-icon.svg" alt="comment" width={20} height={20} />
                     </div>
-                    <div>
-                        <Image src="/assets/icons/send-message-icon.svg" alt="comment" width={25} height={25} />
+                    <div className='-mt-2 charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
+                            <Image src="/assets/icons/not-charged-icon.svg"
+                            alt="post rewarded" width={15} height={15}
+                            />
                     </div>
                 </div>
             </div>
@@ -323,25 +372,25 @@ const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
 
     //Todo: make confirm button disabled after clicking
     const handleValueBasedCharge = async (valueToCharge: number) => {
-        /* call the contract method to do simple charge */
         const post_id = Number(activePost?.post_id);
-        /* after close the modal and toast for success or error */
-        try {
-            await nearState.pnftContract?.charge({
-                charger_id: nearState.accountId,
-                post_id: post_id,
-                amount: `${valueToCharge}` + "000000000000000000000000",
-            },
-                "300000000000000"
-            ).then(() => {
-                getBalance(nearState)
-            })
-            console.log("Post Charged successfully")
-            toast.success('Post charged successfully')
-        } catch (err) {
-            console.error("Unable to charge post due to: ", err)
-            toast.error('Unable to charge post')
-        }
+        // try {
+        //     await nearState.pnftContract?.charge({
+        //         charger_id: nearState.accountId,
+        //         post_id: post_id,
+        //         amount: `${valueToCharge}` + "000000000000000000000000",
+        //     },
+        //         "300000000000000"
+        //     ).then(() => {
+        //         getBalance(nearState)
+        //     })
+        //     console.log("Post Charged successfully")
+        //     toast.success('Post charged successfully')
+        // } catch (err) {
+        //     console.error("Unable to charge post due to: ", err)
+        //     toast.error('Unable to charge post')
+        // }
+
+        initPostChargersList(post_id, nearState.accountId, nearState.accountId, false);
         setShowCharge(false);
 
     }

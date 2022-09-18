@@ -18,7 +18,7 @@ import { getBalance } from '../../lib/aexContract';
 import SharePost from '../SharePost';
 import { Feedback } from 'aws-sdk/clients/applicationinsights';
 import { getPostChargers, initPostChargersList } from '../../lib/chargeFilebase'
-import { selectPostChargers } from '../../store/slices/postChargesSlice';
+import { selectPostChargers, setPostChargers } from '../../store/slices/postChargesSlice';
 
 
 // coverImage, postOwner, nftId, title, description
@@ -45,16 +45,16 @@ const TextPost: React.FC<IProps> = ({
     const randomColor = generateRandomColor();
     const nearState = nearStore((state) => state);
     const dispatch = useDispatch();
-    const {postChargers} = useSelector(selectPostChargers);
+    const { postChargers } = useSelector(selectPostChargers);
     const [userCharged, setUserCharged] = useState<boolean>(false);
 
     useEffect(() => {
         getChargeStatus();
-    },[feed])
+    }, [feed])
 
     useEffect(() => {
         findIfUserCharged();
-    },[postChargers])
+    }, [postChargers])
 
     const getChargeStatus = async () => {
         const chargers = await getPostChargers(feed.post_id, false, dispatch);
@@ -62,11 +62,11 @@ const TextPost: React.FC<IProps> = ({
     }
 
     const findIfUserCharged = async () => {
-        if(postChargers && postChargers.length > 0){
+        if (postChargers && postChargers.length > 0) {
             postChargers.forEach((charger) => {
-                if(charger.post_id == feed.post_id){
+                if (charger.post_id == feed.post_id) {
                     const findIndex = charger.chargers.findIndex((charger) => charger == nearState.accountId);
-                    if(findIndex > -1){
+                    if (findIndex > -1) {
                         setUserCharged(true);
                     }
                 }
@@ -100,10 +100,10 @@ const TextPost: React.FC<IProps> = ({
 
             <div>
                 <div className='overflow-y-scroll'>
-                <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
-                <div className='h-[135px] overflow-y-scroll'>
-                <p className='text-sm text-white mt-2'>{metadata?.description} </p>
-                </div>
+                    <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
+                    <div className='h-[135px] overflow-y-scroll'>
+                        <p className='text-sm text-white mt-2'>{metadata?.description} </p>
+                    </div>
                 </div>
                 <div className='flex justify-between mt-2 items-center'>
                     <div className='flex gap-3 items-center'>
@@ -111,9 +111,9 @@ const TextPost: React.FC<IProps> = ({
                             <Image className='cursor-pointer' src="/assets/icons/comment-icon.svg" alt="comment" width={20} height={20} />
                         </div>
                         <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
-                            <Image src="/assets/icons/share-icon.svg" alt="share"   width={20} height={20}
-                             className='cursor-pointer '
-                             onClick={(e) => initializeShare(feed)} 
+                            <Image src="/assets/icons/share-icon.svg" alt="share" width={20} height={20}
+                                className='cursor-pointer '
+                                onClick={(e) => initializeShare(feed)}
                             />
                         </div>
                         <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
@@ -123,25 +123,27 @@ const TextPost: React.FC<IProps> = ({
 
                     {!feed?.metadata?.title.includes('AERX ProfileNFT for') &&
                         <div>
-                            {!userCharged && 
-                            <div className='charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
-                            <Image src="/assets/icons/not-charged-icon.svg"
-                            alt="charge post" width={15} height={15}
-                            className="cursor-pointer"
-                            onClick={(e) => handleOnClick(e, feed)}
-                            onMouseDown={handleOnMouseDown}
-                                onMouseUp={handleOnMouseUp}
-                                onTouchStart={handleOnTouchStart}
-                                onTouchEnd={handleOnTouchEnd}
-                                />
-                            </div>
+                            {!userCharged &&
+                                <div className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
+                                    <Image src="/assets/icons/not-charged-icon.svg"
+                                        alt="charge post" width={15} height={15}
+                                        className="cursor-pointer"
+                                        onClick={(e) => handleOnClick(e, feed)}
+                                        onMouseDown={handleOnMouseDown}
+                                        onMouseUp={handleOnMouseUp}
+                                        onTouchStart={handleOnTouchStart}
+                                        onTouchEnd={handleOnTouchEnd}
+                                    />
+                                </div>
                             }
-                            {userCharged && 
-                            <div className='charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
-                            <Image src="/assets/icons/already-charged-icon.svg"
-                            alt="post rewarded" width={15} height={15}
-                            />
-                            </div>
+                            {userCharged &&
+                                <div
+                                    onClick={() => toast.error("You have already charged this post")}
+                                    className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
+                                    <Image src="/assets/icons/already-charged-icon.svg"
+                                        alt="post rewarded" width={15} height={15}
+                                    />
+                                </div>
                             }
                         </div>
                     }
@@ -200,9 +202,9 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
                     </div>
 
                     <div className='-mt-2 charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
-                            <Image src="/assets/icons/not-charged-icon.svg"
+                        <Image src="/assets/icons/not-charged-icon.svg"
                             alt="post rewarded" width={15} height={15}
-                            />
+                        />
                     </div>
                 </div>
             </div>
@@ -247,9 +249,9 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
                         <Image src="/assets/icons/save-post-icon.svg" alt="comment" width={20} height={20} />
                     </div>
                     <div className='-mt-2 charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
-                            <Image src="/assets/icons/not-charged-icon.svg"
+                        <Image src="/assets/icons/not-charged-icon.svg"
                             alt="post rewarded" width={15} height={15}
-                            />
+                        />
                     </div>
                 </div>
             </div>
@@ -259,7 +261,7 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
 }
 
 
-const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
+const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [posts, setPosts] = useState<Array<Feed>>([]);
     const [postsClone, setPostsClone] = useState<Array<Feed>>([]);
@@ -269,7 +271,9 @@ const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
     const [showCharge, setShowCharge] = useState<boolean>(false);
     const [showShare, setShowShare] = useState<boolean>(false);
     const [sharablePost, setSharablePost] = useState<Feed | null>(null);
-   
+    const [chargingLoading, setChargingLoading] = useState<boolean>(false);
+
+
 
     /* clicked post */
     const [activePost, setActivePost] = useState<Feed>();
@@ -351,6 +355,7 @@ const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
     /*  handle charging */
     const handleSimpleCharge = async () => {
         /* call the contract method to do simple charge */
+        setIsLoading(true)
         const post_id = Number(activePost?.post_id);
         try {
             await nearState.pnftContract?.charge({
@@ -368,35 +373,50 @@ const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
             console.error("Unable to charge post due to: ", err)
             toast.error('Unable to charge post')
         }
+
+        const postCharge = {
+            post_id: post_id,
+            chargers: nearState.accountId
+        }
+        setChargingLoading(false)
+        dispatch(setPostChargers(postCharge));
     }
 
     //Todo: make confirm button disabled after clicking
     const handleValueBasedCharge = async (valueToCharge: number) => {
+        setChargingLoading(true)
         const post_id = Number(activePost?.post_id);
-        // try {
-        //     await nearState.pnftContract?.charge({
-        //         charger_id: nearState.accountId,
-        //         post_id: post_id,
-        //         amount: `${valueToCharge}` + "000000000000000000000000",
-        //     },
-        //         "300000000000000"
-        //     ).then(() => {
-        //         getBalance(nearState)
-        //     })
-        //     console.log("Post Charged successfully")
-        //     toast.success('Post charged successfully')
-        // } catch (err) {
-        //     console.error("Unable to charge post due to: ", err)
-        //     toast.error('Unable to charge post')
-        // }
+        try {
+            await nearState.pnftContract?.charge({
+                charger_id: nearState.accountId,
+                post_id: post_id,
+                amount: `${valueToCharge}` + "000000000000000000000000",
+            },
+                "300000000000000"
+            ).then(() => {
+                getBalance(nearState)
+            })
+            console.log("Post Charged successfully")
+            toast.success('Post charged successfully')
+        } catch (err) {
+            console.error("Unable to charge post due to: ", err)
+            toast.error('Unable to charge post')
+        }
+        setChargingLoading(false)
 
         initPostChargersList(post_id, nearState.accountId, nearState.accountId, false);
+        const postCharge = {
+            post_id: post_id,
+            chargers: nearState.accountId
+        }
+        alert(JSON.stringify(postCharge))
+        dispatch(setPostChargers(postCharge));
         setShowCharge(false);
 
     }
     /*  end of handle charging*/
 
-    const manipulateFeeds = async (feeds: Array<Feed>, forClone:boolean) => {
+    const manipulateFeeds = async (feeds: Array<Feed>, forClone: boolean) => {
         const newList = [...feeds].reverse();
         let manipulatedFeeds: Feed[] = [];
         let row = 1;
@@ -411,11 +431,11 @@ const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
             }
             row += 1;
             if (index === newList.length - 1) {
-                if(!forClone){
+                if (!forClone) {
                     setPosts(manipulatedFeeds);
                     setPostsClone(manipulatedFeeds)
                 }
-                else{
+                else {
                     setPostsClone(manipulatedFeeds);
                 }
             }
@@ -424,10 +444,10 @@ const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
 
     useEffect(() => {
         handleSearchByPostTitle(searchKey);
-    },[searchKey])
+    }, [searchKey])
 
     const handleSearchByPostTitle = (searchKey: string) => {
-        if(searchKey === '' || searchKey === null || searchKey?.replace(/\s/g, "").length === 0){
+        if (searchKey === '' || searchKey === null || searchKey?.replace(/\s/g, "").length === 0) {
             setPostsClone(posts);
             return;
         }
@@ -475,6 +495,7 @@ const ListFeeds: React.FC<{searchKey: string}> = ({ searchKey }) => {
             {showCharge && <ChargePost
                 onClose={() => setShowCharge(false)}
                 onCharge={handleValueBasedCharge}
+                loading={chargingLoading}
             />}
             {showShare && <SharePost post={sharablePost as Feed} onClose={() => setShowShare(false)} />}
         </>

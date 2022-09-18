@@ -503,7 +503,7 @@ function Pools(props) {
               </Flex>
             </Flex>
 
-            <Flex ml="16.44" mb="23.975px"
+            {/* <Flex ml="16.44" mb="23.975px"
               onClick={() => AddLiquidity()}
               cursor="pointer"
 
@@ -542,9 +542,9 @@ function Pools(props) {
                 <Text color="#ffffff">$3.46</Text>
                 <Text color="#ffffff">197</Text>
               </Flex>
-            </Flex>
+            </Flex> */}
 
-            <Flex ml="16.44" mb="23.975px"
+            {/* <Flex ml="16.44" mb="23.975px"
               onClick={() => AddLiquidity()}
               cursor="pointer"
 
@@ -624,7 +624,7 @@ function Pools(props) {
                 <Text color="#ffffff">$3.46</Text>
                 <Text color="#ffffff">197</Text>
               </Flex>
-            </Flex>
+            </Flex> */}
           </Box>
 
       }

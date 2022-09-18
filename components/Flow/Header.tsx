@@ -50,7 +50,7 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
              <label className='text-white font-semibold text-sm'>My Flow</label>
            </div>
 
-           <div className='flex w-[50%] gap-2 '>
+           <div className='flex w-[55%] gap-2 items-center'>
            <div className='w-[75%]'>
              <SearchInput 
              backgroundColor='bg-black-light' 
@@ -58,23 +58,23 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
              onChange={onSearch}
               />
            </div>
-           <div className='bg-black-light p-1  px-2 rounded-[10px] items-center flex  h-[35px]'>
+           <div className='bg-black-light p-1  px-2 rounded-[10px] items-center flex w-[105px]  h-[40px] '>
              <Image src='/assets/icons/flash-icon.svg' alt="total posts" width={20} height={20} />
-             <label className='text-white text-sm'>31134</label>
+             <label className='text-white text-sm text-center ml-[12px] '>31134</label>
            </div>
            </div>
 
-           <div className='flex gap-2'>
-           <div className='bg-black-light p-1 rounded-[10px] items-center justify-around flex w-[35px] h-[35px]'>
+           <div className='flex gap-2 ml-[-45px] mt-2'>
+           <div className='bg-black-light p-1 rounded-[10px] items-center justify-around flex w-[35px] h-[35px] mt-1 '>
             <Image src="/assets/icons/switch-icon.svg" alt="Switch accounts" width={20} height={20} />
            </div>
-           <div className='bg-purple p-1 rounded-[10px] items-center justify-around flex w-[35px] h-[35px] cursor-pointer hover:opacity-[50%]' 
+           <div className='bg-purple p-1 rounded-[10px] items-center justify-around flex w-[35px] h-[35px] mt-1 cursor-pointer hover:opacity-[50%]' 
             onClick={onAddPost}
            >
-            <Image src="/assets/icons/white-add-icon.svg" alt="Add Post" width={15} height={15} />
+            <Image src="/assets/icons/white-add-icon.svg" alt="Add Post" width={11} height={11} />
            </div>
            <div className='cursor-pointer' onClick={() => onCollapse()}>
-             <Image src="/assets/icons/chat-room-menu-icon.svg" alt="Meu" width={30} height={30} />
+             <Image src="/assets/icons/chat-room-menu-icon.svg" alt="Meu" width={30} height={45} />
            </div>
            </div>
         </div>

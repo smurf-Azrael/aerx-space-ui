@@ -60,9 +60,9 @@ function Profile(props) {
     height="100%"
     w="257.56px"
 
-    // bgImage="url('../resources/pd.svg') "
+    bgImage="url('../resources/pd.svg') "
 
-    bgImage={`url('${nearState.profile.profileImg}')`}
+    // bgImage={`url('${nearState.profile.profileImg}')`}
     bgSize="100% 45%"
     bgRepeat="no-repeat"
     bgPosition="top"

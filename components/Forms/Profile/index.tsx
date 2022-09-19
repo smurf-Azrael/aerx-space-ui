@@ -27,7 +27,9 @@ const ProfileSettingForm: React.FC = () => {
     fileSize: null,
     urlSha256: null,
   });
+  const [creating, setCreating] = useState<boolean>(false);
   const nearState = nearStore((state) => state);
+  const [showTriggers, setShowTriggers] = useState<boolean>(false);
   const initialValues = {
     name: '',
     userName: '',
@@ -51,6 +53,9 @@ const ProfileSettingForm: React.FC = () => {
   const { touched, values, getFieldProps, isValid, errors } = formik;
 
   const handleSubmit = async () => {
+    if(creating) return;
+    if(!file && !avatarUrl) return toast.error("Please select a profile image or use 3d avatar")
+    setCreating(true);
     console.log('File: ', file);
     console.log('Username: ', formik.values.userName);
     let fileUrl:string = "";
@@ -125,6 +130,7 @@ const ProfileSettingForm: React.FC = () => {
   };
 
   function fileChange(event: any) {
+    // alert("file changed")
     const file = event.target.files[0];
     if (file) {
       const filename = file?.name;
@@ -146,10 +152,11 @@ const ProfileSettingForm: React.FC = () => {
     <div className="px-6">
       <Toaster />
       <div className="mt-4 flex w-ful gap-6">
+        <div className=' relative'>
         <div
           className="h-[400px] w-[230px] bg-[#0000004d] p-2"
           style={{
-            background: `${!avatarUrl
+            background: `${(!avatarUrl)
                 ? 'url("/assets/images/profile-avatar-cover.svg")'
                 : 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
               }`,
@@ -166,8 +173,12 @@ const ProfileSettingForm: React.FC = () => {
               </div>
 
               <div
-                className="w-full  flex flex-col justify-around cursor-pointer"
+                className="w-full  flex flex-col justify-around cursor-pointer upload-trigger"
                 onClick={uploadPhoto}
+                onMouseEnter={() => setShowTriggers(true)}
+                style={{
+                  zIndex: showTriggers ? 5 : 1,
+                }}
               >
                 <Image
                   src="/assets/icons/upload-icon.svg"
@@ -188,9 +199,15 @@ const ProfileSettingForm: React.FC = () => {
                 />
               </div>
 
+             
+
               <div
-                className="w-full  flex flex-col justify-around cursor-pointer"
+                className="w-full  flex flex-col justify-around cursor-pointer upload-trigger"
+                onMouseEnter={() => setShowTriggers(true)}
                 onClick={() => router.push('/create-avatar')}
+                style={{
+                  zIndex: showTriggers ? 5 : 1,
+                }}
               >
                 <Image
                   src="/assets/icons/3d-account-icon.svg"
@@ -210,6 +227,28 @@ const ProfileSettingForm: React.FC = () => {
               />
             )}
           </div>
+          </div>
+
+
+          {/* display the file preview  */}
+          <div className='absolute top-0'
+          style={{
+            zIndex: 3,
+          }} 
+          onMouseEnter={() => setShowTriggers(true)}
+          onMouseLeave={() => setShowTriggers(false)}
+          >
+          {filePreview && 
+                <div>
+                   <Image src={filePreview  as string} 
+                   alt="profile-avatar" width={230} height={400} 
+                   className="rounded-2xl" 
+                   />
+                </div>
+              }
+          </div>
+
+
         </div>
         <div className="w-[55%] ">
           <input
@@ -266,11 +305,12 @@ const ProfileSettingForm: React.FC = () => {
       <div className="w-full flex justify-around mt-4">
         <button
           disabled={
-            !isValid ||
+            (!isValid ||
               !touched.name ||
               !touched.userName ||
-              !touched.bio ||
-              !file
+              !touched.bio 
+              // ||(file && filePreview)
+            )
               ? true
               : false
           }
@@ -280,13 +320,13 @@ const ProfileSettingForm: React.FC = () => {
             !isValid ||
               !touched.name ||
               !touched.userName ||
-              !touched.bio ||
-              !file
+              !touched.bio 
+              // ||  (file && avatarUrl)
               ? { opacity: 0.5 }
               : { opacity: 1 }
           }
         >
-          Create
+          {creating ? "Creating..." : "Create"}
         </button>
       </div>
     </div>

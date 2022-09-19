@@ -105,6 +105,11 @@ function Index() {
    
     // }
   };
+
+//   const handleMouseLeave = () => {
+//     clearTimeout(delayHandler)
+// }
+
   const removeCircle = (e) => {
     if (e.detail == 1) {
       setDoubleClicked((prevState) => !prevState);

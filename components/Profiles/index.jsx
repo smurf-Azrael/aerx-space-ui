@@ -91,10 +91,26 @@ function Index() {
 
   const HoverClick = () => {
     // if (e.detail == 2) {
-      setTimeout(() => {
-      setDoubleClicked((prevState) => !prevState);
-      }, 3000);
+  setTimeout(() => {
+
+      setDoubleClicked(true);
+
+    }, 3000);
    
+  };
+  
+
+
+
+
+  const LeaveClick = () => {
+    // if (e.detail == 2) {
+      // setTimeout(() => {
+      // setDoubleClicked(false);
+      clearTimeout
+    // }, 3000);
+
+     
     // }
   };
   const CircleClick = () => {
@@ -144,6 +160,7 @@ function Index() {
                 toggle={toggleClick}
                 hoverClick={HoverClick}
                 circleClick={CircleClick}
+                leaveClick={LeaveClick}
                 wallet={openWallet}
                 removeCircle={removeCircle}
                 switch={switchCircle}

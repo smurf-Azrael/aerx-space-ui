@@ -18,7 +18,9 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [filePreview, setFilePreview] = useState<string>();
     const [media, setMedia] = useState();
+    const [postOwnerProfile, setPostOwnerProfile] = useState<any>();
     const nearState = nearStore((state) => state);
+    const [postType, setPostType] = useState<'post' | 'tempo' | 'music'>('post')
     //Todo: handle together with
     const handlePost = async (e: { preventDefault: () => void; }) => {
         if (isLoading) return;
@@ -88,6 +90,9 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
         (document.getElementsByClassName('upload-photo')[0] as any).click();
     }
 
+  
+
+
     const saveMediaToPinata = async () => {
         const file = media;
         if (file) {
@@ -149,6 +154,26 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
 
         }
     }
+
+    useEffect(() => {
+        getPostOwnerProfile();
+    },[earnPost])
+
+    useEffect(() => {
+        console.log("profile ....")
+        console.log(postOwnerProfile)
+    },[postOwnerProfile])
+    const getPostOwnerProfile = async () => {
+        // alert(JSON.stringify(earnPost))
+        if(earnPost){
+            await nearState.profileContract?.profile_by_id({
+                user_id: earnPost?.owner_id,
+                user_to_find_id: earnPost?.owner_id
+            }).then((res) => {
+                setPostOwnerProfile(res);
+            })
+        }
+    }
     return (
         <div>
             <Toaster />
@@ -171,17 +196,38 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                     <label className='text-white opacity-[20%] text-sm'>Type: </label>
 
                     <div className='flex flex-wrap gap-3 mt-4'>
-                        <div className='bg-[#6154f027] p-2 rounded-full w-[max-content] flex gap-2 px-4'>
-                            <Image src="/assets/icons/text-post-icon.svg" alt="comment" width={15} height={15} />
-                            <label className='text-purple text-sm'>Post</label>
+                        <div className='bg-[#6154f027] p-2 rounded-full w-[max-content] flex gap-2 px-4 cursor-pinter'
+                         onClick={() => setPostType('post')}
+                         style={{
+                            backgroundColor: (postType === 'post') ? '#6154f0ce' : '#6154f027'
+                         }}
+                        >
+                            <Image src="/assets/icons/text-post-icon.svg" alt="comment" width={15} height={15} 
+                            className='cursor-pointer'
+                            />
+                            <label className='text-purple text-sm cursor-pointer'>Post</label>
                         </div>
-                        <div className='bg-[#ff76272f] p-2 rounded-full w-[max-content] flex gap-2 px-4'>
-                            <Image src="/assets/icons/tempo-post-icon.svg" alt="comment" width={15} height={15} />
-                            <label className='text-[#FF7527] text-sm'>Tempo</label>
+                        <div className='cursor-pointer bg-[#ff76272f] p-2 rounded-full w-[max-content] flex gap-2 px-4'
+                           onClick={() => setPostType('tempo')}
+                           style={{
+                            backgroundColor: (postType === 'tempo') ? '#ff7627ae' : '#ff76272f'
+                         }}
+                        >
+                            <Image src="/assets/icons/tempo-post-icon.svg" alt="comment" width={15} height={15}
+                             className='cursor-pointer'
+                            />
+                            <label className='text-[#FF7527] text-sm cursor-pointer'>Tempo</label>
                         </div>
-                        <div className='bg-[#ec52a427] p-2 rounded-full w-[max-content] flex gap-2 px-4'>
-                            <Image src="/assets/icons/music-post-icon.svg" alt="comment" width={15} height={15} />
-                            <label className='text-[#ec52a4] text-sm'>Music</label>
+                        <div className='bg-[#ec52a427] p-2 rounded-full w-[max-content] flex gap-2 px-4 cursor-pointer' 
+                          onClick={() => setPostType('music')}
+                          style={{
+                            backgroundColor: (postType === 'music') ? '#ec52a4b5' : '#ec52a427'
+                         }}
+                        >
+                            <Image src="/assets/icons/music-post-icon.svg" alt="comment" width={15} height={15} 
+                             className='cursor-pointer'
+                            />
+                            <label className='text-[#ec52a4] text-sm cursor-pointer'>Music</label>
                         </div>
                     </div>
                     <div className='bg-white opacity-[15%] p-[0.5px] mt-6' />
@@ -197,7 +243,12 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                         />
                     </div>
                     {/* <label className='text-white'>{earnPost?.metadata?.extra}</label> */}
-                    
+                    {postOwnerProfile && 
+                        <Image src={postOwnerProfile?.metadata?.media} width={30} height={30}
+                        className="rounded-full mt-1" title={postOwnerProfile?.metadata?.extra} 
+                        />
+                    }
+
                     <div className='bg-white opacity-[15%] p-[0.5px] mt-6' />
                 </div>
 

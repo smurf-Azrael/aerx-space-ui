@@ -80,10 +80,10 @@ const Circle = (props) => {
             src={"../resources/Ellipse 2.png"}
           />
         </Box> */}
-          <Image src={'../resources/Group 5450.png'}  w="13.37805px" h="21.92px" />
+          {/* <Image src={'../resources/Group 5450.png'}  w="13.37805px" h="21.92px" />
  
        <Image src={'../resources/Send2.svg'}    w="21.92px" h="21.92px" />
-       <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" />
+       <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" /> */}
       </Flex>
 
       <Flex position="absolute" flexDirection="column" gap="16.44px" ml="248.47005px" mt="46.54px" alignItems="center" zIndex='2'>
@@ -91,6 +91,10 @@ const Circle = (props) => {
        <Image src={'../resources/Frame 13920.png'}  w="21.92px" h="21.92px" />
        <Image src={'../resources/Send.svg'}    w="21.92px" h="21.92px" />
        <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" /> */}
+         <Image src={'../resources/Group 5450.png'}  w="13.37805px" h="21.92px" />
+ 
+ <Image src={'../resources/Send2.svg'}    w="21.92px" h="21.92px" />
+ <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" />
       </Flex>
 
 
@@ -105,6 +109,7 @@ const Circle = (props) => {
         right="10.96px"
         zIndex="2"
         cursor="pointer"
+        mr="2%"
       />
 
       <Box

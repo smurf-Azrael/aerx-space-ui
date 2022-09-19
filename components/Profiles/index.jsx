@@ -89,11 +89,21 @@ function Index() {
   isCircle ? (index = 1) : (index = -1);
 
 
-  const doubleClick = (e) => {
-    if (e.detail == 2) {
+  const HoverClick = () => {
+    // if (e.detail == 2) {
+      setTimeout(() => {
       setDoubleClicked((prevState) => !prevState);
+      }, 3000);
    
-    }
+    // }
+  };
+  const CircleClick = () => {
+    // if (e.detail == 2) {
+    
+      setDoubleClicked((prevState) => !prevState);
+
+   
+    // }
   };
   const removeCircle = (e) => {
     if (e.detail == 1) {
@@ -127,7 +137,8 @@ function Index() {
             <div>
               <Profile
                 toggle={toggleClick}
-                doubleClick={doubleClick}
+                hoverClick={HoverClick}
+                circleClick={CircleClick}
                 wallet={openWallet}
                 removeCircle={removeCircle}
                 switch={switchCircle}

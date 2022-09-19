@@ -71,7 +71,8 @@ function Profile(props) {
         <Flex
           width="100%"
           // backgroundColor="#000000"
-          onDoubleClick={(e) => props.doubleClick(e)}
+          onClick={props.circleClick}
+          onMouseOver={props.hoverClick }
           cursor="pointer"
           bgGradient={bgGradient}
           h="45%"
@@ -174,18 +175,18 @@ function Profile(props) {
               </Flex>
             </Box>
           </Flex>
-          <Flex flexDirection="column" gap="10.96px" mr="8%" mt="21.92px">
+          <Flex flexDirection="column" gap="10.96px" mr="3%" mt="21.92px">
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
-              <Image src="../resources/Group 14948.png" />
+              <Image src="../resources/Group 14948.png" w="42px"  />
             </Box>
             {/* second */}
             <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
-              <Image src="../resources/Group 14949.png" />
+              <Image src="../resources/Group 14949.png" w="42px" />
             </Box>
             {/* third*/}
 
-            <Image src="../resources/Group 14950.png"></Image>
+            <Image src="../resources/Group 14950.png" w="42px"></Image>
           </Flex>
         </Flex>
         {/* profile */}
@@ -196,6 +197,7 @@ function Profile(props) {
           height="25%"
           flexDirection="column"
           backgroundGradient="linear-gradient(180deg, rgba(25, 25, 25, 0) 0%, #191919 100%)"
+          mb="15%"
         >
           <Center borderRadius="50px 50px 0px 0px">
             <div
@@ -235,7 +237,6 @@ function Profile(props) {
             justifyContent="space-around"
             flexDirection="row"
             marginLeft="18.495px"
-            mt="2%"
             overflowX="hidden"
             flex="auto"
             ml="8px"
@@ -340,7 +341,7 @@ function Profile(props) {
             </Flex>
           </Flex>
         </Flex>
-        <Flex bgColor="#242424" borderTopRadius="34.25px" h="25%" mt="12%">
+        <Flex bgColor="#242424" borderTopRadius="34.25px" h="23%" mt="12%">
           <Box
             bgColor="#242424"
             width="257.56px"
@@ -348,7 +349,7 @@ function Profile(props) {
             borderTopRadius="34.25px"
             position="absolute"
             h="15%"
-            top="62%"
+            top="64%"
           >
             <Center>
               <div
@@ -480,7 +481,7 @@ function Profile(props) {
             // borderTopRadius="34.25px"
             position="absolute"
             h="23%"
-            top="74%"
+            top="76%"
           >
             <Flex mt="" ml="16.44px" overflow="hidden">
               <Box marginRight="10.96px" position="relative">
@@ -627,8 +628,8 @@ function Profile(props) {
             width="257.56px"
             marginLeft="0"
             borderTopRadius="50px"
-            h="10%"
-            top="90%"
+            h="8%"
+            top="92%"
           >
             <Center
               display="flex"

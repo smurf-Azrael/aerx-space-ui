@@ -136,6 +136,9 @@ export async function initNearConnection(nearState: NearStoreType) {
     //Get accountId 
     const accountId = walletConnection.getAccountId();
     console.log("accountId : ", accountId);
+    //Get Balance
+    const balance = walletConnection._connectedAccount.getAccountBalance();
+    console.log("balance: ", balance)
     //verify accountId exists
     if (!accountId) {
         console.log("Account id is empty");

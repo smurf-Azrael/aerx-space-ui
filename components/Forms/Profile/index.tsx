@@ -53,36 +53,40 @@ const ProfileSettingForm: React.FC = () => {
   const handleSubmit = async () => {
     console.log('File: ', file);
     console.log('Username: ', formik.values.userName);
-    const returnedIpfsData = await pinToPinata(
-      file,
-      'PROFILE',
-      formik.values.userName
-    );
-    const fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${returnedIpfsData.IpfsHash}`;
-    console.log('File url: ', fileUrl);
-    const fileSize = returnedIpfsData.PinSize;
-    console.log('File size: ', fileSize);
-    const fileUrlHash = new shajs.sha256().update(fileUrl).digest('base64');
-    console.log('Encrypted url: ', fileUrlHash);
-    //is the set state really needed?
+    let fileUrl:string = "";
+    let fileUrlHash:string = "";
+    if(!avatarUrl){
+      let returnedIpfsData = await pinToPinata(
+        file,
+        'PROFILE',
+        formik.values.userName
+        );
+        fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${returnedIpfsData.IpfsHash}`;
+        console.log('File url: ', fileUrl);
+        const fileSize = returnedIpfsData.PinSize;
+        console.log('File size: ', fileSize);
+        fileUrlHash = new shajs.sha256().update(fileUrl).digest('base64');
+        console.log('Encrypted url: ', fileUrlHash);
+        //is the set state really needed?
     setIpfsData((prevIpfs) => ({
       ...prevIpfs,
       fileUrl: fileUrl,
       fileSize: fileSize,
       urlSha256: fileUrlHash,
     }));
+  }
     const profileToMint = {
       title: 'AERX ProfileNFT for ' + formik.values.userName,
       username: formik.values.userName,
       description: formik.values.bio,
-      media: fileUrl,
+      media: avatarUrl ? avatarUrl : fileUrl,
       media_hash: fileUrlHash,
       issued_at: new Date().toISOString(),
       extra: formik.values.name,
       //Todo: confirm if there will be extra from project management
     };
-    console.log('Profile to mint: ', profileToMint);
-    console.log('Ipfs data: ', returnedIpfsData);
+    // console.log('Profile to mint: ', profileToMint);
+    // console.log('Ipfs data: ', returnedIpfsData);
 
     try {
       await nearState.pnftContract

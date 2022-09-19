@@ -318,7 +318,7 @@ ReactSimpleRange.propTypes = {
 };
 ReactSimpleRange.defaultProps = {
     min: 0,
-    max: 100,
+    max: 10,
     step: 1,
     onChange: noOp,
     onChangeComplete: noOp,

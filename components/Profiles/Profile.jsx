@@ -73,7 +73,7 @@ function Profile(props) {
         <Flex
           width="100%"
           // backgroundColor="#000000"
-          // onClick={props.circleClick}
+          onClick={props.circleClick}
           cursor="pointer"
           bgGradient={bgGradient}
 

@@ -10,7 +10,7 @@ import {
   Button,
   color,
 } from "@chakra-ui/react";
-import { MinusIcon } from "@chakra-ui/icons";
+import { MinusIcon,ChevronUpIcon } from "@chakra-ui/icons";
 import { nearStore } from "../../store/near";
 import { Big } from "big.js";
 
@@ -20,7 +20,17 @@ function SendTokens(props) {
   const [amount, setAmount] = React.useState("");
   const [receiver, setReceiver] = React.useState("");
   const [isProceed, setProceed] = React.useState(false);
+  const [coins, setCoins] = React.useState("AEX");
+  const [isCoins, isSetCoins] = React.useState("false");
   const [amountColor, setAmountColor] = React.useState("rgba(255, 255, 255, 0.3)");
+    
+
+
+const handleCoin = (coin) => {
+      setCoins(coin)
+      isSetCoins((prevState) => !prevState)
+      console.log(coins)
+}
 
   const handleAmount = (event) => {
     const value = event.target.value;
@@ -94,6 +104,7 @@ function SendTokens(props) {
     disabled = true
 
   }
+
 
 
   return (
@@ -174,19 +185,57 @@ function SendTokens(props) {
         fontWeight="342.5px"
         gap="10.96px"
       >
+        { !isCoins &&
+        
         <Flex
           alignItems="center"
           width="65.075px"
           height="21.92px"
           gap="5.48px"
+          onClick={() => handleCoin("AEX")}
+          cursor="pointer"
         >
-          <Image src={"../resources/Group 14031.png"} w="21.92px" h="21.92px" />
-          <Text color="rgba(255, 255, 255, 0.3)" fontSize="10.96px">
-            AEX
-          </Text>
-        </Flex>
+          {/* <Image src={"../resources/Group 14350.png"} /> */}
 
-        <Image src={"../resources/Vector 976.png"} />
+          <Image src={"../resources/Group 143505.png"} />
+        </Flex>
+        
+  }
+  { isCoins &&
+        
+        <Flex
+          alignItems="center"
+          width="65.075px"
+          height="21.92px"
+          gap="5.48px"
+          onClick={(a) => handleCoin("NEAR")}
+          cursor="pointer"
+
+        >
+        
+        <Image src={"../resources/Group 140312.png"} w="21.92px" h="21.92px" />
+          <Text color="rgba(255, 255, 255, 0.3)" fontSize="10.96px">
+            NEAR
+          </Text>
+          <Image src="../resources/Vector 933.png" w="4px"/>
+      
+        </Flex>
+        }
+
+
+        {/* <Flex
+          alignItems="center"
+          width="65.075px"
+          height="21.92px"
+          gap="5.48px"
+        >
+          <Image src={"../resources/Group 140312.png"} w="21.92px" h="21.92px" />
+          <Text color="rgba(255, 255, 255, 0.3)" fontSize="10.96px">
+            NEAR
+          </Text>
+        </Flex> */}
+
+        {/* <Image src={"../resources/Vector 976.png"} /> */}
 
         <div>
           <input

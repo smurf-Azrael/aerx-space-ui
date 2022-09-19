@@ -63,6 +63,8 @@ function Profile(props) {
       bgSize="100% 45%"
       bgRepeat="no-repeat"
       bgPosition="top"
+
+
       // backgroundSize="100% 100%"
       // bgGradient={bgGradient}
     >
@@ -71,13 +73,16 @@ function Profile(props) {
         <Flex
           width="100%"
           // backgroundColor="#000000"
-          onDoubleClick={props.circleClick}
-          onMouseOver={props.hoverClick }
+          onClick={props.circleClick}
           cursor="pointer"
           bgGradient={bgGradient}
+
+     
+
           h="45%"
         >
           <Flex
+     
             flexDirection="column"
             gap="10.96px"
             ml="16.44px"
@@ -93,6 +98,7 @@ function Profile(props) {
               borderColor="#FFFFFF"
               borderRadius="6.85px"
               onClick={() => props.toggle()}
+
             >
               <Image
                 src="../resources/Frame 14290.svg"
@@ -103,7 +109,9 @@ function Profile(props) {
               />
             </Box>
           </Flex>
-          <Flex flexDirection="column" alignItems="center" gap="55%">
+          <Flex flexDirection="column" alignItems="center" gap="55%"
+                // onMouseLeave={props.leaveClick}
+          >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
             <Box h="235px">
@@ -119,6 +127,11 @@ function Profile(props) {
                 mt="21px"
                 justifyContent="center"
                 textTransform="capitalize"
+      onMouseEnter={props.hoverClick }
+      // onMouseLeave={props.leaveClick }
+      cursor="wait"
+      onMouseH
+
               >
                 {nearState.profile.fullName}
               </Heading>

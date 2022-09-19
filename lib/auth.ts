@@ -139,7 +139,7 @@ export async function initNearConnection(nearState: NearStoreType) {
     //Get Balance
     const _account = await nearConnection.account(`${accountId}`);
     const balance = await _account.getAccountBalance();
-    console.log("near balance: ", balance);
+    console.log("available near balance: ", balance.available);
     //verify accountId exists
     if (!accountId) {
         console.log("Account id is empty");

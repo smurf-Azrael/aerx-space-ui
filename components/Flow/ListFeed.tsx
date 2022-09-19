@@ -25,6 +25,7 @@ import { selectPostChargers, setPostChargers } from '../../store/slices/postChar
 interface IProps {
     feed: Feed,
     handleOnClick: (e: any, feed: Feed) => void,
+    onClickCapture: (e: any, feed: Feed) => void,
     handleOnMouseDown: (e: any) => void,
     handleOnMouseUp: (e: any) => void,
     handleOnTouchStart: (e: any) => void,
@@ -38,7 +39,8 @@ const TextPost: React.FC<IProps> = ({
     handleOnMouseUp,
     handleOnTouchStart,
     handleOnTouchEnd,
-    initializeShare
+    initializeShare,
+    onClickCapture
 }) => {
     const { metadata, owner_id, owner_profile, profile } = feed;
     const bgImage = metadata?.media;
@@ -129,6 +131,7 @@ const TextPost: React.FC<IProps> = ({
                                         alt="charge post" width={15} height={15}
                                         className="cursor-pointer"
                                         onClick={(e) => handleOnClick(e, feed)}
+                                        onClickCapture={(e) => onClickCapture(e, feed)}
                                         onMouseDown={handleOnMouseDown}
                                         onMouseUp={handleOnMouseUp}
                                         onTouchStart={handleOnTouchStart}
@@ -299,11 +302,12 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
             setAction('click');
             return;
         }
-        handleSimpleCharge();
+        // handleSimpleCharge();
         setAction('click')
     }
 
     function onClick(e: any, post: Feed) {
+        // alert(post.post_id)
         setActivePost(post);
         handleOnClick(e);
     }
@@ -353,10 +357,12 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
 
     //Todo: fix the post id conflict, make charge button disabled after clicking
     /*  handle charging */
-    const handleSimpleCharge = async () => {
+    const handleSimpleCharge = async (postId: string) => {
         /* call the contract method to do simple charge */
+        if(chargingLoading) return;
         setIsLoading(true)
-        const post_id = Number(activePost?.post_id);
+        const post_id = Number(postId);
+        // alert(post_id)
         try {
             await nearState.pnftContract?.charge({
                 charger_id: nearState.accountId,
@@ -373,7 +379,7 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
             console.error("Unable to charge post due to: ", err)
             toast.error('Unable to charge post')
         }
-
+        initPostChargersList(post_id, nearState.accountId, nearState.accountId, false);
         const postCharge = {
             post_id: post_id,
             chargers: nearState.accountId
@@ -403,13 +409,12 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
             toast.error('Unable to charge post')
         }
         setChargingLoading(false)
-
         initPostChargersList(post_id, nearState.accountId, nearState.accountId, false);
         const postCharge = {
             post_id: post_id,
             chargers: nearState.accountId
         }
-        alert(JSON.stringify(postCharge))
+        // alert(JSON.stringify(postCharge))
         dispatch(setPostChargers(postCharge));
         setShowCharge(false);
 
@@ -476,6 +481,7 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
                             <TextPost
                                 feed={post}
                                 handleOnClick={(e: any, feed: Feed) => onClick(e, feed)}
+                                onClickCapture={(e: any, feed: Feed) => handleSimpleCharge(feed.post_id)}
                                 handleOnMouseDown={handleOnMouseDown}
                                 handleOnMouseUp={handleOnMouseUp}
                                 handleOnTouchStart={handleOnTouchStart}

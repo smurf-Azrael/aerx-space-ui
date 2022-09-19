@@ -32,7 +32,7 @@ const ChargePost: React.FC<{
                 <div className='mt-2'>
                     <ReactSimpleRange
                         min={0}
-                        max={parseInt(accountBalance)}
+                        max={10}
                         trackColor={'#FFE660'}
                         thumbColor={'#ffff'}
                         onChange={(value: any) => setValue(parseInt(value?.ratio))}

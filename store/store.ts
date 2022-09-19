@@ -9,6 +9,7 @@ import postsSlice from "./slices/postsSlice";
 import chargePostEventsSlice from "./slices/chargePostEventsSlice";
 import messagesSlice from "./slices/messagesSlice";
 import activeReceiverSlice  from "./slices/receiverSlice";
+import postChargersSlice from "./slices/postChargesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     posts: postsSlice,
     chargePostEvents: chargePostEventsSlice,
     messages: messagesSlice,
-    activeReceiver: activeReceiverSlice
+    activeReceiver: activeReceiverSlice,
+    postChargers: postChargersSlice,
   },
 });
 

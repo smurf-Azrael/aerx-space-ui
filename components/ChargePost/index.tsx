@@ -8,10 +8,16 @@ import { nearStore } from '../../store/near';
 const ChargePost: React.FC<{
     onClose: () => void,
     onCharge: (value: number) => void,
-}> = ({ onClose, onCharge }) => {
+    loading: boolean
+}> = ({ onClose, onCharge, loading=false }) => {
     const [value, setValue] = useState<number>(0);
     const nearState: any = nearStore((state) => state);
     const accountBalance = nearState?.aexBalance;
+
+    const handleCharge = () => {
+        if(loading) return;
+        onCharge(value);
+    }
 
     return (
         <Modal onClose={() => onClose()}>
@@ -26,7 +32,7 @@ const ChargePost: React.FC<{
                 <div className='mt-2'>
                     <ReactSimpleRange
                         min={0}
-                        max={parseInt(accountBalance)}
+                        max={10}
                         trackColor={'#FFE660'}
                         thumbColor={'#ffff'}
                         onChange={(value: any) => setValue(parseInt(value?.ratio))}
@@ -35,8 +41,8 @@ const ChargePost: React.FC<{
                 <div className='mt-8'>
                     <Button
                         icon="/assets/icons/right-arrow-icon.svg"
-                        label='Confirm'
-                        onClick={() => onCharge(value)}
+                        label={loading ? 'Confirming ... ' : 'Confirm'}
+                        onClick={() => handleCharge()}
                     />
                 </div>
             </div>

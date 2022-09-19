@@ -38,6 +38,11 @@ a {
   box-sizing: border-box;
 }
 
+.charge-filter-effect{
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

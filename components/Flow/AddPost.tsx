@@ -196,6 +196,8 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                             className="cursor-pointer"
                         />
                     </div>
+                    {/* <label className='text-white'>{earnPost?.metadata?.extra}</label> */}
+                    
                     <div className='bg-white opacity-[15%] p-[0.5px] mt-6' />
                 </div>
 

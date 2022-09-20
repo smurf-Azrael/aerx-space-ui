@@ -74,7 +74,6 @@ function Profile(props) {
           cursor="pointer"
           gap="7%"
           bgGradient={bgGradient}
-
           h="45%"
         >
           <Flex
@@ -107,7 +106,7 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             gap="55%"
-            // onMouseLeave={props.leaveClick}
+          // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
@@ -125,7 +124,7 @@ function Profile(props) {
                 justifyContent="center"
                 textTransform="capitalize"
                 onClick={props.circleClick}
-                
+
               >
                 {nearState.profile.fullName}
               </Heading>
@@ -134,7 +133,7 @@ function Profile(props) {
                 alignItems="center"
                 justifyContent="center"
                 gap="16px"
-                // mt="55px"
+              // mt="55px"
               >
                 <Text
                   fontSize="12.33px"
@@ -147,7 +146,7 @@ function Profile(props) {
                   mb="11.645px"
                   mt="12px"
                   lineHeight=" 100%"
-                  /* identical to box height, or 18px */
+                /* identical to box height, or 18px */
                 >
                   {nearState.profile.username}
                 </Text>
@@ -261,7 +260,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -286,7 +285,7 @@ function Profile(props) {
                 src={ellipse5}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -311,7 +310,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -335,7 +334,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -403,7 +402,7 @@ function Profile(props) {
                   fontWeight="700"
                   color="#ffffff"
                   fontFamily="Poppins"
-                  //   mr="30.14px"
+                //   mr="30.14px"
                 >
                   {nearState.aexBalance} AEX
                 </Text>

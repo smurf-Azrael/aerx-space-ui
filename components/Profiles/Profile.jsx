@@ -73,7 +73,7 @@ function Profile(props) {
         <Flex
           width="100%"
           // backgroundColor="#000000"
-          onClick={props.circleClick}
+          onDoubleClick={props.circleClick}
           cursor="pointer"
           bgGradient={bgGradient}
 
@@ -127,10 +127,9 @@ function Profile(props) {
                 mt="21px"
                 justifyContent="center"
                 textTransform="capitalize"
-      onMouseEnter={props.hoverClick }
+      // onMouseEnter={props.hoverClick }
       // onMouseLeave={props.leaveClick }
-      cursor="wait"
-      onMouseH
+
 
               >
                 {nearState.profile.fullName}

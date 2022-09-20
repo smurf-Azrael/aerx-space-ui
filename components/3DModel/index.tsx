@@ -20,7 +20,6 @@ const ThreeDModel = ({ src }: { src: string }) => {
       src={src}
       alt="test"
       style={{ width: '100%', height: '100%' }}
-      camera-controls
       autoplay
     ></model-viewer>
   );

@@ -19,7 +19,9 @@ import SharePost from '../SharePost';
 import { Feedback } from 'aws-sdk/clients/applicationinsights';
 import { getPostChargers, initPostChargersList } from '../../lib/chargeFilebase'
 import { selectPostChargers, setPostChargers } from '../../store/slices/postChargesSlice';
+import dynamic from 'next/dynamic';
 
+const ThreeDModel = dynamic(() => import('../3DModel'), { ssr: false });
 
 // coverImage, postOwner, nftId, title, description
 interface IProps {
@@ -76,21 +78,44 @@ const TextPost: React.FC<IProps> = ({
         }
     }
 
-
-
-    return (
-        <div className='w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2 ' style={{
-            backgroundImage: `url(${bgImage})`,
+   const [containerStyle, setContainerStyle] = useState<any>({
+    backgroundImage: `url(${metadata?.media})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+   })
+   
+   useEffect(() => {
+    if(metadata.media?.includes(".glb") || !metadata.media){
+        setContainerStyle({
+            backgroundImage: `url(${metadata.media})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
-            backgroundColor: `${randomColor}`
-        }}>
+            background: 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
+        })
+    }
+   }, [metadata])
+
+    return (
+        <div className='relative w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2 ' 
+        style={containerStyle}>
+            <div style={{zIndex: 2}}>
             <div className='sticky top-2 flex justify-between items-center' >
                 <div className=' flex gap-2 items-center'>
+                    {!(profile?.metadata?.media as string)?.includes(".glb") && 
                     <Image src={profile?.metadata?.media as string ||
                         "/assets/images/avatar-1.svg"}
                         className='w-8 h-8 rounded-full'
                         alt={`${owner_id}'s avatar`} width={40} height={40} />
+                    }
+                    {profile?.metadata?.media?.includes(".glb") &&
+                     <div className="rounded-full border-[1px] border-white"
+                     style={{ width: '40px', height: '40px', margin: 'auto' }}
+                     >
+                         <ThreeDModel
+                         src={Array.isArray(profile?.metadata?.media) ? profile?.metadata?.media[0] : profile?.metadata?.media}
+                       />
+                     </div>
+        }
                     <label className='text-sm text-white font-bolder'>{profile?.metadata?.extra || owner_id}</label>
                 </div>
 
@@ -101,7 +126,7 @@ const TextPost: React.FC<IProps> = ({
             </div>
 
             <div>
-                <div className='overflow-y-scroll'>
+                <div className='overflow-y-scroll mt-2'>
                     <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
                     <div className='h-[135px] overflow-y-scroll'>
                         <p className='text-sm text-white mt-2'>{metadata?.description} </p>
@@ -152,6 +177,17 @@ const TextPost: React.FC<IProps> = ({
                     }
                 </div>
             </div>
+            </div>
+
+            {(bgImage as string)?.includes('.glb') && 
+            <div className=" absolute top-0"
+            style={{ width: '95%', height: '100%', margin: 'auto', zIndex: 1 }}
+            >
+                <ThreeDModel
+                src={Array.isArray(bgImage) ? bgImage[0] : bgImage}
+              />
+            </div>
+            }
         </div>
     )
 }

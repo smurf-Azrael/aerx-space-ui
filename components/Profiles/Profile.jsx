@@ -67,12 +67,12 @@ function Profile(props) {
       <Box>
         {/* profile */}
         <Flex
-          // w="257.56px"
+          w="257.56px"
 
           width="100%"
           onDoubleClick={props.circleClick}
           cursor="pointer"
-          gap="7%"
+          gap="17%"
           bgGradient={bgGradient}
           h="45%"
         >
@@ -211,7 +211,7 @@ function Profile(props) {
               className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
-        mt-6
+        mt-2
         te
         "
               onClick={remCirc}

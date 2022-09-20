@@ -30,7 +30,7 @@ const Circle = (props) => {
     <Box
  
 
-      // w="282.905px"
+      w="252.905px"
       h="467.17px"
       position="fixed"
       borderRadius="20px"

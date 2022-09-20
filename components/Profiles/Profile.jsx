@@ -72,7 +72,7 @@ function Profile(props) {
           width="100%"
           onDoubleClick={props.circleClick}
           cursor="pointer"
-          gap="42px"
+          gap="7%"
           bgGradient={bgGradient}
 
           h="45%"
@@ -713,7 +713,7 @@ function Profile(props) {
         h="100%"
         position="fixed"
         zIndex={backdrop}
-        w="282.905px"
+        w="252.905px"
         bg="#000000B2"
       >
         .

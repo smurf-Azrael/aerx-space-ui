@@ -72,7 +72,7 @@ function Profile(props) {
           width="100%"
           onDoubleClick={props.circleClick}
           cursor="pointer"
-          gap="17%"
+          gap="7%"
           bgGradient={bgGradient}
           h="45%"
         >

@@ -29,6 +29,17 @@ export type TokenContract = Contract & {
     }) => Promise<boolean>;
 };
 
+export type OtherTokenContract = Contract & {
+    ft_balance_of: (accountId: string) => Promise<string>;
+    ft_transfer_call: (arg: {
+        receiver_id: string;
+        amount: string;
+        memo: any;
+        msg: string;
+    }) => Promise<string>;
+};
+
+
 export type PNFTContract = Contract & {
     is_username_available: (username: string) => Promise<boolean>;
     has_registered: (user_id: string) => Promise<boolean>;

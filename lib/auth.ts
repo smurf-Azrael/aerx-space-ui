@@ -1,5 +1,5 @@
 import * as nearApiJs from "near-api-js";
-import { PNFTContract } from "../types/contracts";
+import { OtherTokenContract, PNFTContract } from "../types/contracts";
 import { getConfig } from "./config";
 import {
     connect,
@@ -216,6 +216,63 @@ const loadTokenContract = (
     console.log("token contract:", tokenContract);
 };
 
+
+export async function initNearConnectionForContract(contractName: string) {
+    // Initialize connection to the NEAR testnet
+    const nearTokenConfig = getConfig(process.env.NODE_ENV);
+    //set keystore and connect
+    const keyStore = new keyStores.BrowserLocalStorageKeyStore();
+    const config: ConnectConfig = {
+        ...nearTokenConfig,
+        headers: {},
+        keyStore,
+    };
+    const nearConnection = await connect(config);
+    console.log("nearConnection : ", nearConnection);
+    // nearState.setConnection(nearConnection);
+
+    // TODO: CHECK IF THE KEY IS NOT CAUSING LOCALSTORAGE ACCESS ISSUE
+    const walletConnection = new WalletConnection(nearConnection, "Aerx");
+    console.log("walletConnection : ", walletConnection);
+    // nearState.setWalletConnection(walletConnection);
+
+    //Get accountId 
+    const accountId = walletConnection.getAccountId();
+    console.log("accountId : ", accountId);
+    //Get Balance
+    const _account = await nearConnection.account(`${accountId}`);
+    const balance = await _account.getAccountBalance();
+    console.log("available near balance: ", balance.available);
+    //verify accountId exists
+    if (!accountId) {
+        console.log("Account id is empty");
+        //Todo: prompt user to register or login
+        return;
+    }
+    // nearState.setAccountId(accountId);
+    return loadOtherTokenContracts(walletConnection.account(), contractName)
+
+}
+const loadOtherTokenContracts = (
+    account: ConnectedWalletAccount,
+    contractName: string,
+) => {
+    const otherTokenContract: OtherTokenContract = new Contract(
+        account,
+        contractName,
+        {
+            viewMethods: [
+                "ft_balance_of",
+            ],
+            changeMethods: [
+                "ft_transfer_call",
+            ],
+        },
+    ) as OtherTokenContract;
+
+    return otherTokenContract;
+};
+
 const loadDexContrat = (
     nearState: NearStoreType,
     account: ConnectedWalletAccount,
@@ -320,3 +377,5 @@ export async function loginToken(nearState: NearStoreType) {
         );
     }
 }
+
+export { loadOtherTokenContracts }

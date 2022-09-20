@@ -72,7 +72,7 @@ function Profile(props) {
           width="100%"
           onDoubleClick={props.circleClick}
           cursor="pointer"
-          gap="42px"
+          gap="40px"
           bgGradient={bgGradient}
 
           h="45%"
@@ -107,7 +107,7 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             gap="55%"
-            // onMouseLeave={props.leaveClick}
+          // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
@@ -125,7 +125,7 @@ function Profile(props) {
                 justifyContent="center"
                 textTransform="capitalize"
                 onClick={props.circleClick}
-                
+
               >
                 {nearState.profile.fullName}
               </Heading>
@@ -134,7 +134,7 @@ function Profile(props) {
                 alignItems="center"
                 justifyContent="center"
                 gap="16px"
-                // mt="55px"
+              // mt="55px"
               >
                 <Text
                   fontSize="12.33px"
@@ -147,7 +147,7 @@ function Profile(props) {
                   mb="11.645px"
                   mt="12px"
                   lineHeight=" 100%"
-                  /* identical to box height, or 18px */
+                /* identical to box height, or 18px */
                 >
                   {nearState.profile.username}
                 </Text>
@@ -185,15 +185,15 @@ function Profile(props) {
           <Flex flexDirection="column" gap="10.96px" mr="3%" mt="21.92px">
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
-              <Image src="../resources/Group 14948.png" w="42px" />
+              <Image src="../resources/Group 14948.png" w="36px" />
             </Box>
             {/* second */}
             <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
-              <Image src="../resources/Group 14949.png" w="42px" />
+              <Image src="../resources/Group 14949.png" w="36px" />
             </Box>
             {/* third*/}
 
-            <Image src="../resources/Group 14950.png" w="42px"></Image>
+            <Image src="../resources/Group 14950.png" w="36px"></Image>
           </Flex>
         </Flex>
         {/* profile */}
@@ -261,7 +261,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -286,7 +286,7 @@ function Profile(props) {
                 src={ellipse5}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -311,7 +311,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -335,7 +335,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -403,7 +403,7 @@ function Profile(props) {
                   fontWeight="700"
                   color="#ffffff"
                   fontFamily="Poppins"
-                  //   mr="30.14px"
+                //   mr="30.14px"
                 >
                   {nearState.aexBalance} AEX
                 </Text>

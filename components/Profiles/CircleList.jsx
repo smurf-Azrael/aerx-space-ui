@@ -3,30 +3,30 @@ import { Box, Text, Center, Flex, Image } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
 
 function CircleList(props) {
-  
-  
+
+
   return (
     <Box
       height="739.8px"
       w="257.56px"
       bgColor="#1f1f1f"
-    //   position="absolute"
-    //   top="0"
-    // zIndex="6"
+      //   position="absolute"
+      //   top="0"
+      // zIndex="6"
       fontFamily="poppins"
     >
-         
-         <Center mb="16.44px">
-      <div
-        className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
+
+      <Center mb="16.44px">
+        <div
+          className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
         mt-2
         "
-        
-        onClick={props.remove}
-      >
-        <MinusIcon
+
+          onClick={props.remove}
+        >
+          <MinusIcon
             w="21.92px"
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
@@ -36,7 +36,7 @@ function CircleList(props) {
             bgColor="rgba(255, 255, 255, 0.3);"
             height="2px"
           />
-      </div>
+        </div>
       </Center>
 
       {/* circle text */}

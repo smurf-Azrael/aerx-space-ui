@@ -58,8 +58,8 @@ function Profile(props) {
       position="absolute"
       height="100%"
       w="257.56px"
-      // bgImage="url('../resources/pd.svg') "
-      bgImage={`url('${nearState.profile.profileImg}')`}
+      bgImage="url('../resources/pd.svg') "
+      // bgImage={`url('${nearState.profile.profileImg}')`}
       bgSize="100% 45%"
       bgRepeat="no-repeat"
       bgPosition="top"
@@ -73,7 +73,7 @@ function Profile(props) {
         <Flex
           width="100%"
           // backgroundColor="#000000"
-          onClick={props.circleClick}
+          onDoubleClick={props.circleClick}
           cursor="pointer"
           bgGradient={bgGradient}
 
@@ -127,10 +127,9 @@ function Profile(props) {
                 mt="21px"
                 justifyContent="center"
                 textTransform="capitalize"
-      onMouseEnter={props.hoverClick }
+      // onMouseEnter={props.hoverClick }
       // onMouseLeave={props.leaveClick }
-      cursor="wait"
-      onMouseH
+
 
               >
                 {nearState.profile.fullName}
@@ -211,6 +210,8 @@ function Profile(props) {
           flexDirection="column"
           backgroundGradient="linear-gradient(180deg, rgba(25, 25, 25, 0) 0%, #191919 100%)"
           mb="15%"
+          width="257.56px"
+
         >
           <Center borderRadius="50px 50px 0px 0px">
             <div

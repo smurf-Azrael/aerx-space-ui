@@ -211,7 +211,7 @@ function Profile(props) {
               className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
-        mt-4
+        mt-6
         te
         "
               onClick={remCirc}

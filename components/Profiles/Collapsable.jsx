@@ -12,7 +12,7 @@ function collapsable(props) {
       position="absolute"
       w="41.1px"
       flexDirection="column"
-      gap="10%"
+      // gap="10%"
       zIndex={props.index}
       justifyContent="space-between"
       alignItems="center"

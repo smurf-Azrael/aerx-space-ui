@@ -58,31 +58,26 @@ function Profile(props) {
       position="absolute"
       height="100%"
       w="257.56px"
-      // bgImage="url('../resources/pd.svg') "
-      bgImage={`url('${nearState.profile.profileImg}')`}
+      bgImage="url('../resources/pd.svg') "
+      // bgImage={`url('${nearState.profile.profileImg}')`}
       bgSize="100% 45%"
       bgRepeat="no-repeat"
       bgPosition="top"
-
-
-      // backgroundSize="100% 100%"
-      // bgGradient={bgGradient}
     >
       <Box>
         {/* profile */}
         <Flex
+          // w="257.56px"
+
           width="100%"
-          // backgroundColor="#000000"
           onDoubleClick={props.circleClick}
           cursor="pointer"
+          gap="21%"
           bgGradient={bgGradient}
-
-     
 
           h="45%"
         >
           <Flex
-     
             flexDirection="column"
             gap="10.96px"
             ml="16.44px"
@@ -98,7 +93,6 @@ function Profile(props) {
               borderColor="#FFFFFF"
               borderRadius="6.85px"
               onClick={() => props.toggle()}
-
             >
               <Image
                 src="../resources/Frame 14290.svg"
@@ -109,8 +103,11 @@ function Profile(props) {
               />
             </Box>
           </Flex>
-          <Flex flexDirection="column" alignItems="center" gap="55%"
-                // onMouseLeave={props.leaveClick}
+          <Flex
+            flexDirection="column"
+            alignItems="center"
+            gap="55%"
+            // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
@@ -127,10 +124,8 @@ function Profile(props) {
                 mt="21px"
                 justifyContent="center"
                 textTransform="capitalize"
-      // onMouseEnter={props.hoverClick }
-      // onMouseLeave={props.leaveClick }
-
-
+                // onMouseEnter={props.hoverClick }
+                // onMouseLeave={props.leaveClick }
               >
                 {nearState.profile.fullName}
               </Heading>
@@ -190,7 +185,7 @@ function Profile(props) {
           <Flex flexDirection="column" gap="10.96px" mr="3%" mt="21.92px">
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
-              <Image src="../resources/Group 14948.png" w="42px"  />
+              <Image src="../resources/Group 14948.png" w="42px" />
             </Box>
             {/* second */}
             <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
@@ -211,7 +206,6 @@ function Profile(props) {
           backgroundGradient="linear-gradient(180deg, rgba(25, 25, 25, 0) 0%, #191919 100%)"
           mb="15%"
           width="257.56px"
-
         >
           <Center borderRadius="50px 50px 0px 0px">
             <div

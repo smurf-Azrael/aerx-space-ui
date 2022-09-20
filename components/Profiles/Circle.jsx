@@ -25,7 +25,6 @@ const Circle = (props) => {
     "
       // opacity="15%"
       zIndex={index}
-
     >
       <Box
 

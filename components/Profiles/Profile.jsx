@@ -72,9 +72,8 @@ function Profile(props) {
           width="100%"
           onDoubleClick={props.circleClick}
           cursor="pointer"
-          gap="40px"
+          gap="7%"
           bgGradient={bgGradient}
-
           h="45%"
         >
           <Flex
@@ -185,15 +184,15 @@ function Profile(props) {
           <Flex flexDirection="column" gap="10.96px" mr="3%" mt="21.92px">
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
-              <Image src="../resources/Group 14948.png" w="36px" />
+              <Image src="../resources/Group 14948.png" w="42px" />
             </Box>
             {/* second */}
             <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
-              <Image src="../resources/Group 14949.png" w="36px" />
+              <Image src="../resources/Group 14949.png" w="42px" />
             </Box>
             {/* third*/}
 
-            <Image src="../resources/Group 14950.png" w="36px"></Image>
+            <Image src="../resources/Group 14950.png" w="42px"></Image>
           </Flex>
         </Flex>
         {/* profile */}
@@ -713,7 +712,7 @@ function Profile(props) {
         h="100%"
         position="fixed"
         zIndex={backdrop}
-        w="282.905px"
+        w="252.905px"
         bg="#000000B2"
       >
         .

@@ -28,7 +28,7 @@ function LogOut(props) {
       top="284.275px"
       left="21.92px"
       bgColor="#191919"
-      width="257.56"
+      // width="257.56"
       height="147.96px"
       borderRadius="13.7px"
       zIndex={props.zIndex}
@@ -37,6 +37,9 @@ function LogOut(props) {
     
       <Flex  
          cursor="pointer"
+         onClick={props.logout}
+         mr="4"
+
       >
         <Image
           src="resources/Group 14018.png"

@@ -104,7 +104,7 @@ const TextPost: React.FC<IProps> = ({
 
     return (
         <div className='w-full relative h-[40vh] rounded-[20px] px-4 pt-4 pb-2 '
-            style={{ ...containerStyle, backgroundImage: (bgImage) ? `url(${bgImage})` : `linear-gradient(180deg, #6054F0 0%, #332B8D 100%)` }}>
+            style={{ ...containerStyle, backgroundImage: (bgImage && !(bgImage as string).includes(".glb")) ? `url(${bgImage})` : `linear-gradient(180deg, #6054F0 0%, #332B8D 100%)` }}>
             <div style={{ zIndex: 2 }}>
                 <div className=' flex justify-between items-center' >
                     <div className=' flex gap-2 items-center'>
@@ -133,12 +133,12 @@ const TextPost: React.FC<IProps> = ({
                 </div>
 
                 <div className="h-full ">
-                    <div className=' mt-2  py-2  h-full flex flex-col justify-between'>
+                    <div className=' mt-2  py-2  h-full flex flex-col justify-between' style={{zIndex: 3}}>
                         <div className=''>
                         <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
                         </div>
                         <div className='h-[150px] overflow-y-scroll '>
-                            <p className='text-sm text-white mt-2'>{metadata?.description}
+                            <p className='text-sm text-white mt-2' style={{zIndex: 4}}>{metadata?.description}
                             </p>
                         </div>
                         <div className='flex justify-between mt-2 items-center absolute bottom-2  w-[90%]'>

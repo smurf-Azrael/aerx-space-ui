@@ -128,9 +128,9 @@ const TextPost: React.FC<IProps> = ({
                 <div>
                     <div className='mt-2'>
                         <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
-                        <div className='h-[135px] overflow-y-scroll'>
+                        {/* <div className='h-[135px] overflow-y-scroll'> */}
                             <p className='text-sm text-white mt-2'>{metadata?.description} </p>
-                        </div>
+                        {/* </div> */}
                     </div>
                     <div className='flex justify-between mt-2 items-center'>
                         <div className='flex gap-3 items-center'>

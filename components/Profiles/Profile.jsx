@@ -53,6 +53,7 @@ function Profile(props) {
   return circ ? (
     <CircleList remove={remCirc} />
   ) : (
+    
     <Flex
       bgColor="#191919"
       position="absolute"
@@ -71,7 +72,6 @@ function Profile(props) {
 
           width="100%"
           onDoubleClick={props.circleClick}
-          cursor="pointer"
           gap="7%"
           bgGradient={bgGradient}
           h="45%"
@@ -124,6 +124,8 @@ function Profile(props) {
                 justifyContent="center"
                 textTransform="capitalize"
                 onClick={props.circleClick}
+          cursor="pointer"
+
 
               >
                 {nearState.profile.fullName}
@@ -189,10 +191,12 @@ function Profile(props) {
             {/* second */}
             <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
               <Image src="../resources/Group 14949.png" w="42px" />
-            </Box>
+            </Box >
             {/* third*/}
+            <Box cursor={"pointer"}>
 
             <Image src="../resources/Group 14950.png" w="42px"></Image>
+            </Box>
           </Flex>
         </Flex>
         {/* profile */}
@@ -712,12 +716,14 @@ function Profile(props) {
         h="100%"
         position="fixed"
         zIndex={backdrop}
-        w="252.905px"
+        w="257.56px"
         bg="#000000B2"
+        onClick={logOutUser}
+        cursor="pointer"
       >
         .
       </Flex>
-      <LogOut zIndex={zIndex} log={isLogout} />
+      <LogOut zIndex={zIndex} log={isLogout} logout={logOutUser}/>
     </Flex>
   );
 }

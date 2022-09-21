@@ -1,5 +1,8 @@
 import React from "react";
-import { Box, Flex, Image, Text, Button, Heading, Center } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, Button, Heading, Center,
+  useColorModeValue,
+
+} from "@chakra-ui/react";
 import { nearStore } from "../../store/near";
 import { produceWithPatches } from "immer";
 
@@ -10,8 +13,11 @@ const Circle = (props) => {
 
   let display = props.circle ? "block" : "none"
   let index = props.circle ? 1 : "none"
-  let width = props.circle ? 592 : "none"
-
+  let width = props.circle ? 585 : "none"
+  const bgGradient = useColorModeValue(
+    // "linear(#edf2f700, #edf2f720 15%, gray.100 90%)",
+    "linear(180deg, rgba(25, 25, 25, 0) 0%,, #191919 100%)"
+  );
 
 
 
@@ -25,6 +31,8 @@ const Circle = (props) => {
     "
       // opacity="15%"
       zIndex={index}
+      onClick={(e) => props.remove(e)}
+      cursor="pointer"
     >
       <Box
 
@@ -41,55 +49,14 @@ const Circle = (props) => {
         className="circleModal"
         display={display}
 
+
       >
         <Flex position="absolute" flexDirection="column" gap="20.42px" ml="19.18px" mt="16.44px" zIndex='2' onDoubleClick={(e) => props.onDoubleClick(e)}>
-          {/* <Box
-          width="27.4px"
-          height="27.4px"
-          border="2px solid"
-          borderColor="white"
-          padding="2px"
-          borderRadius="100%"
-        >
-          <Image
-            src={"../resources/1.png"}
-            position="relative"
-            zIndex="2"
-            top="5.48px"
-            left="6.85px"
-            w="6.85px"
-            h="10.96px"
-            boxShadow="xl"
-          />
 
-          <Image
-            src={"../resources/Ellipse 7.png"}
-            position="relative"
-            top="-10.96px"
-          />
-        </Box>
-        <Box>
-          <Image
-           width="27.4px"
-           height="27.4px"
-            padding="2px"
-            border="2px solid"
-            borderColor="white"
-            borderRadius="100%"
-            src={"../resources/Ellipse 2.png"}
-          />
-        </Box> */}
-          {/* <Image src={'../resources/Group 5450.png'}  w="13.37805px" h="21.92px" />
- 
-       <Image src={'../resources/Send2.svg'}    w="21.92px" h="21.92px" />
-       <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" /> */}
         </Flex>
 
         <Flex position="absolute" flexDirection="column" gap="16.44px" ml="248.47005px" mt="46.54px" alignItems="center" zIndex='2'>
-          {/* <Image src={'../resources/Group 5450.png'}  w="13.37805px" h="21.92px" />
-       <Image src={'../resources/Frame 13920.png'}  w="21.92px" h="21.92px" />
-       <Image src={'../resources/Send.svg'}    w="21.92px" h="21.92px" />
-       <Image src={'../resources/Tempo.png'}    w="21.92px" h="21.92px" /> */}
+
           <Image src={'../resources/Group 5450.png'} w="13.37805px" h="21.92px" />
 
           <Image src={'../resources/Send2.svg'} w="21.92px" h="21.92px" />
@@ -112,13 +79,16 @@ const Circle = (props) => {
         />
 
         <Box
+      // bgImage="url('../resources/pd.svg') "
           bgImage={`url('${nearState.profile.profileImg}')`}
           bgRepeat="no-repeat"
-          bgSize="282.905px 297.29px"
+          // bgSize="282.905px 297.29px"
+          bgPosition="center"
+    
+
           bgColor="#191919"
           // bgGradient='linear(to-b black.100)'
           opacity="0.8"
-
           borderTopRadius="13.7px"
           w="282.905px"
           height="297.29px"
@@ -127,6 +97,28 @@ const Circle = (props) => {
           zIndex=""
           className="modal"
         ></Box>
+        <Box
+         position="absolute" 
+         w="282.905px"
+         h="41%"
+         top="25%"
+         bgGradient={bgGradient}
+
+     
+         >
+        </Box>
+        <Box
+         position="absolute" 
+         w="282.905px"
+         h="12%"
+         top="55%"
+         bgGradient={bgGradient}
+
+     
+         >
+        </Box>
+
+
         <Center>
 
           <Flex
@@ -134,6 +126,8 @@ const Circle = (props) => {
             alignItems="center"
             position="absolute"
             top="253.45px"
+
+
           >
             <Heading
               fontSize="21.92px"
@@ -144,6 +138,8 @@ const Circle = (props) => {
               lineHeight="21.92px"
               mb="4.795px"
               textTransform="capitalize"
+              // bgGradient={bgGradient}
+
 
             >
               {nearState.profile.fullName}
@@ -270,6 +266,7 @@ const Circle = (props) => {
             </Button>
           </Flex>
         </ Center>
+
       </Box>
 
     </Box>

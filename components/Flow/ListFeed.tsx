@@ -78,124 +78,126 @@ const TextPost: React.FC<IProps> = ({
         }
     }
 
-   const [containerStyle, setContainerStyle] = useState<any>({
-    backgroundImage: `url(${bgImage})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-   })
-   
-   useEffect(() => {
-    if(metadata.media?.includes(".glb") || !metadata.media){
-        // alert(metadata.media)
-        setContainerStyle({
-            backgroundImage: `url(${bgImage})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            // background: 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
-        })
-    }
-   }, [metadata])
+    const [containerStyle, setContainerStyle] = useState<any>({
+        backgroundImage: `url(${bgImage})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+    })
 
-   useEffect(() => {
-     if((bgImage as string)?.length > 0){
-        setContainerStyle({...containerStyle})
-     }
-   },[bgImage])
+    useEffect(() => {
+        if (metadata.media?.includes(".glb") || !metadata.media) {
+            // alert(metadata.media)
+            setContainerStyle({
+                backgroundImage: `url(${bgImage})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                // background: 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
+            })
+        }
+    }, [metadata])
+
+    useEffect(() => {
+        if ((bgImage as string)?.length > 0) {
+            setContainerStyle({ ...containerStyle })
+        }
+    }, [bgImage])
 
     return (
-        <div className='relative w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2 ' 
-        style={{...containerStyle, backgroundImage: (bgImage) ? `url(${bgImage})` : `linear-gradient(180deg, #6054F0 0%, #332B8D 100%)`}}>
-            <div style={{zIndex: 2}}>
-            <div className='sticky top-2 flex justify-between items-center' >
-                <div className=' flex gap-2 items-center'>
-                    {!(profile?.metadata?.media as string)?.includes(".glb") && 
-                    <Image src={profile?.metadata?.media as string ||
-                        "/assets/images/avatar-1.svg"}
-                        className='w-8 h-8 rounded-full'
-                        alt={`${owner_id}'s avatar`} width={40} height={40} />
-                    }
-                    {profile?.metadata?.media?.includes(".glb") &&
-                     <div className="rounded-full border-[1px] border-white"
-                     style={{ width: '40px', height: '40px', margin: 'auto' }}
-                     >
-                         <ThreeDModel
-                         src={Array.isArray(profile?.metadata?.media) ? profile?.metadata?.media[0] : profile?.metadata?.media}
-                       />
-                     </div>
-        }
-                    <label className='text-sm text-white font-bolder'>{profile?.metadata?.extra || owner_id}</label>
-                </div>
-
-                <div className='flex gap-1 bg-[#ffffff31] p-2 rounded-[20px]'>
-                    <Image src="/assets/icons/nft-icon.svg" alt='NFT' width={15} height={15} />
-                    <label className='text-[11px] text-white'>ee34ad4</label>
-                </div>
-            </div>
-
-            <div>
-                <div className='overflow-y-scroll mt-2'>
-                    <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
-                    <div className='h-[135px] overflow-y-scroll'>
-                        <p className='text-sm text-white mt-2'>{metadata?.description} 
-                          {metadata.media}
-                         </p>
-                    </div>
-                </div>
-                <div className='flex justify-between mt-2 items-center'>
-                    <div className='flex gap-3 items-center'>
-                        <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
-                            <Image className='cursor-pointer' src="/assets/icons/comment-icon.svg" alt="comment" width={20} height={20} />
-                        </div>
-                        <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
-                            <Image src="/assets/icons/share-icon.svg" alt="share" width={20} height={20}
-                                className='cursor-pointer '
-                                onClick={(e) => initializeShare(feed)}
-                            />
-                        </div>
-                        <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
-                            <Image className='cursor-pointer' src="/assets/icons/save-post-icon.svg" alt="save" width={20} height={20} />
-                        </div>
+        <div className='w-full relative h-[40vh] rounded-[20px] px-4 pt-4 pb-2 '
+            style={{ ...containerStyle, backgroundImage: (bgImage) ? `url(${bgImage})` : `linear-gradient(180deg, #6054F0 0%, #332B8D 100%)` }}>
+            <div style={{ zIndex: 2 }}>
+                <div className=' flex justify-between items-center' >
+                    <div className=' flex gap-2 items-center'>
+                        {!(profile?.metadata?.media as string)?.includes(".glb") &&
+                            <Image src={profile?.metadata?.media as string ||
+                                "/assets/images/avatar-1.svg"}
+                                className='w-8 h-8 rounded-full'
+                                alt={`${owner_id}'s avatar`} width={40} height={40} />
+                        }
+                        {profile?.metadata?.media?.includes(".glb") &&
+                            <div className="rounded-full border-[1px] border-white"
+                                style={{ width: '40px', height: '40px', margin: 'auto' }}
+                            >
+                                <ThreeDModel
+                                    src={Array.isArray(profile?.metadata?.media) ? profile?.metadata?.media[0] : profile?.metadata?.media}
+                                />
+                            </div>
+                        }
+                        <label className='text-sm text-white font-bolder'>{profile?.metadata?.extra || owner_id}</label>
                     </div>
 
-                    {!feed?.metadata?.title.includes('AERX ProfileNFT for') &&
-                        <div>
-                            {!userCharged &&
-                                <div className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
-                                    <Image src="/assets/icons/not-charged-icon.svg"
-                                        alt="charge post" width={15} height={15}
-                                        className="cursor-pointer"
-                                        onClick={(e) => handleOnClick(e, feed)}
-                                        onClickCapture={(e) => onClickCapture(e, feed)}
-                                        onMouseDown={handleOnMouseDown}
-                                        onMouseUp={handleOnMouseUp}
-                                        onTouchStart={handleOnTouchStart}
-                                        onTouchEnd={handleOnTouchEnd}
-                                    />
-                                </div>
-                            }
-                            {userCharged &&
-                                <div
-                                    onClick={() => toast.error("You have already charged this post")}
-                                    className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
-                                    <Image src="/assets/icons/already-charged-icon.svg"
-                                        alt="post rewarded" width={15} height={15}
-                                    />
-                                </div>
-                            }
+                    <div className='flex gap-1 bg-[#ffffff31] p-2 rounded-[20px]'>
+                        <Image src="/assets/icons/nft-icon.svg" alt='NFT' width={15} height={15} />
+                        <label className='text-[11px] text-white'>ee34ad4</label>
+                    </div>
+                </div>
+
+                <div className="h-full ">
+                    <div className=' mt-2  py-2  h-full flex flex-col justify-between'>
+                        <div className=''>
+                        <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
                         </div>
-                    }
+                        <div className='h-[150px] overflow-y-scroll '>
+                            <p className='text-sm text-white mt-2'>{metadata?.description}
+                            </p>
+                        </div>
+                        <div className='flex justify-between mt-2 items-center absolute bottom-2  w-[90%]'>
+                        <div className='flex gap-3 items-center'>
+                            <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
+                                <Image className='cursor-pointer' src="/assets/icons/comment-icon.svg" alt="comment" width={20} height={20} />
+                            </div>
+                            <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
+                                <Image src="/assets/icons/share-icon.svg" alt="share" width={20} height={20}
+                                    className='cursor-pointer '
+                                    onClick={(e) => initializeShare(feed)}
+                                />
+                            </div>
+                            <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
+                                <Image className='cursor-pointer' src="/assets/icons/save-post-icon.svg" alt="save" width={20} height={20} />
+                            </div>
+                        </div>
+
+                        {!feed?.metadata?.title.includes('AERX ProfileNFT for') &&
+                            <div>
+                                {!userCharged &&
+                                    <div className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
+                                        <Image src="/assets/icons/not-charged-icon.svg"
+                                            alt="charge post" width={15} height={15}
+                                            className="cursor-pointer"
+                                            onClick={(e) => handleOnClick(e, feed)}
+                                            onClickCapture={(e) => onClickCapture(e, feed)}
+                                            onMouseDown={handleOnMouseDown}
+                                            onMouseUp={handleOnMouseUp}
+                                            onTouchStart={handleOnTouchStart}
+                                            onTouchEnd={handleOnTouchEnd}
+                                        />
+                                    </div>
+                                }
+                                {userCharged &&
+                                    <div
+                                        onClick={() => toast.error("You have already charged this post")}
+                                        className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
+                                        <Image src="/assets/icons/already-charged-icon.svg"
+                                            alt="post rewarded" width={15} height={15}
+                                        />
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                    </div>
+                    
                 </div>
             </div>
-            </div>
 
-            {(bgImage as string)?.includes('.glb') && 
-            <div className=" absolute top-0"
-            style={{ width: '95%', height: '100%', margin: 'auto', zIndex: 1 }}
-            >
-                <ThreeDModel
-                src={Array.isArray(bgImage) ? bgImage[0] : bgImage}
-              />
-            </div>
+            {(bgImage as string)?.includes('.glb') &&
+                <div className=" absolute top-0"
+                    style={{ width: '95%', height: '100%', margin: 'auto', zIndex: 1 }}
+                >
+                    <ThreeDModel
+                        src={Array.isArray(bgImage) ? bgImage[0] : bgImage}
+                    />
+                </div>
             }
         </div>
     )
@@ -404,7 +406,7 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
     /*  handle charging */
     const handleSimpleCharge = async (postId: string) => {
         /* call the contract method to do simple charge */
-        if(chargingLoading) return;
+        if (chargingLoading) return;
         setIsLoading(true)
         const post_id = Number(postId);
         // alert(post_id)

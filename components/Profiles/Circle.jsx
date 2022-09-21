@@ -31,7 +31,7 @@ const Circle = (props) => {
     "
       // opacity="15%"
       zIndex={index}
-      onClick={(e) => props.remove(e)}
+      // onClick={(e) => props.remove(e)}
       cursor="pointer"
     >
       <Box
@@ -82,8 +82,8 @@ const Circle = (props) => {
       // bgImage="url('../resources/pd.svg') "
           bgImage={`url('${nearState.profile.profileImg}')`}
           bgRepeat="no-repeat"
-          // bgSize="282.905px 297.29px"
-          bgPosition="center"
+          bgSize="282.905px 297.29px"
+          // bgPosition="center"
     
 
           bgColor="#191919"

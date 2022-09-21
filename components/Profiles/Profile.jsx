@@ -53,6 +53,7 @@ function Profile(props) {
   return circ ? (
     <CircleList remove={remCirc} />
   ) : (
+    
     <Flex
       bgColor="#191919"
       position="absolute"
@@ -63,26 +64,19 @@ function Profile(props) {
       bgSize="100% 45%"
       bgRepeat="no-repeat"
       bgPosition="top"
-
-
-      // backgroundSize="100% 100%"
-      // bgGradient={bgGradient}
     >
       <Box>
         {/* profile */}
         <Flex
+          w="257.56px"
+
           width="100%"
-          // backgroundColor="#000000"
           onDoubleClick={props.circleClick}
-          cursor="pointer"
+          gap="7%"
           bgGradient={bgGradient}
-
-     
-
           h="45%"
         >
           <Flex
-     
             flexDirection="column"
             gap="10.96px"
             ml="16.44px"
@@ -98,7 +92,6 @@ function Profile(props) {
               borderColor="#FFFFFF"
               borderRadius="6.85px"
               onClick={() => props.toggle()}
-
             >
               <Image
                 src="../resources/Frame 14290.svg"
@@ -109,8 +102,11 @@ function Profile(props) {
               />
             </Box>
           </Flex>
-          <Flex flexDirection="column" alignItems="center" gap="55%"
-                // onMouseLeave={props.leaveClick}
+          <Flex
+            flexDirection="column"
+            alignItems="center"
+            gap="45%"
+          // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
@@ -127,8 +123,8 @@ function Profile(props) {
                 mt="21px"
                 justifyContent="center"
                 textTransform="capitalize"
-      // onMouseEnter={props.hoverClick }
-      // onMouseLeave={props.leaveClick }
+                onClick={props.circleClick}
+          cursor="pointer"
 
 
               >
@@ -139,7 +135,7 @@ function Profile(props) {
                 alignItems="center"
                 justifyContent="center"
                 gap="16px"
-                // mt="55px"
+              // mt="55px"
               >
                 <Text
                   fontSize="12.33px"
@@ -152,7 +148,7 @@ function Profile(props) {
                   mb="11.645px"
                   mt="12px"
                   lineHeight=" 100%"
-                  /* identical to box height, or 18px */
+                /* identical to box height, or 18px */
                 >
                   {nearState.profile.username}
                 </Text>
@@ -190,15 +186,17 @@ function Profile(props) {
           <Flex flexDirection="column" gap="10.96px" mr="3%" mt="21.92px">
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
-              <Image src="../resources/Group 14948.png" w="42px"  />
+              <Image src="../resources/Group 14948.png" w="42px" />
             </Box>
             {/* second */}
             <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
               <Image src="../resources/Group 14949.png" w="42px" />
-            </Box>
+            </Box >
             {/* third*/}
+            <Box cursor={"pointer"}>
 
             <Image src="../resources/Group 14950.png" w="42px"></Image>
+            </Box>
           </Flex>
         </Flex>
         {/* profile */}
@@ -211,14 +209,13 @@ function Profile(props) {
           backgroundGradient="linear-gradient(180deg, rgba(25, 25, 25, 0) 0%, #191919 100%)"
           mb="15%"
           width="257.56px"
-
         >
           <Center borderRadius="50px 50px 0px 0px">
             <div
               className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
         background-#1F1F1F
         gap-0.5
-        mt-4
+        mt-2
         te
         "
               onClick={remCirc}
@@ -267,7 +264,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -292,7 +289,7 @@ function Profile(props) {
                 src={ellipse5}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -317,7 +314,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -341,7 +338,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -409,7 +406,7 @@ function Profile(props) {
                   fontWeight="700"
                   color="#ffffff"
                   fontFamily="Poppins"
-                  //   mr="30.14px"
+                //   mr="30.14px"
                 >
                   {nearState.aexBalance} AEX
                 </Text>
@@ -719,12 +716,14 @@ function Profile(props) {
         h="100%"
         position="fixed"
         zIndex={backdrop}
-        w="282.905px"
+        w="257.56px"
         bg="#000000B2"
+        onClick={logOutUser}
+        cursor="pointer"
       >
         .
       </Flex>
-      <LogOut zIndex={zIndex} log={isLogout} />
+      <LogOut zIndex={zIndex} log={isLogout} logout={logOutUser}/>
     </Flex>
   );
 }

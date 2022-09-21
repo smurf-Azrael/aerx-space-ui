@@ -247,7 +247,7 @@ const SendMessage: React.FC<{
                             const aerx_chat = {
                                 Bucket: "aerx-chats",
                                 Key: `aerx-chat between ${[receiver, caller]}`,
-                                Body: "[" + `"${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"` + "]" + " " + "\n" + `${prevChat}`,
+                                Body: "[" + `"${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"` + "]" + "##aerx-chat##" + `${prevChat}`,
                                 ContentType: "aerx-chat",
                                 Metadata: {
                                     sender: `${receiver} `,
@@ -268,7 +268,7 @@ const SendMessage: React.FC<{
                     const aerx_chat = {
                         Bucket: "aerx-chats",
                         Key: `aerx-chat between ${[caller, receiver]}`,
-                        Body: "[" + `"${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"` + "]" + " " + "\n" + `${prevChat}`,
+                        Body: "[" + `"${Date.now()}", ` + " " + `"${caller}",` + " " + `"${message}"` + "]" + "##aerx-chat##" + `${prevChat}`,
                         ContentType: "aerx-chat",
                         Metadata: {
                             sender: `${caller} `,

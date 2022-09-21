@@ -79,25 +79,32 @@ const TextPost: React.FC<IProps> = ({
     }
 
    const [containerStyle, setContainerStyle] = useState<any>({
-    backgroundImage: `url(${metadata?.media})`,
+    backgroundImage: `url(${bgImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
    })
    
    useEffect(() => {
     if(metadata.media?.includes(".glb") || !metadata.media){
+        // alert(metadata.media)
         setContainerStyle({
-            backgroundImage: `url(${metadata.media})`,
+            backgroundImage: `url(${bgImage})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
-            background: 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
+            // background: 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
         })
     }
    }, [metadata])
 
+   useEffect(() => {
+     if((bgImage as string)?.length > 0){
+        setContainerStyle({...containerStyle})
+     }
+   },[bgImage])
+
     return (
         <div className='relative w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2 ' 
-        style={containerStyle}>
+        style={{...containerStyle, backgroundImage: (bgImage) ? `url(${bgImage})` : `linear-gradient(180deg, #6054F0 0%, #332B8D 100%)`}}>
             <div style={{zIndex: 2}}>
             <div className='sticky top-2 flex justify-between items-center' >
                 <div className=' flex gap-2 items-center'>
@@ -129,7 +136,9 @@ const TextPost: React.FC<IProps> = ({
                 <div className='overflow-y-scroll mt-2'>
                     <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
                     <div className='h-[135px] overflow-y-scroll'>
-                        <p className='text-sm text-white mt-2'>{metadata?.description} </p>
+                        <p className='text-sm text-white mt-2'>{metadata?.description} 
+                          {metadata.media}
+                         </p>
                     </div>
                 </div>
                 <div className='flex justify-between mt-2 items-center'>

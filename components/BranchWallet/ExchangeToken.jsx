@@ -61,7 +61,10 @@ function Exchange(props) {
       const priceFromPool = await nearState.DexContract.get_price_from_pool({
         pool_id: 1, token_id: "aextestnew.mohzcrea8me.testnet"
       })
-      setExpectedReturnNear(expectedReturn)
+      const expectedReturnRaw = expectedReturn / 1000000000000000000000000;
+      const expectedReturnBigN = new Big(expectedReturnRaw || 0);
+      const formattedExpectedReturn = inputBigN.mul("10e23").toFixed(0);
+      setExpectedReturnNear(formattedExpectedReturn)
       const slippagePercentage = tolerance / 100;
       const slippageAmount = slippagePercentage * expectedReturn;
       const minReturn = expectedReturn - slippageAmount;
@@ -94,6 +97,9 @@ function Exchange(props) {
     const slippagePercentage = tolerance / 100;
     const slippageAmount = slippagePercentage * expectedReturnNear;
     const minReturn = expectedReturnNear - slippageAmount;
+    const minReturnRaw = minReturn / 1000000000000000000000000;
+    const minReturnBigN = new Big(minReturnRaw || 0);
+    const formattedMinReturn = minReturnBigN.mul("10e23").toFixed(0);
     setMinExpectedNear(minReturn)
     const slippagePercentageEffect = slippagePercentage * convertedNear;
     const amountDueToSlippage = convertedNear - slippagePercentageEffect;
@@ -111,7 +117,10 @@ function Exchange(props) {
       const priceFromPool = await nearState.DexContract.get_price_from_pool({
         pool_id: 1, token_id: "near.near"
       });
-      setExpectedReturnAex(expectedReturn)
+      const expectedReturnRaw = expectedReturn / 1000000000000000000000000;
+      const expectedReturnBigN = new Big(expectedReturnRaw || 0);
+      const formattedExpectedReturn = inputBigN.mul("10e23").toFixed(0);
+      setExpectedReturnAex(formattedExpectedReturn)
       const slippagePercentage = tolerance / 100;
       const slippageAmount = slippagePercentage * expectedReturn;
       const minReturn = expectedReturn - slippageAmount;
@@ -146,7 +155,10 @@ function Exchange(props) {
     const slippagePercentage = tolerance / 100;
     const slippageAmount = slippagePercentage * expectedReturnAex;
     const minReturn = expectedReturnAex - slippageAmount;
-    setMinExpectedAex(minReturn)
+    const minReturnRaw = minReturn / 1000000000000000000000000;
+    const minReturnBigN = new Big(minReturnRaw || 0);
+    const formattedMinReturn = minReturnBigN.mul("10e23").toFixed(0);
+    setMinExpectedAex(formattedMinReturn)
     const slippagePercentageEffect = slippagePercentage * convertedAex;
     const amountDueToSlippage = convertedAex - slippagePercentageEffect;
     setMinimumAex(parseFloat(amountDueToSlippage).toFixed(4));

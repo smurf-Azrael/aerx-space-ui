@@ -79,27 +79,34 @@ const TextPost: React.FC<IProps> = ({
     }
 
     const [containerStyle, setContainerStyle] = useState<any>({
-        backgroundImage: `url(${metadata?.media})`,
+        backgroundImage: `url(${bgImage})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     })
 
     useEffect(() => {
         if (metadata.media?.includes(".glb") || !metadata.media) {
+            // alert(metadata.media)
             setContainerStyle({
-                backgroundImage: `url(${metadata.media})`,
+                backgroundImage: `url(${bgImage})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
-                background: 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
+                // background: 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
             })
         }
     }, [metadata])
 
+    useEffect(() => {
+        if ((bgImage as string)?.length > 0) {
+            setContainerStyle({ ...containerStyle })
+        }
+    }, [bgImage])
+
     return (
-        <div className='relative w-full h-[40vh] overflow-y-auto flex flex-col justify-between rounded-[20px] px-4 pt-4 pb-2 '
-            style={containerStyle}>
+        <div className='w-full relative h-[40vh] rounded-[20px] px-4 pt-4 pb-2 '
+            style={{ ...containerStyle, backgroundImage: (bgImage && !(bgImage as string).includes(".glb")) ? `url(${bgImage})` : `linear-gradient(180deg, #6054F0 0%, #332B8D 100%)` }}>
             <div style={{ zIndex: 2 }}>
-                <div className='sticky top-2 flex justify-between items-center' >
+                <div className=' flex justify-between items-center' >
                     <div className=' flex gap-2 items-center'>
                         {!(profile?.metadata?.media as string)?.includes(".glb") &&
                             <Image src={profile?.metadata?.media as string ||
@@ -125,14 +132,16 @@ const TextPost: React.FC<IProps> = ({
                     </div>
                 </div>
 
-                <div>
-                    <div className='mt-2'>
+                <div className="h-full ">
+                    <div className=' mt-2  py-2  h-full flex flex-col justify-between' style={{zIndex: 3}}>
+                        <div className=''>
                         <h1 className='text-white font-bold text-xl' style={{ fontWeight: 'bold' }}>{metadata.title}</h1>
-                        {/* <div className='h-[135px] overflow-y-scroll'> */}
-                            <p className='text-sm text-white mt-2'>{metadata?.description} </p>
-                        {/* </div> */}
-                    </div>
-                    <div className='flex justify-between mt-2 items-center'>
+                        </div>
+                        <div className='h-[150px] overflow-y-scroll '>
+                            <p className='text-sm text-white mt-2' style={{zIndex: 4}}>{metadata?.description}
+                            </p>
+                        </div>
+                        <div className='flex justify-between mt-2 items-center absolute bottom-2  w-[90%]'>
                         <div className='flex gap-3 items-center'>
                             <div className='hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]'>
                                 <Image className='cursor-pointer' src="/assets/icons/comment-icon.svg" alt="comment" width={20} height={20} />
@@ -176,6 +185,8 @@ const TextPost: React.FC<IProps> = ({
                             </div>
                         }
                     </div>
+                    </div>
+                    
                 </div>
             </div>
 

@@ -69,6 +69,10 @@ const nearStore = create<NearStoreType>((set) => ({
     setAexBalance: (aexBalance: any) => set((state) => ({ ...state, aexBalance })),
     removeAexBalance: () => set((state) => ({ ...state, aexBalance: 0 })),
 
+    nearBalance: 0,
+    setNearBalance: (nearBalance: any) => set((state) => ({ ...state, nearBalance })),
+    removeNearBalance: () => set((state) => ({ ...state, NearBalance: 0 })),
+
     pinataState: null,
     setPinataState: (pinataState: any) => set((state) => ({ ...state, pinataState })),
     removePinataState: () => set((state) => ({ ...state, pinataState: null })),

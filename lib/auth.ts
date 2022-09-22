@@ -136,10 +136,6 @@ export async function initNearConnection(nearState: NearStoreType) {
     //Get accountId 
     const accountId = walletConnection.getAccountId();
     console.log("accountId : ", accountId);
-    //Get Balance
-    const _account = await nearConnection.account(`${accountId}`);
-    const balance = await _account.getAccountBalance();
-    console.log("available near balance: ", balance.available);
     //verify accountId exists
     if (!accountId) {
         console.log("Account id is empty");
@@ -147,6 +143,11 @@ export async function initNearConnection(nearState: NearStoreType) {
         return;
     }
     nearState.setAccountId(accountId);
+    //Get Balance
+    const _account = await nearConnection.account(`${accountId}`);
+    const balance = await _account.getAccountBalance();
+    console.log("available near balance: ", balance.available);
+    nearState.setNearBalance(balance.available);
     //.2 load tokenContract whenever it is ready
     await loadTokenContract(nearState, walletConnection.account());
     //3. load dex contract whenever it is ready

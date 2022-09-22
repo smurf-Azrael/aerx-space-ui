@@ -12,11 +12,18 @@ import WithStar from "./WithStars";
 import WithDots from "./WithDots";
 import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
+import { nearStore } from "../../store/near";
+import { loginToken } from "../../lib/auth";
 
 const HeroSection: React.FC = () => {
   const { saly, group1 } = useSelector(getUserState);
+  const state = nearStore((state: any) => state);
+
   function authentication() {
-    console.log("welcome to arex");
+    console.log("Get Started Button");
+    loginToken(state).then(() => {
+      //
+    })
   }
   return (
     <Container
@@ -56,6 +63,7 @@ const HeroSection: React.FC = () => {
               pt="-8%"
               color="#FFFFFF"
             pl="2%"
+      
 
 
             >

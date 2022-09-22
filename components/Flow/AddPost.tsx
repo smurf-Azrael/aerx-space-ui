@@ -65,7 +65,7 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                         toast.success(`Your AERX-postNFT has been minted Successfully`)
                         nearState.postDetails.body = "";
                         nearState.postDetails.title = "";
-                        router.push('/flow')
+                        location.reload();
                         //save post
 
                     })

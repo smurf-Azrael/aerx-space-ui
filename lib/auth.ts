@@ -17,6 +17,7 @@ import {
 } from "../types/contracts";
 import { TOKEN_CONTRACT_NAME, PROFILE_CONTRACT_NAME, DEX_CONTRACT_NAME } from "../utils/constants/contract";
 import { authenticatePinata } from "./pinata";
+import Big from "big.js";
 
 
 const {
@@ -147,7 +148,11 @@ export async function initNearConnection(nearState: NearStoreType) {
     const _account = await nearConnection.account(`${accountId}`);
     const balance = await _account.getAccountBalance();
     console.log("available near balance: ", balance.available);
-    nearState.setNearBalance(balance.available);
+    const availableNear = balance.available;
+    const nearBalanceBigN = new Big(availableNear || 0);
+    const formattedNearBalance = nearBalanceBigN.div("10e23").toFixed(3);
+    nearState.setNearBalance(formattedNearBalance);
+    console.log("formated near balance: ", formattedNearBalance)
     //.2 load tokenContract whenever it is ready
     await loadTokenContract(nearState, walletConnection.account());
     //3. load dex contract whenever it is ready

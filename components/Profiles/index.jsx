@@ -98,6 +98,21 @@ function Index() {
     }, 3000);
    
   };
+
+  let profileCardTimeout;
+  // Write a function to show the tooltip
+  const ProfileCardEnter = () => {
+    profileCardTimeout = setTimeout(() => {
+        setDoubleClicked(true);
+   }, 3000);
+};
+
+// Write a function to hide the tooltip
+const ProfileCardLeave = () => {
+    clearInterval(profileCardTimeout);
+    // setDoubleClicked(false);
+
+};
   
 
 
@@ -158,9 +173,9 @@ function Index() {
             <div>
               <Profile
                 toggle={toggleClick}
-                hoverClick={HoverClick}
+                profileEnter={ProfileCardEnter}
                 circleClick={CircleClick}
-                leaveClick={LeaveClick}
+                profileLeave={ProfileCardLeave}
                 wallet={openWallet}
                 removeCircle={removeCircle}
                 switch={switchCircle}

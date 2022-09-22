@@ -13,14 +13,16 @@ const Circle = (props) => {
 
   let display = props.circle ? "block" : "none"
   let index = props.circle ? 1 : "none"
-  let width = props.circle ? 585 : "none"
+  let width = props.circle ? 545 : "none"
   const bgGradient = useColorModeValue(
     // "linear(#edf2f700, #edf2f720 15%, gray.100 90%)",
     "linear(180deg, rgba(25, 25, 25, 0) 0%,, #191919 100%)"
   );
 
 
-
+const blankClick = () => {
+    props.remove
+}
 
 
 
@@ -31,7 +33,8 @@ const Circle = (props) => {
     "
       // opacity="15%"
       zIndex={index}
-      // onClick={(e) => props.remove(e)}
+      onClick={(e) => props.remove(e)}
+
       cursor="pointer"
     >
       <Box
@@ -65,7 +68,7 @@ const Circle = (props) => {
 
 
         <Image
-          onClick={(e) => props.remove(e)}
+          onClick={blankClick}
 
           src={"../resources/Frame 139.png"}
           position="absolute"
@@ -79,8 +82,8 @@ const Circle = (props) => {
         />
 
         <Box
-      // bgImage="url('../resources/pd.svg') "
-          bgImage={`url('${nearState.profile.profileImg}')`}
+      bgImage="url('../resources/Rectangle 32121.png') "
+          // bgImage={`url('${nearState.profile.profileImg}')`}
           bgRepeat="no-repeat"
           bgSize="282.905px 297.29px"
           // bgPosition="center"

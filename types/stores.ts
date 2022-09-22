@@ -48,6 +48,10 @@ export type NearStoreType = {
     setAexBalance: (aexBalance: any) => void;
     removeAexBalance: () => void;
 
+    nearBalance: number;
+    setNearBalance: (nearBalance: any) => void;
+    removeNearBalance: () => void;
+
     pinataState: boolean | null;
     setPinataState: (pinataState: boolean | undefined) => void;
     removePinataState: () => void;

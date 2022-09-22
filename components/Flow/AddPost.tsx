@@ -41,7 +41,7 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
         try {
             console.log("post to mint", postToMint);
             setIsLoading(true);
-            saveMediaToPinata();
+            await saveMediaToPinata();
             console.log("Post to mint: ", postToMint)
             await nearState.pnftContract?.mint_post({
                 user_id: nearState.accountId,
@@ -53,7 +53,9 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                 toast.success(`Your AERX-postNFT has been minted Successfully`)
                 nearState.postDetails.body = "";
                 nearState.postDetails.title = "";
-                router.push('/flow')
+                // router.push('/flow')
+                // refresh the page
+                router.reload();
                 //save post
 
             })
@@ -128,7 +130,7 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
         try {
             console.log("post to mint", postToMint);
             setIsLoading(true);
-            saveMediaToPinata();
+            await saveMediaToPinata();
             console.log("Post to mint: ", postToMint)
 
             await nearState.profileContract?.mint_post({

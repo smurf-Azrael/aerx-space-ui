@@ -53,33 +53,33 @@ const ProfileSettingForm: React.FC = () => {
   const { touched, values, getFieldProps, isValid, errors } = formik;
 
   const handleSubmit = async () => {
-    if(creating) return;
-    if(!file && !avatarUrl) return toast.error("Please select a profile image or use 3d avatar")
+    if (creating) return;
+    if (!file && !avatarUrl) return toast.error("Please select a profile image or use 3d avatar")
     setCreating(true);
     console.log('File: ', file);
     console.log('Username: ', formik.values.userName);
-    let fileUrl:string = "";
-    let fileUrlHash:string = "";
-    if(!avatarUrl){
+    let fileUrl: string = "";
+    let fileUrlHash: string = "";
+    if (!avatarUrl) {
       let returnedIpfsData = await pinToPinata(
         file,
         'PROFILE',
         formik.values.userName
-        );
-        fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${returnedIpfsData.IpfsHash}`;
-        console.log('File url: ', fileUrl);
-        const fileSize = returnedIpfsData.PinSize;
-        console.log('File size: ', fileSize);
-        fileUrlHash = new shajs.sha256().update(fileUrl).digest('base64');
-        console.log('Encrypted url: ', fileUrlHash);
-        //is the set state really needed?
-    setIpfsData((prevIpfs) => ({
-      ...prevIpfs,
-      fileUrl: fileUrl,
-      fileSize: fileSize,
-      urlSha256: fileUrlHash,
-    }));
-  }
+      );
+      fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${returnedIpfsData.IpfsHash}`;
+      console.log('File url: ', fileUrl);
+      const fileSize = returnedIpfsData.PinSize;
+      console.log('File size: ', fileSize);
+      fileUrlHash = new shajs.sha256().update(fileUrl).digest('base64');
+      console.log('Encrypted url: ', fileUrlHash);
+      //is the set state really needed?
+      setIpfsData((prevIpfs) => ({
+        ...prevIpfs,
+        fileUrl: fileUrl,
+        fileSize: fileSize,
+        urlSha256: fileUrlHash,
+      }));
+    }
     const profileToMint = {
       title: 'AERX ProfileNFT for ' + formik.values.userName,
       username: formik.values.userName,
@@ -102,7 +102,7 @@ const ProfileSettingForm: React.FC = () => {
             token_metadata: profileToMint,
           },
           '300000000000000',
-          '1300000000000000000000'
+          '10000000000000000000000'
         )
         .then((res) => {
           toast.success(
@@ -153,99 +153,99 @@ const ProfileSettingForm: React.FC = () => {
       <Toaster />
       <div className="mt-4 flex w-ful gap-6">
         <div className=' relative'>
-        <div
-          className="h-[400px] w-[230px] bg-[#0000004d] p-2"
-          style={{
-            background: `${(!avatarUrl)
+          <div
+            className="h-[400px] w-[230px] bg-[#0000004d] p-2"
+            style={{
+              background: `${(!avatarUrl)
                 ? 'url("/assets/images/profile-avatar-cover.svg")'
                 : 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
-              }`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            borderRadius: '20px',
-            backgroundBlendMode: 'overlay',
-          }}
-        >
-          {!avatarUrl && (
-            <div className="flex flex-col justify-between h-[50%] text-sm pt-4">
-              <div className="flex justify-around">
-                <label className="text-white">Avatar</label>
+                }`,
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              borderRadius: '20px',
+              backgroundBlendMode: 'overlay',
+            }}
+          >
+            {!avatarUrl && (
+              <div className="flex flex-col justify-between h-[50%] text-sm pt-4">
+                <div className="flex justify-around">
+                  <label className="text-white">Avatar</label>
+                </div>
+
+                <div
+                  className="w-full  flex flex-col justify-around cursor-pointer upload-trigger"
+                  onClick={uploadPhoto}
+                  onMouseEnter={() => setShowTriggers(true)}
+                  style={{
+                    zIndex: showTriggers ? 5 : 1,
+                  }}
+                >
+                  <Image
+                    src="/assets/icons/upload-icon.svg"
+                    alt="profile-avatar"
+                    width={40}
+                    height={40}
+                    className="cursor-pointer"
+                  />
+                  <label className="text-white text-center cursor-pointer">
+                    Upload
+                  </label>
+                  <input
+                    type="file"
+                    hidden
+                    accept="image/*"
+                    onChange={fileChange}
+                    className="upload-photo"
+                  />
+                </div>
+
+
+
+                <div
+                  className="w-full  flex flex-col justify-around cursor-pointer upload-trigger"
+                  onMouseEnter={() => setShowTriggers(true)}
+                  onClick={() => router.push('/create-avatar')}
+                  style={{
+                    zIndex: showTriggers ? 5 : 1,
+                  }}
+                >
+                  <Image
+                    src="/assets/icons/3d-account-icon.svg"
+                    alt="profile-avatar"
+                    width={40}
+                    height={40}
+                  />
+                  <label className="text-white text-center">3D avatar</label>
+                </div>
               </div>
-
-              <div
-                className="w-full  flex flex-col justify-around cursor-pointer upload-trigger"
-                onClick={uploadPhoto}
-                onMouseEnter={() => setShowTriggers(true)}
-                style={{
-                  zIndex: showTriggers ? 5 : 1,
-                }}
-              >
-                <Image
-                  src="/assets/icons/upload-icon.svg"
-                  alt="profile-avatar"
-                  width={40}
-                  height={40}
-                  className="cursor-pointer"
-                />
-                <label className="text-white text-center cursor-pointer">
-                  Upload
-                </label>
-                <input
-                  type="file"
-                  hidden
-                  accept="image/*"
-                  onChange={fileChange}
-                  className="upload-photo"
-                />
-              </div>
-
-             
-
-              <div
-                className="w-full  flex flex-col justify-around cursor-pointer upload-trigger"
-                onMouseEnter={() => setShowTriggers(true)}
-                onClick={() => router.push('/create-avatar')}
-                style={{
-                  zIndex: showTriggers ? 5 : 1,
-                }}
-              >
-                <Image
-                  src="/assets/icons/3d-account-icon.svg"
-                  alt="profile-avatar"
-                  width={40}
-                  height={40}
-                />
-                <label className="text-white text-center">3D avatar</label>
-              </div>
-            </div>
-          )}
-
-          <div style={{ width: '100%', height: '100%', margin: 'auto' }}>
-            {avatarUrl && (
-              <ThreeDModel
-                src={Array.isArray(avatarUrl) ? avatarUrl[0] : avatarUrl}
-              />
             )}
-          </div>
+
+            <div style={{ width: '100%', height: '100%', margin: 'auto' }}>
+              {avatarUrl && (
+                <ThreeDModel
+                  src={Array.isArray(avatarUrl) ? avatarUrl[0] : avatarUrl}
+                />
+              )}
+            </div>
           </div>
 
 
           {/* display the file preview  */}
           <div className='absolute top-0'
-          style={{
-            zIndex: 3,
-          }} 
-          onMouseEnter={() => setShowTriggers(true)}
-          onMouseLeave={() => setShowTriggers(false)}
+            style={{
+              zIndex: 3,
+            }}
+            onMouseEnter={() => setShowTriggers(true)}
+            onMouseLeave={() => setShowTriggers(false)}
           >
-          {filePreview && 
-                <div>
-                   <Image src={filePreview  as string} 
-                   alt="profile-avatar" width={230} height={400} 
-                   className="rounded-2xl" 
-                   />
-                </div>
-              }
+            {filePreview &&
+              <div>
+                <Image src={filePreview as string}
+                  alt="profile-avatar" width={230} height={400}
+                  className="rounded-2xl"
+                />
+              </div>
+            }
           </div>
 
 
@@ -308,7 +308,7 @@ const ProfileSettingForm: React.FC = () => {
             (!isValid ||
               !touched.name ||
               !touched.userName ||
-              !touched.bio 
+              !touched.bio
               // ||(file && filePreview)
             )
               ? true
@@ -320,7 +320,7 @@ const ProfileSettingForm: React.FC = () => {
             !isValid ||
               !touched.name ||
               !touched.userName ||
-              !touched.bio 
+              !touched.bio
               // ||  (file && avatarUrl)
               ? { opacity: 0.5 }
               : { opacity: 1 }

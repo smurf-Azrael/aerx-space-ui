@@ -458,6 +458,8 @@ function Exchange(props) {
           </div>
         </Flex>
       )}
+        {isExchange ? 
+
       <Text
         mb="10.96px"
         textAlign="center"
@@ -466,8 +468,20 @@ function Exchange(props) {
         fontSize="9.59"
         color="#FFFFFF4D"
       >
-        Available: 102.4 NEAR
+        Available: {nearState.nearBalance} NEAR 
       </Text>
+      :
+      <Text
+        mb="10.96px"
+        textAlign="center"
+        fontFamily="Poppins"
+        fontWeight="400"
+        fontSize="9.59"
+        color="#FFFFFF4D"
+      >
+        Available: {nearState.aexBalance} AEX 
+      </Text>
+      }
 
       {/* INPUT BEFORE SLIPPAGE TOLLERNCE STARTS */}
 

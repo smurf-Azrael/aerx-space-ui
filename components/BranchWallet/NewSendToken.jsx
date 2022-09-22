@@ -337,8 +337,13 @@ function SendTokens(props) {
         fontWeight="400"
       >
         <Text color="#ffffff4d">Available to send</Text>
+        { !isCoins ? 
+
         <Text color="#ffffff4d">{nearState.aexBalance} AEX</Text>
-      </Flex>
+        :
+        <Text color="#ffffff4d">{nearState.nearBalance} NEAR</Text>
+        }
+        </Flex>
     </Box>
   );
 }

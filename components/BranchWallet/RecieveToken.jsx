@@ -65,7 +65,7 @@ function RecieveToken(props) {
       {/* end */}
 
       <Box
-        mb="16.44px"
+        // mb="16.44px"
         mr="16.44px"
         fontFamily="Poppins"
         fontSize="10.96px"
@@ -100,7 +100,7 @@ function RecieveToken(props) {
           </Text>
         </Flex>
       </Box>
-      <Center mb="32.88px">
+      <Center mb="4%">
         <Flex
           flexDirection="column"
           alightItems="center"
@@ -160,7 +160,7 @@ function RecieveToken(props) {
                 color="#FFFFFF"
                 w="142.48px"
               >
-                e8e9f38940951e644a64a4ca90dcc67108b8f50343d58e1
+                {nearState.accountId}
               </Text>
 
               <Image
@@ -218,16 +218,17 @@ function RecieveToken(props) {
             </Box>
           </Center>
           <Center>
-            <Flex gap="65.76px">
+            <Flex >
               <Text
-                fontFamily="Poppins"
-                fontStyle="normal"
-                fontWeight="500"
-                fontSize="9.59px"
-                color="#FFFFFF4D"
-                ml="24.88px"
+               fontFamily="Poppins"
+               fontStyle="normal"
+               fontWeight="500"
+               fontSize="9.59px"
+               color="#FFFFFF4D"
+               ml="24.88px"
+               mr="58.91"
               >
-                Available balanace
+                Available balance
               </Text>
               <Text
                 fontFamily="Poppins"
@@ -266,7 +267,7 @@ function RecieveToken(props) {
           <Center mb="21.92px">
             <QRCodeSVG size="102.75px" value={nearState.accountId} />
           </Center>
-          <Center mb="22.605px">
+          <Center mb="12.605px">
             <Text
               fontFamily="Poppins"
               fontStyle="normal"
@@ -299,7 +300,9 @@ function RecieveToken(props) {
                 color="#FFFFFF"
                 w="142.48px"
               >
-                e8e9f38940951e644a64a4ca90dcc67108b8f50343d58e1
+                {/* e8e9f38940951e644a64a4ca90dcc67108b8f50343d58e1 */}
+                {nearState.accountId}
+
               </Text>
 
               <Image
@@ -369,7 +372,7 @@ function RecieveToken(props) {
                 ml="24.88px"
                 mr="58.91"
               >
-                Available balanace
+                Available balance
               </Text>
               <Text
                 fontFamily="Poppins"
@@ -379,7 +382,7 @@ function RecieveToken(props) {
                 color="#FFFFFF4D"
                 mr="24.88px"
               >
-                102.4 NEAR
+                {nearState.nearBalance} NEAR
               </Text>
             </Flex>
           </Center>

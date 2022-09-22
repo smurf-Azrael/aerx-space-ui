@@ -41,3 +41,11 @@ export type Feed = {
     type?: 'text' | 'image' | 'video' | 'audio' | 'file' | 'tempo',
     profile?: Profile,
 }
+
+export type Tempo ={
+    ownerId : string,
+    title : string,
+    content : string,
+    time : string
+
+}

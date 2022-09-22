@@ -4,7 +4,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { tempoFeed, videoFeed } from '../../helpers/data/feeds';
 import { initNearConnection } from '../../lib/auth';
 import { nearStore } from '../../store/near';
-import { Feed } from '../../types/Post';
+import { Feed, Tempo } from '../../types/Post';
 import VideoControl from '../VideoControl';
 import { generateRandomColor } from '../../helpers/utils/generateRadomColor';
 import { useDispatch, useSelector } from '../../store/store';
@@ -252,6 +252,14 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
 }
 
 const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
+
+    // const GetTempo = () => {
+    //    const returnedTempo:Tempo = {
+    //     userId:
+    //    }
+
+        
+    // }
 
     return (
         <div className='flex flex-col justify-between w-full bg-black h-[40vh] rounded-[20px] p-2' style={{

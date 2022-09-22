@@ -104,7 +104,7 @@ function Index() {
   const ProfileCardEnter = () => {
     profileCardTimeout = setTimeout(() => {
         setDoubleClicked(true);
-   }, 3000);
+   }, 4000);
 };
 
 // Write a function to hide the tooltip

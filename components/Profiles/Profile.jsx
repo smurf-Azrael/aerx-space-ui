@@ -215,7 +215,7 @@ function Profile(props) {
               px="0"
               flexDirection="column"
               gap="2px"
-              backgroundColor="#1F1F1F"
+              // backgroundColor="#1F1F1F"
             >
               <MinusIcon
                 w="21.92px"
@@ -255,7 +255,7 @@ function Profile(props) {
               width="auto"
               cursor="pointer"
               onClick={props.circleClick}
-              onMouseOver={props.profileEnter}
+              onMouseEnter={props.profileEnter}
               onMouseLeave={props.profileLeave}
             >
               <Image
@@ -281,6 +281,8 @@ function Profile(props) {
               width="auto"
               cursor="pointer"
               onClick={props.circleClick}
+              onMouseEnter={props.profileEnter}
+              onMouseLeave={props.profileLeave}
             >
               <Image
                 src={ellipse5}
@@ -305,6 +307,8 @@ function Profile(props) {
               width="auto"
               cursor="pointer"
               onClick={props.circleClick}
+              onMouseEnter={props.profileEnter}
+              onMouseLeave={props.profileLeave}
             >
               <Image
                 src={ellipse4}
@@ -328,6 +332,8 @@ function Profile(props) {
               width="auto"
               cursor="pointer"
               onClick={props.circleClick}
+              onMouseEnter={props.profileEnter}
+              onMouseLeave={props.profileLeave}
             >
               <Image
                 src={ellipse4}
@@ -369,7 +375,7 @@ function Profile(props) {
               px="0"
               flexDirection="column"
               gap="2px"
-              backgroundColor="#1F1F1F"
+              // backgroundColor="#1F1F1F"
             >
               <MinusIcon
                 w="21.92px"

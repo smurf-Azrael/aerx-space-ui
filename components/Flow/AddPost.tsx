@@ -96,6 +96,7 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
         const file = e.target.files[0];
         if (!file) return;
         setMedia(file);
+        console.log(URL.createObjectURL(file))
         setFilePreview(URL.createObjectURL(file));
         setFileToPreview(URL.createObjectURL(file));
 

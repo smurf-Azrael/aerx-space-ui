@@ -10,6 +10,7 @@ interface IProps {
     setTransactionStatus: (status: 'pending' | 'success' | 'failed') => void;
 }
 const SendCoins: React.FC<IProps> = ({ setTransactionStatus }) => {
+
     const { accountId } = useSelector(selectActiveReceiver)
     const nearState = nearStore((state) => state)
     const [loading, setLoading] = useState<boolean>(false);

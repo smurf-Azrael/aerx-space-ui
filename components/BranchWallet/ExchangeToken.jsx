@@ -63,7 +63,7 @@ function Exchange(props) {
       })
       const expectedReturnRaw = expectedReturn / 1000000000000000000000000;
       const expectedReturnBigN = new Big(expectedReturnRaw || 0);
-      const formattedExpectedReturn = inputBigN.mul("10e23").toFixed(0);
+      const formattedExpectedReturn = expectedReturnBigN.mul("10e23").toFixed(0);
       setExpectedReturnNear(formattedExpectedReturn)
       const slippagePercentage = tolerance / 100;
       const slippageAmount = slippagePercentage * expectedReturn;
@@ -100,7 +100,7 @@ function Exchange(props) {
     const minReturnRaw = minReturn / 1000000000000000000000000;
     const minReturnBigN = new Big(minReturnRaw || 0);
     const formattedMinReturn = minReturnBigN.mul("10e23").toFixed(0);
-    setMinExpectedNear(minReturn)
+    setMinExpectedNear(formattedMinReturn)
     const slippagePercentageEffect = slippagePercentage * convertedNear;
     const amountDueToSlippage = convertedNear - slippagePercentageEffect;
     setMinimumNear(parseFloat(amountDueToSlippage).toFixed(4));
@@ -119,7 +119,7 @@ function Exchange(props) {
       });
       const expectedReturnRaw = expectedReturn / 1000000000000000000000000;
       const expectedReturnBigN = new Big(expectedReturnRaw || 0);
-      const formattedExpectedReturn = inputBigN.mul("10e23").toFixed(0);
+      const formattedExpectedReturn = expectedReturnBigN.mul("10e23").toFixed(0);
       setExpectedReturnAex(formattedExpectedReturn)
       const slippagePercentage = tolerance / 100;
       const slippageAmount = slippagePercentage * expectedReturn;
@@ -249,7 +249,7 @@ function Exchange(props) {
           await nearState.DexContract.swap_aex({
             pool_id: 1,
             token_to: "aextestnew.mohzcrea8me.testnet",
-            amount: `${amountToSwapNear} `,
+            amount: `${amountToSwapNear}`,
             min_expected: `${minExpectedAex}`,
           },
             "300000000000000",
@@ -458,6 +458,8 @@ function Exchange(props) {
           </div>
         </Flex>
       )}
+        {isExchange ? 
+
       <Text
         mb="10.96px"
         textAlign="center"
@@ -466,8 +468,20 @@ function Exchange(props) {
         fontSize="9.59"
         color="#FFFFFF4D"
       >
-        Available: 102.4 NEAR
+        Available: {nearState.nearBalance} NEAR 
       </Text>
+      :
+      <Text
+        mb="10.96px"
+        textAlign="center"
+        fontFamily="Poppins"
+        fontWeight="400"
+        fontSize="9.59"
+        color="#FFFFFF4D"
+      >
+        Available: {nearState.aexBalance} AEX 
+      </Text>
+      }
 
       {/* INPUT BEFORE SLIPPAGE TOLLERNCE STARTS */}
 

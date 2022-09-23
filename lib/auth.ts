@@ -17,6 +17,7 @@ import {
 } from "../types/contracts";
 import { TOKEN_CONTRACT_NAME, PROFILE_CONTRACT_NAME, DEX_CONTRACT_NAME } from "../utils/constants/contract";
 import { authenticatePinata } from "./pinata";
+import Big from "big.js";
 
 
 const {
@@ -136,10 +137,6 @@ export async function initNearConnection(nearState: NearStoreType) {
     //Get accountId 
     const accountId = walletConnection.getAccountId();
     console.log("accountId : ", accountId);
-    //Get Balance
-    const _account = await nearConnection.account(`${accountId}`);
-    const balance = await _account.getAccountBalance();
-    console.log("available near balance: ", balance.available);
     //verify accountId exists
     if (!accountId) {
         console.log("Account id is empty");
@@ -147,6 +144,15 @@ export async function initNearConnection(nearState: NearStoreType) {
         return;
     }
     nearState.setAccountId(accountId);
+    //Get Balance
+    const _account = await nearConnection.account(`${accountId}`);
+    const balance = await _account.getAccountBalance();
+    console.log("available near balance: ", balance.available);
+    const availableNear = balance.available;
+    const nearBalanceBigN = new Big(availableNear || 0);
+    const formattedNearBalance = nearBalanceBigN.div("10e23").toFixed(3);
+    nearState.setNearBalance(formattedNearBalance);
+    console.log("formated near balance: ", formattedNearBalance)
     //.2 load tokenContract whenever it is ready
     await loadTokenContract(nearState, walletConnection.account());
     //3. load dex contract whenever it is ready

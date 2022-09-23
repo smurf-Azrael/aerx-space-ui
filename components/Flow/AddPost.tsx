@@ -21,50 +21,64 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
     const [postOwnerProfile, setPostOwnerProfile] = useState<any>();
     const nearState = nearStore((state) => state);
     const [postType, setPostType] = useState<'post' | 'tempo' | 'music'>('post')
-    //Todo: handle together with
+
     const handlePost = async (e: { preventDefault: () => void; }) => {
         if (isLoading) return;
         e.preventDefault();
         if (earnPost) return postEarn2Gether();
-        let postToMint;
-        if (!nearState.postDetails.body || nearState.postDetails.body.length === 0) return toast.error("Please enter a description");
+        const file = media;
+        if (file) {
+            const filename = (file as File).name;
+            var parts = filename.split(".");
+            const fileType = parts[parts.length - 1];
 
-        postToMint = {
-            title: (!nearState?.postDetails?.title || (nearState.postDetails.title = "")) ? `AERX-postNFT for ${nearState.profile?.username}`
-                : nearState?.postDetails?.title,
-            description: nearState.postDetails.body,
-            media: nearState.postDetails.media,
-            media_hash: nearState.postDetails.mediaHash,
-            issued_at: new Date().toISOString(),
-            //extra will be used to handle the toghether with on the create post
-        }
-        try {
-            console.log("post to mint", postToMint);
-            setIsLoading(true);
-            await saveMediaToPinata();
-            console.log("Post to mint: ", postToMint)
-            await nearState.pnftContract?.mint_post({
-                user_id: nearState.accountId,
-                origin_post_id: 0,
-                token_metadata: postToMint
-            },
-                "300000000000000"
-            ).then((res) => {
-                toast.success(`Your AERX-postNFT has been minted Successfully`)
-                nearState.postDetails.body = "";
-                nearState.postDetails.title = "";
-                // router.push('/flow')
-                // refresh the page
-                router.reload();
-                //save post
+            await pinToPinata(file, "POST", nearState.profile?.username).then(async (res: { IpfsHash: any; }) => {
+                const fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${res.IpfsHash}`
+                console.log("File url: ", fileUrl)
+                const fileUrlHash = new shajs.sha256().update(fileUrl).digest("base64");
+                console.log("Encrypted url: ", fileUrlHash)
+                nearState.postDetails.media = fileUrl;
+                nearState.postDetails.mediaType = fileType;
+                nearState.postDetails.mediaHash = fileUrlHash;
+                console.log("title: ", nearState?.postDetails?.title)
+                if (!nearState.postDetails.body || nearState.postDetails.body.length === 0) return toast.error("Please enter a description");
+                const postToMint = {
+                    title: (!nearState?.postDetails?.title || (nearState.postDetails.title = "")) ? `AERX-postNFT for ${nearState.profile?.username}`
+                        : nearState?.postDetails?.title,
+                    description: nearState.postDetails.body,
+                    media: fileUrl,
+                    media_hash: fileUrlHash,
+                    issued_at: new Date().toISOString(),
+                    //extra will be used to handle the toghether with on the create post
+                }
+                try {
+                    console.log("post to mint", postToMint);
+                    setIsLoading(true);
+                    console.log("Post to mint: ", postToMint)
+                    await nearState.pnftContract?.mint_post({
+                        user_id: nearState.accountId,
+                        origin_post_id: 0,
+                        token_metadata: postToMint
+                    },
+                        "300000000000000"
+                    ).then((res) => {
+                        toast.success(`Your AERX-postNFT has been minted Successfully`)
+                        nearState.postDetails.body = "";
+                        nearState.postDetails.title = "";
+                        location.reload();
+                        //save post
 
+                    })
+                    setIsLoading(false);
+                } catch (err) {
+                    setIsLoading(false);
+                    toast.error("Unable to mint AERX-postNFT. Try again later")
+                    console.error("Unable to mint AERX postNFT: ", err)
+
+                }
             })
-            setIsLoading(false);
-        } catch (err) {
-            setIsLoading(false);
-            toast.error("Unable to mint AERX-postNFT. Try again later")
-            console.error("Unable to mint AERX postNFT: ", err)
-
+        } else {
+            toast.error("No image found")
         }
 
     }
@@ -82,6 +96,7 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
         const file = e.target.files[0];
         if (!file) return;
         setMedia(file);
+        console.log(URL.createObjectURL(file))
         setFilePreview(URL.createObjectURL(file));
         setFileToPreview(URL.createObjectURL(file));
 
@@ -92,17 +107,16 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
         (document.getElementsByClassName('upload-photo')[0] as any).click();
     }
 
-  
 
-
-    const saveMediaToPinata = async () => {
+    /*  post earn to gether post */
+    const postEarn2Gether = async () => {
         const file = media;
         if (file) {
             const filename = (file as File).name;
             var parts = filename.split(".");
             const fileType = parts[parts.length - 1];
 
-            await pinToPinata(file, "POST", nearState.profile?.username).then((res: { IpfsHash: any; }) => {
+            await pinToPinata(file, "POST", nearState.profile?.username).then(async (res: { IpfsHash: any; }) => {
                 const fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${res.IpfsHash}`
                 console.log("File url: ", fileUrl)
                 const fileUrlHash = new shajs.sha256().update(fileUrl).digest("base64");
@@ -110,64 +124,61 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                 nearState.postDetails.media = fileUrl;
                 nearState.postDetails.mediaType = fileType;
                 nearState.postDetails.mediaHash = fileUrlHash;
+                console.log("title: ", nearState?.postDetails?.title)
+                if (!nearState.postDetails.body || nearState.postDetails.body.length === 0) return toast.error("Please enter a description");
+                const postToMint = {
+                    title: (!nearState?.postDetails?.title || (nearState.postDetails.title = "")) ? `AERX-postNFT for ${nearState.profile?.username}`
+                        : nearState?.postDetails?.title,
+                    description: nearState.postDetails.body,
+                    media: fileUrl,
+                    media_hash: fileUrlHash,
+                    issued_at: new Date().toISOString(),
+                    //extra will be used to handle the toghether with on the create post
+                }
+                try {
+                    console.log("post to mint", postToMint);
+                    setIsLoading(true);
+                    console.log("Post to mint: ", postToMint)
+                    await nearState.profileContract?.mint_post({
+                        user_id: nearState.accountId,
+                        origin_post_id: Number(earnPost.post_id),
+                        token_metadata: postToMint
+                    },
+                        "300000000000000",
+                        "10000000000000000000000"
+                    ).then((res) => {
+                        toast.success(`Your AERX-postNFT has been minted Successfully`)
+                        nearState.postDetails.body = "";
+                        nearState.postDetails.title = "";
+                        router.push('/flow')
+                        //save post
+
+                    })
+                    setIsLoading(false);
+                } catch (err) {
+                    setIsLoading(false);
+                    toast.error("Unable to mint AERX-postNFT. Try again later")
+                    console.error("Unable to mint AERX postNFT: ", err)
+
+                }
             })
         } else {
             toast.error("No image found")
         }
-    }
 
-    /*  post earn to gether post */
-    const postEarn2Gether = async () => {
-        let postToMint = {
-            title: (!nearState?.postDetails?.title || (nearState.postDetails.title = "" && !earnPost?.metadata?.title)) ? `AERX-postNFT for ${nearState.profile?.username}`
-                : (earnPost?.metadata?.title) ? earnPost?.metadata?.title : nearState?.postDetails?.title,
-            description: nearState?.postDetails?.body || earnPost?.metadata?.description,
-            media: nearState?.postDetails?.media || earnPost?.metadata?.media,
-            media_hash: nearState?.postDetails?.mediaHash || earnPost?.metadata?.media_hash,
-            issued_at: new Date().toISOString(),
-            //extra will be used to handle the toghether with on the create post
-        }
-        try {
-            console.log("post to mint", postToMint);
-            setIsLoading(true);
-            await saveMediaToPinata();
-            console.log("Post to mint: ", postToMint)
-
-            await nearState.profileContract?.mint_post({
-                user_id: nearState.accountId,
-                origin_post_id: Number(earnPost.post_id),
-                token_metadata: postToMint
-            },
-                "300000000000000",
-                "10000000000000000000000"
-            ).then((res) => {
-                toast.success(`Your AERX-postNFT has been minted Successfully`)
-                nearState.postDetails.body = "";
-                nearState.postDetails.title = "";
-                router.push('/flow')
-                //save post
-
-            })
-            setIsLoading(false);
-        } catch (err) {
-            setIsLoading(false);
-            toast.error("Unable to mint AERX-postNFT. Try again later")
-            console.error("Unable to mint AERX postNFT: ", err)
-
-        }
     }
 
     useEffect(() => {
         getPostOwnerProfile();
-    },[earnPost])
+    }, [earnPost])
 
     useEffect(() => {
         console.log("profile ....")
         console.log(postOwnerProfile)
-    },[postOwnerProfile])
+    }, [postOwnerProfile])
     const getPostOwnerProfile = async () => {
         // alert(JSON.stringify(earnPost))
-        if(earnPost){
+        if (earnPost) {
             await nearState.profileContract?.profile_by_id({
                 user_id: earnPost?.owner_id,
                 user_to_find_id: earnPost?.owner_id
@@ -199,35 +210,35 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
 
                     <div className='flex flex-wrap gap-3 mt-4'>
                         <div className='bg-[#6154f027] p-2 rounded-full w-[max-content] flex gap-2 px-4 cursor-pinter'
-                         onClick={() => setPostType('post')}
-                         style={{
-                            backgroundColor: (postType === 'post') ? '#6154f0ce' : '#6154f027'
-                         }}
+                            onClick={() => setPostType('post')}
+                            style={{
+                                backgroundColor: (postType === 'post') ? '#6154f0ce' : '#6154f027'
+                            }}
                         >
-                            <Image src="/assets/icons/text-post-icon.svg" alt="comment" width={15} height={15} 
-                            className='cursor-pointer'
+                            <Image src="/assets/icons/text-post-icon.svg" alt="comment" width={15} height={15}
+                                className='cursor-pointer'
                             />
                             <label className='text-purple text-sm cursor-pointer'>Post</label>
                         </div>
                         <div className='cursor-pointer bg-[#ff76272f] p-2 rounded-full w-[max-content] flex gap-2 px-4'
-                           onClick={() => setPostType('tempo')}
-                           style={{
-                            backgroundColor: (postType === 'tempo') ? '#ff7627ae' : '#ff76272f'
-                         }}
+                            onClick={() => setPostType('tempo')}
+                            style={{
+                                backgroundColor: (postType === 'tempo') ? '#ff7627ae' : '#ff76272f'
+                            }}
                         >
                             <Image src="/assets/icons/tempo-post-icon.svg" alt="comment" width={15} height={15}
-                             className='cursor-pointer'
+                                className='cursor-pointer'
                             />
                             <label className='text-[#FF7527] text-sm cursor-pointer'>Tempo</label>
                         </div>
-                        <div className='bg-[#ec52a427] p-2 rounded-full w-[max-content] flex gap-2 px-4 cursor-pointer' 
-                          onClick={() => setPostType('music')}
-                          style={{
-                            backgroundColor: (postType === 'music') ? '#ec52a4b5' : '#ec52a427'
-                         }}
+                        <div className='bg-[#ec52a427] p-2 rounded-full w-[max-content] flex gap-2 px-4 cursor-pointer'
+                            onClick={() => setPostType('music')}
+                            style={{
+                                backgroundColor: (postType === 'music') ? '#ec52a4b5' : '#ec52a427'
+                            }}
                         >
-                            <Image src="/assets/icons/music-post-icon.svg" alt="comment" width={15} height={15} 
-                             className='cursor-pointer'
+                            <Image src="/assets/icons/music-post-icon.svg" alt="comment" width={15} height={15}
+                                className='cursor-pointer'
                             />
                             <label className='text-[#ec52a4] text-sm cursor-pointer'>Music</label>
                         </div>
@@ -245,9 +256,9 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                         />
                     </div>
                     {/* <label className='text-white'>{earnPost?.metadata?.extra}</label> */}
-                    {postOwnerProfile && 
+                    {postOwnerProfile &&
                         <Image src={postOwnerProfile?.metadata?.media} width={30} height={30}
-                        className="rounded-full mt-1" title={postOwnerProfile?.metadata?.extra} 
+                            className="rounded-full mt-1" title={postOwnerProfile?.metadata?.extra}
                         />
                     }
 

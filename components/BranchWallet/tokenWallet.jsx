@@ -68,7 +68,8 @@ function tokenWallet(props) {
       </Text>
 
       <Center mb="16.44px" fontWeight="600">
-        <Flex gap="5.48px" alignItems="center" justifyContent="center">
+        <Flex  gap="5.48px" alignItems="center" justifyContent="center">
+          {/* <Text>Earnings</Text> */}
           <Text
             fontFamily="Poppins"
             lineHeight="100%"
@@ -96,24 +97,46 @@ function tokenWallet(props) {
       </Center>
 
       <Center
+      >
+        <Flex 
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        
+        >
+          {/* <Text
+           fontWeight="400"
+           fontSize="9.59px"
+           opacity="0.3"
+           fontFamily="Poppins"
+           mb="5.48px"
+           color="white"
+           textAlign="center"
+          >Available: </Text> */}
+        <Box fontFamily="Poppins" fontSize="10.96px"
+                py="5.48px"
+                px="10.96px"
+        // minWidth="93.16px"
+        maxWidth="244.16px"
+        mx="82.2px"
         borderRadius="34.935px"
         mb="21.92px"
-        bgColor="#FFFFFF0D;
-"
-        py="5.48px"
-        px="10.96px"
-        mx="82.2px"
-        w="93.16px"
-      >
-        <Flex fontFamily="Poppins" fontSize="10.96px" fontWeight="500">
-          <Text color="white">4,312</Text>
+        bgColor="#FFFFFF0D;"
+       
+
+
+
+        fontWeight="500" justifyContent="center">
+          <Text color="white">{nearState.nearBalance} NEAR</Text>
           <Text
             color="#FFFFFF80;
 "
           >
-            .16 NEAR
+            {/* .16 NEAR */}
           </Text>
-        </Flex>
+        </Box>
+      </Flex>
+
       </Center>
 
       <Flex

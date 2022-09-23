@@ -20,8 +20,8 @@ const useGetPosts = async (state: any, dispatch: AppDispatch) => {
     user_id: state.accountId,
   })
   if (posts?.length > 0) {
-    posts.sort((a: any, b: any) => {
-      return b.metadata.issued_at - a.metadata.issued_at
+    posts.sort((a: any, b: any) => { // 
+    return new Date(b.metadata.issued_at) < new Date(a.metadata.issued_at) ? 1 : -1
     })
 
     dispatch(setFeeds(posts))

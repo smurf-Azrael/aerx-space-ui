@@ -261,7 +261,7 @@ function NewAddLiquidity(props) {
         fontSize="9.59"
         color="#FFFFFF4D"
       >
-        Available: 102.4 NEAR
+        Available: {nearState.nearBalance} NEAR
       </Text>
 
       {/* second input */}
@@ -321,7 +321,7 @@ function NewAddLiquidity(props) {
         fontSize="9.59"
         color="#FFFFFF4D"
       >
-        Available: 888.4 AEX
+        Available: {nearState.aexBalance} AEX
       </Text>
 
       {/* DYNAMIC INPUT */}

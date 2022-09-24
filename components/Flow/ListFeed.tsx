@@ -745,10 +745,10 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
             style={{
               width:
                 post.type === "text"
-                  ? "58%"
+                  ? "306.88px"
                   : post.type === "video"
-                  ? "38%"
-                  : "31%",
+                  ? "164.44px"
+                  : "164.44px",
             }}
           >
             {post.type === "text" && (

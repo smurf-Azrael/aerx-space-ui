@@ -27,14 +27,17 @@ export interface HeaderProps {
 
 
 
-const SearchInput: React.FC<Props> = ({backgroundColor='bg-black-dark', placeholder="Search user", onChange }) => {
+const SearchInput: React.FC<Props> = ({backgroundColor='#FFFFFF08', placeholder="Search user", onChange }) => {
     return (
         <div className={`${backgroundColor}  pl-2  rounded-md flex items-center  gap-2 w-full `}>
-            <div >
+            <div className='bg=["#FFFFFF08]' >
             <Image src={'/assets/icons/search-input-icon.svg'}  width="16.44px" height="16.44px" alt="Search "  />
             </div>
             <div>
-              <input type="text" placeholder={placeholder} className='text-white bg-transparent text-sm focus:outline-none' style={{}}
+              <input type="text" placeholder={placeholder} className='text-white bg-transparent text-sm focus:outline-none' style={{
+                height:"27.4px",
+                // backgroundColor:"#FFFFFF08"
+              }}
                onChange={(e) => onChange(e.target.value)}
               />
             </div>
@@ -60,8 +63,10 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
           <Flex
           width="480.28px"
           height="43.84px"
-          justifyContent="space-between"
-          backgroundColor="black"
+          
+          // justifyContent="space-between"
+          // backgroundColor="#FFFFFF12;
+          // "
           //  position="fixed"
           //  zIndex="2"
           //  mt="-25px"
@@ -72,6 +77,7 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
             <Box
             w="43.155px"
             h="10.96px"
+            mr="10.275px"
             >
              <Text 
           
@@ -87,17 +93,17 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
               My Flow            
             </Text>
             </Box>
-               <Box className='w-[208.925px] '>
+               <Box className='w-[222.925px] bg-[#FFFFFF08] rounded-[6.85px]'>
              <SearchInput 
-             backgroundColor='bg-black-light' 
+             backgroundColor='#FFFFFF08' 
              placeholder="Search" 
              onChange={onSearch}
               />
            </Box>
              <Box
-            w="71.925px" h="27.4px" backgroundColor= "rgba(255, 255, 255, 0.03)" justifyContent="center" alignItems="center" ml="8px" borderRadius="6.85px" 
+            w="71.925px" h="27.4px" mr="5.48px" backgroundColor= "rgba(255, 255, 255, 0.03)" justifyContent="center" alignItems="center" ml="8px" borderRadius="6.85px" 
             >
-              <Flex justifyContent="center" gap="11.49" backgroundColor= "rgba(255, 255, 255, 0.03)" w="71.925px" h="27.4px" >
+              <Flex justifyContent="center" gap="11.49" backgroundColor= "rgba(255, 255, 255, 0.03)" w="71.925px" h="27.4px"  >
              <Image src='/assets/icons/flash-icon.svg' alt="total posts" width="16.44px" height="16.44px"  mt="1" />
              <Text 
                 fontFamily= 'Poppins'
@@ -115,7 +121,7 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
               </Text>
               </Flex>
               </Box>
-                 <Box className='bg-black-light p-1 rounded-[10px] items-center justify-around flex w-[27.4px] h-[27.4px] '>
+                 <Box className='bg-black-light p-1 rounded-[10px] mr-[5.48px] items-center justify-around flex w-[27.4px] h-[27.4px] '>
           <Image src="/assets/icons/switch-icon.svg" alt="Switch accounts" width="24px" height="24px" />
            </Box>
            <Box className='bg-purple p-1 rounded-[10px] items-center justify-around flex w-[27.4px] h-[27.4px]  cursor-pointer hover:opacity-[50%]' 
@@ -123,7 +129,7 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
            >
             <Image src="/assets/icons/white-add-icon.svg" alt="Add Post" width="12px" height="12px" />
            </Box>
-             <Box className='cursor-pointer ' onClick={() => onCollapse()}>
+             <Box className='cursor-pointer ' ml="16.44px" onClick={() => onCollapse()}>
             <Image src="/assets/icons/chat-room-menu-icon.svg" alt="Meu" width={30} height={45} />
             </Box>
           </Flex>

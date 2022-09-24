@@ -33,7 +33,7 @@ const Flow: React.FC = () => {
  
 
     
-    <div className="w-full h-screen bg-black p-6 flow ">
+    <div className="w-full h-screen bg-black p-6 flow  ">
     
       <div className="flex justify-between">
       <Box top="0" left="0" position="absolute" zIndex="6"  >
@@ -63,7 +63,7 @@ const Flow: React.FC = () => {
 
         {!flow.collapsed && (
           <div
-            className=" w-[42%] h-[94vh] overflow-y-scroll"
+            className=" w-[522.72px] h-[94vh] overflow-y-scroll  rounded-[13.7px] bg-[#FFFFFF12]"
             // style={{
             //   width:
             //     chat.minimized && !space.collapsed

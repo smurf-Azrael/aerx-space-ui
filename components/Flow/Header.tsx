@@ -1,9 +1,18 @@
 import { on } from 'events';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react'
 import { collapseFlow } from '../../store/slices/modulesSlices';
 import { useDispatch } from '../../store/store';
+import {
+  Box,
+  Button,
+  Text,
+  Heading,
+  Container,
+  Flex,
+  Image
+} from "@chakra-ui/react";
 
 export interface Props {
     backgroundColor?:string,
@@ -15,11 +24,14 @@ export interface HeaderProps {
     onAddPost: () => void,
     onSearch: (searchValue: string) => void
 }
+
+
+
 const SearchInput: React.FC<Props> = ({backgroundColor='bg-black-dark', placeholder="Search user", onChange }) => {
     return (
-        <div className={`${backgroundColor}  px-[8px] py-1 rounded-md flex items-center  gap-2 w-full`}>
-            <div className='mt-1'>
-            <Image src={'/assets/icons/search-input-icon.svg'}  width={20} height={20} alt="Search" />
+        <div className={`${backgroundColor}  pl-2  rounded-md flex items-center  gap-2 w-full `}>
+            <div >
+            <Image src={'/assets/icons/search-input-icon.svg'}  width="16.44px" height="16.44px" alt="Search "  />
             </div>
             <div>
               <input type="text" placeholder={placeholder} className='text-white bg-transparent text-sm focus:outline-none' style={{}}
@@ -44,40 +56,150 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
     }
 
     return (
-        <div className='flex justify-between items-center h-10  w-full'>
-           <div className='flex items-center mr-1'>
-             <Image src="/assets/icons/flow-header-logo.svg" alt='flow' width={30} height={30} />
-             <label className='text-white font-semibold text-sm'>My Flow</label>
-           </div>
-
-           <div className='flex w-[55%] gap-2 items-center'>
-           <div className='w-[75%]'>
+       
+          <Flex
+          width="480.28px"
+          height="43.84px"
+          justifyContent="space-between"
+          backgroundColor="black"
+          //  position="fixed"
+          //  zIndex="2"
+          //  mt="-25px"
+           textAlign="center"
+           alignItems="center"
+          >
+          <Image src="/assets/icons/flow-header-logo.svg" alt='flow' width="21.92px" height="21.92px" />
+            <Box
+            w="43.155px"
+            h="10.96px"
+            >
+             <Text 
+          
+            fontFamily= 'Poppins'
+            fontStyle= 'normal'
+            fontWeight= '600'
+            fontSize='10.96px'
+            lineHeight= '100%'
+            letterSpacing= '-0.02em'
+            color="#FFFFFF"
+         
+            >             
+              My Flow            
+            </Text>
+            </Box>
+               <Box className='w-[208.925px] '>
              <SearchInput 
              backgroundColor='bg-black-light' 
              placeholder="Search" 
              onChange={onSearch}
               />
-           </div>
-           <div className='bg-black-light p-1  px-2 rounded-[10px] items-center flex w-[25%]  h-[40px] '>
-             <Image src='/assets/icons/flash-icon.svg' alt="total posts" width={20} height={20} />
-             <label className='text-white text-sm text-center ml-[12px] '>31134</label>
-           </div>
-           </div>
-
-           <div className='flex gap-2 ml-[-7%] mt-2'>
-           <div className='bg-black-light p-1 rounded-[10px] items-center justify-around flex w-[35px] h-[35px] mt-1 '>
-            <Image src="/assets/icons/switch-icon.svg" alt="Switch accounts" width={20} height={20} />
-           </div>
-           <div className='bg-purple p-1 rounded-[10px] items-center justify-around flex w-[35px] h-[35px] mt-1 cursor-pointer hover:opacity-[50%]' 
+           </Box>
+             <Box
+            w="71.925px" h="27.4px" backgroundColor= "rgba(255, 255, 255, 0.03)" justifyContent="center" alignItems="center" ml="8px" borderRadius="6.85px" 
+            >
+              <Flex justifyContent="center" gap="11.49" backgroundColor= "rgba(255, 255, 255, 0.03)" w="71.925px" h="27.4px" >
+             <Image src='/assets/icons/flash-icon.svg' alt="total posts" width="16.44px" height="16.44px"  mt="1" />
+             <Text 
+                fontFamily= 'Poppins'
+                fontStyle= 'normal'
+                fontWeight= '600'
+                fontSize='10.96px'
+                lineHeight= '100%'
+                mt="2"
+                /* identical to box height, or 16px */
+    
+                letterSpacing= '-0.02em'
+                color="#FFFFFF"
+             >
+              31134
+              </Text>
+              </Flex>
+              </Box>
+                 <Box className='bg-black-light p-1 rounded-[10px] items-center justify-around flex w-[27.4px] h-[27.4px] '>
+          <Image src="/assets/icons/switch-icon.svg" alt="Switch accounts" width="24px" height="24px" />
+           </Box>
+           <Box className='bg-purple p-1 rounded-[10px] items-center justify-around flex w-[27.4px] h-[27.4px]  cursor-pointer hover:opacity-[50%]' 
             onClick={onAddPost}
            >
-            <Image src="/assets/icons/white-add-icon.svg" alt="Add Post" width={11} height={11} />
-           </div>
-           <div className='cursor-pointer' onClick={() => onCollapse()}>
-             <Image src="/assets/icons/chat-room-menu-icon.svg" alt="Meu" width={30} height={45} />
-           </div>
-           </div>
-        </div>
+            <Image src="/assets/icons/white-add-icon.svg" alt="Add Post" width="12px" height="12px" />
+           </Box>
+             <Box className='cursor-pointer ' onClick={() => onCollapse()}>
+            <Image src="/assets/icons/chat-room-menu-icon.svg" alt="Meu" width={30} height={45} />
+            </Box>
+          </Flex>
+           
+          //  <Flex  
+          //  gap="8.49"
+          //  justifyContent="space-evenly"   
+          //  alignItems="center"
+          //  position="fixed"
+          //  zIndex="2"
+          //  mt="-25px"
+          //  ml="0"
+          // backgroundColor="black"
+          //  >
+          //    <Image src="/assets/icons/flow-header-logo.svg" alt='flow' width="32px" height="32px" />
+          //    <Text 
+          
+          //   fontFamily= 'Poppins'
+          //   fontStyle= 'normal'
+          //   fontWeight= '600'
+          //   fontSize='16px'
+          //   lineHeight= '100%'
+          //   w="63px"
+          //   /* identical to box height, or 16px */
+
+          //   letterSpacing= '-0.02em'
+          //   color="#FFFFFF"
+           
+
+            
+          //   >             
+          //     My Flow            
+          //   </Text>
+
+          //   <div className='w-[205px] '>
+          //    <SearchInput 
+          //    backgroundColor='bg-black-light' 
+          //    placeholder="Search" 
+          //    onChange={onSearch}
+          //     />
+          //  </div>
+          //   <Box
+          //   w="71.925px" h="27.4px" backgroundColor= "rgba(255, 255, 255, 0.03)" justifyContent="center" alignItems="center" ml="8px" borderRadius="6.85px" 
+          //   >
+          //     <Flex justifyContent="center" gap="11.49" backgroundColor= "rgba(255, 255, 255, 0.03)"  >
+          //    <Image src='/assets/icons/flash-icon.svg' alt="total posts" width="16.44px" height="16.44px"  mt="1" />
+          //    <Text 
+          //       fontFamily= 'Poppins'
+          //       fontStyle= 'normal'
+          //       fontWeight= '600'
+          //       fontSize='10.96px'
+          //       lineHeight= '100%'
+          //       mt="2"
+          //       /* identical to box height, or 16px */
+    
+          //       letterSpacing= '-0.02em'
+          //       color="#FFFFFF"
+          //    >
+          //     31134
+          //     </Text>
+          //     </Flex>
+          //     </Box>
+          //     <div className='bg-black-light p-1 rounded-[10px] items-center justify-around flex w-[27.4px] h-[27.4px] '>
+          //   <Image src="/assets/icons/switch-icon.svg" alt="Switch accounts" width="24px" height="24px" />
+          //  </div>
+          //  <div className='bg-purple p-1 rounded-[10px] items-center justify-around flex w-[27.4px] h-[27.4px]  cursor-pointer hover:opacity-[50%]' 
+          //   onClick={onAddPost}
+          //  >
+          //   <Image src="/assets/icons/white-add-icon.svg" alt="Add Post" width="12px" height="12px" />
+          //  </div>
+          //  <div className='cursor-pointer ' onClick={() => onCollapse()}>
+          //    <Image src="/assets/icons/chat-room-menu-icon.svg" alt="Meu" width={30} height={45} />
+          //  </div>
+          //  </Flex>
+        
+    
     )
 }
 

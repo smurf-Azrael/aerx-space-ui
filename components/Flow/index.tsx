@@ -19,10 +19,10 @@ const FlowFeeds: React.FC = () => {
     },[searchKey])
 
     return (
-        <div className='w-full h-[max-content] bg-black-dark rounded-[10px] mt-{25%}'>
+        <div className='w-[517.72px] h-[max-content] bg-black-dark rounded-[10px] mt-{25%}'>
             {!addPost &&
                 <>
-                    <div className='flex gap-2 py-2 px-4'>
+                    <div className='flex gap-2  px-4'>
                         <FlowHeader
                             onAddPost={() => setAddPost(true)}
                             onSearch={(searchKey: string) => setSearchKey(searchKey)}
@@ -37,6 +37,7 @@ const FlowFeeds: React.FC = () => {
                 addPost &&
                 <AddPost onClose={() => cancelAddPost()} />
             }
+            
         </div>
     )
 }

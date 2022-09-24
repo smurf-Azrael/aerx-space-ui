@@ -17,6 +17,10 @@ import LogOut from "./LogOut";
 import CircleList from "./CircleList";
 import Circle from "./Circle";
 import { expandChat, expandFlow } from "../../store/slices/modulesSlices";
+import dynamic from 'next/dynamic';
+
+const ThreeDModel = dynamic(() => import('../3DModel'), { ssr: false });
+
 
 function Profile(props) {
   const nearState = nearStore((state) => state);
@@ -50,20 +54,32 @@ function Profile(props) {
     return <Circle />;
   };
 
+
   return circ ? (
     <CircleList remove={remCirc} />
   ) : (
     <Flex
-      bgColor="#191919"
+      bgColor={!(nearState.profile.profileImg.includes(".glb")) ? "#191919" : "transparent"}
       position="absolute"
       height="100%"
       w="257.56px"
       // bgImage="url('../resources/pd.svg') "
-      bgImage={`url('${nearState.profile.profileImg}')`}
+      bgImage={!(nearState.profile.profileImg.includes('.glb')) ? `url('${nearState.profile.profileImg}')` : 'none'}
       bgSize="100% 45%"
       bgRepeat="no-repeat"
       bgPosition="top"
+      className="relative"
     >
+      {nearState.profile.profileImg.includes(".glb") && 
+        <div className="absolute top-0 w-[257.56px] h-[50%] profile-gradient  " 
+        style={{
+          zIndex: -1}}
+        >
+           <ThreeDModel
+              src={Array.isArray(nearState.profile.profileImg) ? nearState.profile.profileImg[0] : nearState.profile.profileImg}
+            />
+        </div>
+      }
       <Box>
         {/* profile */}
         <Flex
@@ -71,7 +87,7 @@ function Profile(props) {
           width="100%"
           // onDoubleClick={props.circleClick}
           gap="7%"
-          bgGradient={bgGradient}
+          bgGradient={!(nearState.profile.profileImg.includes('.glb')) ? bgGradient : "none"}
           h="45%"
         >
           <Flex
@@ -80,6 +96,7 @@ function Profile(props) {
             ml="16.44px"
             mt="21.92px"
             cursor="pointer"
+            zIndex={6}
           >
             <Box
               color="#6054F0"
@@ -104,11 +121,14 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             gap="45%"
+            zIndex={6}
             // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
-            <Box h="235px">
+            <Box h="235px" 
+              // zIndex={6}
+            >
               <Heading
                 fontSize="21.92px"
                 color="#FFFFFF"
@@ -177,7 +197,10 @@ function Profile(props) {
               </Flex>
             </Box>
           </Flex>
-          <Flex flexDirection="column" gap="10.96px" mr="3%" mt="21.92px">
+          <Flex 
+          flexDirection="column" gap="10.96px" mr="3%" mt="21.92px"
+          zIndex={6}
+          >
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
               <Image src="../resources/Group 14948.png" w="42px" />
@@ -202,8 +225,9 @@ function Profile(props) {
           backgroundGradient="linear-gradient(180deg, rgba(25, 25, 25, 0) 0%, #191919 100%)"
           mb="15%"
           width="257.56px"
+          zIndex={8}
         >
-          <Center borderRadius="50px 50px 0px 0px">
+          <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
             <Button
               onClick={remCirc}
               cursor="pointer"

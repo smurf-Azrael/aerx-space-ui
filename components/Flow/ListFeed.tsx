@@ -106,12 +106,15 @@ const TextPost: React.FC<IProps> = ({
 
   return (
     <Box
-      width="306.88px"
+      width="312.88px"
       height="295.92px"
       style={containerStyle}
       borderRadius="10.96px"
       padding="16px"
       flexDirection="column"
+      mt={-2}
+      mb={1}
+
     //   mr="8px"
      
     >
@@ -217,24 +220,24 @@ const TextPost: React.FC<IProps> = ({
           </Text>
         </Box>
       </Flex>
-      <Flex gap="55%" alignItems="center">
-        <Box mt={1}>
+      <Flex gap="55%" alignItems="center" >
+        <Box >
           <Flex>
             <div className="hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]">
               <Image
                 className="cursor-pointer"
                 src="/assets/icons/comment-icon.svg"
                 alt="comment"
-                width="13.7px"
-                height="13.7px"
+                width="16.44px"
+                height="16.44px"
               />
             </div>
             <div className="hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]">
               <Image
                 src="/assets/icons/share-icon.svg"
                 alt="share"
-                width="13.7px"
-                height="13.7px"
+                width="16.44px"
+                height="16.44px"
                 className="cursor-pointer "
                 onClick={(e) => initializeShare(feed)}
               />
@@ -244,20 +247,20 @@ const TextPost: React.FC<IProps> = ({
                 className="cursor-pointer"
                 src="/assets/icons/save-post-icon.svg"
                 alt="save"
-                width="13.7px"
-                height="13.7px"
+                width="16.44px"
+                height="16.44px"
               />
             </div>
           </Flex>
         </Box>
-        <Box>
+        <Box mt={-1}>
           {!feed?.metadata?.title.includes("AERX ProfileNFT for") && (
             <div>
               {
                 !userCharged && (
                   // <div className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
                   <Image
-                    src="../resources/Group 139691.png"
+                    src="../resources/Group 139692.png"
                     alt="charge post"
                     width="27.4px"
                     height="27.4px"
@@ -280,7 +283,7 @@ const TextPost: React.FC<IProps> = ({
                   className="cursor-pointer charge-filter-effect  rounded-full flex justify-around"
                 >
                   <Image
-                    src="../resources/Group 13969.png"
+                    src="../resources/Group 139693.png"
                     alt="post rewarded"
                     width="27.4px"
                     height="27.4px"
@@ -298,7 +301,7 @@ const TextPost: React.FC<IProps> = ({
 const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
   return (
     <Flex
-      width="164.44px"
+      width="166.85px"
       height="295.92px"
       bgImage={`url('${metadata?.media}')`}
       borderRadius="10.275px"
@@ -307,6 +310,11 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
       backgroundSize="cover"
       flexDirection="column"
       padding="10.96px"
+      mr="2px"
+      mt={-2}
+      mb={1}
+
+
     >
       <Flex flexDirection="column" gap="48.635px">
         <Flex>
@@ -408,7 +416,7 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
 
   return (
     <Flex
-      width="164.44px"
+      width="166.85px"
       height="295.92px"
       bgImage="url('assets/images/cover-image-2.svg') "
       borderRadius="10.275px"
@@ -418,6 +426,10 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
       flexDirection="column"
       padding="10.96px"
       gap="117.135px"
+      mt={-2}
+      mb={1}
+    
+
     >
       <Flex justifyContent="space-between">
         <Image
@@ -738,17 +750,17 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
   return (
     <>
       <Toaster />
-      <div className="w-full  flex  flex-wrap gap-2 gap-y-3">
+      <div className="w-[487.72px]  flex  flex-wrap gap-2 gap-y-3">
         {postsClone.map((post: Feed, index: number) => (
           <div
             key={index}
             style={{
               width:
                 post.type === "text"
-                  ? "306.88px"
+                  ? "312.48px"
                   : post.type === "video"
-                  ? "164.44px"
-                  : "164.44px",
+                  ? "166.85px"
+                  : "166.85px",
             }}
           >
             {post.type === "text" && (

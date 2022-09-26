@@ -109,9 +109,9 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
                 fontFamily= 'Poppins'
                 fontStyle= 'normal'
                 fontWeight= '600'
-                fontSize='10.96px'
+                fontSize='14px'
                 lineHeight= '100%'
-                mt="2"
+                mt="1.5"
                 /* identical to box height, or 16px */
     
                 letterSpacing= '-0.02em'

@@ -28,7 +28,7 @@ const FlowFeeds: React.FC = () => {
                             onSearch={(searchKey: string) => setSearchKey(searchKey)}
                         />
                     </div>
-                    <div className=' py-2'>
+                    <div className=' py-[55px]'>
                         <ListFeeds searchKey={""} />
                     </div>
                 </>

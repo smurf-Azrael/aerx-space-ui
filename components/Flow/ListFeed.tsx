@@ -260,7 +260,7 @@ const TextPost: React.FC<IProps> = ({
                 !userCharged && (
                   // <div className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
                   <Image
-                    src="../resources/Group 140974.png"
+                    src="../resources/Group 1409711.png"
                     alt="charge post"
                     width="27.4px"
                     height="27.4px"
@@ -283,7 +283,7 @@ const TextPost: React.FC<IProps> = ({
                   className="cursor-pointer charge-filter-effect  rounded-full flex justify-around"
                 >
                   <Image
-                    src="../resources/Group 14097.png"
+                    src="../resources/Group 1409712.png"
                     alt="post rewarded"
                     width="27.4px"
                     height="27.4px"
@@ -393,7 +393,7 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
 
             <Box className=" charge-filter-effect  rounded-full flex justify-around mt-1">
               <Image
-                src="../resources/Group 140972.png"
+                src="../resources/Group 1409711.png"
                 alt="post rewarded"
                 width="27.4px"
                 height="27.4px"
@@ -517,7 +517,7 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
         </Box>
         <Box className="charge-filter-effect  rounded-full flex justify-around">
           <Image
-            src="../resources/Group 14097.png"
+            src="../resources/Group 1409711.png"
             alt="post rewarded"
             width="27.4px"
             height="27.4px"

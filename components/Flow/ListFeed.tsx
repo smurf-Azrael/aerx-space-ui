@@ -260,7 +260,7 @@ const TextPost: React.FC<IProps> = ({
                 !userCharged && (
                   // <div className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
                   <Image
-                    src="../resources/Group 139692.png"
+                    src="../resources/Group 140974.png"
                     alt="charge post"
                     width="27.4px"
                     height="27.4px"
@@ -283,7 +283,7 @@ const TextPost: React.FC<IProps> = ({
                   className="cursor-pointer charge-filter-effect  rounded-full flex justify-around"
                 >
                   <Image
-                    src="../resources/Group 139693.png"
+                    src="../resources/Group 14097.png"
                     alt="post rewarded"
                     width="27.4px"
                     height="27.4px"
@@ -393,7 +393,7 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
 
             <Box className=" charge-filter-effect  rounded-full flex justify-around mt-1">
               <Image
-                src="../resources/Group 139691.png"
+                src="../resources/Group 140972.png"
                 alt="post rewarded"
                 width="27.4px"
                 height="27.4px"
@@ -425,7 +425,7 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
       backgroundSize="cover"
       flexDirection="column"
       padding="10.96px"
-      gap="117.135px"
+      gap="57.135px"
       mt={-2}
       mb={1}
     
@@ -490,7 +490,7 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
             </Text>
           </Box>
         </Center>
-        <Flex mt="28.255px" justifyContent="space-evenly" alignItems="center">
+        <Flex mt="78.255px" justifyContent="space-evenly" alignItems="center">
           <Box>
             <Image
               src="/assets/icons/comment-icon.svg"
@@ -517,10 +517,10 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
         </Box>
         <Box className="charge-filter-effect  rounded-full flex justify-around">
           <Image
-            src="/assets/icons/not-charged-icon.svg"
+            src="../resources/Group 14097.png"
             alt="post rewarded"
-            width="16.44px"
-            height="16.44px"
+            width="27.4px"
+            height="27.4px"
           />
         </Box>
         </Flex>

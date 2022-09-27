@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Image,
@@ -18,6 +18,7 @@ import CircleList from "./CircleList";
 import Circle from "./Circle";
 import { expandChat, expandFlow } from "../../store/slices/modulesSlices";
 import dynamic from 'next/dynamic';
+
 
 const ThreeDModel = dynamic(() => import('../3DModel'), { ssr: false });
 
@@ -54,7 +55,65 @@ function Profile(props) {
     return <Circle />;
   };
 
+  useEffect(() => {
+    const initBabylon = async () => {
+      console.log("avt: ", nearState._3dUrl)
+      const BabylonViewer = await import('babylonjs-viewer');
+      const babylon = document.getElementById("babylon-element-profile");
+      new BabylonViewer.DefaultViewer(babylon, {
+        extends: "none",
+        templates: {
+          main: {
+            html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+            params: {
+              ["no-escape"]: true,
+              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+            }
+          },
+          ["loadingScreen"]: {
+            html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+            params: {
+              ["backgroundColor"]: "#0000004d",
+              ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+            }
+          },
+        },
+        engine: {
+          antialiasing: true,
+          hdEnabled: true,
+          adaptiveQuality: true,
+        },
+        // scene: {
+        //   clearColor: {
+        //     r: 0.5,
+        //     g: 0.5,
+        //     b: 0.5,
+        //     a: 0.3,
+        //   },
+        //   colorGrading: {
 
+        //   }
+        // },
+        optimizer: true,
+        model: {
+          url: `${nearState.profile.profileImg}`,
+          scaling: {
+            x: 3.5,
+            y: 3,
+            z: 3,
+          },
+          position: {
+            x: 0,
+            y: -2,
+            z: 1
+          }
+        }
+      });
+    }
+    initBabylon().then(() => {
+    })
+
+  }, [])
   return circ ? (
     <CircleList remove={remCirc} />
   ) : (
@@ -70,14 +129,16 @@ function Profile(props) {
       bgPosition="top"
       className="relative"
     >
-      {nearState.profile.profileImg.includes(".glb") && 
-        <div className="absolute top-0 w-[257.56px] h-[50%] profile-gradient  " 
-        style={{
-          zIndex: -1}}
+      {nearState.profile.profileImg.includes(".glb") &&
+        <div className="absolute top-0 w-[257.56px] h-[50%] profile-gradient  "
+          style={{
+            zIndex: -1
+          }}
         >
-           <ThreeDModel
+          <div id="babylon-element-profile"></div>
+          {/* <ThreeDModel
               src={Array.isArray(nearState.profile.profileImg) ? nearState.profile.profileImg[0] : nearState.profile.profileImg}
-            />
+            /> */}
         </div>
       }
       <Box>
@@ -122,12 +183,12 @@ function Profile(props) {
             alignItems="center"
             gap="45%"
             zIndex={6}
-            // onMouseLeave={props.leaveClick}
+          // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
-            <Box h="235px" 
-              // zIndex={6}
+            <Box h="235px"
+            // zIndex={6}
             >
               <Heading
                 fontSize="21.92px"
@@ -149,7 +210,7 @@ function Profile(props) {
                 alignItems="center"
                 justifyContent="center"
                 gap="16px"
-                // mt="55px"
+              // mt="55px"
               >
                 <Text
                   fontSize="12.33px"
@@ -162,7 +223,7 @@ function Profile(props) {
                   mb="11.645px"
                   mt="12px"
                   lineHeight=" 100%"
-                  /* identical to box height, or 18px */
+                /* identical to box height, or 18px */
                 >
                   {nearState.profile.username}
                 </Text>
@@ -197,9 +258,9 @@ function Profile(props) {
               </Flex>
             </Box>
           </Flex>
-          <Flex 
-          flexDirection="column" gap="10.96px" mr="3%" mt="21.92px"
-          zIndex={6}
+          <Flex
+            flexDirection="column" gap="10.96px" mr="3%" mt="21.92px"
+            zIndex={6}
           >
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
@@ -239,7 +300,7 @@ function Profile(props) {
               px="0"
               flexDirection="column"
               gap="2px"
-              // backgroundColor="#1F1F1F"
+            // backgroundColor="#1F1F1F"
             >
               <MinusIcon
                 w="21.92px"
@@ -286,7 +347,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -312,7 +373,7 @@ function Profile(props) {
                 src={ellipse5}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -338,7 +399,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -363,7 +424,7 @@ function Profile(props) {
                 src={ellipse4}
                 width="43.84px"
                 borderRadius="100%"
-                //   mb="5.48px"
+              //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -387,32 +448,32 @@ function Profile(props) {
             h="15%"
             top="64%"
           >
-             <Center borderRadius="50px 50px 0px 0px">
-            <Button
-              onClick={props.wallet}
-              cursor="pointer"
-              background="none"
-              w="21.92px"
-              bgColor="rgba(255, 255, 255, 0.3);"
-              height="12px"
-              mt="2"
-              px="0"
-              flexDirection="column"
-              gap="2px"
+            <Center borderRadius="50px 50px 0px 0px">
+              <Button
+                onClick={props.wallet}
+                cursor="pointer"
+                background="none"
+                w="21.92px"
+                bgColor="rgba(255, 255, 255, 0.3);"
+                height="12px"
+                mt="2"
+                px="0"
+                flexDirection="column"
+                gap="2px"
               // backgroundColor="#1F1F1F"
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </Button>
-          </Center>
+              >
+                <MinusIcon
+                  w="21.92px"
+                  bgColor="rgba(255, 255, 255, 0.3);"
+                  height="2px"
+                />
+                <MinusIcon
+                  w="21.92px"
+                  bgColor="rgba(255, 255, 255, 0.3);"
+                  height="2px"
+                />
+              </Button>
+            </Center>
             <Flex flexDirection="column">
               <Text
                 marginLeft="16.44px"
@@ -436,7 +497,7 @@ function Profile(props) {
                   fontWeight="700"
                   color="#ffffff"
                   fontFamily="Poppins"
-                  //   mr="30.14px"
+                //   mr="30.14px"
                 >
                   {nearState.aexBalance} AEX
                 </Text>
@@ -754,7 +815,7 @@ function Profile(props) {
         .
       </Flex>
       <LogOut zIndex={zIndex} log={isLogout} logout={logOutUser} />
-    </Flex>
+    </Flex >
   );
 }
 

@@ -144,8 +144,8 @@ export async function initNearConnection(nearState: NearStoreType) {
         return;
     }
     nearState.setAccountId(accountId);
-    //Get Balance
-    const _account = await nearConnection.account(`${accountId}`);
+    //Get balance
+    const _account = await nearConnection.account(accountId);
     const balance = await _account.getAccountBalance();
     console.log("available near balance: ", balance.available);
     const availableNear = balance.available;

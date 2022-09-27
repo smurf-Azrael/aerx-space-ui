@@ -12,6 +12,7 @@ import { getBalance } from '../lib/aexContract';
 import { initNearConnection, checkProfile } from '../lib/auth';
 import { nearStore } from '../store/near';
 import { initPinata } from '../lib/auth';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(true);
@@ -69,7 +70,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <ChakraProvider
         theme={myTheme}
-      >
+      > <Head>
+          <title>Aerx</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          {/* <link rel="stylesheet" src="../public/resources/aerx.svg" /> */}
+          <script src="https://cdn.babylonjs.com/viewer/babylon.viewer.js"></script>
+        </Head>
         <ThemeProvider attribute="class">
           <Component {...pageProps} />
         </ThemeProvider>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Textarea } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { background, Box, Textarea } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -12,14 +12,12 @@ import { ProfileType } from '../../../types/stores';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-const ThreeDModel = dynamic(() => import('../../3DModel'), { ssr: false });
+
+
+
 
 const ProfileSettingForm: React.FC = () => {
   const router = useRouter();
-  const {
-    query: { avatarUrl },
-  } = router;
-  console.log('query', avatarUrl);
   const [file, setFile] = useState<File>();
   const [filePreview, setFilePreview] = useState<string>();
   const [ipfsData, setIpfsData] = useState<IPFSDataType>({
@@ -29,6 +27,7 @@ const ProfileSettingForm: React.FC = () => {
   });
   const [creating, setCreating] = useState<boolean>(false);
   const nearState = nearStore((state) => state);
+  console.log!("avater url: ", nearState._3dUrl)
   const [showTriggers, setShowTriggers] = useState<boolean>(false);
   const initialValues = {
     name: '',
@@ -54,13 +53,13 @@ const ProfileSettingForm: React.FC = () => {
 
   const handleSubmit = async () => {
     if (creating) return;
-    if (!file && !avatarUrl) return toast.error("Please select a profile image or use 3d avatar")
+    if (!file && !nearState._3dUrl) return toast.error("Please select a profile image or use 3d avatar")
     setCreating(true);
     console.log('File: ', file);
     console.log('Username: ', formik.values.userName);
     let fileUrl: string = "";
     let fileUrlHash: string = "";
-    if (!avatarUrl) {
+    if (!nearState._3dUrl) {
       let returnedIpfsData = await pinToPinata(
         file,
         'PROFILE',
@@ -84,7 +83,7 @@ const ProfileSettingForm: React.FC = () => {
       title: 'AERX ProfileNFT for ' + formik.values.userName,
       username: formik.values.userName,
       description: formik.values.bio,
-      media: avatarUrl ? avatarUrl : fileUrl,
+      media: nearState._3dUrl ? nearState._3dUrl : fileUrl,
       media_hash: fileUrlHash,
       issued_at: new Date().toISOString(),
       extra: formik.values.name,
@@ -147,6 +146,54 @@ const ProfileSettingForm: React.FC = () => {
       toast.success('Image selected');
     }
   }
+  useEffect(() => {
+    const initBabylon = async () => {
+      console.log("avt: ", nearState._3dUrl)
+      const BabylonViewer = await import('babylonjs-viewer');
+      const babylon = document.getElementById("babylon-element")!;
+      new BabylonViewer.DefaultViewer(babylon, {
+        extends: "none",
+        templates: {
+          main: {
+            html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+            params: {
+              ["no-escape"]: true,
+              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+            }
+          },
+          ["loadingScreen"]: {
+            html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+            params: {
+              ["backgroundColor"]: "#0000004d",
+              ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+            }
+          },
+        },
+        engine: {
+          antialiasing: true,
+          hdEnabled: true,
+          adaptiveQuality: true,
+        },
+        optimizer: true,
+        model: {
+          url: `${nearState._3dUrl}`,
+          scaling: {
+            x: 3.5,
+            y: 3,
+            z: 3,
+          },
+          position: {
+            x: 0,
+            y: -2,
+            z: 1
+          }
+        }
+      });
+    }
+    initBabylon().then(() => {
+    })
+
+  }, [])
 
   return (
     <div className="px-6">
@@ -156,7 +203,7 @@ const ProfileSettingForm: React.FC = () => {
           <div
             className="h-[400px] w-[230px] bg-[#0000004d] p-2"
             style={{
-              background: `${(!avatarUrl)
+              background: `${(!nearState._3dUrl)
                 ? 'url("/assets/images/profile-avatar-cover.svg")'
                 : 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
                 }`,
@@ -166,7 +213,7 @@ const ProfileSettingForm: React.FC = () => {
               backgroundBlendMode: 'overlay',
             }}
           >
-            {!avatarUrl && (
+            {!nearState._3dUrl && (
               <div className="flex flex-col justify-between h-[50%] text-sm pt-4">
                 <div className="flex justify-around">
                   <label className="text-white">Avatar</label>
@@ -219,14 +266,9 @@ const ProfileSettingForm: React.FC = () => {
                 </div>
               </div>
             )}
-
-            <div style={{ width: '100%', height: '100%', margin: 'auto' }}>
-              {avatarUrl && (
-                <ThreeDModel
-                  src={Array.isArray(avatarUrl) ? avatarUrl[0] : avatarUrl}
-                />
-              )}
-            </div>
+            {nearState._3dUrl && (
+              <div id="babylon-element" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
+            )}
           </div>
 
 
@@ -321,7 +363,7 @@ const ProfileSettingForm: React.FC = () => {
               !touched.name ||
               !touched.userName ||
               !touched.bio
-              // ||  (file && avatarUrl)
+              // ||  (file && nearState._3dUrl)
               ? { opacity: 0.5 }
               : { opacity: 1 }
           }

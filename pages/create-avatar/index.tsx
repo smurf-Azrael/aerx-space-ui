@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
+import { nearStore } from '../../store/near';
 // import { OrbitControls, useGLTF } from "@react-three/drei";
 
 const Create3DAvatar = () => {
@@ -8,6 +9,7 @@ const Create3DAvatar = () => {
   const [avatarUrl, setAvatarUrl] = useState('')
   const [showIFrame, setShowIFrame] = useState(true)
   const router = useRouter();
+  const nearState = nearStore((state) => state);
 
   function subscribe(event: any) {
     const json = parse(event)
@@ -32,6 +34,7 @@ const Create3DAvatar = () => {
     // Get avatar GLB URL
     if (json.eventName === 'v1.avatar.exported') {
       console.log(`Avatar URL: ${json.data.url}`);
+      nearState.set3DUrl(`${json.data.url}`)
       setAvatarUrl(json.data.url)
       setShowIFrame(false);
     }
@@ -70,8 +73,6 @@ const Create3DAvatar = () => {
     }
   }, [showIFrame])
 
-  // const { scene } = useGLTF(`${avatarUrl}`);
-  // console.log("Scene: ", scene)
 
   return (
     <div className="App">

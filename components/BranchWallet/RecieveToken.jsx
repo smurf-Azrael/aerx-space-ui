@@ -39,29 +39,32 @@ function RecieveToken(props) {
       position="absolute"
       top="0"
     >
-      <Center>
-        <div
-          className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
-        background-#1F1F1F
-        gap-0.5
-        mb-[19.18px]
-        mt-2
-        "
-          onClick={props.toggleWallet}
-          cursor="pointer"
-        >
-          <MinusIcon
-            w="21.92px"
-            bgColor="rgba(255, 255, 255, 0.3);"
-            height="2px"
-          />
-          <MinusIcon
-            w="21.92px"
-            bgColor="rgba(255, 255, 255, 0.3);"
-            height="2px"
-          />
-        </div>
-      </Center>
+    <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
+            <Button
+              onClick={props.toggleWallet}
+              cursor="pointer"
+              background="none"
+              w="21.92px"
+              bgColor="rgba(255, 255, 255, 0.3);"
+              height="12px"
+              mt="2"
+              px="0"
+              flexDirection="column"
+              gap="2px"
+              // backgroundColor="#1F1F1F"
+            >
+              <MinusIcon
+                w="21.92px"
+                bgColor="rgba(255, 255, 255, 0.3);"
+                height="2px"
+              />
+              <MinusIcon
+                w="21.92px"
+                bgColor="rgba(255, 255, 255, 0.3);"
+                height="2px"
+              />
+            </Button>
+          </Center>
       {/* end */}
 
       <Box

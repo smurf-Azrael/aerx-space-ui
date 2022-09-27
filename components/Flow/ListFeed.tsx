@@ -115,8 +115,7 @@ const TextPost: React.FC<IProps> = ({
       mt={-2}
       mb={1}
 
-    //   mr="8px"
-     
+      //   mr="8px"
     >
       <Flex justifyContent="space-between">
         <Flex gap="5.48px">
@@ -220,8 +219,8 @@ const TextPost: React.FC<IProps> = ({
           </Text>
         </Box>
       </Flex>
-      <Flex gap="55%" alignItems="center" >
-        <Box >
+      <Flex gap="55%" alignItems="center">
+        <Box>
           <Flex>
             <div className="hover:bg-[#ffffff3a] flex justify-around cursor-pointer  p-1 rounded-full w-[30px] h-[30px]">
               <Image
@@ -259,11 +258,12 @@ const TextPost: React.FC<IProps> = ({
               {
                 !userCharged && (
                   // <div className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
+                  <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
                   <Image
-                    src="../resources/Group 1409711.png"
+                    src="../resources/Union2.png"
                     alt="charge post"
-                    width="27.4px"
-                    height="27.4px"
+                    width="14px"
+                    height="21px"
                     className="cursor-pointer"
                     onClick={(e) => handleOnClick(e, feed)}
                     onClickCapture={(e) => onClickCapture(e, feed)}
@@ -272,6 +272,9 @@ const TextPost: React.FC<IProps> = ({
                     onTouchStart={handleOnTouchStart}
                     onTouchEnd={handleOnTouchEnd}
                   />
+                 </Box>
+             
+                  
                 )
                 // </div>
               }
@@ -282,12 +285,14 @@ const TextPost: React.FC<IProps> = ({
                   }
                   className="cursor-pointer charge-filter-effect  rounded-full flex justify-around"
                 >
-                  <Image
-                    src="../resources/Group 1409712.png"
-                    alt="post rewarded"
-                    width="27.4px"
-                    height="27.4px"
-                  />
+         <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
+            <Image
+              src="../resources/Union.png"
+              alt="post rewarded"
+              width="14px"
+              height="21px"
+            />
+          </Box>
                 </div>
               )}
             </div>
@@ -313,8 +318,6 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
       mr="2px"
       mt={-2}
       mb={1}
-
-
     >
       <Flex flexDirection="column" gap="48.635px">
         <Flex>
@@ -391,14 +394,14 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
               />
             </Flex>
 
-            <Box className=" charge-filter-effect  rounded-full flex justify-around mt-1">
-              <Image
-                src="../resources/Group 1409711.png"
-                alt="post rewarded"
-                width="27.4px"
-                height="27.4px"
-              />
-            </Box>
+            <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
+            <Image
+              src="../resources/Union2.png"
+              alt="post rewarded"
+              width="14px"
+              height="21px"
+            />
+          </Box>
           </Flex>
         </Flex>
       </Flex>
@@ -428,8 +431,6 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
       gap="57.135px"
       mt={-2}
       mb={1}
-    
-
     >
       <Flex justifyContent="space-between">
         <Image
@@ -490,7 +491,7 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
             </Text>
           </Box>
         </Center>
-        <Flex mt="78.255px" justifyContent="space-evenly" alignItems="center">
+        <Flex mt="78.255px" justifyContent="space-between" alignItems="center">
           <Box>
             <Image
               src="/assets/icons/comment-icon.svg"
@@ -500,33 +501,32 @@ const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
             />
           </Box>
           <Box>
-           <Image
-            src="/assets/icons/share-icon.svg"
-            alt="comment"
-            width="16.44px"
-            height="16.44px"
-          />
-        </Box>
-        <Box>
-          <Image
-            src="/assets/icons/save-post-icon.svg"
-            alt="comment"
-            width="16.44px"
-            height="16.44px"
-          />
-        </Box>
-        <Box className="charge-filter-effect  rounded-full flex justify-around">
-          <Image
-            src="../resources/Group 1409711.png"
-            alt="post rewarded"
-            width="27.4px"
-            height="27.4px"
-          />
-        </Box>
+            <Image
+              src="/assets/icons/share-icon.svg"
+              alt="comment"
+              width="16.44px"
+              height="16.44px"
+            />
+          </Box>
+          <Box>
+            <Image
+              src="/assets/icons/save-post-icon.svg"
+              alt="comment"
+              width="16.44px"
+              height="16.44px"
+            />
+          </Box>
+          <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
+            <Image
+              src="../resources/Union.png"
+              alt="post rewarded"
+              width="14px"
+              height="21px"
+            />
+          </Box>
         </Flex>
       </Flex>
     </Flex>
-   
   );
 };
 

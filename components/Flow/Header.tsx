@@ -105,7 +105,7 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
              <Box
             w="71.925px" h="27.4px" mr="5.48px" backgroundColor= "rgba(255, 255, 255, 0.03)" justifyContent="center" alignItems="center" ml="8px" borderRadius="6.85px" 
             >
-              <Flex justifyContent="center" gap="11.49" backgroundColor= "rgba(255, 255, 255, 0.03)" w="71.925px" h="27.4px"  >
+              <Flex justifyContent="center" gap="7.87px" backgroundColor= "rgba(255, 255, 255, 0.03)" w="71.925px" h="27.4px"  >
              <Image src='/assets/icons/flash-icon.svg' alt="total posts" width="16.44px" height="16.44px"  mt="1" />
              <Text 
                 fontFamily= 'Poppins'

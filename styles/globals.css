@@ -95,7 +95,8 @@ a {
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
-  margin-right:-12px
+  
+
 
 
   /* display: none; */
@@ -110,7 +111,7 @@ a {
 ::-webkit-scrollbar-thumb {
   background: rgba(136, 136, 136, 0.174); 
   border-radius: 5px;
-  direction:rtl
+ 
 }
 
 /* Handle on hover */

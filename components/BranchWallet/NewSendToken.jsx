@@ -13,6 +13,7 @@ import {
 import { MinusIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { nearStore } from "../../store/near";
 import { Big } from "big.js";
+import { initNear, loadOtherContract } from "../../lib/otherContracts";
 
 function SendTokens(props) {
   const nearState = nearStore((state) => state);
@@ -34,7 +35,7 @@ function SendTokens(props) {
 
   const handleAmount = (event) => {
     const value = event.target.value;
-    if (value > 0) {
+    if (value > 0 && value <= nearState.aexBalance) {
       setAmountColor("rgba(255, 255, 255, 0.3)")
       const inputBigN = new Big(value || 0);
       const formattedInput = inputBigN.mul("10e23").toFixed(0);
@@ -59,22 +60,44 @@ function SendTokens(props) {
 
   const transferAex = async () => {
     console.log("Send button clicked");
-    console.log("Details: ", amount, receiver);
-    try {
-      await nearState.tokenContract.ft_transfer({
-        receiver_id: receiver,
-        amount: amount,
-        memo: "AEX Transfer",
-      },
-        "300000000000000",
-        "1",
-      )
-      nearState.setSuccessfulTransfer(true);
-      console.log("Transfer successful")
-      //show successful page
-    } catch (error) {
-      console.log("Transfer not successful: ", error)
-      //show error page
+    if (coins == "NEAR") {
+      await initNear();
+      console.log(nearState.nearAccount)
+      // console.log("Details: ", amount, receiver);
+      // try {
+      //   await nearState.nearAccount.sendMoney(
+      //     {
+      //       receiverId: `${receiver}`, // receiver account
+      //       amount: `${amount}` // amount in yoctoNEAR
+      //     }
+
+      //   );
+
+      // } catch (err) {
+      //   console.error("Unable to send Near", err)
+
+      // }
+
+    }
+    if (coins == "AEX") {
+      console.log("Details: ", amount, receiver);
+
+      try {
+        await nearState.tokenContract.ft_transfer({
+          receiver_id: receiver,
+          amount: amount,
+          memo: "AEX Transfer",
+        },
+          "300000000000000",
+          "1",
+        )
+        nearState.setSuccessfulTransfer(true);
+        console.log("Transfer successful")
+        //show successful page
+      } catch (error) {
+        console.log("Transfer not successful: ", error)
+        //show error page
+      }
     }
   };
 
@@ -82,7 +105,7 @@ function SendTokens(props) {
   let disabled;
   let colorChange
 
-  amount.length < 1 ? (bgColor = "#FFFFFF1D;") : (bgColor = "#6054F0");
+  // amount.length < 1 ? (bgColor = "#FFFFFF1D;") : (bgColor = "#6054F0");
   amount.length < 1 ? (disabled = true) : (disabled = false);
 
 
@@ -337,13 +360,13 @@ function SendTokens(props) {
         fontWeight="400"
       >
         <Text color="#ffffff4d">Available to send</Text>
-        { !isCoins ? 
+        {!isCoins ?
 
-        <Text color="#ffffff4d">{nearState.aexBalance} AEX</Text>
-        :
-        <Text color="#ffffff4d">{nearState.nearBalance} NEAR</Text>
+          <Text color="#ffffff4d">{nearState.aexBalance} AEX</Text>
+          :
+          <Text color="#ffffff4d">{nearState.nearBalance} NEAR</Text>
         }
-        </Flex>
+      </Flex>
     </Box>
   );
 }

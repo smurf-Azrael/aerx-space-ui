@@ -73,6 +73,10 @@ const nearStore = create<NearStoreType>((set) => ({
     setNearBalance: (nearBalance: any) => set((state) => ({ ...state, nearBalance })),
     removeNearBalance: () => set((state) => ({ ...state, NearBalance: 0 })),
 
+    nearAccount: null,
+    setNearAccount: (nearAccount: any) => set((state) => ({ ...state, nearAccount })),
+    removeNearAccount: () => set((state) => ({ ...state, nearAccount: null })),
+
     pinataState: null,
     setPinataState: (pinataState: any) => set((state) => ({ ...state, pinataState })),
     removePinataState: () => set((state) => ({ ...state, pinataState: null })),
@@ -99,6 +103,13 @@ const nearStore = create<NearStoreType>((set) => ({
     setPrevChats: (prevChats: any) => set((state) => ({ ...state, prevChats })),
     removePrevChats: () => set((state) => ({ ...state, prevChats: null })),
 
+    is3D: false,
+    setIs3D: (is3D: any) => set((state) => ({ ...state, is3D })),
+    removeIs3D: () => set((state) => ({ ...state, is3D: false })),
+
+    _3dUrl: null,
+    set3DUrl: (_3dUrl: any) => set((state) => ({ ...state, _3dUrl })),
+    remove3DUrl: () => set((state) => ({ ...state, _3dUrl: null })),
 
 }));
 

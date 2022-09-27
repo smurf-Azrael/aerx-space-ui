@@ -1,6 +1,6 @@
 import { Near, WalletConnection } from "near-api-js";
 import { postDetailsType } from "../hooks/useFetchPost";
-import { DexContract, PNFTContract, ProfileContract } from "./contracts";
+import { DexContract, NearAccount, PNFTContract, ProfileContract } from "./contracts";
 
 // TODO: CHANGE ANY TYPE TO CUSTOM TYPE
 export type NearStoreType = {
@@ -52,6 +52,10 @@ export type NearStoreType = {
     setNearBalance: (nearBalance: any) => void;
     removeNearBalance: () => void;
 
+    nearAccount: Near | null;
+    setNearAccount: (nearAccount: any) => void;
+    removeNearAccount: () => void;
+
     pinataState: boolean | null;
     setPinataState: (pinataState: boolean | undefined) => void;
     removePinataState: () => void;
@@ -63,6 +67,14 @@ export type NearStoreType = {
     prevChats: any | null;
     setPrevChats: (prevChats: any) => void;
     removePrevChats: () => void;
+
+    is3D: boolean,
+    setIs3D: (is3D: boolean) => void;
+    removeIs3D: () => void;
+
+    _3dUrl: string | null,
+    set3DUrl: (_3dUrl: string | null) => void;
+    remove3DUrl: () => void;
 
 };
 

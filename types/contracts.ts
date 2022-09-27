@@ -116,7 +116,7 @@ export type ProfileContract = Contract & {
         gas: string,
         deposit: string,
     ) => Promise<any>;
-    repost: (arg: { post_id: number }, gas: string) => Promise<any>;
+    repost: (arg: { post_id: number }, gas: string, deposit: string,) => Promise<any>;
     swap: (
         arg: { amount: string; min_expected: string },
         gas: string,
@@ -205,4 +205,11 @@ export type DexContract = Contract & {
         gas: string,
         deposit: string,
     ) => Promise<any>;
+};
+
+export type NearAccount = {
+    sendMoney: (arg: {
+        receiverId: string;
+        amount: number;
+    }) => Promise<any>;
 };

@@ -485,7 +485,7 @@ const SendMessage: React.FC<{
   const handleSendMessage = async () => {
     await getChat(nearState.accountId, activeReceiver.accountId);
     console.log(activeReceiver.accountId);
-
+    const textArea = document.getElementById("textarea")!;
     const newMessage: Message = {
       id: Date.now().toString(),
       sender: {
@@ -507,8 +507,10 @@ const SendMessage: React.FC<{
 
     try {
       await sendMessage(nearState.accountId, activeReceiver.accountId, message);
+      textArea.textContent = "";
     } catch (error) {
       console.error("Error while sending message");
+      textArea.textContent = "";
     }
   };
 

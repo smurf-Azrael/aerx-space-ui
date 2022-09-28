@@ -94,7 +94,7 @@ function Profile(props) {
           model: {
             url: `${nearState.profile.profileImg}`,
             scaling: {
-              x: 0.8,
+              x: 0.9,
               y: 0.5,
               z: 0.8,
             },

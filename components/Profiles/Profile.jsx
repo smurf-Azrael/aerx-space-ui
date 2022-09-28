@@ -91,11 +91,11 @@ function Profile(props) {
 //             y: 3,
 //             z: 3,
 //           },
-//           position: {
-//             x: 0,
-//             y: -2,
-//             z: 1
-//           }
+          position: {
+            x: 0,
+            y: -2,
+            z: 1
+          }
         }
       });
     }

@@ -19,10 +19,6 @@ import {
   Flex,
   Image,
   Text,
-  Button,
-  Heading,
-  Center,
-  useColorModeValue,
 } from "@chakra-ui/react";
 const { Readable } = require("stream");
 
@@ -111,6 +107,14 @@ const SecondaryHeader: React.FC<{
           //   }
           // },
         },
+        scene:{
+            clearColor:{
+              r: 0,
+              g: 0,
+              b: 0,
+              a: 0,
+            }
+          },
         engine: {
           antialiasing: true,
           hdEnabled: true,
@@ -138,7 +142,7 @@ const SecondaryHeader: React.FC<{
   }, [])
 
   return (
-    <Flex mt="17.65px" gap="90.42px">
+    <Flex mt="17.65px" gap="66.42px">
       <Flex alignItems="center">
         {!activeMessage?.avatar.includes(".glb") && (
           <Image
@@ -150,9 +154,11 @@ const SecondaryHeader: React.FC<{
           />
         )}
         {activeMessage?.avatar.includes(".glb") && (
+            <Box width="27.4px" height="27.4px" borderRadius="13.7px" borderColor="white" border="1px solid">
           <div id="babylon-element-chat-room" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
+            </Box>
         )}
-        <Flex flexDirection="column" gap="2.74" ml="8.22px">
+        <Flex flexDirection="column" gap="2.74" ml="8.22px" width="175px">
           <Text
             fontFamily="Poppins"
             fontSize="10.96px"
@@ -175,7 +181,7 @@ const SecondaryHeader: React.FC<{
           </Text>
         </Flex>
       </Flex>
-      <Flex gap="14px">
+      <Flex gap="14px" ml="-74px" justifyContent="space-around">
         <Image
           src="/assets/icons/audio-call-icon.svg"
           alt="Phone"
@@ -187,6 +193,7 @@ const SecondaryHeader: React.FC<{
           alt="Video"
           width={18}
           height={18}
+          
         />
       </Flex>
     </Flex>
@@ -537,7 +544,7 @@ const SendMessage: React.FC<{
         />
       </Flex>
 
-      <div className="w-[15%] ">
+      <div className="w-[15%] mt-[-4px]">
         <Image
           src="../resources/Group 55371.png"
           alt="send message"

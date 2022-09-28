@@ -86,16 +86,16 @@ function Profile(props) {
         optimizer: true,
         model: {
           url: `${nearState.profile.profileImg}`,
-          scaling: {
-            x: 3.5,
-            y: 3,
-            z: 3,
-          },
-          position: {
-            x: 0,
-            y: -2,
-            z: 1
-          }
+//           scaling: {
+//             x: 3.5,
+//             y: 3,
+//             z: 3,
+//           },
+//           position: {
+//             x: 0,
+//             y: -2,
+//             z: 1
+//           }
         }
       });
     }

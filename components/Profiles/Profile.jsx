@@ -83,17 +83,6 @@ function Profile(props) {
           hdEnabled: true,
           adaptiveQuality: true,
         },
-        // scene: {
-        //   clearColor: {
-        //     r: 0.5,
-        //     g: 0.5,
-        //     b: 0.5,
-        //     a: 0.3,
-        //   },
-        //   colorGrading: {
-
-        //   }
-        // },
         optimizer: true,
         model: {
           url: `${nearState.profile.profileImg}`,

@@ -33,7 +33,6 @@ function NewAddLiquidity(props) {
       try {
         await nearState.DexContract.lend({
           pool_id: 1,
-          token_id: "near.near",
           equivalent_aex: `${convertedAex}`,
         },
           "300000000000000",
@@ -50,7 +49,7 @@ function NewAddLiquidity(props) {
 
   const handleSetDeposit = async (e) => {
     const priceFromPool = await nearState.DexContract.get_price_from_pool({
-      pool_id: 1, token_id: "near.near"
+      pool_id: 1, token_id: "nearnativetoken.near"
     });
     const PriceBigN = new Big(priceFromPool || 0);
     const formattedPrice = PriceBigN.div("10e23").toFixed(4);

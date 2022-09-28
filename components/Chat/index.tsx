@@ -53,11 +53,63 @@ const ChatHeader: React.FC<{ onChange: (searchValue: string) => void }> = ({ onC
     )
 }
 const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, message, isActive, onClick, onClickCapture, onPointerOver, onPointerOverCapture }) => {
+    useEffect(() => {
+        const initBabylon = async () => {
+            const BabylonViewer = await import('babylonjs-viewer');
+            const babylon = document.getElementById("babylon-element-chat-index")!;
+            new BabylonViewer.DefaultViewer(babylon, {
+                extends: "none",
+                templates: {
+                    main: {
+                        html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+                        params: {
+                            ["no-escape"]: true,
+                            ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+                        }
+                    },
+                    ["loadingScreen"]: {
+                        html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+                        params: {
+                            ["backgroundColor"]: "#0000004d",
+                            ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+                        }
+                    },
+                },
+                engine: {
+                    antialiasing: true,
+                    hdEnabled: true,
+                    adaptiveQuality: true,
+                },
+                optimizer: true,
+                model: {
+                    url: `${avatar}`,
+                    //   scaling: {
+                    //     x: 3.5,
+                    //     y: 3,
+                    //     z: 3,
+                    //   },
+                    //   position: {
+                    //     x: 0,
+                    //     y: -2,
+                    //     z: 1
+                    //   }
+                }
+            });
+        }
+        initBabylon().then(() => {
+        })
+
+    }, [])
     return (
         <div onClickCapture={onClickCapture} onClick={onClick} onPointerOver={onPointerOver} onPointerOverCapture={onPointerOverCapture} className={`mt-2 mr-1 ${isActive ? 'bg-[#2b2b2b] rounded-[10px]' : ''} px-3 py-2`}>
             <div className='flex items-center gap-2 cursor-pointer '>
                 <div className='w-[25%] '>
-                    <Image src={avatar} width={40} height={40} alt="Avatar" className='rounded-full' />
+                    {!avatar.includes(".glb") && (
+                        <Image src={avatar} width={40} height={40} alt="Avatar" className='rounded-full' />
+                    )}
+                    {avatar.includes(".glb") && (
+                        <div id="babylon-element-chat-index" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
+                    )}
                 </div>
                 <div className='w-[70%] '>
                     <div className='flex justify-between'>
@@ -311,7 +363,7 @@ const Chat: React.FC = () => {
                             {/* <Image src="/assets/icons/pin-icon.svg" alt="Pin" width={13} height={13} /> */}
                             {/* <label className='text-[14px] text-white opacity-[15%]'>Pinned</label> */}
                             <Image src="/assets/icons/fill-icon.svg" alt="Pin" width={13} height={13} />
-                            <label className='text-[14px] text-white opacity-[15%]'>All Charts</label>
+                            <label className='text-[14px] text-white opacity-[15%]'>All Chats</label>
                         </div>
                         <div className="bg-redd-500 h-full overflow-y-scroll">
                             {chatsClone.map((message, index) => (

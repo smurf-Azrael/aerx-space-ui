@@ -37,7 +37,7 @@ const PrimaryHeader: React.FC = () => {
     }
   };
   return (
-  
+
     <Flex gap="115px" alignItems="center">
       <Flex alignItems="center">
         <Box>
@@ -63,7 +63,7 @@ const PrimaryHeader: React.FC = () => {
       </Flex>
       <Flex alignItems="center" gap="16.44px">
         <Box>
-        <Image
+          <Image
             src="../resources/Add Users.png"
             alt="Add new user"
             width={18}
@@ -71,7 +71,7 @@ const PrimaryHeader: React.FC = () => {
           />
         </Box>
         <Box className="cursor-pointer" onClick={handleCollapseChat}>
-            <Image
+          <Image
             src="../resources/Hide.png"
             alt="Menu"
             width={27}
@@ -80,7 +80,7 @@ const PrimaryHeader: React.FC = () => {
         </Box>
       </Flex>
     </Flex>
-     
+
 
   );
 };
@@ -88,56 +88,110 @@ const PrimaryHeader: React.FC = () => {
 const SecondaryHeader: React.FC<{
   activeMessage: IMessageItem;
 }> = ({ activeMessage }) => {
+
+  useEffect(() => {
+    const initBabylon = async () => {
+      const BabylonViewer = await import('babylonjs-viewer');
+      const babylon = document.getElementById("babylon-element-chat-room")!;
+      new BabylonViewer.DefaultViewer(babylon, {
+        extends: "none",
+        templates: {
+          main: {
+            html: "<canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+            params: {
+              ["no-escape"]: true,
+              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+            }
+          },
+          // ["loadingScreen"]: {
+          //   html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+          //   params: {
+          //     ["backgroundColor"]: "#0000004d",
+          //     ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+          //   }
+          // },
+        },
+        engine: {
+          antialiasing: true,
+          hdEnabled: true,
+          adaptiveQuality: true,
+        },
+        optimizer: true,
+        model: {
+          url: `${activeMessage?.avatar}`,
+          // scaling: {
+          //   x: 3.5,
+          //   y: 3,
+          //   z: 3,
+          // },
+          // position: {
+          //   x: 0,
+          //   y: -2,
+          //   z: 1
+          // }
+        }
+      });
+    }
+    initBabylon().then(() => {
+    })
+
+  }, [])
+
   return (
-    <Flex mt="17.65px"  gap="90.42px">
-        <Flex alignItems="center">
+    <Flex mt="17.65px" gap="90.42px">
+      <Flex alignItems="center">
+        {!activeMessage?.avatar.includes(".glb") && (
           <Image
             src={activeMessage?.avatar || "/assets/images/avatar-1.svg"}
             width="27.4px"
             height="27.4px"
             alt="Avatar"
             className="rounded-full"
-          /> 
-          <Flex flexDirection="column" gap="2.74" ml="8.22px">
-            <Text
-                 fontFamily="Poppins"
-                 fontSize="10.96px"
-                 fontWeight="500"
-                 color="#FFFFFF"
-                 lineHeight="100%"
-                 letterSpacing="-0.02em"
-            >
-              {activeMessage?.name}
-            </Text>
-            <Text
-                 fontFamily="Poppins"
-                 fontSize="9.5px"
-                 fontWeight="400"
-                 color="#FFFFFF80"
-                 lineHeight="100%"
-                 letterSpacing="-0.02em"
-            >
-              Last seen recently
-            </Text>
-          </Flex>                   
+          />
+        )}
+        {activeMessage?.avatar.includes(".glb") && (
+          <div id="babylon-element-chat-room" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
+        )}
+        <Flex flexDirection="column" gap="2.74" ml="8.22px">
+          <Text
+            fontFamily="Poppins"
+            fontSize="10.96px"
+            fontWeight="500"
+            color="#FFFFFF"
+            lineHeight="100%"
+            letterSpacing="-0.02em"
+          >
+            {activeMessage?.name}
+          </Text>
+          <Text
+            fontFamily="Poppins"
+            fontSize="9.5px"
+            fontWeight="400"
+            color="#FFFFFF80"
+            lineHeight="100%"
+            letterSpacing="-0.02em"
+          >
+            Last seen recently
+          </Text>
         </Flex>
-        <Flex gap="14px">
+      </Flex>
+      <Flex gap="14px">
         <Image
-            src="/assets/icons/audio-call-icon.svg"
-            alt="Phone"
-            width={18}
-            height={18}
-          />
-            <Image
-            src="/assets/icons/video-call-icon.svg"
-            alt="Video"
-            width={18}
-            height={18}
-          />
-        </Flex>
+          src="/assets/icons/audio-call-icon.svg"
+          alt="Phone"
+          width={18}
+          height={18}
+        />
+        <Image
+          src="/assets/icons/video-call-icon.svg"
+          alt="Video"
+          width={18}
+          height={18}
+        />
+      </Flex>
     </Flex>
-   
- 
+
+
   );
 };
 
@@ -154,7 +208,7 @@ const MessagesWrapper: React.FC<{ activeReceiver: IMessageItem }> = ({
     type: EMessageType;
   }> = ({ content, type }) => {
     return (
-        
+
       <div className="flex overflown-c">
         <div
           className="ml-auto bg-black-light p-3 px-4 w-[max-content] max-w-[90%]"
@@ -173,7 +227,7 @@ const MessagesWrapper: React.FC<{ activeReceiver: IMessageItem }> = ({
           )}
         </div>
       </div>
-     
+
     );
   };
 
@@ -452,7 +506,7 @@ const SendMessage: React.FC<{
   };
 
   return (
- 
+
     <Flex className="flex justify-between align-center " alignItems="center">
       <Flex gap="19.5px" alignItems="center">
         <Image

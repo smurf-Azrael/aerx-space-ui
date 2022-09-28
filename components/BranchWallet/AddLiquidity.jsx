@@ -29,7 +29,7 @@ function AddLiquidities(props) {
     // try {
     //   nearState.DexContract.lend({
     //     pool_id: 1,
-    //     token_id: "near.near",
+    //     token_id: "nearnativetoken.near",
     //     amount: ,
     //     min_expected: ,
     //     equivalent_aex: ,
@@ -171,7 +171,7 @@ function AddLiquidities(props) {
             h="38.36px"
           >
             <NumberInputField
-            disabled
+              disabled
               color="#ffffff"
               fontSize="10.96px"
               bgColor="#191A1B;"

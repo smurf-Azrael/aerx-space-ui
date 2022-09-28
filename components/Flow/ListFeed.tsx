@@ -28,7 +28,6 @@ import {
 import dynamic from "next/dynamic";
 import { Box, Text, Flex, Image, Center } from "@chakra-ui/react";
 
-const ThreeDModel = dynamic(() => import("../3DModel"), { ssr: false });
 
 // coverImage, postOwner, nftId, title, description
 interface IProps {
@@ -104,6 +103,93 @@ const TextPost: React.FC<IProps> = ({
     }
   }, [metadata]);
 
+  useEffect(() => {
+    const initBabylon = async () => {
+      const BabylonViewer = await import('babylonjs-viewer');
+      const babylon = document.getElementById("babylon-element-feed")!;
+      const babylonPost = document.getElementById("babylon-element-feed-post")!;
+      new BabylonViewer.DefaultViewer(babylon, {
+        extends: "none",
+        templates: {
+          main: {
+            html: "<canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+            params: {
+              ["no-escape"]: true,
+              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+            }
+          },
+          // ["loadingScreen"]: {
+          //   html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+          //   params: {
+          //     ["backgroundColor"]: "#0000004d",
+          //     ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+          //   }
+          // },
+        },
+        engine: {
+          antialiasing: true,
+          hdEnabled: true,
+          adaptiveQuality: true,
+        },
+        optimizer: true,
+        model: {
+          url: `${nearState.profile?.profileImg}`,
+          // scaling: {
+          //   x: 3.5,
+          //   y: 3,
+          //   z: 3,
+          // },
+          // position: {
+          //   x: 0,
+          //   y: -2,
+          //   z: 1
+          // }
+        }
+      });
+      new BabylonViewer.DefaultViewer(babylonPost, {
+        extends: "none",
+        templates: {
+          main: {
+            html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+            params: {
+              ["no-escape"]: true,
+              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+            }
+          },
+          ["loadingScreen"]: {
+            html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+            params: {
+              ["backgroundColor"]: "#0000004d",
+              ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+            }
+          },
+        },
+        engine: {
+          antialiasing: true,
+          hdEnabled: true,
+          adaptiveQuality: true,
+        },
+        optimizer: true,
+        model: {
+          url: `${nearState.profile?.profileImg}`,
+          scaling: {
+            x: 3.5,
+            y: 3,
+            z: 3,
+          },
+          position: {
+            x: 0,
+            y: -2,
+            z: 1
+          }
+        }
+      });
+    }
+    initBabylon().then(() => {
+    })
+
+  }, [])
+
   return (
     <Box
       width="312.88px"
@@ -115,7 +201,6 @@ const TextPost: React.FC<IProps> = ({
       mt={-2}
       mb={1}
 
-      //   mr="8px"
     >
       <Flex justifyContent="space-between">
         <Flex gap="5.48px">
@@ -132,18 +217,12 @@ const TextPost: React.FC<IProps> = ({
                 height="27.4px"
               />
             )}
-            {profile?.metadata?.media?.includes(".glb") && (
+            {nearState.profile?.profileImg?.includes(".glb") && (
               <div
                 className="rounded-full border-[1px] border-white"
                 style={{ width: "27.4px", height: "27.4px", margin: "auto" }}
               >
-                <ThreeDModel
-                  src={
-                    Array.isArray(profile?.metadata?.media)
-                      ? profile?.metadata?.media[0]
-                      : profile?.metadata?.media
-                  }
-                />
+                <div id="babylon-element-feed"></div>
               </div>
             )}
           </Box>
@@ -219,6 +298,11 @@ const TextPost: React.FC<IProps> = ({
           </Text>
         </Box>
       </Flex>
+      {/* {(bgImage as string)?.includes('.glb') &&
+        <Box style={{ width: '100%', height: '100%', margin: 'auto' }} id="babylon-element-feed-post">
+
+        </Box>
+      } */}
       <Flex gap="55%" alignItems="center">
         <Box>
           <Flex>
@@ -259,22 +343,22 @@ const TextPost: React.FC<IProps> = ({
                 !userCharged && (
                   // <div className='cursor-pointer charge-filter-effect w-[30px] h-[30px] rounded-full flex justify-around'>
                   <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
-                  <Image
-                    src="../resources/Union2.png"
-                    alt="charge post"
-                    width="14px"
-                    height="21px"
-                    className="cursor-pointer"
-                    onClick={(e) => handleOnClick(e, feed)}
-                    onClickCapture={(e) => onClickCapture(e, feed)}
-                    onMouseDown={handleOnMouseDown}
-                    onMouseUp={handleOnMouseUp}
-                    onTouchStart={handleOnTouchStart}
-                    onTouchEnd={handleOnTouchEnd}
-                  />
-                 </Box>
-             
-                  
+                    <Image
+                      src="../resources/Union2.png"
+                      alt="charge post"
+                      width="14px"
+                      height="21px"
+                      className="cursor-pointer"
+                      onClick={(e) => handleOnClick(e, feed)}
+                      onClickCapture={(e) => onClickCapture(e, feed)}
+                      onMouseDown={handleOnMouseDown}
+                      onMouseUp={handleOnMouseUp}
+                      onTouchStart={handleOnTouchStart}
+                      onTouchEnd={handleOnTouchEnd}
+                    />
+                  </Box>
+
+
                 )
                 // </div>
               }
@@ -285,14 +369,14 @@ const TextPost: React.FC<IProps> = ({
                   }
                   className="cursor-pointer charge-filter-effect  rounded-full flex justify-around"
                 >
-         <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
-            <Image
-              src="../resources/Union.png"
-              alt="post rewarded"
-              width="14px"
-              height="21px"
-            />
-          </Box>
+                  <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
+                    <Image
+                      src="../resources/Union.png"
+                      alt="post rewarded"
+                      width="14px"
+                      height="21px"
+                    />
+                  </Box>
                 </div>
               )}
             </div>
@@ -395,13 +479,13 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
             </Flex>
 
             <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
-            <Image
-              src="../resources/Union2.png"
-              alt="post rewarded"
-              width="14px"
-              height="21px"
-            />
-          </Box>
+              <Image
+                src="../resources/Union2.png"
+                alt="post rewarded"
+                width="14px"
+                height="21px"
+              />
+            </Box>
           </Flex>
         </Flex>
       </Flex>
@@ -759,8 +843,8 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
                 post.type === "text"
                   ? "312.48px"
                   : post.type === "video"
-                  ? "166.85px"
-                  : "166.85px",
+                    ? "166.85px"
+                    : "166.85px",
             }}
           >
             {post.type === "text" && (

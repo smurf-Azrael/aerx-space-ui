@@ -9,13 +9,13 @@ const ChargePost: React.FC<{
     onClose: () => void,
     onCharge: (value: number) => void,
     loading: boolean
-}> = ({ onClose, onCharge, loading=false }) => {
+}> = ({ onClose, onCharge, loading = false }) => {
     const [value, setValue] = useState<number>(0);
     const nearState: any = nearStore((state) => state);
     const accountBalance = nearState?.aexBalance;
 
     const handleCharge = () => {
-        if(loading) return;
+        if (loading) return;
         onCharge(value);
     }
 

@@ -40,7 +40,7 @@ function Exchange(props) {
 
   const swapCapture = () => {
     if (tokenFrom == "aextestnew.mohzcrea8me.testnet") {
-      setTokenFrom("near.near")
+      setTokenFrom("nearnativetoken.near")
     } else {
       setTokenFrom("aextestnew.mohzcrea8me.testnet")
     }
@@ -56,7 +56,7 @@ function Exchange(props) {
       const formattedInput = inputBigN.mul("10e23").toFixed(0);
       setAmountToSwapAex(formattedInput);
       const expectedReturn = await nearState.DexContract.get_return_amount_in_u128({
-        pool_id: 1, amount_to_swap: formattedInput, token_from: "aextestnew.mohzcrea8me.testnet", token_to: "near.near"
+        pool_id: 1, amount_to_swap: formattedInput, token_from: "aextestnew.mohzcrea8me.testnet", token_to: "nearnativetoken.near"
       });
       const priceFromPool = await nearState.DexContract.get_price_from_pool({
         pool_id: 1, token_id: "aextestnew.mohzcrea8me.testnet"
@@ -107,15 +107,15 @@ function Exchange(props) {
   }
 
   const handleSwapNear = async (e) => {
-    if (tokenFrom == "near.near") {
+    if (tokenFrom == "nearnativetoken.near") {
       const inputBigN = new Big(e.target.value || 0);
       const formattedInput = inputBigN.mul("10e23").toFixed(0);
       setAmountToSwapNear(formattedInput);
       const expectedReturn = await nearState.DexContract.get_return_amount_in_u128({
-        pool_id: 1, amount_to_swap: formattedInput, token_from: "near.near", token_to: "aextestnew.mohzcrea8me.testnet"
+        pool_id: 1, amount_to_swap: formattedInput, token_from: "nearnativetoken.near", token_to: "aextestnew.mohzcrea8me.testnet"
       });
       const priceFromPool = await nearState.DexContract.get_price_from_pool({
-        pool_id: 1, token_id: "near.near"
+        pool_id: 1, token_id: "nearnativetoken.near"
       });
       const expectedReturnRaw = expectedReturn / 1000000000000000000000000;
       const expectedReturnBigN = new Big(expectedReturnRaw || 0);
@@ -227,7 +227,7 @@ function Exchange(props) {
   const swapToOrFromAex = async () => {
     console.log("Swap button has been clicked");
     if (tokenFrom == "aextestnew.mohzcrea8me.testnet") {
-      const message = `{\"action\": \"swap\",\"pool_id\": \"1\",\"token_to\": \"near.near\",\"min_expected\": \"${minExpectedNear}\"}`;
+      const message = `{\"action\": \"swap\",\"pool_id\": \"1\",\"token_to\": \"nearnativetoken.near\",\"min_expected\": \"${minExpectedNear}\"}`;
       try {
         await nearState.tokenContract.ft_transfer_call({
           receiver_id: "aeswaptestnew.mohzcrea8me.testnet",
@@ -243,7 +243,7 @@ function Exchange(props) {
         console.log("Unable to swap AEX to NEAR due to: ", err)
 
       }
-    } else if (tokenFrom == "near.near") {
+    } else if (tokenFrom == "nearnativetoken.near") {
       if (amountToSwapNear > 0) {
         try {
           await nearState.DexContract.swap_aex({
@@ -296,31 +296,31 @@ function Exchange(props) {
       position="absolute"
       top="0"
     >
-             <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
-            <Button
-              onClick={props.toggleWallet}
-              cursor="pointer"
-              background="none"
-              w="21.92px"
-              bgColor="rgba(255, 255, 255, 0.3);"
-              height="12px"
-              mt="2"
-              px="0"
-              flexDirection="column"
-              gap="2px"
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </Button>
-          </Center>
+      <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
+        <Button
+          onClick={props.toggleWallet}
+          cursor="pointer"
+          background="none"
+          w="21.92px"
+          bgColor="rgba(255, 255, 255, 0.3);"
+          height="12px"
+          mt="2"
+          px="0"
+          flexDirection="column"
+          gap="2px"
+        >
+          <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+          <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+        </Button>
+      </Center>
 
       <Flex
         mb="94.53px"
@@ -461,29 +461,29 @@ function Exchange(props) {
           </div>
         </Flex>
       )}
-        {isExchange ? 
+      {isExchange ?
 
-      <Text
-        mb="10.96px"
-        textAlign="center"
-        fontFamily="Poppins"
-        fontWeight="400"
-        fontSize="9.59"
-        color="#FFFFFF4D"
-      >
-        Available: {nearState.nearBalance} NEAR 
-      </Text>
-      :
-      <Text
-        mb="10.96px"
-        textAlign="center"
-        fontFamily="Poppins"
-        fontWeight="400"
-        fontSize="9.59"
-        color="#FFFFFF4D"
-      >
-        Available: {nearState.aexBalance} AEX 
-      </Text>
+        <Text
+          mb="10.96px"
+          textAlign="center"
+          fontFamily="Poppins"
+          fontWeight="400"
+          fontSize="9.59"
+          color="#FFFFFF4D"
+        >
+          Available: {nearState.nearBalance} NEAR
+        </Text>
+        :
+        <Text
+          mb="10.96px"
+          textAlign="center"
+          fontFamily="Poppins"
+          fontWeight="400"
+          fontSize="9.59"
+          color="#FFFFFF4D"
+        >
+          Available: {nearState.aexBalance} AEX
+        </Text>
       }
 
       {/* INPUT BEFORE SLIPPAGE TOLLERNCE STARTS */}

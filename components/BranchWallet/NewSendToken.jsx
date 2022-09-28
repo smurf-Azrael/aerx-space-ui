@@ -35,7 +35,7 @@ function SendTokens(props) {
 
   const handleAmount = (event) => {
     const value = event.target.value;
-    if (value > 0 || value <= nearState.aexBalance) {
+    if (value > 0 && value <= nearState.aexBalance) {
       setAmountColor("rgba(255, 255, 255, 0.3)")
       const inputBigN = new Big(value || 0);
       const formattedInput = inputBigN.mul("10e23").toFixed(0);

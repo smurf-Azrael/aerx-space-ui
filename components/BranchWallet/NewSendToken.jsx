@@ -35,7 +35,7 @@ function SendTokens(props) {
 
   const handleAmount = (event) => {
     const value = event.target.value;
-    if (value > 0 && value <= nearState.aexBalance) {
+    if (value > 0 || value <= nearState.aexBalance) {
       setAmountColor("rgba(255, 255, 255, 0.3)")
       const inputBigN = new Big(value || 0);
       const formattedInput = inputBigN.mul("10e23").toFixed(0);
@@ -138,31 +138,31 @@ function SendTokens(props) {
       position="absolute"
       top="0"
     >
-             <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
-            <Button
-              onClick={props.toggleWallet}
-              cursor="pointer"
-              background="none"
-              w="21.92px"
-              bgColor="rgba(255, 255, 255, 0.3);"
-              height="12px"
-              mt="2"
-              px="0"
-              flexDirection="column"
-              gap="2px"
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </Button>
-          </Center>
+      <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
+        <Button
+          onClick={props.toggleWallet}
+          cursor="pointer"
+          background="none"
+          w="21.92px"
+          bgColor="rgba(255, 255, 255, 0.3);"
+          height="12px"
+          mt="2"
+          px="0"
+          flexDirection="column"
+          gap="2px"
+        >
+          <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+          <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+        </Button>
+      </Center>
       <Box
         mb="204.13px"
         mx="16.44px"

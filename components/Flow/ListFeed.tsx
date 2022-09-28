@@ -27,6 +27,7 @@ import {
 } from "../../store/slices/postChargesSlice";
 import dynamic from "next/dynamic";
 import { Box, Text, Flex, Image, Center } from "@chakra-ui/react";
+import { DefaultViewer } from "babylonjs-viewer";
 
 // coverImage, postOwner, nftId, title, description
 interface IProps {
@@ -103,10 +104,9 @@ const TextPost: React.FC<IProps> = ({
   }, [metadata]);
 
   useEffect(() => {
-    const initBabylon = async () => {
-      const BabylonViewer = await import("babylonjs-viewer");
+    const initBabylonFeed = async () => {
+      const BabylonViewer = await import('babylonjs-viewer');
       const babylon = document.getElementById("babylon-element-feed")!;
-      const babylonPost = document.getElementById("babylon-element-feed-post")!;
       new BabylonViewer.DefaultViewer(babylon, {
         extends: "none",
         templates: {
@@ -114,8 +114,8 @@ const TextPost: React.FC<IProps> = ({
             html: "<canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
             params: {
               ["no-escape"]: true,
-              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`,
-            },
+              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+            }
           },
           // ["loadingScreen"]: {
           //   html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
@@ -125,8 +125,8 @@ const TextPost: React.FC<IProps> = ({
           //   }
           // },
         },
-        scene:{
-          clearColor:{
+        scene: {
+          clearColor: {
             r: 0,
             g: 0,
             b: 0,
@@ -140,7 +140,7 @@ const TextPost: React.FC<IProps> = ({
         },
         optimizer: true,
         model: {
-          url: `${nearState.profile?.profileImg}`,
+          url: `${metadata.media}`,
           // scaling: {
           //   x: 3.5,
           //   y: 3,
@@ -151,50 +151,51 @@ const TextPost: React.FC<IProps> = ({
           //   y: -2,
           //   z: 1
           // }
-        },
+        }
       });
-      new BabylonViewer.DefaultViewer(babylonPost, {
-        extends: "none",
-        templates: {
-          main: {
-            html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
-            params: {
-              ["no-escape"]: true,
-              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`,
-            },
-          },
-          ["loadingScreen"]: {
-            html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
-            params: {
-              ["backgroundColor"]: "#0000004d",
-              ["loadingImage"]:
-                "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png",
-            },
-          },
-        },
-        engine: {
-          antialiasing: true,
-          hdEnabled: true,
-          adaptiveQuality: true,
-        },
-        optimizer: true,
-        model: {
-          url: `${nearState.profile?.profileImg}`,
-          scaling: {
-            x: 3.5,
-            y: 3,
-            z: 3,
-          },
-          position: {
-            x: 0,
-            y: -2,
-            z: 1,
-          },
-        },
-      });
-    };
-    initBabylon().then(() => {});
-  }, []);
+      // const babylonPost = document.getElementById("babylon-element-feed-post")!;
+      // new BabylonViewer.DefaultViewer(babylonPost, {
+      //   extends: "none",
+      //   templates: {
+      //     main: {
+      //       html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+      //       params: {
+      //         ["no-escape"]: true,
+      //         ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+      //       }
+      //     },
+      //     ["loadingScreen"]: {
+      //       html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+      //       params: {
+      //         ["backgroundColor"]: "#0000004d",
+      //         ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+      //       }
+      //     },
+      //   },
+      //   engine: {
+      //     antialiasing: true,
+      //     hdEnabled: true,
+      //     adaptiveQuality: true,
+      //   },
+      //   optimizer: true,
+      //   model: {
+      //     url: `${metadata.media}`,
+      //     // scaling: {
+      //     //   x: 3.5,
+      //     //   y: 3,
+      //     //   z: 3,
+      //     // },
+      //     // position: {
+      //     //   x: 0,
+      //     //   y: -2,
+      //     //   z: 1
+      //     // }
+      //   }
+      // });
+    }
+    initBabylonFeed()
+  }, [])
+
 
   return (
     <Box
@@ -210,7 +211,7 @@ const TextPost: React.FC<IProps> = ({
       <Flex justifyContent="space-between">
         <Flex gap="5.48px">
           <Box>
-            {!(profile?.metadata?.media as string)?.includes(".glb") && (
+            {!metadata.media?.includes(".glb") && (
               <Image
                 src={
                   (profile?.metadata?.media as string) ||
@@ -222,9 +223,9 @@ const TextPost: React.FC<IProps> = ({
                 height="27.4px"
               />
             )}
-            {nearState.profile?.profileImg?.includes(".glb") && (
+            {metadata.media?.includes(".glb") && (
               <Box width="27.4px" height="27.4px" borderRadius="13.7px" borderColor="white" border="1px solid" >
-                <div id="babylon-element-feed" style={{ width: "100%", height: "100%", margin: "auto", borderRadius:"13.7px" }}></div>
+                <div id="babylon-element-feed" style={{ width: "100%", height: "100%", margin: "auto", borderRadius: "13.7px" }}></div>
               </Box>
             )}
           </Box>
@@ -843,8 +844,8 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
                 post.type === "text"
                   ? "312.48px"
                   : post.type === "video"
-                  ? "166.85px"
-                  : "166.85px",
+                    ? "166.85px"
+                    : "166.85px",
             }}
           >
             {post.type === "text" && (

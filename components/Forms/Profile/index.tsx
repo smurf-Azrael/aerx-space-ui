@@ -151,7 +151,7 @@ const ProfileSettingForm: React.FC = () => {
       console.log("avt: ", nearState._3dUrl)
       const BabylonViewer = await import('babylonjs-viewer');
       const babylon = document.getElementById("babylon-element")!;
-      new BabylonViewer.DefaultViewer(babylon, {
+      let viewer = new BabylonViewer.DefaultViewer(babylon, {
         extends: "none",
         templates: {
           main: {
@@ -169,6 +169,14 @@ const ProfileSettingForm: React.FC = () => {
             }
           },
         },
+        scene: {
+          clearColor: {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0,
+          }
+        },
         engine: {
           antialiasing: true,
           hdEnabled: true,
@@ -178,13 +186,13 @@ const ProfileSettingForm: React.FC = () => {
         model: {
           url: `${nearState._3dUrl}`,
           scaling: {
-            x: 3.5,
-            y: 3,
-            z: 3,
+            x: 0.8,
+            y: 0.8,
+            z: 0.8,
           },
           position: {
             x: 0,
-            y: -2,
+            y: -1,
             z: 1
           }
         }

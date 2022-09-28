@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Center, Flex, Image } from "@chakra-ui/react";
+import { Box, Text, Center, Flex, Image,Button } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
 
 function CircleList(props) {
@@ -17,28 +17,31 @@ function CircleList(props) {
     >
       
 
-      <Center mb="16.44px">
-        <div
-          className="m cursor-pointer  hover:bg-[#ffffff39]  flex flex-col
-        background-#1F1F1F
-        gap-0.5
-        mt-2
-        "
-
-          onClick={props.remove}
-        >
-          <MinusIcon
-            w="21.92px"
-            bgColor="rgba(255, 255, 255, 0.3);"
-            height="2px"
-          />
-          <MinusIcon
-            w="21.92px"
-            bgColor="rgba(255, 255, 255, 0.3);"
-            height="2px"
-          />
-        </div>
-      </Center>
+      <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
+            <Button
+              onClick={props.remove}
+              cursor="pointer"
+              background="none"
+              w="21.92px"
+              bgColor="rgba(255, 255, 255, 0.3);"
+              height="12px"
+              mt="2"
+              px="0"
+              flexDirection="column"
+              gap="2px"
+            >
+              <MinusIcon
+                w="21.92px"
+                bgColor="rgba(255, 255, 255, 0.3);"
+                height="2px"
+              />
+              <MinusIcon
+                w="21.92px"
+                bgColor="rgba(255, 255, 255, 0.3);"
+                height="2px"
+              />
+            </Button>
+          </Center>
 
       {/* circle text */}
       <Center>

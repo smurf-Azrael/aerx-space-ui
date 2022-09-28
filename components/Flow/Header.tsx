@@ -61,23 +61,25 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
     return (
        
           <Flex
-          width="480.28px"
+          className="bg-black-dark"
+          width="488.82px"
           height="43.84px"
           
           // justifyContent="space-between"
           // backgroundColor="#FFFFFF12;
           // "
-          //  position="fixed"
-          //  zIndex="2"
+           position="fixed"
+           zIndex="2"
           //  mt="-25px"
-           textAlign="center"
+          //  textAlign="center"
            alignItems="center"
+           ml={-4}
           >
           <Image src="/assets/icons/flow-header-logo.svg" alt='flow' width="21.92px" height="21.92px" />
             <Box
-            w="43.155px"
+            w="63.155px"
             h="10.96px"
-            mr="10.275px"
+            ml="10.275px"
             >
              <Text 
           
@@ -93,7 +95,7 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
               My Flow            
             </Text>
             </Box>
-               <Box className='w-[222.925px] bg-[#FFFFFF08] rounded-[6.85px]'>
+               <Box className='w-[242.925px] bg-[#FFFFFF08] rounded-[6.85px]'>
              <SearchInput 
              backgroundColor='#FFFFFF08' 
              placeholder="Search" 
@@ -103,15 +105,15 @@ const FlowHeader: React.FC<HeaderProps> = ({onAddPost, onSearch}) => {
              <Box
             w="71.925px" h="27.4px" mr="5.48px" backgroundColor= "rgba(255, 255, 255, 0.03)" justifyContent="center" alignItems="center" ml="8px" borderRadius="6.85px" 
             >
-              <Flex justifyContent="center" gap="11.49" backgroundColor= "rgba(255, 255, 255, 0.03)" w="71.925px" h="27.4px"  >
+              <Flex justifyContent="center" gap="7.87px" backgroundColor= "rgba(255, 255, 255, 0.03)" w="71.925px" h="27.4px"  >
              <Image src='/assets/icons/flash-icon.svg' alt="total posts" width="16.44px" height="16.44px"  mt="1" />
              <Text 
                 fontFamily= 'Poppins'
                 fontStyle= 'normal'
                 fontWeight= '600'
-                fontSize='10.96px'
+                fontSize='14px'
                 lineHeight= '100%'
-                mt="2"
+                mt="1.5"
                 /* identical to box height, or 16px */
     
                 letterSpacing= '-0.02em'

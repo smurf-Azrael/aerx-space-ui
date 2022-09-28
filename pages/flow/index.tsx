@@ -62,26 +62,13 @@ const Flow: React.FC = () => {
         }
 
         {!flow.collapsed && (
+          <div className=" w-[508.72px] px-2.5 h-[94vh] bg-black-dark    rounded-[13.7px] ">
           <div
-            className=" w-[522.72px] h-[94vh] overflow-y-scroll  rounded-[13.7px] bg-[#FFFFFF12]"
-            // style={{
-            //   width:
-            //     chat.minimized && !space.collapsed
-            //       ? "55%"
-            //       : chat.collapsed && !space.collapsed
-            //       ? "75%"
-            //       : space.collapsed && chat.minimized
-            //       ? "73%"
-            //       : space.collapsed && chat.default
-            //       ? "58%"
-            //       : space.collapsed && chat.collapsed
-            //       ? "95%"
-            //       : "",
-            //   padding: space.collapsed && chat.collapsed ? "0% 10%" : "",
-            //   marginLeft: chat.collapsed ? "5%" : "",
-            // }}
+            className=" w-[495.72px] h-[94vh] overflow-y-scroll  rounded-[13.7px]  pt-4s"
+    
           >
             <FlowFeeds />
+          </div>
           </div>
         )}
 

@@ -19,7 +19,7 @@ const FlowFeeds: React.FC = () => {
     },[searchKey])
 
     return (
-        <div className='w-[517.72px] h-[max-content] bg-black-dark rounded-[10px] mt-{25%}'>
+        <div className='w-[485.72px] h-[max-content] bg-black-dark rounded-[10px] mt-{25%}'>
             {!addPost &&
                 <>
                     <div className='flex gap-2  px-4'>
@@ -28,7 +28,7 @@ const FlowFeeds: React.FC = () => {
                             onSearch={(searchKey: string) => setSearchKey(searchKey)}
                         />
                     </div>
-                    <div className='px-4 py-2'>
+                    <div className=' py-[55px]'>
                         <ListFeeds searchKey={""} />
                     </div>
                 </>

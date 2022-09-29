@@ -1,3 +1,4 @@
+// pinata keys change reload test
 import '@google/model-viewer';
 declare global {
   namespace JSX {

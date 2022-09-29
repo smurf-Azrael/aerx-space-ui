@@ -239,7 +239,7 @@ function Exchange(props) {
         )
         toast.success("Successfully swapped AEX to NEAR")
       } catch (err) {
-        toast.error("Unable to swap AEX to NEAR")
+        // toast.error("Unable to swap AEX to NEAR")
         console.log("Unable to swap AEX to NEAR due to: ", err)
 
       }
@@ -257,7 +257,7 @@ function Exchange(props) {
           )
           toast.success("Successfully swapped NEAR to AEX")
         } catch (err) {
-          toast.error("Unable to swap NEAR to AEX")
+          // toast.error("Unable to swap NEAR to AEX")
           console.log("Unable to swap NEAR to AEX due to: ", err)
         }
       }

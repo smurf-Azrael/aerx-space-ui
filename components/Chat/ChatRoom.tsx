@@ -107,14 +107,14 @@ const SecondaryHeader: React.FC<{
           //   }
           // },
         },
-        scene:{
-            clearColor:{
-              r: 0,
-              g: 0,
-              b: 0,
-              a: 0,
-            }
-          },
+        scene: {
+          clearColor: {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0,
+          }
+        },
         engine: {
           antialiasing: true,
           hdEnabled: true,
@@ -154,9 +154,9 @@ const SecondaryHeader: React.FC<{
           />
         )}
         {activeMessage?.avatar.includes(".glb") && (
-            <Box width="27.4px" height="27.4px" borderRadius="13.7px" borderColor="white" border="1px solid">
-          <div id="babylon-element-chat-room" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
-            </Box>
+          <Box width="27.4px" height="27.4px" borderRadius="13.7px" borderColor="white" border="1px solid">
+            <div id="babylon-element-chat-room" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
+          </Box>
         )}
         <Flex flexDirection="column" gap="2.74" ml="8.22px" width="175px">
           <Text
@@ -193,7 +193,7 @@ const SecondaryHeader: React.FC<{
           alt="Video"
           width={18}
           height={18}
-          
+
         />
       </Flex>
     </Flex>
@@ -485,7 +485,7 @@ const SendMessage: React.FC<{
   const handleSendMessage = async () => {
     await getChat(nearState.accountId, activeReceiver.accountId);
     console.log(activeReceiver.accountId);
-
+    const textArea = document.getElementById("textarea")!;
     const newMessage: Message = {
       id: Date.now().toString(),
       sender: {
@@ -507,8 +507,10 @@ const SendMessage: React.FC<{
 
     try {
       await sendMessage(nearState.accountId, activeReceiver.accountId, message);
+      textArea.textContent = "";
     } catch (error) {
       console.error("Error while sending message");
+      textArea.textContent = "";
     }
   };
 

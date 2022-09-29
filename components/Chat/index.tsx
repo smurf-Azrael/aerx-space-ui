@@ -14,7 +14,7 @@ import {
     Box,
     Flex,
     Text,
-  } from "@chakra-ui/react";
+} from "@chakra-ui/react";
 
 export interface IMessageItem {
     accountId: string,
@@ -80,14 +80,14 @@ const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, messa
                         }
                     },
                 },
-                scene:{
-                    clearColor:{
-                      r: 0,
-                      g: 0,
-                      b: 0,
-                      a: 0,
+                scene: {
+                    clearColor: {
+                        r: 0,
+                        g: 0,
+                        b: 0,
+                        a: 0,
                     }
-                  },
+                },
                 engine: {
                     antialiasing: true,
                     hdEnabled: true,
@@ -122,7 +122,7 @@ const MessageItem: React.FC<IMessageItem> = ({ avatar, name, time, status, messa
                     )}
                     {avatar.includes(".glb") && (
                         <Box width="27.4px" height="27.4px" borderRadius="13.7px" borderColor="white" border="1px solid" >
-                        <div id="babylon-element-chat-index" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
+                            <div id="babylon-element-chat-index" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
                         </Box>
                     )}
                 </div>

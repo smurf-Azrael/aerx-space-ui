@@ -146,7 +146,7 @@ function Profile(props) {
             ml="16.44px"
             mt="21.92px"
             cursor="pointer"
-            zIndex={6}
+           
           >
             <Box
               color="#6054F0"
@@ -171,7 +171,7 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             gap="45%"
-            zIndex={6}
+            // zIndex={6}
           // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
@@ -191,6 +191,7 @@ function Profile(props) {
                 mt="21px"
                 justifyContent="center"
                 textTransform="capitalize"
+                // zIndex="-1"
               >
                 {nearState.profile.fullName}
               </Heading>
@@ -249,7 +250,7 @@ function Profile(props) {
           </Flex>
           <Flex
             flexDirection="column" gap="10.96px" mr="3%" mt="21.92px"
-            zIndex={6}
+           
           >
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
@@ -277,7 +278,7 @@ function Profile(props) {
           width="257.56px"
           zIndex={8}
         >
-          <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
+          <Center borderRadius="50px 50px 0px 0px"  >
             <Button
               onClick={remCirc}
               cursor="pointer"

@@ -34,18 +34,16 @@ export type Feed = {
         reference_hash?: string
     },
     total_charges?: number,
-    total_comments?: number,
-    comments?: any[],
     original_post_id?: string,
     co_earners?: any[],
     type?: 'text' | 'image' | 'video' | 'audio' | 'file' | 'tempo',
     profile?: Profile,
 }
 
-export type Tempo ={
-    ownerId : string,
-    title : string,
-    content : string,
-    time : string
+export type Tempo = {
+    ownerId: string,
+    title: string,
+    content: string,
+    time: string
 
 }

@@ -7,7 +7,7 @@ import myTheme from "../lib/theme.js";
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
 import { useState, useEffect } from 'react';
-import { fetchpostsData } from '../hooks/useFetchPost';
+import { fetchPosts } from '../hooks/useFetchPost';
 import { getBalance } from '../lib/aexContract';
 import { initNearConnection, checkProfile } from '../lib/auth';
 import { nearStore } from '../store/near';
@@ -49,7 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     //4)fetch posts 
     if (!isLoading) {
       (async () => {
-        await fetchpostsData(nearState);
+        await fetchPosts(nearState);
       })();
     }
   }, [isLoading, nearState.accountId, nearState.pnftContract]);

@@ -27,8 +27,6 @@ import {
 } from "../../store/slices/postChargesSlice";
 import dynamic from "next/dynamic";
 import { Box, Text, Flex, Image, Center } from "@chakra-ui/react";
-import { DefaultViewer } from "babylonjs-viewer";
-
 // coverImage, postOwner, nftId, title, description
 interface IProps {
   feed: Feed;
@@ -107,99 +105,102 @@ const TextPost: React.FC<IProps> = ({
     const initBabylonFeed = async () => {
       const BabylonViewer = await import('babylonjs-viewer');
       const babylon = document.getElementById("babylon-element-feed")!;
-      new BabylonViewer.DefaultViewer(babylon, {
-        extends: "none",
-        templates: {
-          main: {
-            html: "<canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
-            params: {
-              ["no-escape"]: true,
-              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+      console.log("mediaaaaa: ", metadata.media);
+      if (metadata.media != null && metadata.media?.includes(".glb")) {
+        new BabylonViewer.DefaultViewer(babylon, {
+          extends: "none",
+          templates: {
+            main: {
+              html: "<canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+              params: {
+                ["no-escape"]: true,
+                ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+              }
+            },
+            // ["loadingScreen"]: {
+            //   html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+            //   params: {
+            //     ["backgroundColor"]: "#0000004d",
+            //     ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+            //   }
+            // },
+          },
+          scene: {
+            clearColor: {
+              r: 0,
+              g: 0,
+              b: 0,
+              a: 0,
             }
           },
-          // ["loadingScreen"]: {
-          //   html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
-          //   params: {
-          //     ["backgroundColor"]: "#0000004d",
-          //     ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
-          //   }
-          // },
-        },
-        scene: {
-          clearColor: {
-            r: 0,
-            g: 0,
-            b: 0,
-            a: 0,
+          engine: {
+            antialiasing: true,
+            hdEnabled: true,
+            adaptiveQuality: true,
+          },
+          optimizer: true,
+          model: {
+            url: `${metadata.media}`,
+            // scaling: {
+            //   x: 3.5,
+            //   y: 3,
+            //   z: 3,
+            // },
+            // position: {
+            //   x: 0,
+            //   y: -2,
+            //   z: 1
+            // }
           }
-        },
-        engine: {
-          antialiasing: true,
-          hdEnabled: true,
-          adaptiveQuality: true,
-        },
-        optimizer: true,
-        model: {
-          url: `${metadata.media}`,
-          // scaling: {
-          //   x: 3.5,
-          //   y: 3,
-          //   z: 3,
-          // },
-          // position: {
-          //   x: 0,
-          //   y: -2,
-          //   z: 1
-          // }
-        }
-      });
-      const babylonPost = document.getElementById("babylon-element-feed-post")!;
-      new BabylonViewer.DefaultViewer(babylonPost, {
-        extends: "none",
-        templates: {
-          main: {
-            html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
-            params: {
-              ["no-escape"]: true,
-              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+        });
+        const babylonPost = document.getElementById("babylon-element-feed-post")!;
+        new BabylonViewer.DefaultViewer(babylonPost, {
+          extends: "none",
+          templates: {
+            main: {
+              html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+              params: {
+                ["no-escape"]: true,
+                ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
+              }
+            },
+            ["loadingScreen"]: {
+              html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+              params: {
+                ["backgroundColor"]: "#0000004d",
+                ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+              }
+            },
+          },
+          scene: {
+            clearColor: {
+              r: 0,
+              g: 0,
+              b: 0,
+              a: 0,
             }
           },
-          ["loadingScreen"]: {
-            html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
-            params: {
-              ["backgroundColor"]: "#0000004d",
-              ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
-            }
+          engine: {
+            antialiasing: true,
+            hdEnabled: true,
+            adaptiveQuality: true,
           },
-        },
-        scene: {
-          clearColor: {
-            r: 0,
-            g: 0,
-            b: 0,
-            a: 0,
+          optimizer: true,
+          model: {
+            url: `${metadata.media}`,
+            // scaling: {
+            //   x: 3.5,
+            //   y: 3,
+            //   z: 3,
+            // },
+            // position: {
+            //   x: 0,
+            //   y: -2,
+            //   z: 1
+            // }
           }
-        },
-        engine: {
-          antialiasing: true,
-          hdEnabled: true,
-          adaptiveQuality: true,
-        },
-        optimizer: true,
-        model: {
-          url: `${metadata.media}`,
-          // scaling: {
-          //   x: 3.5,
-          //   y: 3,
-          //   z: 3,
-          // },
-          // position: {
-          //   x: 0,
-          //   y: -2,
-          //   z: 1
-          // }
-        }
-      });
+        });
+      }
     }
     initBabylonFeed()
   }, [])
@@ -310,14 +311,14 @@ const TextPost: React.FC<IProps> = ({
         </Box>
       </Flex>
       {(bgImage as string)?.includes('.glb') &&
-      <Flex marginLeft=""   height="200px" marginTop="-200px" width="280px" zIndex={-1}> 
-      
-           <Box  
-        style={{ width: '100%', height: '100%', margin: 'auto' }} id="babylon-element-feed-post">
+        <Flex marginLeft="" height="200px" marginTop="-200px" width="280px" zIndex={-1}>
 
-        </Box>
-      </Flex>
-     
+          <Box
+            style={{ width: '100%', height: '100%', margin: 'auto' }} id="babylon-element-feed-post">
+
+          </Box>
+        </Flex>
+
       }
       <Flex gap="55%" alignItems="center">
         <Box>
@@ -648,6 +649,14 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
   const timerRef: any = useRef();
   const isLongPress: any = useRef();
 
+  const AWS = require('aws-sdk');
+  const filebase = new AWS.S3({
+    endpoint: 'https://s3.filebase.com',
+    signatureVersion: 'v4',
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
+  });
+
   function startPressTimer() {
     isLongPress.current = false;
     timerRef.current = setTimeout(() => {
@@ -706,6 +715,49 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
 
   useEffect(() => {
     useGetPosts(nearState, dispatch);
+  }, [isLoading, nearState.accountId, nearState.pnftContract]);
+
+  useEffect(() => {
+    const getTempo = async () => {
+      if (nearState.pnftContract) {
+        let userIds = await nearState.pnftContract.get_users_ids({ user_id: nearState.accountId });
+        let tempos = [];
+        userIds.forEach(async (userId: any) => {
+          const params = {
+            Key: `aerx-Tempo-for-${userId}`,
+            Bucket: "aerx-tempo",
+          };
+          await filebase.getObject(params, (err: any, data: { Body: WithImplicitCoercion<string> | { [Symbol.toPrimitive](hint: "string"): string; }; }) => {
+            if (err) {
+              // continue;     
+            } else {
+              const tempos = Buffer.from(data.Body, 'utf8').toString();
+              console.log("tempos: ", tempos)
+              const tempoArray = tempos.split("##aerx-tempo##");
+              for (let i = 0; i < tempoArray.length; i++) {
+                // const chatArrayFormatted = chatArray[i].replaceAll("\n", " ")
+                const json = JSON.parse(tempoArray[i]);
+                console.log("tempppp: ", json)
+                // console.log("time: ", json[0])
+                // console.log("sender: ", json[1])
+                // console.log("message: ", json[2])
+                // const message: Message = {
+                //     id: Math.random().toString(36).substr(2, 9),
+                //     sender: {
+                //         id: json[1],
+                //         name: json[1],
+                //     },
+                //     type: EMessageType.TEXT,
+                //     content: json[2],
+                //     createdAt: json[0],
+              }
+            }
+          })
+        })
+      }
+
+    }
+    getTempo();
   }, [isLoading, nearState.accountId, nearState.pnftContract]);
 
   useEffect(() => {

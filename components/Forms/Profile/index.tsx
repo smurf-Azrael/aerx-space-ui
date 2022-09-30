@@ -53,7 +53,7 @@ const ProfileSettingForm: React.FC = () => {
 
   const handleSubmit = async () => {
     if (creating) return;
-    if (!file && !nearState._3dUrl) return toast.error("Please select a profile image or use 3d avatar")
+    if (!file && !nearState._3dUrl) return ("Please select a profile image or use 3d avatar")
     setCreating(true);
     console.log('File: ', file);
     console.log('Username: ', formik.values.userName);

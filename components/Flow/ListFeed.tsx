@@ -732,15 +732,16 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
               // continue;     
             } else {
               const tempos = Buffer.from(data.Body, 'utf8').toString();
-              console.log("tempos: ", tempos)
               const tempoArray = tempos.split("##aerx-tempo##");
               for (let i = 0; i < tempoArray.length; i++) {
                 // const chatArrayFormatted = chatArray[i].replaceAll("\n", " ")
                 const json = JSON.parse(tempoArray[i]);
                 console.log("tempppp: ", json)
-                // console.log("time: ", json[0])
-                // console.log("sender: ", json[1])
-                // console.log("message: ", json[2])
+
+                console.log("time: ", json[0])
+                console.log("sender: ", json[1])
+                console.log("message: ", json[2])
+                console.log("message: ", json[3])
                 // const message: Message = {
                 //     id: Math.random().toString(36).substr(2, 9),
                 //     sender: {

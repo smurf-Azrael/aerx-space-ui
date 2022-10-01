@@ -7,6 +7,7 @@ import { pinToPinata } from '../../lib/pinata';
 import { nearStore } from '../../store/near';
 import { Post } from '../../types/Post';
 const shajs = require('sha.js');
+import { uploadTempo } from "../../lib/aerxTempo";
 
 interface IProps {
     onClose: () => void;
@@ -51,30 +52,45 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                     issued_at: new Date().toISOString(),
                     //extra will be used to handle the toghether with on the create post
                 }
-                try {
-                    console.log("post to mint", postToMint);
-                    setIsLoading(true);
-                    console.log("Post to mint: ", postToMint)
-                    await nearState.pnftContract?.mint_post({
-                        user_id: nearState.accountId,
-                        origin_post_id: 0,
-                        token_metadata: postToMint
-                    },
-                        "300000000000000"
-                    ).then((res) => {
-                        toast.success(`Your AERX-postNFT has been minted Successfully`)
+                if (postType == "tempo") {
+                    try {
+                        await uploadTempo(nearState.accountId, postToMint.description, postToMint.title, postToMint.media);
+                        toast.success("Tempo uploaded successfully will be deleted exactly 12 hours from now");
+                        console.log("Tempo uploaded successfully")
                         nearState.postDetails.body = "";
                         nearState.postDetails.title = "";
                         location.reload();
-                        //save post
+                    } catch (err) {
+                        setIsLoading(false);
+                        toast.error("Unable to upload tempo. Try again later")
+                        console.error("Unable to upload tempo due to: ", err)
+                    }
+                } else {
+                    try {
+                        console.log("post to mint", postToMint);
+                        setIsLoading(true);
+                        console.log("Post to mint: ", postToMint)
+                        await nearState.pnftContract?.mint_post({
+                            user_id: nearState.accountId,
+                            origin_post_id: 0,
+                            token_metadata: postToMint
+                        },
+                            "300000000000000"
+                        ).then((res) => {
+                            toast.success(`Your AERX-postNFT has been minted Successfully`)
+                            nearState.postDetails.body = "";
+                            nearState.postDetails.title = "";
+                            location.reload();
+                            //save post
 
-                    })
-                    setIsLoading(false);
-                } catch (err) {
-                    setIsLoading(false);
-                    toast.error("Unable to mint AERX-postNFT. Try again later")
-                    console.error("Unable to mint AERX postNFT: ", err)
+                        })
+                        setIsLoading(false);
+                    } catch (err) {
+                        setIsLoading(false);
+                        toast.error("Unable to mint AERX-postNFT. Try again later")
+                        console.error("Unable to mint AERX postNFT: ", err)
 
+                    }
                 }
             })
         } else {
@@ -96,7 +112,6 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
         const file = e.target.files[0];
         if (!file) return;
         setMedia(file);
-        console.log(URL.createObjectURL(file))
         setFilePreview(URL.createObjectURL(file));
         setFileToPreview(URL.createObjectURL(file));
 
@@ -115,7 +130,6 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
             const filename = (file as File).name;
             var parts = filename.split(".");
             const fileType = parts[parts.length - 1];
-
             await pinToPinata(file, "POST", nearState.profile?.username).then(async (res: { IpfsHash: any; }) => {
                 const fileUrl = `${process.env.NEXT_PUBLIC_IPFS_BASE_URL}/${res.IpfsHash}`
                 console.log("File url: ", fileUrl)
@@ -150,15 +164,12 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                         toast.success(`Your AERX-postNFT has been minted Successfully`)
                         nearState.postDetails.body = "";
                         nearState.postDetails.title = "";
-                        router.push('/flow')
-                        //save post
+                        location.reload();
 
                     })
                     setIsLoading(false);
                 } catch (err) {
                     setIsLoading(false);
-                    toast.error("Unable to mint AERX-postNFT. Try again later")
-                    console.error("Unable to mint AERX postNFT: ", err)
 
                 }
             })

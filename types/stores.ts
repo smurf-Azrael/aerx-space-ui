@@ -1,5 +1,5 @@
 import { Near, WalletConnection } from "near-api-js";
-import { postDetailsType } from "../hooks/useFetchPost";
+import { postDetailsType, returnedPostType } from "../hooks/useFetchPost";
 import { DexContract, NearAccount, PNFTContract, ProfileContract } from "./contracts";
 
 // TODO: CHANGE ANY TYPE TO CUSTOM TYPE
@@ -40,7 +40,7 @@ export type NearStoreType = {
     setLastRes: (lastRes: any) => void;
     removeLastRes: () => void;
 
-    feed: any[] | null;
+    feed: any | null;
     setFeed: (feed: any) => void;
     removeFeed: () => void;
 

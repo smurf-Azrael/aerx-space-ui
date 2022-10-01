@@ -142,7 +142,7 @@ const SecondaryHeader: React.FC<{
   }, [])
 
   return (
-    <Flex mt="17.65px" gap="66.42px">
+    <Flex mt="17.65px" gap="">
       <Flex alignItems="center">
         {!activeMessage?.avatar.includes(".glb") && (
           <Image
@@ -158,7 +158,7 @@ const SecondaryHeader: React.FC<{
             <div id="babylon-element-chat-room" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
           </Box>
         )}
-        <Flex flexDirection="column" gap="2.74" ml="8.22px" width="175px">
+        <Flex flexDirection="column" gap="2.74" ml="8.22px" width="165px">
           <Text
             fontFamily="Poppins"
             fontSize="10.96px"
@@ -181,7 +181,7 @@ const SecondaryHeader: React.FC<{
           </Text>
         </Flex>
       </Flex>
-      <Flex gap="14px" ml="-74px" justifyContent="space-around">
+      <Flex gap="14px" ml="" justifyContent="space-around">
         <Image
           src="/assets/icons/audio-call-icon.svg"
           alt="Phone"
@@ -218,7 +218,7 @@ const MessagesWrapper: React.FC<{ activeReceiver: IMessageItem }> = ({
 
       <div className="flex overflown-c">
         <div
-          className="ml-auto bg-black-light p-3 px-4 w-[max-content] max-w-[90%]"
+          className="ml-auto bg-black-light p-3 px-4 w-[max-content] max-w-[90%] "
           style={{ borderRadius: "20px 20px 0px 20px" }}
         >
           {type === EMessageType.TEXT && (
@@ -244,7 +244,7 @@ const MessagesWrapper: React.FC<{ activeReceiver: IMessageItem }> = ({
   }> = ({ content, type }) => {
     return (
       <div
-        className="bg-primary p-3 px-4 w-[max-content] max-w-[90%]"
+        className="bg-primary p-3 px-4 w-[max-content] max-w-[90%] ml-2"
         style={{ borderRadius: "20px 20px 20px 0px" }}
       >
         {type === EMessageType.TEXT && (
@@ -516,7 +516,7 @@ const SendMessage: React.FC<{
 
   return (
 
-    <Flex className="flex justify-between align-center " alignItems="center">
+    <Flex className="flex align-center " alignItems="center">
       <Flex gap="19.5px" alignItems="center">
         <Image
           src="/assets/icons/tag-icon.svg"
@@ -527,7 +527,7 @@ const SendMessage: React.FC<{
         <textarea
           id="textarea"
           placeholder="Type message..."
-          className=".placeholder-black-light bg-transparent focus:outline-none w-[90%]
+          className=".placeholder-black-light bg-transparent focus:outline-none w-[182px]
               text-white text-[11px] mt-4 "
           style={{
             resize: "none",
@@ -546,7 +546,7 @@ const SendMessage: React.FC<{
         />
       </Flex>
 
-      <div className="w-[15%] mt-[-4px]">
+      <div className="w-[15%] mt-[-4px] ml-[-15px]">
         <Image
           src="../resources/Group 55371.png"
           alt="send message"

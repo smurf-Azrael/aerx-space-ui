@@ -105,102 +105,99 @@ const TextPost: React.FC<IProps> = ({
     const initBabylonFeed = async () => {
       const BabylonViewer = await import('babylonjs-viewer');
       const babylon = document.getElementById("babylon-element-feed")!;
-      console.log("mediaaaaa: ", metadata.media);
-      if (metadata.media != null && metadata.media?.includes(".glb")) {
-        new BabylonViewer.DefaultViewer(babylon, {
-          extends: "none",
-          templates: {
-            main: {
-              html: "<canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
-              params: {
-                ["no-escape"]: true,
-                ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
-              }
-            },
-            // ["loadingScreen"]: {
-            //   html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
-            //   params: {
-            //     ["backgroundColor"]: "#0000004d",
-            //     ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
-            //   }
-            // },
-          },
-          scene: {
-            clearColor: {
-              r: 0,
-              g: 0,
-              b: 0,
-              a: 0,
+      new BabylonViewer.DefaultViewer(babylon, {
+        extends: "none",
+        templates: {
+          main: {
+            html: "<canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+            params: {
+              ["no-escape"]: true,
+              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
             }
           },
-          engine: {
-            antialiasing: true,
-            hdEnabled: true,
-            adaptiveQuality: true,
-          },
-          optimizer: true,
-          model: {
-            url: `${metadata.media}`,
-            // scaling: {
-            //   x: 3.5,
-            //   y: 3,
-            //   z: 3,
-            // },
-            // position: {
-            //   x: 0,
-            //   y: -2,
-            //   z: 1
-            // }
+          // ["loadingScreen"]: {
+          //   html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+          //   params: {
+          //     ["backgroundColor"]: "#0000004d",
+          //     ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+          //   }
+          // },
+        },
+        scene: {
+          clearColor: {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0,
           }
-        });
-        const babylonPost = document.getElementById("babylon-element-feed-post")!;
-        new BabylonViewer.DefaultViewer(babylonPost, {
-          extends: "none",
-          templates: {
-            main: {
-              html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
-              params: {
-                ["no-escape"]: true,
-                ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
-              }
-            },
-            ["loadingScreen"]: {
-              html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
-              params: {
-                ["backgroundColor"]: "#0000004d",
-                ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
-              }
-            },
-          },
-          scene: {
-            clearColor: {
-              r: 0,
-              g: 0,
-              b: 0,
-              a: 0,
+        },
+        engine: {
+          antialiasing: true,
+          hdEnabled: true,
+          adaptiveQuality: true,
+        },
+        optimizer: true,
+        model: {
+          url: `${metadata.media}`,
+          // scaling: {
+          //   x: 3.5,
+          //   y: 3,
+          //   z: 3,
+          // },
+          // position: {
+          //   x: 0,
+          //   y: -2,
+          //   z: 1
+          // }
+        }
+      });
+      const babylonPost = document.getElementById("babylon-element-feed-post")!;
+      new BabylonViewer.DefaultViewer(babylonPost, {
+        extends: "none",
+        templates: {
+          main: {
+            html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+            params: {
+              ["no-escape"]: true,
+              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
             }
           },
-          engine: {
-            antialiasing: true,
-            hdEnabled: true,
-            adaptiveQuality: true,
+          ["loadingScreen"]: {
+            html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+            params: {
+              ["backgroundColor"]: "#0000004d",
+              ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+            }
           },
-          optimizer: true,
-          model: {
-            url: `${metadata.media}`,
-            // scaling: {
-            //   x: 3.5,
-            //   y: 3,
-            //   z: 3,
-            // },
-            // position: {
-            //   x: 0,
-            //   y: -2,
-            //   z: 1
-            // }
+        },
+        scene: {
+          clearColor: {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0,
           }
-        });
-      }
+        },
+        engine: {
+          antialiasing: true,
+          hdEnabled: true,
+          adaptiveQuality: true,
+        },
+        optimizer: true,
+        model: {
+          url: `${metadata.media}`,
+          // scaling: {
+          //   x: 3.5,
+          //   y: 3,
+          //   z: 3,
+          // },
+          // position: {
+          //   x: 0,
+          //   y: -2,
+          //   z: 1
+          // }
+        }
+      });
     }
     initBabylonFeed()
   }, [])
@@ -508,125 +505,238 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
   );
 };
 
-const TempoPost: React.FC<Feed> = ({ owner_id, metadata }) => {
-  // const GetTempo = () => {
-  //    const returnedTempo:Tempo = {
-  //     userId:
-  //    }
+const renderTempo = (state) => {
+  for (let i = 0; i < state.tempos.length; i++) {
+    if (typeof (state.tempos[i]) != "object") {
+      const json = JSON.parse(state.tempos[i]);
+      console.log("cnt: ", json[3])
 
-  // }
-
-  return (
-    <Flex
-      width="166.85px"
-      height="295.92px"
-      bgImage="url('assets/images/cover-image-2.svg') "
-      borderRadius="10.275px"
-      marginLeft={0}
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
-      flexDirection="column"
-      padding="10.96px"
-      gap="57.135px"
-      mt={-2}
-      mb={1}
-    >
-      <Flex justifyContent="space-between">
-        <Image
-          src="../resources/Label.png"
-          alt="tempo post"
-          width="27.4px"
-          height="27.4px"
-          alignContent="center"
-        />
-        <Image
-          src="/assets/icons/play-icon.svg"
-          alt="play"
-          width="16.44px"
-          height="14.2px"
-          marginTop="5.48px"
-        />
-      </Flex>
-      <Flex flexDirection="column">
-        <Center>
-          <Image
-            src="/assets/images/avatar-4.svg"
-            alt={`${owner_id}'s avatar`}
-            width="27.4px"
-            height="27.4px"
-          />
-        </Center>
-        <Center>
-          <Box height="24px" width="121px">
-            <Text
-              fontFamily="Poppins"
-              fontStyle="normal"
-              fontWeight="600"
-              fontSize="10.96px"
-              lineHeight="100%"
-              letterSpacing="-0.02em"
-              color="#FFFFFF"
-              mt="10.96px"
-              textAlign="center"
-            >
-              {owner_id}
-            </Text>
-          </Box>
-        </Center>
-        <Center>
-          <Box height="24px" width="121px">
-            <Text
-              fontFamily="Poppins"
-              fontStyle="normal"
-              fontWeight="400"
-              fontSize="9.59px"
-              lineHeight="100%"
-              letterSpacing="-0.02em"
-              color="#FFFFFF"
-              mt="4.96px"
-              textAlign="center"
-            >
-              {metadata.title}
-            </Text>
-          </Box>
-        </Center>
-        <Flex mt="78.255px" justifyContent="space-between" alignItems="center">
-          <Box>
+      return (
+        <Flex
+          width="166.85px"
+          height="295.92px"
+          bgImage={`url(${json[2]})`}
+          borderRadius="10.275px"
+          marginLeft={0}
+          backgroundRepeat="no-repeat"
+          backgroundSize="cover"
+          flexDirection="column"
+          padding="10.96px"
+          gap="57.135px"
+          mt={-2}
+          mb={1}
+        >
+          <Flex justifyContent="space-between">
             <Image
-              src="/assets/icons/comment-icon.svg"
-              alt="comment"
+              src="../resources/Label.png"
+              alt="tempo post"
+              width="27.4px"
+              height="27.4px"
+              alignContent="center"
+            />
+            <Image
+              src="/assets/icons/play-icon.svg"
+              alt="play"
               width="16.44px"
-              height="16.44px"
+              height="14.2px"
+              marginTop="5.48px"
             />
-          </Box>
-          <Box>
-            <Image
-              src="/assets/icons/share-icon.svg"
-              alt="comment"
-              width="16.44px"
-              height="16.44px"
-            />
-          </Box>
-          <Box>
-            <Image
-              src="/assets/icons/save-post-icon.svg"
-              alt="comment"
-              width="16.44px"
-              height="16.44px"
-            />
-          </Box>
-          <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
-            <Image
-              src="../resources/Union.png"
-              alt="post rewarded"
-              width="14px"
-              height="21px"
-            />
-          </Box>
+          </Flex>
+          <Flex flexDirection="column">
+            <Center>
+              <Image
+                src="/assets/images/avatar-4.svg"
+                alt="avatar"
+                width="27.4px"
+                height="27.4px"
+              />
+            </Center>
+            <Center>
+              <Box height="24px" width="121px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="600"
+                  fontSize="10.96px"
+                  lineHeight="100%"
+                  letterSpacing="-0.02em"
+                  color="#FFFFFF"
+                  mt="10.96px"
+                  textAlign="center"
+                >
+                  {/* {owner_id} */}
+                </Text>
+              </Box>
+            </Center>
+            <Center>
+              <Box height="24px" width="121px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="400"
+                  fontSize="9.59px"
+                  lineHeight="100%"
+                  letterSpacing="-0.02em"
+                  color="#FFFFFF"
+                  mt="4.96px"
+                  textAlign="center"
+                >
+                  {json[3]}
+                </Text>
+              </Box>
+            </Center>
+            <Flex mt="78.255px" justifyContent="space-between" alignItems="center">
+              <Box>
+                <Image
+                  src="/assets/icons/comment-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box>
+                <Image
+                  src="/assets/icons/share-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box>
+                <Image
+                  src="/assets/icons/save-post-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
+                <Image
+                  src="../resources/Union.png"
+                  alt="post rewarded"
+                  width="14px"
+                  height="21px"
+                />
+              </Box>
+            </Flex>
+          </Flex>
         </Flex>
-      </Flex>
-    </Flex>
-  );
+      );
+    } else {
+      const json = JSON.parse(state.tempos[i][0]);
+      return (
+        <Flex
+          width="166.85px"
+          height="295.92px"
+          bgImage={`url(${json[2]})`}
+          borderRadius="10.275px"
+          marginLeft={0}
+          backgroundRepeat="no-repeat"
+          backgroundSize="cover"
+          flexDirection="column"
+          padding="10.96px"
+          gap="57.135px"
+          mt={-2}
+          mb={1}
+        >
+          <Flex justifyContent="space-between">
+            <Image
+              src="../resources/Label.png"
+              alt="tempo post"
+              width="27.4px"
+              height="27.4px"
+              alignContent="center"
+            />
+            <Image
+              src="/assets/icons/play-icon.svg"
+              alt="play"
+              width="16.44px"
+              height="14.2px"
+              marginTop="5.48px"
+            />
+          </Flex>
+          <Flex flexDirection="column">
+            <Center>
+              <Image
+                src="/assets/images/avatar-4.svg"
+                alt="avatar"
+                width="27.4px"
+                height="27.4px"
+              />
+            </Center>
+            <Center>
+              <Box height="24px" width="121px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="600"
+                  fontSize="10.96px"
+                  lineHeight="100%"
+                  letterSpacing="-0.02em"
+                  color="#FFFFFF"
+                  mt="10.96px"
+                  textAlign="center"
+                >
+                  {/* {owner_id} */}
+                </Text>
+              </Box>
+            </Center>
+            <Center>
+              <Box height="24px" width="121px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="400"
+                  fontSize="9.59px"
+                  lineHeight="100%"
+                  letterSpacing="-0.02em"
+                  color="#FFFFFF"
+                  mt="4.96px"
+                  textAlign="center"
+                >
+                  {json[3]}
+                </Text>
+              </Box>
+            </Center>
+            <Flex mt="78.255px" justifyContent="space-between" alignItems="center">
+              <Box>
+                <Image
+                  src="/assets/icons/comment-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box>
+                <Image
+                  src="/assets/icons/share-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box>
+                <Image
+                  src="/assets/icons/save-post-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
+                <Image
+                  src="../resources/Union.png"
+                  alt="post rewarded"
+                  width="14px"
+                  height="21px"
+                />
+              </Box>
+            </Flex>
+          </Flex>
+        </Flex>
+      );
+    }
+  }
 };
 
 const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
@@ -721,42 +831,30 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
     const getTempo = async () => {
       if (nearState.pnftContract) {
         let userIds = await nearState.pnftContract.get_users_ids({ user_id: nearState.accountId });
-        let tempos = [];
+        let temposArray: (string | string[])[] = [];
+        let finalTempoArray: string[] = [];
         userIds.forEach(async (userId: any) => {
           const params = {
             Key: `aerx-Tempo-for-${userId}`,
             Bucket: "aerx-tempo",
           };
-          await filebase.getObject(params, (err: any, data: { Body: WithImplicitCoercion<string> | { [Symbol.toPrimitive](hint: "string"): string; }; }) => {
-            if (err) {
-              // continue;     
-            } else {
+          await filebase.getObject(params, (err: any, data: any) => {
+            if (data) {
               const tempos = Buffer.from(data.Body, 'utf8').toString();
               const tempoArray = tempos.split("##aerx-tempo##");
-              for (let i = 0; i < tempoArray.length; i++) {
-                // const chatArrayFormatted = chatArray[i].replaceAll("\n", " ")
-                const json = JSON.parse(tempoArray[i]);
-                console.log("tempppp: ", json)
-
-                console.log("time: ", json[0])
-                console.log("sender: ", json[1])
-                console.log("message: ", json[2])
-                console.log("message: ", json[3])
-                // const message: Message = {
-                //     id: Math.random().toString(36).substr(2, 9),
-                //     sender: {
-                //         id: json[1],
-                //         name: json[1],
-                //     },
-                //     type: EMessageType.TEXT,
-                //     content: json[2],
-                //     createdAt: json[0],
+              if (tempoArray.length > 1) {
+                tempoArray.forEach((tempAry) => {
+                  temposArray.push(tempAry);
+                })
+              } else {
+                temposArray.push(tempoArray);
               }
             }
           })
-        })
-      }
 
+        })
+        nearState.setTempos(temposArray)
+      }
     }
     getTempo();
   }, [isLoading, nearState.accountId, nearState.pnftContract]);
@@ -929,7 +1027,7 @@ const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {
               />
             )}
             {post.type === "video" && <VideoPost {...post} />}
-            {post.type === "tempo" && <TempoPost {...post} />}
+            {post.type === "tempo" && renderTempo(nearState)}
           </div>
         ))}
       </div>

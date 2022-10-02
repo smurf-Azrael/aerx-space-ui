@@ -76,6 +76,10 @@ export type NearStoreType = {
     set3DUrl: (_3dUrl: string | null) => void;
     remove3DUrl: () => void;
 
+    tempos: any | null,
+    setTempos: (tempos: any) => void;
+    removeTempos: () => void;
+
 };
 
 export type ProfileStoreType = {

@@ -34,7 +34,7 @@ const PrimaryHeader: React.FC = () => {
   };
   return (
 
-    <Flex gap="115px" alignItems="center">
+    <Flex gap="115px" alignItems="center" px="3%">
       <Flex alignItems="center">
         <Box>
           <Image
@@ -142,7 +142,7 @@ const SecondaryHeader: React.FC<{
   }, [])
 
   return (
-    <Flex mt="17.65px" gap="">
+    <Flex mt="17.65px" gap="" px="3%">
       <Flex alignItems="center">
         {!activeMessage?.avatar.includes(".glb") && (
           <Image
@@ -516,7 +516,7 @@ const SendMessage: React.FC<{
 
   return (
 
-    <Flex className="flex align-center " alignItems="center">
+    <Flex className="flex align-center " alignItems="center" px="3%">
       <Flex gap="19.5px" alignItems="center">
         <Image
           src="/assets/icons/tag-icon.svg"
@@ -546,7 +546,7 @@ const SendMessage: React.FC<{
         />
       </Flex>
 
-      <div className="w-[15%] mt-[-4px] ml-[-15px]">
+      <div className="w-[15%] mt-[-4px] ">
         <Image
           src="../resources/Group 55371.png"
           alt="send message"

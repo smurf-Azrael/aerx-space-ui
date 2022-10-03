@@ -134,9 +134,6 @@ function Profile(props) {
           }}
         >
           <div id="babylon-element-profile"></div>
-          {/* <ThreeDModel
-              src={Array.isArray(nearState.profile.profileImg) ? nearState.profile.profileImg[0] : nearState.profile.profileImg}
-            /> */}
         </div>
       }
       <Box>
@@ -258,7 +255,7 @@ function Profile(props) {
             </Box>
           </Flex>
           <Flex
-            flexDirection="column" gap="10.96px" mr="3%" mt="21.92px"
+            flexDirection="column" gap="10.96px"  mt="21.92px"
            
           >
             {/* first */}

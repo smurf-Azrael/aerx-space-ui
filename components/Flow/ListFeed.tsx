@@ -227,7 +227,7 @@ const TextPost: React.FC<IProps> = ({
                   "/assets/images/avatar-1.svg"
                 }
                 className="w-8 h-8 rounded-full"
-                alt={`${owner_id}'s avatar`}
+                alt=""
                 width="27.4px"
                 height="27.4px"
               />

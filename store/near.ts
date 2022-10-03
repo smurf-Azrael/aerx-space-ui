@@ -111,6 +111,11 @@ const nearStore = create<NearStoreType>((set) => ({
     set3DUrl: (_3dUrl: any) => set((state) => ({ ...state, _3dUrl })),
     remove3DUrl: () => set((state) => ({ ...state, _3dUrl: null })),
 
+    tempos: null,
+    setTempos: (tempos: any) => set((state) => ({ ...state, tempos })),
+    removeTempos: () => set((state) => ({ ...state, tempos: null })),
+
+
 }));
 
 export { nearStore };

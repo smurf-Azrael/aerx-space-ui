@@ -54,12 +54,16 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                 }
                 if (postType == "tempo") {
                     try {
-                        await uploadTempo(nearState.accountId, postToMint.description, postToMint.title, postToMint.media);
-                        toast.success("Tempo uploaded successfully will be deleted exactly 12 hours from now");
-                        console.log("Tempo uploaded successfully")
-                        nearState.postDetails.body = "";
-                        nearState.postDetails.title = "";
-                        location.reload();
+                        let result = await uploadTempo(nearState.accountId, postToMint.description, postToMint.title, postToMint.media);
+                        if (result) {
+                            toast.success("Tempo uploaded successfully will be deleted exactly 12 hours from now");
+                            console.log("Tempo uploaded successfully")
+                            nearState.postDetails.body = "";
+                            nearState.postDetails.title = "";
+                            location.reload();
+                        }
+
+
                     } catch (err) {
                         setIsLoading(false);
                         toast.error("Unable to upload tempo. Try again later")

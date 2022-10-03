@@ -505,7 +505,7 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
   );
 };
 
-const renderTempo = (state) => {
+const renderTempo = (state: { tempos: string | any[]; }) => {
   for (let i = 0; i < state.tempos.length; i++) {
     if (typeof (state.tempos[i]) != "object") {
       const json = JSON.parse(state.tempos[i]);

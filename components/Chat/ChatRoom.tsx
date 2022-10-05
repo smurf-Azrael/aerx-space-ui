@@ -158,7 +158,7 @@ const SecondaryHeader: React.FC<{
             <div id="babylon-element-chat-room" style={{ width: "100%", height: "100%", margin: "auto" }}></div>
           </Box>
         )}
-        <Flex flexDirection="column" gap="2.74" ml="8.22px" width="165px">
+        <Flex flexDirection="column" gap="2.74" ml="8.22px" width="166px">
           <Text
             fontFamily="Poppins"
             fontSize="10.96px"
@@ -546,7 +546,7 @@ const SendMessage: React.FC<{
         />
       </Flex>
 
-      <div className="w-[15%] mt-[-4px] ml-[-15px]">
+      <div className="w-[15%] mt-[-4px] ">
         <Image
           src="../resources/Group 55371.png"
           alt="send message"

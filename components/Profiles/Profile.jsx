@@ -150,7 +150,7 @@ function Profile(props) {
           h="45%"
         >
           <Flex
-            flexDirection="column"
+            // flexDirection="column"
             gap="10.96px"
             ml="16.44px"
             mt="21.92px"

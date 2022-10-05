@@ -224,7 +224,7 @@ const TextPost: React.FC<IProps> = ({
                   "/assets/images/avatar-1.svg"
                 }
                 className="w-8 h-8 rounded-full"
-                alt={`${owner_id}'s avatar`}
+                alt=""
                 width="27.4px"
                 height="27.4px"
               />
@@ -381,14 +381,14 @@ const TextPost: React.FC<IProps> = ({
                   }
                   className="cursor-pointer charge-filter-effect  rounded-full flex justify-around"
                 >
-                  <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
-                    <Image
-                      src="../resources/Union.png"
-                      alt="post rewarded"
-                      width="14px"
-                      height="21px"
-                    />
-                  </Box>
+                 <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-lg bg-white/30 ">
+                <Image
+                  src="../resources/Union.png"
+                  alt="post rewarded"
+                  width="14px"
+                  height="21px"
+                />
+              </Box>
                 </div>
               )}
             </div>
@@ -731,6 +731,7 @@ const renderTempo = (state: { tempos: string | any[]; }) => {
                   height="21px"
                 />
               </Box>
+              
             </Flex>
           </Flex>
         </Flex>

@@ -180,7 +180,7 @@ function Profile(props) {
             flexDirection="column"
             alignItems="center"
             gap="45%"
-            // zIndex={6}
+            // zIndex={5}
           // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />

@@ -145,9 +145,10 @@ function Profile(props) {
           w="257.56px"
           width="100%"
           // onDoubleClick={props.circleClick}
-          gap="7%"
+          gap="17%"
           bgGradient={!(nearState.profile.profileImg.includes('.glb')) ? bgGradient : "none"}
           h="45%"
+          // justifycontent="space-evenly"
         >
           <Flex
             // flexDirection="column"
@@ -179,7 +180,8 @@ function Profile(props) {
           <Flex
             flexDirection="column"
             alignItems="center"
-            gap="45%"
+            gap="65%"
+            justifyContent="space-between"
             // zIndex={6}
           // onMouseLeave={props.leaveClick}
           >

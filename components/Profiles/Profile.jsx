@@ -145,7 +145,7 @@ function Profile(props) {
           w="257.56px"
           width="100%"
           // onDoubleClick={props.circleClick}
-          gap="7%"
+          gap="17%"
           bgGradient={!(nearState.profile.profileImg.includes('.glb')) ? bgGradient : "none"}
           h="45%"
         >

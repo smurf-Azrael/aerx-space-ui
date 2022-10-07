@@ -527,13 +527,15 @@ const renderTempo = (state: { tempos: string | any[]; }) => {
           mb={1}
         >
           <Flex justifyContent="space-between">
+          <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-1 backdrop-blur-sm bg-white/30 ">
             <Image
-              src="../resources/Label.png"
+              src="../resources/Tempo.png"
               alt="tempo post"
-              width="27.4px"
-              height="27.4px"
+              width="16.44px"
+              height="16.44px"
               alignContent="center"
             />
+            </Box>
             <Image
               src="/assets/icons/play-icon.svg"
               alt="play"

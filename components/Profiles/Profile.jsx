@@ -144,20 +144,20 @@ function Profile(props) {
         <Flex
           w="257.56px"
           width="100%"
-          // onDoubleClick={props.circleClick}
           gap="17%"
           bgGradient={!(nearState.profile.profileImg.includes('.glb')) ? bgGradient : "none"}
           h="45%"
         >
           <Flex
-            // flexDirection="column"
-            gap="10.96px"
-            ml="16.44px"
-            mt="21.92px"
-            cursor="pointer"
-           
+          flexDirection="column"
+          gap='75px'
           >
-            <Box
+            <Flex
+            mx="16.44px"
+            mt="19.18px"
+            gap="58.7px"
+            >
+              <Box
               color="#6054F0"
               width="27.4px"
               height="27.4px"
@@ -175,18 +175,130 @@ function Profile(props) {
                 pl="4px"
               />
             </Box>
+            <Image width="38.62px" height="15.755px" src={logoP} alt="aerx-logo" mt={2}/>
+            <Flex 
+            flexDirection="column"
+            gap="26.715px"
+            >
+                 <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
+              <Image src="../resources/Group 14948.png" w="42px" />
+            </Box>
+            
+            <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
+              <Image src="../resources/Group 14949.png" w="42px" />
+            </Box>
+         
+            <Box cursor={"pointer"}>
+              <Image src="../resources/Group 14950.png" w="42px"></Image>
+            </Box>
+
+
+            </Flex>
+
+            </Flex>
+
+
+
+          
+               <Flex 
+               justifyContent="center"
+               alignItems="center"
+               flexDirection="column"
+
+               >
+                <Heading
+                fontSize="21.92px"
+                color="#FFFFFF"
+                fontFamily="Poppins"
+                fontWeight="700"
+                fontStyle="normal"
+                lineHeight="100%"
+                mt="21px"
+                textTransform="capitalize"
+              >
+                {nearState.profile.fullName}
+              </Heading>
+              <Flex
+               gap="4px" 
+               mt="5px"  
+               alignItems="center"     
+               >
+              
+                    <Text
+                  fontSize="12.33px"
+                  fontFamily="Poppins"
+                  fontStyle="italic"
+                  color="#FFFFFFB2"
+                  fontWeight="400"
+                  letterSpacing="-0.02em"
+                  justifyContent="center"
+                  lineHeight=" 100%"
+                  mr="8px"
+                >
+                  {nearState.profile.username}
+                </Text>
+                <Image src={ellipse3} marginRight={2} w="10.96px" />
+                  <Text
+                  color= "#FFFFFFB2"
+                    fontFamily="Poppins"
+                    fontWeight="500"
+                    fontSize="9.59px"
+                    lineHeight="100%"
+                    letterSpacing="-0.02em"
+                    // width="156.18px"
+                  >
+                    Aura: 2k
+                  </Text>
+                
+               </Flex>
+               </Flex>
+               
+            
+         
+            
+
+
           </Flex>
-          <Flex
+       
+
+
+
+
+
+          {/* <Flex
+            gap="10.96px"
+            ml="16.44px"
+            mt="21.92px"
+            cursor="pointer"
+           
+          > */}
+            {/* <Box
+              color="#6054F0"
+              width="27.4px"
+              height="27.4px"
+              border="2px solid"
+              bgColor="#FFFFFF"
+              borderColor="#FFFFFF"
+              borderRadius="6.85px"
+              onClick={() => props.toggle()}
+            >
+              <Image
+                src="../resources/Frame 14290.svg"
+                w="18px"
+                py="5px"
+                px="auto"
+                pl="4px"
+              />
+            </Box> */}
+          </Flex>
+          {/* <Flex
             flexDirection="column"
             alignItems="center"
             gap="45%"
-            // zIndex={5}
-          // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
 
             <Box h="235px"
-            // zIndex={6}
             >
               <Heading
                 fontSize="21.92px"
@@ -196,11 +308,9 @@ function Profile(props) {
                 fontStyle="normal"
                 lineHeight="100%"
                 textAlign="center"
-                // letterSpacing="-0.02em"
                 mt="21px"
                 justifyContent="center"
                 textTransform="capitalize"
-                // zIndex="-1"
               >
                 {nearState.profile.fullName}
               </Heading>
@@ -222,14 +332,12 @@ function Profile(props) {
                   mb="11.645px"
                   mt="12px"
                   lineHeight=" 100%"
-                /* identical to box height, or 18px */
                 >
                   {nearState.profile.username}
                 </Text>
 
                 <Flex
-                // boxShadow = "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
-                // boxShadow = "rgba(0, 0, 0, 0.25) 30px 154px 155px,  10px -212px 130px, rgba(0, 0, 0, 0.12) 10px 24px 6px, rgba(0, 0, 0, 0.17) 12px 12px 13px, rgba(0, 0, 0, 0.09) 10px -13px 65px"
+
                 >
                   <Image src={ellipse3} marginRight={2} w="10.96px" />
                   <Text
@@ -238,9 +346,8 @@ function Profile(props) {
                     fontWeight="500"
                     fontSize="9.59px"
                     lineHeight="100%"
-                    /* identical to box height, or 14px */
-
                     letterSpacing="-0.02em"
+                    width="156.18px"
                   >
                     Aura: 2k
                   </Text>
@@ -256,25 +363,29 @@ function Profile(props) {
                 </Box>
               </Flex>
             </Box>
-          </Flex>
-          <Flex
+          </Flex> */}
+          {/* <Flex
             flexDirection="column" gap="10.96px" mr="3%" mt="21.92px"
            
           >
-            {/* first */}
+            
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
               <Image src="../resources/Group 14948.png" w="42px" />
             </Box>
-            {/* second */}
+            
             <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
               <Image src="../resources/Group 14949.png" w="42px" />
             </Box>
-            {/* third*/}
+         
             <Box cursor={"pointer"}>
               <Image src="../resources/Group 14950.png" w="42px"></Image>
             </Box>
-          </Flex>
-        </Flex>
+          </Flex> */}
+        {/* </Flex> */}
+
+
+
+        
         {/* profile */}
         {/* image carousel  */}
         <Flex

@@ -381,14 +381,14 @@ const TextPost: React.FC<IProps> = ({
                   }
                   className="cursor-pointer charge-filter-effect  rounded-full flex justify-around"
                 >
-                  <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
-                    <Image
-                      src="../resources/Union.png"
-                      alt="post rewarded"
-                      width="14px"
-                      height="21px"
-                    />
-                  </Box>
+                 <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-lg bg-white/30 ">
+                <Image
+                  src="../resources/Union.png"
+                  alt="post rewarded"
+                  width="14px"
+                  height="21px"
+                />
+              </Box>
                 </div>
               )}
             </div>
@@ -505,124 +505,241 @@ const VideoPost: React.FC<Feed> = ({ metadata, owner_id }) => {
   );
 };
 
-const renderTempo = (state: { tempos: any[]; }) => {
-  return (state.tempos.map((tempos, index) => {
-    const json = JSON.parse(tempos);
-    console.log('json', json[3], "key", index)
-    return (
-      <Flex
-        width="166.85px"
-        height="295.92px"
-        bgImage={`url(${json[2]})`}
-        borderRadius="10.275px"
-        marginLeft={0}
-        backgroundRepeat="no-repeat"
-        backgroundSize="cover"
-        flexDirection="column"
-        padding="10.96px"
-        gap="57.135px"
-        mt={-2}
-        mb={1}
-        key={index}
-      >
-        <Flex justifyContent="space-between">
-          <Image
-            src="../resources/Label.png"
-            alt="tempo post"
-            width="27.4px"
-            height="27.4px"
-            alignContent="center"
-          />
-          <Image
-            src="/assets/icons/play-icon.svg"
-            alt="play"
-            width="16.44px"
-            height="14.2px"
-            marginTop="5.48px"
-          />
-        </Flex>
-        <Flex flexDirection="column">
-          <Center>
+const renderTempo = (state: { tempos: string | any[]; }) => {
+  for (let i = 0; i < state.tempos.length; i++) {
+    if (typeof (state.tempos[i]) != "object") {
+      const json = JSON.parse(state.tempos[i]);
+      console.log("cnt: ", json[3])
+
+      return (
+        <Flex
+          width="166.85px"
+          height="295.92px"
+          bgImage={`url(${json[2]})`}
+          borderRadius="10.275px"
+          marginLeft={0}
+          backgroundRepeat="no-repeat"
+          backgroundSize="cover"
+          flexDirection="column"
+          padding="10.96px"
+          gap="57.135px"
+          mt={-2}
+          mb={1}
+        >
+          <Flex justifyContent="space-between">
+          <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-1 backdrop-blur-sm bg-white/30 ">
             <Image
-              src="/assets/images/avatar-4.svg"
-              alt="avatar"
-              width="27.4px"
-              height="27.4px"
+              src="../resources/Tempo.png"
+              alt="tempo post"
+              width="16.44px"
+              height="16.44px"
+              alignContent="center"
             />
-          </Center>
-          <Center>
-            <Box height="24px" width="121px">
-              <Text
-                fontFamily="Poppins"
-                fontStyle="normal"
-                fontWeight="600"
-                fontSize="10.96px"
-                lineHeight="100%"
-                letterSpacing="-0.02em"
-                color="#FFFFFF"
-                mt="10.96px"
-                textAlign="center"
-              >
-                {/* {owner_id} */}
-              </Text>
             </Box>
-          </Center>
-          <Center>
-            <Box height="24px" width="121px">
-              <Text
-                fontFamily="Poppins"
-                fontStyle="normal"
-                fontWeight="400"
-                fontSize="9.59px"
-                lineHeight="100%"
-                letterSpacing="-0.02em"
-                color="#FFFFFF"
-                mt="4.96px"
-                textAlign="center"
-              >
-                {json[3]}
-              </Text>
-            </Box>
-          </Center>
-          <Flex mt="78.255px" justifyContent="space-between" alignItems="center">
-            <Box>
+            <Image
+              src="/assets/icons/play-icon.svg"
+              alt="play"
+              width="16.44px"
+              height="14.2px"
+              marginTop="5.48px"
+            />
+          </Flex>
+          <Flex flexDirection="column">
+            <Center>
               <Image
-                src="/assets/icons/comment-icon.svg"
-                alt="comment"
-                width="16.44px"
-                height="16.44px"
+                src="/assets/images/avatar-4.svg"
+                alt="avatar"
+                width="27.4px"
+                height="27.4px"
               />
-            </Box>
-            <Box>
-              <Image
-                src="/assets/icons/share-icon.svg"
-                alt="comment"
-                width="16.44px"
-                height="16.44px"
-              />
-            </Box>
-            <Box>
-              <Image
-                src="/assets/icons/save-post-icon.svg"
-                alt="comment"
-                width="16.44px"
-                height="16.44px"
-              />
-            </Box>
-            <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
-              <Image
-                src="../resources/Union.png"
-                alt="post rewarded"
-                width="14px"
-                height="21px"
-              />
-            </Box>
+            </Center>
+            <Center>
+              <Box height="24px" width="121px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="600"
+                  fontSize="10.96px"
+                  lineHeight="100%"
+                  letterSpacing="-0.02em"
+                  color="#FFFFFF"
+                  mt="10.96px"
+                  textAlign="center"
+                >
+                  {/* {owner_id} */}
+                </Text>
+              </Box>
+            </Center>
+            <Center>
+              <Box height="24px" width="121px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="400"
+                  fontSize="9.59px"
+                  lineHeight="100%"
+                  letterSpacing="-0.02em"
+                  color="#FFFFFF"
+                  mt="4.96px"
+                  textAlign="center"
+                >
+                  {json[3]}
+                </Text>
+              </Box>
+            </Center>
+            <Flex mt="78.255px" justifyContent="space-between" alignItems="center">
+              <Box>
+                <Image
+                  src="/assets/icons/comment-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box>
+                <Image
+                  src="/assets/icons/share-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box>
+                <Image
+                  src="/assets/icons/save-post-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
+                <Image
+                  src="../resources/Union.png"
+                  alt="post rewarded"
+                  width="14px"
+                  height="21px"
+                />
+              </Box>
+            </Flex>
           </Flex>
         </Flex>
-      </Flex>
-    );
-
-  }))
+      );
+    } else {
+      const json = JSON.parse(state.tempos[i][0]);
+      return (
+        <Flex
+          width="166.85px"
+          height="295.92px"
+          bgImage={`url(${json[2]})`}
+          borderRadius="10.275px"
+          marginLeft={0}
+          backgroundRepeat="no-repeat"
+          backgroundSize="cover"
+          flexDirection="column"
+          padding="10.96px"
+          gap="57.135px"
+          mt={-2}
+          mb={1}
+        >
+          <Flex justifyContent="space-between">
+            <Image
+              src="../resources/Label.png"
+              alt="tempo post"
+              width="27.4px"
+              height="27.4px"
+              alignContent="center"
+            />
+            <Image
+              src="/assets/icons/play-icon.svg"
+              alt="play"
+              width="16.44px"
+              height="14.2px"
+              marginTop="5.48px"
+            />
+          </Flex>
+          <Flex flexDirection="column">
+            <Center>
+              <Image
+                src="/assets/images/avatar-4.svg"
+                alt="avatar"
+                width="27.4px"
+                height="27.4px"
+              />
+            </Center>
+            <Center>
+              <Box height="24px" width="121px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="600"
+                  fontSize="10.96px"
+                  lineHeight="100%"
+                  letterSpacing="-0.02em"
+                  color="#FFFFFF"
+                  mt="10.96px"
+                  textAlign="center"
+                >
+                  {/* {owner_id} */}
+                </Text>
+              </Box>
+            </Center>
+            <Center>
+              <Box height="24px" width="121px">
+                <Text
+                  fontFamily="Poppins"
+                  fontStyle="normal"
+                  fontWeight="400"
+                  fontSize="9.59px"
+                  lineHeight="100%"
+                  letterSpacing="-0.02em"
+                  color="#FFFFFF"
+                  mt="4.96px"
+                  textAlign="center"
+                >
+                  {json[3]}
+                </Text>
+              </Box>
+            </Center>
+            <Flex mt="78.255px" justifyContent="space-between" alignItems="center">
+              <Box>
+                <Image
+                  src="/assets/icons/comment-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box>
+                <Image
+                  src="/assets/icons/share-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box>
+                <Image
+                  src="/assets/icons/save-post-icon.svg"
+                  alt="comment"
+                  width="16.44px"
+                  height="16.44px"
+                />
+              </Box>
+              <Box className="charge-filter-effect  rounded-full flex justify-around py-1 px-2 backdrop-blur-sm bg-white/30 ">
+                <Image
+                  src="../resources/Union.png"
+                  alt="post rewarded"
+                  width="14px"
+                  height="21px"
+                />
+              </Box>
+              
+            </Flex>
+          </Flex>
+        </Flex>
+      );
+    }
+  }
 };
 
 const ListFeeds: React.FC<{ searchKey: string }> = ({ searchKey }) => {

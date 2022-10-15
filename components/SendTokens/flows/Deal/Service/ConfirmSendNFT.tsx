@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { NFT } from '../../../../../types/NFT';
 import Button from '../../../../Elements/Button';
 import StepIndicator from '../../../../StepIndicator';
+import { nearStore } from "../../../../../store/near";
 
 interface IProps {
     selectedNFTs: Array<NFT>
@@ -11,6 +12,7 @@ interface IProps {
 const ConfirmSendNFT: React.FC<IProps> = ({ selectedNFTs }) => {
     const [rotationDegree, setRotationDegree] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
+    const nearState = nearStore((state) => state);
 
     setTimeout(() => {
         if (rotationDegree < 360) {
@@ -24,7 +26,6 @@ const ConfirmSendNFT: React.FC<IProps> = ({ selectedNFTs }) => {
     setTimeout(() => {
         setLoading(false);
     }, 2000);
-
     return (
         <div className='w-[300px] h-[max-content] pb-2 items-center flex flex-col'>
             <label className='text-white text-sm'>Deal NFT</label>
@@ -56,7 +57,7 @@ const ConfirmSendNFT: React.FC<IProps> = ({ selectedNFTs }) => {
                     </div>
                 }
             </div>
-
+            
             <div className='mt-[30%] w-full px-4 '>
                 <div className='flex justify-around'>
                     <label className='text-white text-sm'>Information</label>
@@ -64,8 +65,8 @@ const ConfirmSendNFT: React.FC<IProps> = ({ selectedNFTs }) => {
                 <div className='w-full flex items-center justify-between mt-4 '>
                     <label className='text-sm text-white opacity-[30%]'>User</label>
                     <div className='flex gap-2 items-center'>
-                        <Image src="/assets/images/avatar-1.svg" alt="user" width={30} height={30} />
-                        <label className='text-sm text-white opacity-[30%]'>peeetwht.aerx</label>
+                        <Image src={nearState.profile?.profileImg!} alt="" width={30} height={30} />
+                        <label className='text-sm text-white opacity-[30%]'>{nearState.accountId}</label>
                     </div>
                 </div>
 
@@ -85,7 +86,7 @@ const ConfirmSendNFT: React.FC<IProps> = ({ selectedNFTs }) => {
 
                 <div className='mt-2 flex justify-between  text-sm gap-2 items-center'>
                     <label className='text-white opacity-[30%]'>Quantity</label>
-                    <label className='text-white'>54 AEX</label>
+                    <label className='text-white'>{nearState.serviceAmount} AEX</label>
                 </div>
 
                 <div className='w-full mt-4'>

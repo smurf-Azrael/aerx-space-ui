@@ -80,6 +80,10 @@ export type NearStoreType = {
     setTempos: (tempos: any) => void;
     removeTempos: () => void;
 
+    serviceAmount: string| null,
+    setServiceAmount: (serviceAmount: any) => void;
+    removeServiceAmount: () => void;
+
 };
 
 export type ProfileStoreType = {

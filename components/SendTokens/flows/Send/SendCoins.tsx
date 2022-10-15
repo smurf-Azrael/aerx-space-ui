@@ -1,3 +1,4 @@
+import Big from 'big.js';
 import React, { useState } from 'react'
 import { nearStore } from '../../../../store/near';
 import { selectActiveReceiver } from '../../../../store/slices/receiverSlice';
@@ -10,32 +11,46 @@ interface IProps {
     setTransactionStatus: (status: 'pending' | 'success' | 'failed') => void;
 }
 const SendCoins: React.FC<IProps> = ({ setTransactionStatus }) => {
-
     const { accountId } = useSelector(selectActiveReceiver)
     const nearState = nearStore((state) => state)
     const [loading, setLoading] = useState<boolean>(false);
-    const [coins, setCoins] = useState<string>();
+    const [amount, setAmount] = useState<string>();
+
+
+    const handleAmount = (e: { target: { value: any; }; }) => {
+        const value = e.target.value;
+        if (value > 0) {
+            //change colour
+            const inputBigN = new Big(value || 0);
+            const formattedInput = inputBigN.mul("10e23").toFixed(0);
+            setAmount(`${formattedInput}`);
+        }
+        //else change colour
+
+    }
 
     const handleSend = async () => {
         if (loading) return;
-        setLoading(true);
-        try {
-            const resp = await nearState.tokenContract.ft_transfer(
+        console.log("amt: ", amount)
+        if (accountId != null) {
+            setLoading(true);
+            await nearState.tokenContract.ft_transfer(
                 {
                     receiver_id: accountId,
-                    amount: coins,
-                    memo: `From ${nearState.accountId}  to ${accountId} at ${new Date().toLocaleString()}`
-                }
-            )
+                    amount: amount,
+                    memo: `AERX Chat token transfer From ${nearState.accountId}  to ${accountId} at ${new Date().toLocaleString()}`
+                },
+                '300000000000000',
+                '1',
+            ).then(() => {
+                setLoading(false)
+                console.log("Sent token ....")
+                setTransactionStatus('success')
+            }).catch((err: any) => {
             setLoading(false)
-            console.log("Sent token ....")
-            console.log(resp)
-            setTransactionStatus('success')
-        }
-        catch (e) {
-            setLoading(false)
-            setTransactionStatus('failed')
-            console.log(e)
+            // setTransactionStatus('failed')
+            console.error("Unable to send token due to: ",err)
+            })
         }
     }
     return (
@@ -55,7 +70,7 @@ const SendCoins: React.FC<IProps> = ({ setTransactionStatus }) => {
                                 type='number'
                                 className='text-sm text-right text-white focus:outline-none bg-transparent w-[max-content]'
                                 placeholder='0'
-                                onChange={(e) => setCoins(e.target.value)}
+                                onChange={handleAmount}
                             />
                         </div>
                     </div>

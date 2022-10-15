@@ -115,6 +115,10 @@ const nearStore = create<NearStoreType>((set) => ({
     setTempos: (tempos: any) => set((state) => ({ ...state, tempos })),
     removeTempos: () => set((state) => ({ ...state, tempos: null })),
 
+    serviceAmount: null,
+    setServiceAmount: (serviceAmount: any) => set((state) => ({ ...state, serviceAmount })),
+    removeServiceAmount: () => set((state) => ({ ...state, serviceAmount: null })),
+
 
 }));
 

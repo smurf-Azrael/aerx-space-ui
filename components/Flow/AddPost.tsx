@@ -215,7 +215,7 @@ const CreatePostForm: React.FC<{ setFileToPreview: (fileURL: string) => void, ea
                     <input placeholder='Post title'
                         className='focus:outline-none border-none text-white w-full bg-transparent text-sm mt-4'
                         onChange={updateTitle}
-                        defaultValue={earnPost ? earnPost.metadata.title : ""}
+                        defaultValue={""}
                     />
                     <div className='bg-white opacity-[15%] p-[0.5px] mt-4' />
                 </div>
@@ -386,9 +386,9 @@ const AddPost: React.FC<IProps> = ({ onClose }) => {
     const getPost = async () => {
         const post = await nearState?.profileContract?.post_details({ user_id: nearState?.accountId, post_id: earn2gether as string });
         if (!post) return;
-        if (post?.metadata?.media) {
-            setFilePreview(post?.metadata?.media);
-        }
+        // if (post?.metadata?.media) {
+        //     setFilePreview(post?.metadata?.media);
+        // }
         setEarnPost(post)
     }
 
@@ -423,7 +423,7 @@ const AddPost: React.FC<IProps> = ({ onClose }) => {
                                 color: 'white'
                             }}
                             onChange={updateBody}
-                            defaultValue={(earnPost) ? earnPost.metadata.description : ''}
+                            defaultValue={""}
 
                         />
                     </div>

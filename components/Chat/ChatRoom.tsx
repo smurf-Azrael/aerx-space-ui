@@ -543,6 +543,7 @@ const SendMessage: React.FC<{
               handleSendMessage();
             }
           }}
+          defaultValue={""}
         />
       </Flex>
 

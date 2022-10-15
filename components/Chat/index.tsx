@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import { EMessageType } from '../../enums/EMessageType';
 import { nearStore } from '../../store/near';
-import { setDirectMessages } from '../../store/slices/messagesSlice';
+import { selectMessages, setDirectMessages } from '../../store/slices/messagesSlice';
 import { selectModules } from '../../store/slices/modulesSlices';
 import { setActiveReceiver } from '../../store/slices/receiverSlice';
 import { useDispatch, useSelector } from '../../store/store';
@@ -15,6 +15,7 @@ import {
     Flex,
     Text,
 } from "@chakra-ui/react";
+import Big from 'big.js';
 
 export interface IMessageItem {
     accountId: string,
@@ -162,6 +163,7 @@ const Chat: React.FC = () => {
     const [profiles, setProfiles] = useState<Array<Feed>>([]);
     const [prevChats, setPrevChats] = useState<string>();
     const [chatReceiver, setChatReceiver] = useState<string>("");
+    const { messages } = useSelector(selectMessages);
 
 
     useEffect(() => {
@@ -269,6 +271,96 @@ const Chat: React.FC = () => {
         }
 
     }
+    const getRequest = async (caller: any, receiver: string, type: string) => {
+        const params = {
+          Key: `aerx-${type} between ${caller},${receiver}`,
+          Bucket: "aerx-requests",
+        };
+        try {
+          await filebase.getObject(params, async (err: any, data: { Body: WithImplicitCoercion<string> | { [Symbol.toPrimitive](hint: "string"): string; }; }) => {
+            if (err) {
+              const param = {
+                Key: `aerx-${type} between ${receiver},${caller}`,
+                Bucket: "aerx-requests",
+              };
+              await filebase.getObject(param, (err: any, data: { Body: WithImplicitCoercion<string> | { [Symbol.toPrimitive](hint: "string"): string; }; }) => {
+                if (err) {
+                  console.log("Request does not exist");
+                } else {
+                  const prevRequest = Buffer.from(data.Body, "utf8").toString();
+                  console.log("prev c: ", prevRequest);
+                  const requestArray = prevRequest.split("##aerx-request##");
+                  let allRequests = [];
+                  for (let i = 0; i < requestArray.length; i++) {
+                    const requestArrayFormatted = requestArray[i].replaceAll(
+                      "\n",
+                      " "
+                    );
+                    const json = JSON.parse(requestArrayFormatted);
+                    const amountBigN = new Big(json[3] || 0);
+                    const formattedAmountBigN = amountBigN.div("10e23").toFixed(3);
+                    console.log(json);
+                    console.log("time: ", json[0]);
+                    console.log("sender: ", json[1]);
+                    console.log("message: ", json[2]);
+                    console.log("amount: ", formattedAmountBigN);
+                    const _request = {
+                        id: Math.random().toString(36).substr(2, 9),
+                        sender: {
+                          id: json[1],
+                          name: json[1],
+                        },
+                        type: EMessageType.TEXT,
+                        content: `Requested ${formattedAmountBigN} AEX with memo: ${json[2]}`,
+                      //   amount: json[3],
+                        createdAt: json[0],
+                    };
+                    allRequests.push(_request);
+                  }
+                  messages.forEach((msg) => {
+                    allRequests.push(msg)
+                  })
+                  dispatch(setDirectMessages(allRequests));
+                }
+              });
+            } else {
+              const prevRequest = Buffer.from(data.Body, "utf8").toString();
+              console.log("prev c: ", prevRequest);
+              const requestArray = prevRequest.split("##aerx-request##");
+              let allRequests = [];
+              for (let i = 0; i < requestArray.length; i++) {
+                const requestArrayFormatted = requestArray[i].replaceAll("\n", " ");
+                const json = JSON.parse(requestArrayFormatted);
+                const amountBigN = new Big(json[3] || 0);
+                const formattedAmountBigN = amountBigN.div("10e23").toFixed(3);
+                console.log(json);
+                console.log("time: ", json[0]);
+                console.log("sender: ", json[1]);
+                console.log("message: ", json[2]);
+                console.log("amount: ", formattedAmountBigN);
+                const _request = {
+                  id: Math.random().toString(36).substr(2, 9),
+                  sender: {
+                    id: json[1],
+                    name: json[1],
+                  },
+                  type: EMessageType.TEXT,
+                  content: `Requested ${formattedAmountBigN} AEX with memo: ${json[2]}`,
+                //   amount: json[3],
+                  createdAt: json[0],
+                };
+                allRequests.push(_request);
+              }
+              messages.forEach((msg) => {
+                allRequests.push(msg)
+              })
+              dispatch(setDirectMessages(allRequests));
+            }
+          });
+        } catch (err) {
+          console.error("try caught error: ", err);
+        }
+      };
     //Todo: Move aerx chat keycode to env
     const handleSetActiveMessage = async (index: number) => {
         const params = {
@@ -339,6 +431,9 @@ const Chat: React.FC = () => {
                     dispatch(setDirectMessages(messages.reverse()));
                 }
             })
+            await getRequest(nearState.accountId, chats[index].accountId, "CoinRequest");
+            await getRequest(nearState.accountId, chats[index].accountId, "CoinDeal");
+              
         } catch (err) {
             console.error("try caught error: ", err);
 

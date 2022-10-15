@@ -145,7 +145,7 @@ function Profile(props) {
           gap="17%"
           bgGradient={!(nearState.profile.profileImg.includes('.glb')) ? bgGradient : "none"}
           h="45%"
-          // justifycontent="space-evenly"
+        // justifycontent="space-evenly"
         >
           <Flex
             // flexDirection="column"
@@ -153,7 +153,7 @@ function Profile(props) {
             ml="16.44px"
             mt="21.92px"
             cursor="pointer"
-           
+
           >
             <Box
               color="#6054F0"
@@ -179,7 +179,7 @@ function Profile(props) {
             alignItems="center"
             gap="65%"
             justifyContent="space-between"
-            // zIndex={6}
+          // zIndex={6}
           // onMouseLeave={props.leaveClick}
           >
             <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
@@ -199,7 +199,7 @@ function Profile(props) {
                 mt="21px"
                 justifyContent="center"
                 textTransform="capitalize"
-                // zIndex="-1"
+              // zIndex="-1"
               >
                 {nearState.profile.fullName}
               </Heading>
@@ -257,8 +257,8 @@ function Profile(props) {
             </Box>
           </Flex>
           <Flex
-            flexDirection="column" gap="10.96px"  mt="21.92px"
-           
+            flexDirection="column" gap="10.96px" mt="21.92px"
+
           >
             {/* first */}
             <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>

@@ -13,7 +13,7 @@ const Circle = (props) => {
 
   let display = props.circle ? "block" : "none"
   let index = props.circle ? 1 : "none"
-  let width = props.circle ? 545 : "none"
+  let width = props.circle ? 575 : "none"
   const bgGradient = useColorModeValue(
     // "linear(#edf2f700, #edf2f720 15%, gray.100 90%)",
     "linear(180deg, rgba(25, 25, 25, 0) 0%,, #191919 100%)"

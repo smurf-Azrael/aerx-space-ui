@@ -156,6 +156,7 @@ const Chat: React.FC = () => {
     const dispatch = useDispatch();
     const [chats, setChats] = useState<Array<IMessageItem>>([]);
     const [chatsClone, setChatsClone] = useState<Array<IMessageItem>>([]);
+    const [isSearched, setIsSearched] = useState<boolean>(false);
     const [activeMessage, setActiveMessage] = useState<number>(0);
     const { chat, sidebar } = useSelector(selectModules)
     const nearState: any = nearStore((state) => state);
@@ -213,6 +214,7 @@ const Chat: React.FC = () => {
     const formMessageItem = () => {
         const messageItems: Array<IMessageItem> = [];
         profiles.map((profile: Feed) => {
+            
             const messageItem: IMessageItem = {
                 accountId: profile.owner_id,
                 avatar: profile?.metadata?.media || '/assets/images/avatar-1.svg',
@@ -224,7 +226,7 @@ const Chat: React.FC = () => {
             messageItems.push(messageItem);
         })
         setChats(messageItems);
-        setChatsClone(messageItems);
+        setChatsClone(messageItems)
     }
 
     const AWS = require('aws-sdk');
@@ -475,12 +477,14 @@ const Chat: React.FC = () => {
                             <Image src="/assets/icons/fill-icon.svg" alt="Pin" width={13} height={13} />
                             <label className='text-[14px] text-white opacity-[15%]'>All Chats</label>
                         </div>
+                        
                         <div className="bg-redd-500 h-full overflow-y-scroll">
                             {chatsClone.map((message, index) => (
                                 <MessageItem onClickCapture={() => handleCapture(index)} key={index} {...message} isActive={activeMessage === index ? true : false} onClick={() => handleSetActiveMessage(index)} />
                             ))
                             }
                         </div>
+                     
                     </div>
 
                     {/* <div>

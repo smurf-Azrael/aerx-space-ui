@@ -17,11 +17,9 @@ import LogOut from "./LogOut";
 import CircleList from "./CircleList";
 import Circle from "./Circle";
 import { expandChat, expandFlow } from "../../store/slices/modulesSlices";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-
-const ThreeDModel = dynamic(() => import('../3DModel'), { ssr: false });
-
+const ThreeDModel = dynamic(() => import("../3DModel"), { ssr: false });
 
 function Profile(props) {
   const nearState = nearStore((state) => state);
@@ -54,10 +52,10 @@ function Profile(props) {
   const mouseDown = (e) => {
     return <Circle />;
   };
-  if (nearState.profile.profileImg.includes('.glb')) {
+  if (nearState.profile.profileImg.includes(".glb")) {
     useEffect(() => {
       const initBabylon = async () => {
-        const BabylonViewer = await import('babylonjs-viewer');
+        const BabylonViewer = await import("babylonjs-viewer");
         const babylon = document.getElementById("babylon-element-profile");
         let viewer = new BabylonViewer.DefaultViewer(babylon, {
           extends: "none",
@@ -66,15 +64,16 @@ function Profile(props) {
               html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
               params: {
                 ["no-escape"]: true,
-                ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
-              }
+                ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`,
+              },
             },
             ["loadingScreen"]: {
               html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
               params: {
                 ["backgroundColor"]: "#0000004d",
-                ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
-              }
+                ["loadingImage"]:
+                  "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png",
+              },
             },
           },
           scene: {
@@ -83,7 +82,7 @@ function Profile(props) {
               g: 0,
               b: 0,
               a: 0,
-            }
+            },
           },
           engine: {
             antialiasing: true,
@@ -101,91 +100,126 @@ function Profile(props) {
             position: {
               x: 0,
               y: -1,
-              z: 1
-            }
-          }
+              z: 1,
+            },
+          },
         });
-      }
-      initBabylon().then(() => {
-      })
-
-    }, [])
+      };
+      initBabylon().then(() => {});
+    }, []);
   }
 
   return circ ? (
     <CircleList remove={remCirc} />
   ) : (
     <Flex
-      bgColor={!(nearState.profile.profileImg.includes(".glb")) ? "#191919" : "transparent"}
+      bgColor={
+        !nearState.profile.profileImg.includes(".glb")
+          ? "#191919"
+          : "transparent"
+      }
       position="absolute"
       height="100%"
-      w="257.56px"
+      w="290px"
       // bgImage="url('../resources/pd.svg') "
-      bgImage={!(nearState.profile.profileImg.includes('.glb')) ? `url('${nearState.profile.profileImg}')` : 'none'}
-      bgSize="100% 45%"
+      bgImage={
+        !nearState.profile.profileImg.includes(".glb")
+          ? `url('${nearState.profile.profileImg}')`
+          : "none"
+      }
+      bgSize="auto 47%"
       bgRepeat="no-repeat"
-      bgPosition="top"
+      bgPos="top"
       className="relative"
+      overflowY="hidden"  
     >
-      {nearState.profile.profileImg.includes(".glb") &&
-        <div className="absolute top-0 w-[257.56px] h-[50%] profile-gradient  "
+      {nearState.profile.profileImg.includes(".glb") && (
+        <div
+          className="absolute top-0 w-[290px] h-[47%] profile-gradient  "
           style={{
-            zIndex: -1
+            zIndex: -1,
           }}
         >
           <div id="babylon-element-profile"></div>
         </div>
-      }
+      )}
       <Box>
         {/* profile */}
         <Flex
-          w="257.56px"
+          w="290px"
           width="100%"
           // onDoubleClick={props.circleClick}
           gap="17%"
-          bgGradient={!(nearState.profile.profileImg.includes('.glb')) ? bgGradient : "none"}
-          h="45%"
-        // justifycontent="space-evenly"
+          bgGradient={
+            !nearState.profile.profileImg.includes(".glb") ? bgGradient : "none"
+          }
+          h="47%"
+          // justifycontent="space-evenly"
         >
-          <Flex
-            // flexDirection="column"
-            gap="10.96px"
-            ml="16.44px"
-            mt="21.92px"
-            cursor="pointer"
+          <Flex flexDirection="column" w="full">
+            <Flex justifyContent="space-between" mb="auto">
+              <Flex
+                flexDirection="column"
+                gap="10.96px"
+                ml="16.44px"
+                mt="21.92px"
+                cursor="pointer"
+              >
+                <Box
+                  color="#6054F0"
+                  width="27.4px"
+                  height="27.4px"
+                  border="2px solid"
+                  bgColor="#FFFFFF"
+                  borderColor="#FFFFFF"
+                  borderRadius="6.85px"
+                  onClick={() => props.toggle()}
+                >
+                  <Image
+                    src="../resources/Frame 14290.svg"
+                    w="18px"
+                    py="5px"
+                    px="auto"
+                    pl="4px"
+                  />
+                </Box>
+              </Flex>
 
-          >
+              <Flex
+                flexDirection="column"
+                alignItems="center"
+                gap="65%"
+                justifyContent="space-between"
+                // zIndex={6}
+                // onMouseLeave={props.leaveClick}
+              >
+                <Image
+                  width="42.47px"
+                  height="15.755px"
+                  src={logoP}
+                  mt="21.92px"
+                />
+              </Flex>
+              <Flex flexDirection="column" gap="10.96px" mt="21.92px" mr={4}>
+                {/* first */}
+                <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
+                  <Image src="../resources/Group 14948.png" w="42px" />
+                </Box>
+                {/* second */}
+                <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
+                  <Image src="../resources/Group 14949.png" w="42px" />
+                </Box>
+                {/* third*/}
+                <Box cursor={"pointer"}>
+                  <Image src="../resources/Group 14950.png" w="42px"></Image>
+                </Box>
+              </Flex>
+            </Flex>
+
             <Box
-              color="#6054F0"
-              width="27.4px"
-              height="27.4px"
-              border="2px solid"
-              bgColor="#FFFFFF"
-              borderColor="#FFFFFF"
-              borderRadius="6.85px"
-              onClick={() => props.toggle()}
-            >
-              <Image
-                src="../resources/Frame 14290.svg"
-                w="18px"
-                py="5px"
-                px="auto"
-                pl="4px"
-              />
-            </Box>
-          </Flex>
-          <Flex
-            flexDirection="column"
-            alignItems="center"
-            gap="65%"
-            justifyContent="space-between"
-          // zIndex={6}
-          // onMouseLeave={props.leaveClick}
-          >
-            <Image width="42.47px" height="15.755px" src={logoP} mt="21.92px" />
-
-            <Box h="235px"
-            // zIndex={6}
+              h="auto"
+              mb={4}
+              // zIndex={6}
             >
               <Heading
                 fontSize="21.92px"
@@ -199,7 +233,7 @@ function Profile(props) {
                 mt="21px"
                 justifyContent="center"
                 textTransform="capitalize"
-              // zIndex="-1"
+                // zIndex="-1"
               >
                 {nearState.profile.fullName}
               </Heading>
@@ -208,7 +242,7 @@ function Profile(props) {
                 alignItems="center"
                 justifyContent="center"
                 gap="16px"
-              // mt="55px"
+                // mt="55px"
               >
                 <Text
                   fontSize="12.33px"
@@ -221,7 +255,7 @@ function Profile(props) {
                   mb="11.645px"
                   mt="12px"
                   lineHeight=" 100%"
-                /* identical to box height, or 18px */
+                  /* identical to box height, or 18px */
                 >
                   {nearState.profile.username}
                 </Text>
@@ -256,23 +290,6 @@ function Profile(props) {
               </Flex>
             </Box>
           </Flex>
-          <Flex
-            flexDirection="column" gap="10.96px" mt="21.92px"
-
-          >
-            {/* first */}
-            <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
-              <Image src="../resources/Group 14948.png" w="42px" />
-            </Box>
-            {/* second */}
-            <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
-              <Image src="../resources/Group 14949.png" w="42px" />
-            </Box>
-            {/* third*/}
-            <Box cursor={"pointer"}>
-              <Image src="../resources/Group 14950.png" w="42px"></Image>
-            </Box>
-          </Flex>
         </Flex>
         {/* profile */}
         {/* image carousel  */}
@@ -283,10 +300,10 @@ function Profile(props) {
           flexDirection="column"
           backgroundGradient="linear-gradient(180deg, rgba(25, 25, 25, 0) 0%, #191919 100%)"
           mb="15%"
-          width="257.56px"
+          width="290px"
           zIndex={8}
         >
-          <Center borderRadius="50px 50px 0px 0px"  >
+          <Center borderRadius="50px 50px 0px 0px">
             <Button
               onClick={remCirc}
               cursor="pointer"
@@ -298,7 +315,7 @@ function Profile(props) {
               px="0"
               flexDirection="column"
               gap="2px"
-            // backgroundColor="#1F1F1F"
+              // backgroundColor="#1F1F1F"
             >
               <MinusIcon
                 w="21.92px"
@@ -331,6 +348,7 @@ function Profile(props) {
             overflowX="hidden"
             flex="auto"
             ml="8px"
+            mt="10px"
           >
             <Flex
               flexDirection="column"
@@ -343,9 +361,9 @@ function Profile(props) {
             >
               <Image
                 src={ellipse4}
-                width="43.84px"
+                width="48px"
                 borderRadius="100%"
-              //   mb="5.48px"
+                //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -369,9 +387,9 @@ function Profile(props) {
             >
               <Image
                 src={ellipse5}
-                width="43.84px"
+                width="48px"
                 borderRadius="100%"
-              //   mb="5.48px"
+                //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -395,9 +413,9 @@ function Profile(props) {
             >
               <Image
                 src={ellipse4}
-                width="43.84px"
+                width="48px"
                 borderRadius="100%"
-              //   mb="5.48px"
+                //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -420,9 +438,9 @@ function Profile(props) {
             >
               <Image
                 src={ellipse4}
-                width="43.84px"
+                width="48px"
                 borderRadius="100%"
-              //   mb="5.48px"
+                //   mb="5.48px"
               />
               <Text
                 fontSize="10.96px"
@@ -439,7 +457,7 @@ function Profile(props) {
         <Flex bgColor="#242424" borderTopRadius="34.25px" h="23%" mt="12%">
           <Box
             bgColor="#242424"
-            width="257.56px"
+            width="290px"
             marginLeft="0"
             borderTopRadius="34.25px"
             position="absolute"
@@ -458,7 +476,7 @@ function Profile(props) {
                 px="0"
                 flexDirection="column"
                 gap="2px"
-              // backgroundColor="#1F1F1F"
+                // backgroundColor="#1F1F1F"
               >
                 <MinusIcon
                   w="21.92px"
@@ -495,7 +513,7 @@ function Profile(props) {
                   fontWeight="700"
                   color="#ffffff"
                   fontFamily="Poppins"
-                //   mr="30.14px"
+                  //   mr="30.14px"
                 >
                   {nearState.aexBalance} AEX
                 </Text>
@@ -576,7 +594,7 @@ function Profile(props) {
           </Box>
           <Box
             bgColor="#242424"
-            width="257.56px"
+            width="290px"
             marginLeft="0"
             // borderTopRadius="34.25px"
             position="absolute"
@@ -626,8 +644,8 @@ function Profile(props) {
                 </Text>
                 <Image
                   src={"resources/Rectangle 3421.png"}
-                  maxWidth="95.9px"
-                  height="85%"
+                  maxWidth="110px"
+                  height="119px"
                 />
               </Box>
 
@@ -669,8 +687,8 @@ function Profile(props) {
                 </Text>
                 <Image
                   src={"resources/Rectangle 3527.png"}
-                  maxWidth="95.9px"
-                  height="85%"
+                  maxWidth="110px"
+                  height="119px"
                 />
               </Box>
 
@@ -715,8 +733,8 @@ function Profile(props) {
                 </Text>
                 <Image
                   src={"resources/Rectangle 3421.png"}
-                  maxWidth="95.9px"
-                  height="85%"
+                  maxWidth="110px"
+                  height="119px"
                 />
               </Box>
             </Flex>
@@ -725,7 +743,7 @@ function Profile(props) {
           <Box
             position="absolute"
             bgColor="#303030;"
-            width="257.56px"
+            width="290px"
             marginLeft="0"
             borderTopRadius="50px"
             h="8%"
@@ -805,7 +823,7 @@ function Profile(props) {
         h="100%"
         position="fixed"
         zIndex={backdrop}
-        w="257.56px"
+        w="290px"
         bg="#000000B2"
         onClick={logOutUser}
         cursor="pointer"
@@ -813,7 +831,7 @@ function Profile(props) {
         .
       </Flex>
       <LogOut zIndex={zIndex} log={isLogout} logout={logOutUser} />
-    </Flex >
+    </Flex>
   );
 }
 

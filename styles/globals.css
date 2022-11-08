@@ -3,20 +3,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import 'tailwindcss/utilities';
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import "tailwindcss/utilities";
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #2b2b2b
+  color: #2b2b2b;
 }
 
 .flow,
 .poppins,
 .account {
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 html,
@@ -26,7 +26,7 @@ body {
   margin: 0;
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 a {
@@ -38,7 +38,7 @@ a {
   box-sizing: border-box;
 }
 
-.charge-filter-effect{
+.charge-filter-effect {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
 }
@@ -54,11 +54,8 @@ a {
     position: fixed;
     bottom: 0;
     right: 0;
-
   }
 }
-
-
 
 .topBar {
   align-items: center;
@@ -74,7 +71,8 @@ a {
   border: none;
   width: 100%;
   height: calc(100vh - 100px);
-}.topBar {
+}
+.topBar {
   align-items: center;
   border-bottom: 2px solid #333;
   display: flex;
@@ -91,37 +89,90 @@ a {
   /* color: #252525 */
 }
 
-/* Scroll bar stylings */
+/* .scroller {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-margin-left: 5px;
+  scrollbar-width: thin;
+  border-radius: 20px;
+  scrollbar-color: #6054f0 transparent;
+} */
+
 ::-webkit-scrollbar {
+  width: 14px;
+  height: 20px;
+  left: 10px;
+  scrollbar-color: #6054f0 transparent;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6054f0;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 20px;
+  height: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5449c9;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+
+@supports (scrollbar-color: #6054f0 transparent) {
+  * {
+    scrollbar-color: #6054f0 transparent;
+    scrollbar-width: thin;
+  }
+}
+
+/* Scroll bar stylings */
+/* ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
-  
 
-
-
-  /* display: none; */
-}
+  display: none;
+} */
 
 /* Track */
-::-webkit-scrollbar-track {
-  background: var(--lightestgrey); 
-}
+/* ::-webkit-scrollbar-track {
+  background: var(--lightestgrey);
+} */
 
 /* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgba(136, 136, 136, 0.174); 
+/* ::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.174);
   border-radius: 5px;
- 
-}
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(85, 85, 85, 0.149); 
-}
-.profile-gradient{
-  background: rgb(51,43,141);
-  background: -moz-linear-gradient(180deg, rgba(51,43,141,1) 6%, rgba(51,43,141,1) 63%, rgba(29,29,29,1) 93%);
-  background: -webkit-linear-gradient(180deg, rgba(51,43,141,1) 6%, rgba(51,43,141,1) 63%, rgba(29,29,29,1) 93%);
-  background: linear-gradient(180deg, rgba(51,43,141,1) 6%, rgba(51,43,141,1) 63%, rgba(29,29,29,1) 93%);
+/* ::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.149);
+} */
+.profile-gradient {
+  background: rgb(51, 43, 141);
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(51, 43, 141, 1) 6%,
+    rgba(51, 43, 141, 1) 63%,
+    rgba(29, 29, 29, 1) 93%
+  );
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(51, 43, 141, 1) 6%,
+    rgba(51, 43, 141, 1) 63%,
+    rgba(29, 29, 29, 1) 93%
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(51, 43, 141, 1) 6%,
+    rgba(51, 43, 141, 1) 63%,
+    rgba(29, 29, 29, 1) 93%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#332b8d",endColorstr="#1d1d1d",GradientType=1);
 }

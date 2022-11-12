@@ -126,9 +126,8 @@ function Profile(props) {
       w="320px"
       height="100vh"
       overflowX="hidden"
-      // overflowY="scroll"
-      // background="scroll"
-      style={{padding: "0!important"}}
+      overflowY="hidden"
+      style={{ padding: "0!important" }}
     >
       <GridItem
         bgColor={
@@ -197,13 +196,9 @@ function Profile(props) {
                 // zIndex={6}
                 // onMouseLeave={props.leaveClick}
               >
-                <Image
-                  width="42.47px"
-                  height="15.755px"
-                  src={logoP}
-                />
+                <Image width="42.47px" height="15.755px" src={logoP} />
               </Flex>
-              <Flex flexDirection="column" gap="10.96px" mt="21.92px" >
+              <Flex flexDirection="column" gap="10.96px" mt="21.92px">
                 {/* first */}
                 <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
                   <Image src="../resources/Group 14948.png" w="42px" />
@@ -462,452 +457,466 @@ function Profile(props) {
             </Wrap>
           </Flex>
         </Box>
-        <Box
-          px="10px"
-          bgColor="#242424"
-          w="320px"
-          marginLeft="0"
-          borderTopRadius="34.25px"
-          marginTop="-1.5rem"
-        >
-          <Center borderRadius="50px 50px 0px 0px">
-            <Button
-              onClick={props.wallet}
-              cursor="pointer"
-              background="none"
-              w="21.92px"
-              bgColor="rgba(255, 255, 255, 0.3);"
-              height="12px"
-              mt="2"
-              px="0"
-              flexDirection="column"
-              gap="2px"
-              backgroundColor="#242424"
+        <Box bgColor="rgb(36, 36, 36)">
+          <Box bgColor="#1F1F1F">
+            <Box
+              px="10px"
+              bgColor="#242424"
+              w="320px"
+              marginLeft="0"
+              borderTopRadius="34.25px"
+              marginTop="-1.5rem"
             >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </Button>
-          </Center>
-          <Box>
-            <Heading
-              letterSpacing="-0.02em"
-              fontWeight="500"
-              fontSize="16px"
-              lineHeight="100%"
-              textTransform="capitalize"
-              fontFamily="Poppins"
-              color="rgba(255, 255, 255, 0.3)"
-              mt="10px"
-            >
-              Wallet
-            </Heading>
-            <Flex my={2}>
-              <Text
-                flexBasis="200px"
-                fontSize="16.44px"
-                fontWeight="700"
-                color="#ffffff"
-                fontFamily="Poppins"
-              >
-                {" "}
-                {nearState.aexBalance} AEX
-              </Text>
-              <Flex>
-                <div
-                  className="cursor-pointer  hover:bg-[#ffffff39]
-    background-#1F1F1F
-    w-[16.44px]
-    h-[16.44px]
-    mr-[10.275px]
-
-   "
-                >
-                  <Image
-                    src={"resources/Download.png"}
-                    alt="download"
-                    w="16.44px"
-                    h="16.44px"
-                  />
-                </div>
-                <div
-                  className="cursor-pointer  hover:bg-[#ffffff39]
-    background-#1F1F1F
-    w-[16.44px]
-    h-[16.44px]
-    mr-[10.275px]
-
-   "
+              <Center borderRadius="50px 50px 0px 0px">
+                <Button
                   onClick={props.wallet}
+                  cursor="pointer"
+                  background="none"
+                  w="21.92px"
+                  bgColor="rgba(255, 255, 255, 0.3);"
+                  height="12px"
+                  mt="2"
+                  px="0"
+                  flexDirection="column"
+                  gap="2px"
+                  backgroundColor="#242424"
                 >
-                  <Image
-                    src={"resources/Upload.png"}
-                    alt="upload"
-                    w="16.44px"
-                    h="16.44px"
-                    mr="10.275px"
+                  <MinusIcon
+                    w="21.92px"
+                    bgColor="rgba(255, 255, 255, 0.3);"
+                    height="2px"
                   />
-                </div>
-                <div
-                  className="cursor-pointer  hover:bg-[#ffffff39]
-    background-#1F1F1F
-    w-[16.44px]
-    h-[16.44px]
-    mr-[10.275px]
-
-   "
-                  onClick={props.wallet}
-                >
-                  <Image
-                    src={"resources/Frame 5556.png"}
-                    alt="upload"
-                    w="16.44px"
-                    h="16.44px"
-                    mr="10.275px"
+                  <MinusIcon
+                    w="21.92px"
+                    bgColor="rgba(255, 255, 255, 0.3);"
+                    height="2px"
                   />
-                </div>
-                <div
-                  className="cursor-pointer  hover:bg-[#ffffff39]
-    background-#1F1F1F
-    w-[16.44px]
-    h-[16.44px]
-    mr-[10.275px]
-
-   "
-                  onClick={props.wallet}
+                </Button>
+              </Center>
+              <Box>
+                <Heading
+                  letterSpacing="-0.02em"
+                  fontWeight="500"
+                  fontSize="16px"
+                  lineHeight="100%"
+                  textTransform="capitalize"
+                  fontFamily="Poppins"
+                  color="rgba(255, 255, 255, 0.3)"
+                  mt="10px"
                 >
-                  <Image
-                    src={"resources/plant 1.png"}
-                    alt="upload"
-                    w="16.44px"
-                    h="16.44px"
-                    mr="10.275px"
-                  />
-                </div>
-              </Flex>
-            </Flex>
-            <Flex gap={3} w="420px" h="200px">
-              <Box h="149px" w="120px" border="none">
-                <Box
-                  my={0}
-                  h="100%"
-                  w="100%"
-                  borderWidth="1px"
-                  borderRadius="15px"
-                  bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
-                  bgRepeat="no-repeat"
-                  bgSize="cover"
-                  bgPos="center"
-                  border="none"
-                >
-                  <Box
-                    bgColor="rgba(0, 0, 0, 0.5)"
-                    h="100%"
-                    borderRadius="15px"
-                  >
-                    <Flex
-                      px={2}
-                      py={2}
-                      h="100%"
-                      flexDirection="column"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        px={3}
-                        my={1}
-                      >
-                        <Box mr={1} alignSelf="center">
-                          <Image src={"resources/Ticket Star.png"} alt="star" />
-                        </Box>
-                        <Text
-                          h="14px"
-                          w="34px"
-                          fontSize="14px"
-                          fontWeight="500"
-                          fontStyle="normal"
-                          lineHeight="100%"
-                          mx={1}
-                          alignSelf="center"
-                          color="#fff"
-                        >
-                          Art
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text
-                          fontSize="16px"
-                          fontWeight="900"
-                          fontStyle="normal"
-                          lineHeight="18px"
-                          letterSpacing="-2"
-                          my={3}
-                          color="#fff"
-                          alignSelf="center"
-                        >
-                          NFT Name
-                        </Text>
-                        <Text
-                          fontSize="16px"
-                          fontWeight="400"
-                          fontStyle="normal"
-                          lineHeight="100%"
-                          letterSpacing="-0.02em"
-                          textAlign="center"
-                          color="#fff"
-                        >
-                          24,6 aex
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </Box>
-                </Box>
-              </Box>
-              <Box h="149px" w="120px" border="none">
-                <Box
-                  my={0}
-                  h="100%"
-                  w="100%"
-                  borderWidth="1px"
-                  borderRadius="15px"
-                  bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
-                  bgRepeat="no-repeat"
-                  bgSize="cover"
-                  bgPos="center"
-                  border="none"
-                >
-                  <Box
-                    bgColor="rgba(0, 0, 0, 0.5)"
-                    h="100%"
-                    borderRadius="15px"
-                  >
-                    <Flex
-                      px={2}
-                      py={2}
-                      h="100%"
-                      flexDirection="column"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        px={3}
-                        my={1}
-                      >
-                        <Box mr={1} alignSelf="center">
-                          <Image src={"resources/Fill 1.png"} alt="Fill" />
-                        </Box>
-                        <Text
-                          h="14px"
-                          w="34px"
-                          fontSize="14px"
-                          fontWeight="500"
-                          fontStyle="normal"
-                          lineHeight="100%"
-                          mx={1}
-                          alignSelf="center"
-                          color="#fff"
-                        >
-                          Art
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text
-                          fontSize="16px"
-                          fontWeight="900"
-                          fontStyle="normal"
-                          lineHeight="18px"
-                          letterSpacing="-2"
-                          my={3}
-                          alignSelf="center"
-                          color="#fff"
-                        >
-                          NFT Name
-                        </Text>
-                        <Text
-                          fontSize="16px"
-                          fontWeight="400"
-                          fontStyle="normal"
-                          lineHeight="100%"
-                          letterSpacing="-0.02em"
-                          textAlign="center"
-                          color="#fff"
-                        >
-                          24,6 aex
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </Box>
-                </Box>
-              </Box>
-              <Box h="149px" w="120px" border="none">
-                <Box
-                  my={0}
-                  h="100%"
-                  w="100%"
-                  borderWidth="1px"
-                  borderRadius="15px"
-                  bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
-                  bgRepeat="no-repeat"
-                  bgSize="cover"
-                  bgPos="center"
-                  border="none"
-                >
-                  <Box
-                    bgColor="rgba(0, 0, 0, 0.5)"
-                    h="100%"
-                    borderRadius="15px"
-                  >
-                    <Flex
-                      px={2}
-                      py={2}
-                      h="100%"
-                      flexDirection="column"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        px={3}
-                        my={1}
-                      >
-                        <Box mr={1} alignSelf="center">
-                          <Image src={"resources/Ticket Star.png"} alt="Star" />
-                        </Box>
-                        <Text
-                          h="14px"
-                          w="34px"
-                          fontSize="14px"
-                          fontWeight="500"
-                          fontStyle="normal"
-                          lineHeight="100%"
-                          mx={1}
-                          alignSelf="center"
-                          color="#fff"
-                        >
-                          Art
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text
-                          fontSize="16px"
-                          fontWeight="900"
-                          fontStyle="normal"
-                          lineHeight="18px"
-                          letterSpacing="-2"
-                          my={3}
-                          alignSelf="center"
-                          color="#fff"
-                        >
-                          NFT Name
-                        </Text>
-                        <Text
-                          fontSize="16px"
-                          fontWeight="400"
-                          fontStyle="normal"
-                          lineHeight="100%"
-                          letterSpacing="-0.02em"
-                          textAlign="center"
-                          color="#fff"
-                        >
-                          24,6 aex
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </Box>
-                </Box>
-              </Box>
-            </Flex>
-          </Box>
-        </Box>
-        <Box>
-          <Box
-            // position="fixed"
-            bgColor="#303030;"
-            width="320px"
-            marginLeft="0"
-            borderTopRadius="34.25px"
-            h="60px"
-            mt="-3rem"
-            // bottom="0"
-            // top="92%"
-          >
-            <Center
-              display="flex"
-              marginTop="8.22px"
-              // mb="5px"
-              gap="21.92px"
-              ml="28px"
-              pt="4px"
-              h="full"
-            >
-              <Box
-                border="1px"
-                borderColor="rgba(255, 255, 255, 0.1);"
-                borderRadius="100%"
-                padding="3.8px"
-              >
-                <Flex alignItems="center" justifyItems="center" position="relative">
+                  Wallet
+                </Heading>
+                <Flex my={2}>
                   <Text
+                    flexBasis="200px"
+                    fontSize="16.44px"
+                    fontWeight="700"
                     color="#ffffff"
-                    marginTop={-4}
-                    marginLeft={3}
-                    position="absolute"
-                    backgroundColor="red"
-                    px="3.5px"
-                    borderRadius="100%"
                     fontFamily="Poppins"
-                    fontWeight="500"
-                    fontSize="9.59px"
                   >
-                    3
+                    {" "}
+                    {nearState.aexBalance} AEX
                   </Text>
-                  <Image
-                    src={"resources/Notification.png"}
-                    w="19.52895px"
-                    h="21.26895px"
-                  />
+                  <Flex>
+                    <div
+                      className="cursor-pointer  hover:bg-[#ffffff39]
+    background-#1F1F1F
+    w-[16.44px]
+    h-[16.44px]
+    mr-[10.275px]
+
+   "
+                    >
+                      <Image
+                        src={"resources/Download.png"}
+                        alt="download"
+                        w="16.44px"
+                        h="16.44px"
+                      />
+                    </div>
+                    <div
+                      className="cursor-pointer  hover:bg-[#ffffff39]
+    background-#1F1F1F
+    w-[16.44px]
+    h-[16.44px]
+    mr-[10.275px]
+
+   "
+                      onClick={props.wallet}
+                    >
+                      <Image
+                        src={"resources/Upload.png"}
+                        alt="upload"
+                        w="16.44px"
+                        h="16.44px"
+                        mr="10.275px"
+                      />
+                    </div>
+                    <div
+                      className="cursor-pointer  hover:bg-[#ffffff39]
+    background-#1F1F1F
+    w-[16.44px]
+    h-[16.44px]
+    mr-[10.275px]
+
+   "
+                      onClick={props.wallet}
+                    >
+                      <Image
+                        src={"resources/Frame 5556.png"}
+                        alt="upload"
+                        w="16.44px"
+                        h="16.44px"
+                        mr="10.275px"
+                      />
+                    </div>
+                    <div
+                      className="cursor-pointer  hover:bg-[#ffffff39]
+    background-#1F1F1F
+    w-[16.44px]
+    h-[16.44px]
+    mr-[10.275px]
+
+   "
+                      onClick={props.wallet}
+                    >
+                      <Image
+                        src={"resources/plant 1.png"}
+                        alt="upload"
+                        w="16.44px"
+                        h="16.44px"
+                        mr="10.275px"
+                      />
+                    </div>
+                  </Flex>
+                </Flex>
+                <Flex gap={3} w="420px" h="120px">
+                  <Box h="120px" w="120px" border="none">
+                    <Box
+                      my={0}
+                      h="100%"
+                      w="100%"
+                      borderWidth="1px"
+                      borderRadius="15px"
+                      bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
+                      bgRepeat="no-repeat"
+                      bgSize="cover"
+                      bgPos="center"
+                      border="none"
+                    >
+                      <Box
+                        bgColor="rgba(0, 0, 0, 0.5)"
+                        h="100%"
+                        borderRadius="15px"
+                      >
+                        <Flex
+                          px={2}
+                          py={2}
+                          h="100%"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignItems="center"
+                        >
+                          <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            px={3}
+                            my={1}
+                          >
+                            <Box mr={1} alignSelf="center">
+                              <Image
+                                src={"resources/Ticket Star.png"}
+                                alt="star"
+                              />
+                            </Box>
+                            <Text
+                              h="14px"
+                              w="34px"
+                              fontSize="14px"
+                              fontWeight="500"
+                              fontStyle="normal"
+                              lineHeight="100%"
+                              mx={1}
+                              alignSelf="center"
+                              color="#fff"
+                            >
+                              Art
+                            </Text>
+                          </Box>
+                          <Box>
+                            <Text
+                              fontSize="16px"
+                              fontWeight="900"
+                              fontStyle="normal"
+                              lineHeight="18px"
+                              letterSpacing="-2"
+                              my={3}
+                              color="#fff"
+                              alignSelf="center"
+                            >
+                              NFT Name
+                            </Text>
+                            <Text
+                              fontSize="16px"
+                              fontWeight="400"
+                              fontStyle="normal"
+                              lineHeight="100%"
+                              letterSpacing="-0.02em"
+                              textAlign="center"
+                              color="#fff"
+                            >
+                              24,6 aex
+                            </Text>
+                          </Box>
+                        </Flex>
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box h="120px" w="120px" border="none">
+                    <Box
+                      my={0}
+                      h="100%"
+                      w="100%"
+                      borderWidth="1px"
+                      borderRadius="15px"
+                      bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
+                      bgRepeat="no-repeat"
+                      bgSize="cover"
+                      bgPos="center"
+                      border="none"
+                    >
+                      <Box
+                        bgColor="rgba(0, 0, 0, 0.5)"
+                        h="100%"
+                        borderRadius="15px"
+                      >
+                        <Flex
+                          px={2}
+                          py={2}
+                          h="100%"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignItems="center"
+                        >
+                          <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            px={3}
+                            my={1}
+                          >
+                            <Box mr={1} alignSelf="center">
+                              <Image src={"resources/Fill 1.png"} alt="Fill" />
+                            </Box>
+                            <Text
+                              h="14px"
+                              w="34px"
+                              fontSize="14px"
+                              fontWeight="500"
+                              fontStyle="normal"
+                              lineHeight="100%"
+                              mx={1}
+                              alignSelf="center"
+                              color="#fff"
+                            >
+                              Art
+                            </Text>
+                          </Box>
+                          <Box>
+                            <Text
+                              fontSize="16px"
+                              fontWeight="900"
+                              fontStyle="normal"
+                              lineHeight="18px"
+                              letterSpacing="-2"
+                              my={3}
+                              alignSelf="center"
+                              color="#fff"
+                            >
+                              NFT Name
+                            </Text>
+                            <Text
+                              fontSize="16px"
+                              fontWeight="400"
+                              fontStyle="normal"
+                              lineHeight="100%"
+                              letterSpacing="-0.02em"
+                              textAlign="center"
+                              color="#fff"
+                            >
+                              24,6 aex
+                            </Text>
+                          </Box>
+                        </Flex>
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box h="120px" w="120px" border="none">
+                    <Box
+                      my={0}
+                      h="100%"
+                      w="100%"
+                      borderWidth="1px"
+                      borderRadius="15px"
+                      bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
+                      bgRepeat="no-repeat"
+                      bgSize="cover"
+                      bgPos="center"
+                      border="none"
+                    >
+                      <Box
+                        bgColor="rgba(0, 0, 0, 0.5)"
+                        h="100%"
+                        borderRadius="15px"
+                      >
+                        <Flex
+                          px={2}
+                          py={2}
+                          h="100%"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignItems="center"
+                        >
+                          <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            px={3}
+                            my={1}
+                          >
+                            <Box mr={1} alignSelf="center">
+                              <Image
+                                src={"resources/Ticket Star.png"}
+                                alt="Star"
+                              />
+                            </Box>
+                            <Text
+                              h="14px"
+                              w="34px"
+                              fontSize="14px"
+                              fontWeight="500"
+                              fontStyle="normal"
+                              lineHeight="100%"
+                              mx={1}
+                              alignSelf="center"
+                              color="#fff"
+                            >
+                              Art
+                            </Text>
+                          </Box>
+                          <Box>
+                            <Text
+                              fontSize="16px"
+                              fontWeight="900"
+                              fontStyle="normal"
+                              lineHeight="18px"
+                              letterSpacing="-2"
+                              my={3}
+                              alignSelf="center"
+                              color="#fff"
+                            >
+                              NFT Name
+                            </Text>
+                            <Text
+                              fontSize="16px"
+                              fontWeight="400"
+                              fontStyle="normal"
+                              lineHeight="100%"
+                              letterSpacing="-0.02em"
+                              textAlign="center"
+                              color="#fff"
+                            >
+                              24,6 aex
+                            </Text>
+                          </Box>
+                        </Flex>
+                      </Box>
+                    </Box>
+                  </Box>
                 </Flex>
               </Box>
-              <Box
-                border="1px"
-                borderColor="rgba(255, 255, 255, 0.1);"
-                borderRadius="100%"
-                padding="5px"
-                cursor="pointer"
-                onClick={logOutUser}
+            </Box>
+          </Box>
+          <Box>
+            <Box
+              // position="fixed"
+              bgColor="#303030;"
+              width="320px"
+              marginLeft="0"
+              borderTopRadius="34.25px"
+              h="60px"
+              // mt="-3rem"
+              // bottom="0"
+              // top="92%"
+            >
+              <Center
+                display="flex"
+                marginTop="8.22px"
+                // mb="5px"
+                gap="21.92px"
+                ml="28px"
+                pt="4px"
+                h="full"
               >
-                <Image
-                  src={nearState.profile.profileImg}
-                  w="21.92px"
-                  h="21.92px"
+                <Box
+                  border="1px"
+                  borderColor="rgba(255, 255, 255, 0.1);"
                   borderRadius="100%"
-                />
-              </Box>
-              <Box
-                border="1px"
-                borderColor="rgba(255, 255, 255, 0.1);"
-                marginRight="32px"
-                borderRadius="100%"
-                padding="5px"
-              >
-                <Image src={"resources/Setting.png"} w="17.35105px" />
-              </Box>
-            </Center>
+                  padding="3.8px"
+                >
+                  <Flex
+                    alignItems="center"
+                    justifyItems="center"
+                    position="relative"
+                  >
+                    <Text
+                      color="#ffffff"
+                      marginTop={-4}
+                      marginLeft={3}
+                      position="absolute"
+                      backgroundColor="red"
+                      px="3.5px"
+                      borderRadius="100%"
+                      fontFamily="Poppins"
+                      fontWeight="500"
+                      fontSize="9.59px"
+                    >
+                      3
+                    </Text>
+                    <Image
+                      src={"resources/Notification.png"}
+                      w="19.52895px"
+                      h="21.26895px"
+                    />
+                  </Flex>
+                </Box>
+                <Box
+                  border="1px"
+                  borderColor="rgba(255, 255, 255, 0.1);"
+                  borderRadius="100%"
+                  padding="5px"
+                  cursor="pointer"
+                  onClick={logOutUser}
+                >
+                  <Image
+                    src={nearState.profile.profileImg}
+                    w="21.92px"
+                    h="21.92px"
+                    borderRadius="100%"
+                  />
+                </Box>
+                <Box
+                  border="1px"
+                  borderColor="rgba(255, 255, 255, 0.1);"
+                  marginRight="32px"
+                  borderRadius="100%"
+                  padding="5px"
+                >
+                  <Image src={"resources/Setting.png"} w="17.35105px" />
+                </Box>
+              </Center>
+            </Box>
           </Box>
         </Box>
       </GridItem>

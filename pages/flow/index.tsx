@@ -53,7 +53,7 @@ const Flow: React.FC = () => {
         {!flow.collapsed && (
           <div className=" w-[508.72px] px-2.5 h-[94vh] bg-black-dark    rounded-[13.7px] ">
             <div className=" w-[495.72px] h-[94vh] overflow-y-scroll  rounded-[13.7px]  pt-4s">
-              {/* <FlowFeeds /> */}
+              <FlowFeeds />
             </div>
           </div>
         )}

@@ -16,7 +16,6 @@ import {
 } from "../../store/slices/messagesSlice"
 import { Box, Flex, Image, Text } from "@chakra-ui/react"
 import { SmoothCorners } from "react-smooth-corners"
-const { Readable } = require("stream")
 
 const PrimaryHeader: React.FC = () => {
   const { chat } = useSelector(selectModules)
@@ -371,7 +370,7 @@ const SendMessage: React.FC<{
     }
   }
 
-  //Todo: use a function to handle the init chat on second try
+  //Todo: use a function to handle the init chat on second try and env to handle the aerxchat secretkey
   const sendMessage = async (
     caller: string,
     receiver: string,

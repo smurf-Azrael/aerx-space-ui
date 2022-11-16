@@ -133,7 +133,7 @@ function Profile(props) {
         bgColor={
           !nearState.profile.profileImg.includes(".glb")
             ? "#191919"
-            : "transparent"
+            : "#191919"
         }
         bgImage={
           !nearState.profile.profileImg.includes(".glb")

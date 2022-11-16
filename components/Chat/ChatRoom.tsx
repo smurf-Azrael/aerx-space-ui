@@ -16,6 +16,8 @@ import {
 } from "../../store/slices/messagesSlice"
 import { Box, Flex, Image, Text } from "@chakra-ui/react"
 import { SmoothCorners } from "react-smooth-corners"
+import Image from "next/image"
+import { Transaction } from "../../components/SendTokens/ui/Transaction"
 
 const PrimaryHeader: React.FC = () => {
   const { chat } = useSelector(selectModules)

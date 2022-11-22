@@ -424,8 +424,8 @@ function Profile(props) {
               >
                 Wallet
               </Heading>
-              <Flex my={2} justifyContent="center" gap="10px">
-                <Flex gap={2} flex={1}>
+              <Flex my={2} justifyContent="space-between" gap="10px">
+                <Flex gap={2}>
                   <Text
                     fontSize="16px"
                     fontWeight="700"
@@ -445,7 +445,7 @@ function Profile(props) {
                     alt="aerx-token"
                   />
                 </Flex>
-                <Flex gap={2} flex={1} justifyContent="center">
+                <Flex gap={2} justifyContent="center">
                   <Text
                     fontSize="16px"
                     fontWeight="700"
@@ -464,7 +464,7 @@ function Profile(props) {
                     alignSelf="center"
                   />
                 </Flex>
-                <Flex gap={2} flex={1} justifyContent="flex-end">
+                <Flex gap={2} justifyContent="flex-end">
                   <Text
                     fontSize="16px"
                     fontWeight="700"

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   Box,
   Image,
@@ -116,388 +116,333 @@ function Profile(props) {
     }, []);
   }
 
+  const handleESC = useCallback((e) => {
+    if (e.key === "Escape"){
+      props.toggle()
+    }
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleESC);
+
+    return () => {
+    window.addEventListener("keydown", handleESC);
+
+    };
+  }, []);
+
   return circ ? (
     <CircleList remove={remCirc} />
   ) : (
-    <Grid
-      templateRows={isLargerThan656 ? "240px 1fr" :  "1fr"}
-      // templateRows=" repeat( auto-fit, minmax(100%, 100vh) )"
-      bg="#1F1F1F"
-      w="320px"
-      height="100vh"
-      overflowX="hidden"
-      overflowY="hidden"
-      style={{ padding: "0!important" }}
-    >
-      <GridItem
-        bgColor={
-          !nearState.profile.profileImg.includes(".glb")
-            ? "#191919"
-            : "#191919"
-        }
-        bgImage={
-          !nearState.profile.profileImg.includes(".glb")
-            ? `url('${nearState.profile.profileImg}')`
-            : "none"
-        }
-        // bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
-        bgRepeat="no-repeat"
-        bgSize="cover"
-        bgPos="center"
-        w="inherit"
+    <Flex>
+      <Grid
+        templateRows={isLargerThan656 ? "1fr" : "1fr"}
+        bg="#1F1F1F"
+        w="250px"
+        height="100vh"
+        overflowX="hidden"
+        overflowY="hidden"
+        style={{ padding: "0!important" }}
       >
-        <Flex
-          w="320px"
-          width="100%"
-          // onDoubleClick={props.circleClick}
-          gap="17%"
-          bgGradient={
-            !nearState.profile.profileImg.includes(".glb") ? bgGradient : "none"
+        <GridItem
+          bgColor={
+            !nearState.profile.profileImg.includes(".glb")
+              ? "#191919"
+              : "#191919"
           }
-          h="100%"
-          // justifycontent="space-evenly"
+          bgImage={
+            !nearState.profile.profileImg.includes(".glb")
+              ? `url('${nearState.profile.profileImg}')`
+              : "none"
+          }
+          // bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
+          bgRepeat="no-repeat"
+          bgSize="cover"
+          bgPos="center"
+          w="inherit"
         >
-          <Flex flexDirection="column" w="full">
-            <Flex justifyContent="space-between" mb="auto" marginInline="15px">
+          <Flex
+            w="250px"
+            width="100%"
+            // onDoubleClick={props.circleClick}
+            // gap="17%"
+            bgGradient={
+              !nearState.profile.profileImg.includes(".glb")
+                ? bgGradient
+                : "none"
+            }
+            h="100%"
+            // justifycontent="space-evenly"
+          >
+            <Flex flexDirection="column" w="full">
               <Flex
-                flexDirection="column"
-                gap="10.96px"
-                flexBasis="42px"
-                mt="21.92px"
-                cursor="pointer"
-              >
-                <Box
-                  color="#6054F0"
-                  width="27.4px"
-                  height="27.4px"
-                  border="2px solid"
-                  bgColor="#FFFFFF"
-                  borderColor="#FFFFFF"
-                  borderRadius="6.85px"
-                  onClick={() => props.toggle()}
-                >
-                  <Image
-                    src="../resources/Frame 14290.svg"
-                    w="18px"
-                    py="5px"
-                    px="auto"
-                    pl="4px"
-                  />
-                </Box>
-              </Flex>
-
-              <Flex
-                flexDirection="column"
-                alignItems="center"
-                flexBasis="100px"
-                mt="21.92px"
-                // gap="65%"
                 justifyContent="space-between"
-                // zIndex={6}
-                // onMouseLeave={props.leaveClick}
+                mb="auto"
+                marginInline="12px"
               >
-                <Image width="42.47px" height="15.755px" src={logoP} />
-              </Flex>
-              <Flex flexDirection="column" gap="10.96px" mt="21.92px">
-                {/* first */}
-                <Box cursor="pointer" onClick={() => dispatch(expandFlow())}>
-                  <Image src="../resources/Group 14948.png" w="42px" />
-                </Box>
-                {/* second */}
-                <Box cursor={"pointer"} onClick={() => dispatch(expandChat())}>
-                  <Image src="../resources/Group 14949.png" w="42px" />
-                </Box>
-                {/* third*/}
-                <Box cursor={"pointer"}>
-                  <Image src="../resources/Group 14950.png" w="42px"></Image>
-                </Box>
-              </Flex>
-            </Flex>
-
-            <Box
-              h="auto"
-              mb={4}
-              // zIndex={6}
-            >
-              <Heading
-                fontSize="21.92px"
-                color="#FFFFFF"
-                fontFamily="Poppins"
-                fontWeight="700"
-                fontStyle="normal"
-                lineHeight="100%"
-                textAlign="center"
-                // letterSpacing="-0.02em"
-                // mt="21px"
-                justifyContent="center"
-                textTransform="capitalize"
-                // zIndex="-1"
-              >
-                {nearState.profile.fullName}
-              </Heading>
-
-              <Flex
-                alignItems="center"
-                justifyContent="center"
-                gap="16px"
-                // mt="55px"
-              >
-                <Text
-                  fontSize="12.33px"
-                  fontFamily="Poppins"
-                  fontStyle="italic"
-                  color="#FFFFFFB2"
-                  fontWeight="400"
-                  letterSpacing="-0.02em"
-                  marginTop="5.48px"
-                  mb="11.645px"
-                  mt="12px"
-                  lineHeight=" 100%"
-                  /* identical to box height, or 18px */
-                >
-                  {nearState.profile.username}
-                </Text>
-
                 <Flex
-                // boxShadow = "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
-                // boxShadow = "rgba(0, 0, 0, 0.25) 30px 154px 155px,  10px -212px 130px, rgba(0, 0, 0, 0.12) 10px 24px 6px, rgba(0, 0, 0, 0.17) 12px 12px 13px, rgba(0, 0, 0, 0.09) 10px -13px 65px"
+                  flexDirection="column"
+                  justifyContent="flex-end"
+                  alignItems="flex-end"
+                  flexBasis="100%"
+                  mt="12px"
+                  cursor="pointer"
                 >
-                  <Image src={ellipse3} marginRight={2} w="10.96px" />
-                  <Text
-                    color="#FFFFFF80"
-                    fontFamily="Poppins"
-                    fontWeight="500"
-                    fontSize="9.59px"
-                    lineHeight="100%"
-                    /* identical to box height, or 14px */
-
-                    letterSpacing="-0.02em"
+                  <Box
+                    h="40px"
+                    w="40px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.1)"
+                    border="1px solid rgba(255, 255, 255, 0.15)"
+                    backdropFilter="10px"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    // onClick={() => props.toggle()}
                   >
-                    Aura: 2k
-                  </Text>
+                    <Image src="resources/badge.png" alt="badge" />
+                  </Box>
                 </Flex>
-                <Box
-                  // bgGradient="linear(to-b, #1f1f1f 0%, #191919 100%)"
-                  w="261.56px"
-                  position="absolute"
-                  top="295px"
-                  h="34px"
-                >
-                  .
-                </Box>
               </Flex>
-            </Box>
+
+              <Box
+                h="auto"
+                mb={1}
+                // zIndex={6}
+              >
+                <Flex justifyContent="center" flexBasis="100%" gap="10px">
+                  <Heading
+                    fontSize="20px"
+                    color="#FFFFFF"
+                    fontFamily="Poppins"
+                    fontWeight="700"
+                    fontStyle="normal"
+                    lineHeight="100%"
+                    textAlign="center"
+                    // letterSpacing="-0.02em"
+                    // mt="21px"
+                    justifyContent="center"
+                    textTransform="capitalize"
+                    display="inline-flex"
+                    // zIndex="-1"
+                  >
+                    {nearState.profile.fullName}
+                  </Heading>
+                  <Image src="resources/Squircle-logo.png" alt="verified" />
+                </Flex>
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  gap="16px"
+                  mt="-2px"
+                >
+                  <Text
+                    fontSize="14px"
+                    fontFamily="Poppins"
+                    fontStyle="italic"
+                    color="#FFFFFF"
+                    fontWeight="400"
+                    letterSpacing="-0.02em"
+                    mb="11.645px"
+                    mt="12px"
+                    lineHeight=" 100%"
+                    /* identical to box height, or 18px */
+                  >
+                    {nearState.profile.username}.aerx
+                  </Text>
+
+                  <Flex
+                  // boxShadow = "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+                  // boxShadow = "rgba(0, 0, 0, 0.25) 30px 154px 155px,  10px -212px 130px, rgba(0, 0, 0, 0.12) 10px 24px 6px, rgba(0, 0, 0, 0.17) 12px 12px 13px, rgba(0, 0, 0, 0.09) 10px -13px 65px"
+                  >
+                    <Image
+                      src={ellipse3}
+                      marginRight={2}
+                      w="16px"
+                      h="16px"
+                      alt="elipse"
+                    />
+                    <Text
+                      color="#FFFFFF"
+                      fontFamily="Poppins"
+                      fontWeight="400"
+                      fontSize="14px"
+                      lineHeight="100%"
+                      /* identical to box height, or 14px */
+
+                      letterSpacing="-0.02em"
+                    >
+                      Aura: 2k
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Box>
+            </Flex>
           </Flex>
-        </Flex>
-      </GridItem>
-      <GridItem bgColor="#191919">
-        <Box
-          px="10px"
-          bgColor=" #1F1F1F"
-          w="320px"
-          height="165px"
-          marginLeft="0"
-          borderTopRadius="34.25px"
-        >
-          <Center borderRadius="50px 50px 0px 0px">
-            <Button
-              onClick={remCirc}
-              cursor="pointer"
-              background="none"
-              w="21.92px"
-              bgColor="rgba(255, 255, 255, 0.3);"
-              height="12px"
-              mt="2"
-              px="0"
-              flexDirection="column"
-              gap="2px"
-              backgroundColor="#1F1F1F"
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </Button>
-          </Center>
-          <Flex flexDirection="column">
-            <Heading
-              letterSpacing="-0.02em"
-              fontWeight="500"
-              fontSize="16px"
-              lineHeight="100%"
-              textTransform="capitalize"
-              color="rgba(255, 255, 255, 0.3)"
-              fontFamily="Poppins"
-              mt="10px"
-            >
-              Circles
-            </Heading>{" "}
-            <Wrap my={4} overflowX="hidden" w="350px" ml={-2}>
-              <WrapItem
-                flexWrap="nowrap"
-                display="flex"
+        </GridItem>
+        <GridItem bgColor="rgba(0, 0, 0, 0.15)">
+          <Box
+            px="13px"
+            bgColor=" #1F1F1F"
+            w="250px"
+            marginLeft="0"
+            borderRadius=" 25px 25px 0px 0px"
+            boxShadow="0px -5px 25px rgba(0, 0, 0, 0.4)"
+          >
+            <Center borderRadius="50px 50px 0px 0px">
+              <Button
+                onClick={remCirc}
+                outline="none"
+                _hover={{
+                  background: "none",
+                }}
+                cursor="pointer"
+                background="none"
+                height="12px"
+                mt="2"
+                px="0"
                 flexDirection="column"
-                alignItems="center"
-                flex="1"
+                gap="2px"
               >
-                <Avatar
-                  mb={1.5}
-                  name="Dan Abrahmov"
-                  src="https://bit.ly/dan-abramov"
-                />
-
-                <Text
-                  fontSize="10.96px"
-                  fontFamily="Poppins"
-                  h="32.88px"
-                  fontWeight="400"
-                  color="#ffffff"
-                >
-                  Work
-                </Text>
-              </WrapItem>
-              <WrapItem
-                flexWrap="nowrap"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                flex="1"
+                <Image src="resources/Arrow-up-icon.png" alt="up" />
+              </Button>
+            </Center>
+            <Flex flexDirection="column">
+              <Heading
+                letterSpacing="-0.02em"
+                fontWeight="500"
+                fontSize="12px"
+                lineHeight="100%"
+                textTransform="capitalize"
+                color="rgba(255, 255, 255, 0.3)"
+                fontFamily="Poppins"
+                mt="10px"
               >
-                <Avatar
-                  mb={1.5}
-                  name="Dan Abrahmov"
-                  src="https://bit.ly/dan-abramov"
-                />
-
-                <Text
-                  fontSize="10.96px"
-                  fontFamily="Poppins"
-                  h="32.88px"
-                  fontWeight="400"
-                  color="#ffffff"
+                Contacts
+              </Heading>{" "}
+              <Wrap mt={2} mb={4} justifyContent="space-between">
+                <WrapItem
+                  flexWrap="nowrap"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  flex="1"
                 >
-                  Family
-                </Text>
-              </WrapItem>
-              <WrapItem
-                flexWrap="nowrap"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                flex="1"
-              >
-                <Avatar
-                  mb={1.5}
-                  name="Dan Abrahmov"
-                  src="https://bit.ly/dan-abramov"
-                />
-
-                <Text
-                  fontSize="10.96px"
-                  fontFamily="Poppins"
-                  h="32.88px"
-                  fontWeight="400"
-                  color="#ffffff"
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.05)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    backdropFilter="10px"
+                  >
+                    <Image src="resources/Plus-con.png" alt="add" />
+                  </Box>
+                </WrapItem>
+                <WrapItem
+                  flexWrap="nowrap"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  flex="1"
                 >
-                  Friends
-                </Text>
-              </WrapItem>
-              <WrapItem
-                flexWrap="nowrap"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                flex="1"
-              >
-                <Avatar
-                  mb={1.5}
-                  name="Dan Abrahmov"
-                  src="https://bit.ly/dan-abramov"
-                />
-
-                <Text
-                  fontSize="10.96px"
-                  fontFamily="Poppins"
-                  h="32.88px"
-                  fontWeight="400"
-                  color="#ffffff"
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.05)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    backdropFilter="10px"
+                  >
+                    <Image src="resources/Plus-con.png" alt="add" />
+                  </Box>
+                </WrapItem>
+                <WrapItem
+                  flexWrap="nowrap"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  flex="1"
                 >
-                  Followers
-                </Text>
-              </WrapItem>
-              <WrapItem
-                flexWrap="nowrap"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                flex="1"
-              >
-                <Avatar
-                  mb={1.5}
-                  name="Dan Abrahmov"
-                  src="https://bit.ly/dan-abramov"
-                />
-
-                <Text
-                  fontSize="10.96px"
-                  fontFamily="Poppins"
-                  h="32.88px"
-                  fontWeight="400"
-                  color="#ffffff"
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.05)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                  >
+                    <Image src="resources/Plus-con.png" alt="add" />
+                  </Box>
+                </WrapItem>
+                <WrapItem
+                  flexWrap="nowrap"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  flex="1"
                 >
-                  Following
-                </Text>
-              </WrapItem>
-            </Wrap>
-          </Flex>
-        </Box>
-        <Box bgColor="rgb(36, 36, 36)">
-          <Box bgColor="#1F1F1F">
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.05)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    backdropFilter="10px"
+                  >
+                    <Image src="resources/Plus-con.png" alt="add" />
+                  </Box>
+                </WrapItem>
+              </Wrap>
+            </Flex>
+          </Box>
+          <Box boxShadow="0px -5px 25px rgba(0, 0, 0, 0.4)">
             <Box
-              px="10px"
-              bgColor="#242424"
-              w="320px"
+              px="13px"
+              py={3}
+              bgColor="#1F1F1F"
+              w="250px"
               marginLeft="0"
-              borderTopRadius="34.25px"
-              marginTop="-1.5rem"
+              borderRadius=" 25px 25px 0px 0px"
             >
-              <Center borderRadius="50px 50px 0px 0px">
+              <Center>
                 <Button
                   onClick={props.wallet}
+                  _hover={{
+                    background: "none",
+                  }}
                   cursor="pointer"
                   background="none"
-                  w="21.92px"
-                  bgColor="rgba(255, 255, 255, 0.3);"
                   height="12px"
-                  mt="2"
                   px="0"
                   flexDirection="column"
                   gap="2px"
-                  backgroundColor="#242424"
                 >
-                  <MinusIcon
-                    w="21.92px"
-                    bgColor="rgba(255, 255, 255, 0.3);"
-                    height="2px"
-                  />
-                  <MinusIcon
-                    w="21.92px"
-                    bgColor="rgba(255, 255, 255, 0.3);"
-                    height="2px"
-                  />
+                  <Image src="resources/Arrow-up-icon.png" alt="up" />
                 </Button>
               </Center>
               <Box>
                 <Heading
                   letterSpacing="-0.02em"
                   fontWeight="500"
-                  fontSize="16px"
+                  fontSize="12px"
                   lineHeight="100%"
                   textTransform="capitalize"
                   fontFamily="Poppins"
@@ -506,19 +451,71 @@ function Profile(props) {
                 >
                   Wallet
                 </Heading>
-                <Flex my={2}>
-                  <Text
-                    flexBasis="200px"
-                    fontSize="16.44px"
-                    fontWeight="700"
-                    color="#ffffff"
-                    fontFamily="Poppins"
-                  >
-                    {" "}
-                    {nearState.aexBalance} AEX
-                  </Text>
-                  <Flex>
-                    <div
+                <Flex my={2} justifyContent="space-between" gap="10px">
+                  <Flex gap={2}>
+                    <Text
+                      fontSize="16px"
+                      fontWeight="700"
+                      lineHeight="100%"
+                      letterSpacing="-0.02em"
+                      color="#ffffff"
+                      fontFamily="Poppins"
+                      textTransform="uppercase"
+                    >
+                      {" "}
+                      {nearState.aexBalance}
+                    </Text>
+                    <Image
+                      src="resources/token-logo.png"
+                      w="13px"
+                      h="9px"
+                      alignSelf="center"
+                      alt="aerx-token"
+                    />
+                  </Flex>
+                  <Flex gap={2} justifyContent="center">
+                    <Text
+                      fontSize="16px"
+                      fontWeight="700"
+                      lineHeight="100%"
+                      letterSpacing="-0.02em"
+                      color="#ffffff"
+                      fontFamily="Poppins"
+                      textTransform="uppercase"
+                    >
+                      {" "}
+                      2,132
+                    </Text>
+                    <Image
+                      src="resources/sub-token.png"
+                      w="17.86px"
+                      h="9px"
+                      alignSelf="center"
+                    />
+                  </Flex>
+                  <Flex gap={2} justifyContent="flex-end">
+                    <Text
+                      fontSize="16px"
+                      fontWeight="700"
+                      lineHeight="100%"
+                      letterSpacing="-0.02em"
+                      color="#ffffff"
+                      fontFamily="Poppins"
+                      textTransform="uppercase"
+                    >
+                      {" "}
+                      3,126
+                    </Text>
+                    <Image
+                      src="resources/near-logo.png"
+                      w="11px"
+                      h="11px"
+                      alignSelf="center"
+                    />
+                  </Flex>
+
+                  {/* <Flex> */}
+                  {/* <div
                       className="cursor-pointer  hover:bg-[#ffffff39]
     background-#1F1F1F
     w-[16.44px]
@@ -587,340 +584,250 @@ function Profile(props) {
                         h="16.44px"
                         mr="10.275px"
                       />
-                    </div>
-                  </Flex>
+                    </div> */}
+                  {/* </Flex> */}
                 </Flex>
-                <Flex gap={3} w="420px" h="120px">
-                  <Box h="120px" w="120px" border="none">
-                    <Box
-                      my={0}
-                      h="100%"
-                      w="100%"
-                      borderWidth="1px"
-                      borderRadius="15px"
-                      bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
-                      bgRepeat="no-repeat"
-                      bgSize="cover"
-                      bgPos="center"
-                      border="none"
-                    >
-                      <Box
-                        bgColor="rgba(0, 0, 0, 0.5)"
-                        h="100%"
-                        borderRadius="15px"
-                      >
-                        <Flex
-                          px={2}
-                          py={2}
-                          h="100%"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <Box
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
-                            px={3}
-                            my={1}
-                          >
-                            <Box mr={1} alignSelf="center">
-                              <Image
-                                src={"resources/Ticket Star.png"}
-                                alt="star"
-                              />
-                            </Box>
-                            <Text
-                              h="14px"
-                              w="34px"
-                              fontSize="14px"
-                              fontWeight="500"
-                              fontStyle="normal"
-                              lineHeight="100%"
-                              mx={1}
-                              alignSelf="center"
-                              color="#fff"
-                            >
-                              Art
-                            </Text>
-                          </Box>
-                          <Box>
-                            <Text
-                              fontSize="16px"
-                              fontWeight="900"
-                              fontStyle="normal"
-                              lineHeight="18px"
-                              letterSpacing="-2"
-                              my={3}
-                              color="#fff"
-                              alignSelf="center"
-                            >
-                              NFT Name
-                            </Text>
-                            <Text
-                              fontSize="16px"
-                              fontWeight="400"
-                              fontStyle="normal"
-                              lineHeight="100%"
-                              letterSpacing="-0.02em"
-                              textAlign="center"
-                              color="#fff"
-                            >
-                              24,6 aex
-                            </Text>
-                          </Box>
-                        </Flex>
-                      </Box>
-                    </Box>
+                <Flex gap={3} justifyContent="space-between">
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.1)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    onClick={props.wallet}
+                    cursor="pointer"
+                  >
+                    <Image src="resources/download-icon.png" />
                   </Box>
-                  <Box h="120px" w="120px" border="none">
-                    <Box
-                      my={0}
-                      h="100%"
-                      w="100%"
-                      borderWidth="1px"
-                      borderRadius="15px"
-                      bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
-                      bgRepeat="no-repeat"
-                      bgSize="cover"
-                      bgPos="center"
-                      border="none"
-                    >
-                      <Box
-                        bgColor="rgba(0, 0, 0, 0.5)"
-                        h="100%"
-                        borderRadius="15px"
-                      >
-                        <Flex
-                          px={2}
-                          py={2}
-                          h="100%"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <Box
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
-                            px={3}
-                            my={1}
-                          >
-                            <Box mr={1} alignSelf="center">
-                              <Image src={"resources/Fill 1.png"} alt="Fill" />
-                            </Box>
-                            <Text
-                              h="14px"
-                              w="34px"
-                              fontSize="14px"
-                              fontWeight="500"
-                              fontStyle="normal"
-                              lineHeight="100%"
-                              mx={1}
-                              alignSelf="center"
-                              color="#fff"
-                            >
-                              Art
-                            </Text>
-                          </Box>
-                          <Box>
-                            <Text
-                              fontSize="16px"
-                              fontWeight="900"
-                              fontStyle="normal"
-                              lineHeight="18px"
-                              letterSpacing="-2"
-                              my={3}
-                              alignSelf="center"
-                              color="#fff"
-                            >
-                              NFT Name
-                            </Text>
-                            <Text
-                              fontSize="16px"
-                              fontWeight="400"
-                              fontStyle="normal"
-                              lineHeight="100%"
-                              letterSpacing="-0.02em"
-                              textAlign="center"
-                              color="#fff"
-                            >
-                              24,6 aex
-                            </Text>
-                          </Box>
-                        </Flex>
-                      </Box>
-                    </Box>
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.1)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    onClick={props.wallet}
+                    cursor="pointer"
+                  >
+                    <Image src="resources/Upload-icon.png" />
                   </Box>
-                  <Box h="120px" w="120px" border="none">
-                    <Box
-                      my={0}
-                      h="100%"
-                      w="100%"
-                      borderWidth="1px"
-                      borderRadius="15px"
-                      bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
-                      bgRepeat="no-repeat"
-                      bgSize="cover"
-                      bgPos="center"
-                      border="none"
-                    >
-                      <Box
-                        bgColor="rgba(0, 0, 0, 0.5)"
-                        h="100%"
-                        borderRadius="15px"
-                      >
-                        <Flex
-                          px={2}
-                          py={2}
-                          h="100%"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <Box
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
-                            px={3}
-                            my={1}
-                          >
-                            <Box mr={1} alignSelf="center">
-                              <Image
-                                src={"resources/Ticket Star.png"}
-                                alt="Star"
-                              />
-                            </Box>
-                            <Text
-                              h="14px"
-                              w="34px"
-                              fontSize="14px"
-                              fontWeight="500"
-                              fontStyle="normal"
-                              lineHeight="100%"
-                              mx={1}
-                              alignSelf="center"
-                              color="#fff"
-                            >
-                              Art
-                            </Text>
-                          </Box>
-                          <Box>
-                            <Text
-                              fontSize="16px"
-                              fontWeight="900"
-                              fontStyle="normal"
-                              lineHeight="18px"
-                              letterSpacing="-2"
-                              my={3}
-                              alignSelf="center"
-                              color="#fff"
-                            >
-                              NFT Name
-                            </Text>
-                            <Text
-                              fontSize="16px"
-                              fontWeight="400"
-                              fontStyle="normal"
-                              lineHeight="100%"
-                              letterSpacing="-0.02em"
-                              textAlign="center"
-                              color="#fff"
-                            >
-                              24,6 aex
-                            </Text>
-                          </Box>
-                        </Flex>
-                      </Box>
-                    </Box>
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.1)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    onClick={props.wallet}
+                    cursor="pointer"
+                  >
+                    <Image src="resources/refresh-logo.png" />
+                  </Box>
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.1)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    onClick={props.wallet}
+                    cursor="pointer"
+                  >
+                    <Image src="resources/profit-logo.png" />
                   </Box>
                 </Flex>
               </Box>
             </Box>
           </Box>
-          <Box>
+          <Box boxShadow="0px -5px 25px rgba(0, 0, 0, 0.4)">
             <Box
-              // position="fixed"
-              bgColor="#303030;"
-              width="320px"
+              px="13px"
+              py={3}
+              bgColor=" #1F1F1F"
+              w="250px"
               marginLeft="0"
-              borderTopRadius="34.25px"
-              h="60px"
-              // mt="-3rem"
-              // bottom="0"
-              // top="92%"
+              borderRadius=" 25px 25px 0px 0px"
             >
-              <Center
+              <Center>
+                <Button
+                  // onClick={remCirc}
+                  outline="none"
+                  _hover={{
+                    background: "none",
+                  }}
+                  cursor="pointer"
+                  background="none"
+                  height="12px"
+                  px="0"
+                  flexDirection="column"
+                  gap="2px"
+                >
+                  <Image src="resources/Arrow-up-icon.png" />
+                </Button>
+              </Center>
+              <Flex flexDirection="column">
+                <Heading
+                  letterSpacing="-0.02em"
+                  fontWeight="500"
+                  fontSize="12px"
+                  lineHeight="100%"
+                  textTransform="capitalize"
+                  color="rgba(255, 255, 255, 0.3)"
+                  fontFamily="Poppins"
+                  mt="10px"
+                >
+                  Modules
+                </Heading>{" "}
+                <Flex
+                  flexDirection="row"
+                  gap="10.96px"
+                  mt={2}
+                  justifyContent="space-between"
+                  flexBasis="100%"
+                >
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.1)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    backdropFilter="10px"
+                    cursor="pointer"
+                  >
+                    <Image src="resources/module-1.png" alt="home" />
+                  </Box>
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.1)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    backdropFilter="10px"
+                    cursor="pointer"
+                    onClick={() => dispatch(expandChat())}
+                  >
+                    <Image src="resources/module-2.png" />
+                  </Box>
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.1)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    backdropFilter="10px"
+                    cursor="pointer"
+                    onClick={() => dispatch(expandFlow())}
+                  >
+                    <Image  src="resources/module-3.png" />
+                  </Box>
+                  <Box
+                    h="48px"
+                    w="48px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.05)"
+                    color="#fff"
+                    backdropBlur="10px"
+                    borderRadius="16px"
+                    backdropFilter="10px"
+                    cursor="pointer"
+                  >
+                    <Image src="resources/Plus-con.png" />
+                  </Box>
+                </Flex>
+              </Flex>
+            </Box>
+            <Box>
+              <Box
+                bgColor="#1F1F1F"
+                borderTop="1.5px solid rgba(255, 255, 255, 0.05)"
+                marginLeft="0"
+                h="48px"
+                p={3}
                 display="flex"
-                marginTop="8.22px"
-                // mb="5px"
-                gap="21.92px"
-                ml="28px"
-                pt="4px"
-                h="full"
+                justifyContent="center"
+                alignItems="center"
               >
                 <Box
-                  border="1px"
-                  borderColor="rgba(255, 255, 255, 0.1);"
-                  borderRadius="100%"
-                  padding="3.8px"
+                  cursor="pointer"
+                  onClick={logOutUser}
+                  flex="0.5"
+                  display="flex"
+                  justifyContent="flex-start"
+                >
+                  <Image src="resources/Logout-icon.png" />
+                </Box>
+                <Box
+                  flex="2"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
                 >
                   <Flex
                     alignItems="center"
                     justifyItems="center"
                     position="relative"
+                    gap={3}
+                    bgColor="#1A1A1A"
+                    h="34px"
+                    w="67px"
+                    p={1}
+                    borderRadius="12px"
                   >
-                    <Text
-                      color="#ffffff"
-                      marginTop={-4}
-                      marginLeft={3}
-                      position="absolute"
-                      backgroundColor="red"
-                      px="3.5px"
-                      borderRadius="100%"
-                      fontFamily="Poppins"
-                      fontWeight="500"
-                      fontSize="9.59px"
-                    >
-                      3
-                    </Text>
-                    <Image
-                      src={"resources/Notification.png"}
-                      w="19.52895px"
-                      h="21.26895px"
-                    />
+                    <Box>
+                      <Image src="resources/moon-icon.png" />
+                    </Box>
+                    <Box>
+                      <Image src="resources/sun-icon.png" />
+                    </Box>
                   </Flex>
                 </Box>
-                <Box
-                  border="1px"
-                  borderColor="rgba(255, 255, 255, 0.1);"
-                  borderRadius="100%"
-                  padding="5px"
-                  cursor="pointer"
-                  onClick={logOutUser}
-                >
-                  <Image
-                    src={nearState.profile.profileImg}
-                    w="21.92px"
-                    h="21.92px"
-                    borderRadius="100%"
-                  />
+
+                <Box flex="0.5" display="flex" justifyContent="flex-end">
+                  <Image w="19px" h="20px" src={"resources/Setting.png"} />
                 </Box>
-                <Box
-                  border="1px"
-                  borderColor="rgba(255, 255, 255, 0.1);"
-                  marginRight="32px"
-                  borderRadius="100%"
-                  padding="5px"
-                >
-                  <Image src={"resources/Setting.png"} w="17.35105px" />
-                </Box>
-              </Center>
+              </Box>
             </Box>
           </Box>
-        </Box>
-      </GridItem>
-    </Grid>
+        </GridItem>
+      </Grid>
+
+      <Box
+        color="#fff"
+        alignSelf="center"
+        px={2}
+        onClick={() => props.toggle()}
+        cursor="pointer"
+      >
+        <Image w="16px" h="16px" src={"resources/close-arrow.png"} />
+      </Box>
+    </Flex>
   );
 }
 

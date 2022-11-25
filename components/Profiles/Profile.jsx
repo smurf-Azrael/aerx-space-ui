@@ -117,17 +117,16 @@ function Profile(props) {
   }
 
   const handleESC = useCallback((e) => {
-    if (e.key === "Escape"){
-      props.toggle()
+    if (e.key === "Escape") {
+      props.toggle();
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleESC);
 
     return () => {
-    window.addEventListener("keydown", handleESC);
-
+      window.addEventListener("keydown", handleESC);
     };
   }, []);
 
@@ -155,7 +154,6 @@ function Profile(props) {
               ? `url('${nearState.profile.profileImg}')`
               : "none"
           }
-          // bgImage="https://cdn.dribbble.com/users/383277/screenshots/18055765/media/e5fc935b60035305099554810357012a.png?compress=1&resize=400x300"
           bgRepeat="no-repeat"
           bgSize="cover"
           bgPos="center"
@@ -189,8 +187,8 @@ function Profile(props) {
                   cursor="pointer"
                 >
                   <Box
-                    h="40px"
-                    w="40px"
+                    h="40px!important"
+                    w="40px!important"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
@@ -199,8 +197,7 @@ function Profile(props) {
                     backdropFilter="10px"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
-                    // onClick={() => props.toggle()}
+                    className="super-ellipse"
                   >
                     <Image src="resources/badge.png" alt="badge" />
                   </Box>
@@ -331,15 +328,33 @@ function Profile(props) {
                   flex="1"
                 >
                   <Box
-                    h="48px"
-                    w="48px"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.05)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
+                    backdropFilter="10px"
+                    className="super-ellipse"
+                  >
+                    <Image src="resources/Plus-con.png" alt="add" />
+                  </Box>
+                </WrapItem>
+                <WrapItem
+                  flexWrap="nowrap"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  flex="1"
+                >
+                  <Box
+                    className="super-ellipse"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    bgColor="rgba(255, 255, 255, 0.05)"
+                    color="#fff"
+                    backdropBlur="10px"
                     backdropFilter="10px"
                   >
                     <Image src="resources/Plus-con.png" alt="add" />
@@ -353,16 +368,13 @@ function Profile(props) {
                   flex="1"
                 >
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.05)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
-                    backdropFilter="10px"
                   >
                     <Image src="resources/Plus-con.png" alt="add" />
                   </Box>
@@ -375,36 +387,13 @@ function Profile(props) {
                   flex="1"
                 >
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.05)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
-                  >
-                    <Image src="resources/Plus-con.png" alt="add" />
-                  </Box>
-                </WrapItem>
-                <WrapItem
-                  flexWrap="nowrap"
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                  flex="1"
-                >
-                  <Box
-                    h="48px"
-                    w="48px"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.05)"
-                    color="#fff"
-                    backdropBlur="10px"
-                    borderRadius="16px"
                     backdropFilter="10px"
                   >
                     <Image src="resources/Plus-con.png" alt="add" />
@@ -452,10 +441,10 @@ function Profile(props) {
                   Wallet
                 </Heading>
                 <Flex my={2} justifyContent="space-between" gap="10px">
-                  <Flex gap={2}>
+                  <Flex gap={1}>
                     <Text
-                      fontSize="16px"
-                      fontWeight="700"
+                      fontSize="14px"
+                      fontWeight="400"
                       lineHeight="100%"
                       letterSpacing="-0.02em"
                       color="#ffffff"
@@ -473,10 +462,10 @@ function Profile(props) {
                       alt="aerx-token"
                     />
                   </Flex>
-                  <Flex gap={2} justifyContent="center">
+                  <Flex gap={1} justifyContent="center">
                     <Text
-                      fontSize="16px"
-                      fontWeight="700"
+                      fontSize="14px"
+                      fontWeight="400"
                       lineHeight="100%"
                       letterSpacing="-0.02em"
                       color="#ffffff"
@@ -493,10 +482,10 @@ function Profile(props) {
                       alignSelf="center"
                     />
                   </Flex>
-                  <Flex gap={2} justifyContent="flex-end">
+                  <Flex gap={1} justifyContent="flex-end">
                     <Text
-                      fontSize="16px"
-                      fontWeight="700"
+                      fontSize="14px"
+                      fontWeight="400"
                       lineHeight="100%"
                       letterSpacing="-0.02em"
                       color="#ffffff"
@@ -589,60 +578,52 @@ function Profile(props) {
                 </Flex>
                 <Flex gap={3} justifyContent="space-between">
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.1)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
                     onClick={props.wallet}
                     cursor="pointer"
                   >
                     <Image src="resources/download-icon.png" />
                   </Box>
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.1)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
                     onClick={props.wallet}
                     cursor="pointer"
                   >
                     <Image src="resources/Upload-icon.png" />
                   </Box>
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.1)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
                     onClick={props.wallet}
                     cursor="pointer"
                   >
                     <Image src="resources/refresh-logo.png" />
                   </Box>
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.1)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
                     onClick={props.wallet}
                     cursor="pointer"
                   >
@@ -699,30 +680,26 @@ function Profile(props) {
                   flexBasis="100%"
                 >
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.1)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
                     backdropFilter="10px"
                     cursor="pointer"
                   >
                     <Image src="resources/module-1.png" alt="home" />
                   </Box>
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.1)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
                     backdropFilter="10px"
                     cursor="pointer"
                     onClick={() => dispatch(expandChat())}
@@ -730,31 +707,27 @@ function Profile(props) {
                     <Image src="resources/module-2.png" />
                   </Box>
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.1)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
                     backdropFilter="10px"
                     cursor="pointer"
                     onClick={() => dispatch(expandFlow())}
                   >
-                    <Image  src="resources/module-3.png" />
+                    <Image src="resources/module-3.png" />
                   </Box>
                   <Box
-                    h="48px"
-                    w="48px"
+                    className="super-ellipse"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     bgColor="rgba(255, 255, 255, 0.05)"
                     color="#fff"
                     backdropBlur="10px"
-                    borderRadius="16px"
                     backdropFilter="10px"
                     cursor="pointer"
                   >

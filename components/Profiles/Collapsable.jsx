@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Box, Image, Text, Center, Flex, Button } from "@chakra-ui/react";
 import { useDispatch } from "../../store/store";
 import { expandChat, expandFlow } from "../../store/slices/modulesSlices";
 
 function collapsable(props) {
   const [hideProfile, setHideProfile] = useState(false);
+  const [toggle, setToggle] = useState(true);
   const dispatch = useDispatch();
 
-  setInterval(() => {
-    setHideProfile(true);
-  }, 20000);
+
+  if (toggle) {
+    setInterval(() => {
+      setHideProfile(true);
+      setToggle(true)
+    }, 20000);
+  }
 
   return (
     <Flex>
@@ -20,7 +25,6 @@ function collapsable(props) {
         w="48px"
         borderRight="1px solid rgba(255, 255, 255, 0.15)"
         flexDirection="column"
-        // gap="10%"
         zIndex={props.index}
         justifyContent="space-between"
         alignItems="center"
@@ -155,9 +159,9 @@ function collapsable(props) {
         cursor="pointer"
         ml={hideProfile ? 0 : 12}
         h="full"
-        onMouseOver={() => { 
-          props.toggle() 
-          setHideProfile(false)
+        onMouseOver={() => {
+          setHideProfile(false);
+          setToggle(false);
         }}
       >
         <Image w="16px" h="16px" src={"resources/open-profile.png"} />

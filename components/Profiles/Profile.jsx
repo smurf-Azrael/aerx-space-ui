@@ -319,7 +319,7 @@ function Profile(props) {
               >
                 Contacts
               </Heading>{" "}
-              <Wrap mt={2} mb={4} justifyContent="space-between">
+              <Wrap mt={2} mb={4} justifyContent="space-between" gap={0}>
                 <WrapItem
                   flexWrap="nowrap"
                   display="flex"
@@ -328,14 +328,16 @@ function Profile(props) {
                   flex="1"
                 >
                   <Box
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.05)"
+                    bgImage="resources/Squircle-dark.png"
+                    cursor="pointer"
+                    h="48px"
+                    w="48px"
                     color="#fff"
                     backdropBlur="10px"
                     backdropFilter="10px"
-                    className="super-ellipse"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
                   >
                     <Image src="resources/Plus-con.png" alt="add" />
                   </Box>
@@ -348,14 +350,16 @@ function Profile(props) {
                   flex="1"
                 >
                   <Box
-                    className="super-ellipse"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.05)"
+                    bgImage="/resources/Squircle-dark.png"
+                    cursor="pointer"
+                    h="48px"
+                    w="48px"
                     color="#fff"
                     backdropBlur="10px"
                     backdropFilter="10px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
                   >
                     <Image src="resources/Plus-con.png" alt="add" />
                   </Box>
@@ -368,13 +372,16 @@ function Profile(props) {
                   flex="1"
                 >
                   <Box
-                    className="super-ellipse"
+                    bgImage="resources/Squircle-dark.png"
+                    cursor="pointer"
+                    h="48px"
+                    w="48px"
+                    color="#fff"
+                    backdropBlur="10px"
+                    backdropFilter="10px"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.05)"
-                    color="#fff"
-                    backdropBlur="10px"
                   >
                     <Image src="resources/Plus-con.png" alt="add" />
                   </Box>
@@ -387,14 +394,16 @@ function Profile(props) {
                   flex="1"
                 >
                   <Box
-                    className="super-ellipse"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.05)"
+                    bgImage="/resources/Squircle-dark.png"
+                    cursor="pointer"
+                    h="48px"
+                    w="48px"
                     color="#fff"
                     backdropBlur="10px"
                     backdropFilter="10px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
                   >
                     <Image src="resources/Plus-con.png" alt="add" />
                   </Box>
@@ -578,52 +587,60 @@ function Profile(props) {
                 </Flex>
                 <Flex gap={3} justifyContent="space-between">
                   <Box
-                    className="super-ellipse"
+                    bgImage="/resources/Squircle-light.png"
+                    h="48px"
+                    w="48px"
+                    color="#fff"
+                    backdropBlur="10px"
+                    backdropFilter="10px"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.1)"
-                    color="#fff"
-                    backdropBlur="10px"
                     onClick={props.wallet}
                     cursor="pointer"
                   >
                     <Image src="resources/download-icon.png" />
                   </Box>
                   <Box
-                    className="super-ellipse"
+                    bgImage="/resources/Squircle-light.png"
+                    h="48px"
+                    w="48px"
+                    color="#fff"
+                    backdropBlur="10px"
+                    backdropFilter="10px"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.1)"
-                    color="#fff"
-                    backdropBlur="10px"
                     onClick={props.wallet}
                     cursor="pointer"
                   >
                     <Image src="resources/Upload-icon.png" />
                   </Box>
                   <Box
-                    className="super-ellipse"
+                    bgImage="/resources/Squircle-light.png"
+                    h="48px"
+                    w="48px"
+                    color="#fff"
+                    backdropBlur="10px"
+                    backdropFilter="10px"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.1)"
-                    color="#fff"
-                    backdropBlur="10px"
                     onClick={props.wallet}
                     cursor="pointer"
                   >
                     <Image src="resources/refresh-logo.png" />
                   </Box>
                   <Box
-                    className="super-ellipse"
+                    bgImage="/resources/Squircle-light.png"
+                    h="48px"
+                    w="48px"
+                    color="#fff"
+                    backdropBlur="10px"
+                    backdropFilter="10px"
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.1)"
-                    color="#fff"
-                    backdropBlur="10px"
                     onClick={props.wallet}
                     cursor="pointer"
                   >
@@ -674,62 +691,66 @@ function Profile(props) {
                 </Heading>{" "}
                 <Flex
                   flexDirection="row"
-                  gap="10.96px"
+                  gap={0}
                   mt={2}
                   justifyContent="space-between"
                   flexBasis="100%"
                 >
                   <Box
-                    className="super-ellipse"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.1)"
+                    bgImage="/resources/Squircle-light.png"
+                    h="48px"
+                    w="48px"
                     color="#fff"
                     backdropBlur="10px"
                     backdropFilter="10px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
                     cursor="pointer"
                   >
                     <Image src="resources/module-1.png" alt="home" />
                   </Box>
                   <Box
-                    className="super-ellipse"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.1)"
+                    bgImage="/resources/Squircle-light.png"
+                    h="48px"
+                    w="48px"
                     color="#fff"
                     backdropBlur="10px"
                     backdropFilter="10px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
                     cursor="pointer"
                     onClick={() => dispatch(expandChat())}
                   >
                     <Image src="resources/module-2.png" />
                   </Box>
                   <Box
-                    className="super-ellipse"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.1)"
+                    bgImage="/resources/Squircle-dark.png"
+                    h="48px"
+                    w="48px"
                     color="#fff"
                     backdropBlur="10px"
                     backdropFilter="10px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
                     cursor="pointer"
                     onClick={() => dispatch(expandFlow())}
                   >
                     <Image src="resources/module-3.png" />
                   </Box>
                   <Box
-                    className="super-ellipse"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    bgColor="rgba(255, 255, 255, 0.05)"
+                    bgImage="/resources/Squircle-dark.png"
+                    cursor="pointer"
+                    h="48px"
+                    w="48px"
                     color="#fff"
                     backdropBlur="10px"
                     backdropFilter="10px"
-                    cursor="pointer"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
                   >
                     <Image src="resources/Plus-con.png" />
                   </Box>

@@ -8,11 +8,10 @@ function collapsable(props) {
   const [toggle, setToggle] = useState(true);
   const dispatch = useDispatch();
 
-
   if (toggle) {
     setInterval(() => {
       setHideProfile(true);
-      setToggle(true)
+      setToggle(true);
     }, 20000);
   }
 
@@ -23,63 +22,78 @@ function collapsable(props) {
         bgColor="#141414"
         position="absolute"
         w="48px"
-        borderRight="1px solid rgba(255, 255, 255, 0.15)"
+        borderRight="1px solid #262626"
         flexDirection="column"
         zIndex={props.index}
         justifyContent="space-between"
         alignItems="center"
         display={hideProfile ? "none" : "flex"}
       >
-        <Flex flexDirection="column" h="full" gap="10px" alignItems="center">
+        <Flex
+          flexDirection="column"
+          h="full"
+          gap={2}
+          alignItems="center"
+          py={3}
+        >
           <Image src="../resources/æ.png" mt={5} mb="auto" w="24px" h="17px" />
           <Box
-            className="super-ellipse"
+            bgImage="resources/Squircle-side-dark.png"
+            h="32px"
+            w="32px"
+            backdropBlur="10px"
+            backdropFilter="10px"
             display="flex"
             justifyContent="center"
             alignItems="center"
-            bgColor="rgba(255, 255, 255, 0.05)"
-            color="#fff"
+            onClick={props.wallet}
+            cursor="pointer"
+          >
+            <Image w="20px" h="20px" src="resources/side-1.png" />
+          </Box>
+          <Box
+            bgImage="resources/Squircle-side-light.png"
+            h="32px"
+            w="32px"
+            
             backdropBlur="10px"
             backdropFilter="10px"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            onClick={props.wallet}
             cursor="pointer"
-            w="32px"
-            h="32px"
           >
-            <Image src="resources/Plus-con.png" />
+            <Image w="20px" h="20px" color="#717171" src="resources/side-2.png" />
           </Box>
-          <Image
-            src={"../resources/Vector 38.png"}
-            bgColor="rgba(255, 255, 255, 0.05);"
-            py="5.48px"
-            px="9.59px"
-            borderRadius="10.275px"
-            w="32px"
+          <Box
+            bgImage="resources/Squircle-side-light.png"
             h="32px"
-            cursor={"pointer"}
-            onClick={() => dispatch(expandFlow())}
-          />
-          <Image
-            src={"../resources/Frame 14042.png"}
-            bgColor="rgba(255, 255, 255, 0.05);"
-            py="6.48px"
-            px="7.59px"
-            borderRadius="10.275px"
             w="32px"
+            backdropBlur="10px"
+            backdropFilter="10px"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            onClick={props.wallet}
+            cursor="pointer"
+          >
+            <Image w="20px" h="20px" src="resources/side-3.png" />
+          </Box>
+          <Box
+            bgImage="resources/Squircle-side-light.png"
             h="32px"
-            cursor={"pointer"}
-            onClick={() => dispatch(expandChat())}
-          />
-          <Image
-            src={"../resources/Frame 14289.png"}
-            bgColor="rgba(255, 255, 255, 0.05);"
-            py="6.48px"
-            px="7.59px"
-            borderRadius="10.275px"
             w="32px"
-            h="32px"
-            cursor={"pointer"}
-            mb="19.865px"
-          />
+            backdropBlur="10px"
+            backdropFilter="10px"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            onClick={props.wallet}
+            cursor="pointer"
+          >
+            <Image w="20px" h="20px" src="resources/side-4.png" />
+          </Box>
         </Flex>
         {/* <Flex>
           <div
@@ -112,7 +126,7 @@ function collapsable(props) {
               justifyItems="center"
               position="relative"
               gap={3}
-              bgColor="#1A1A1A"
+              bgColor=" #0A0A0A"
               w="34px"
               h="67px"
               p={1}
@@ -144,7 +158,7 @@ function collapsable(props) {
         px={2}
         onClick={() => props.toggle()}
         cursor="pointer"
-        ml={hideProfile ? 0 : 12}
+        ml={hideProfile ? 0 : "2.7em"}
         h="full"
       >
         <Image w="16px" h="16px" src={"resources/open-profile.png"} />
@@ -157,7 +171,7 @@ function collapsable(props) {
         px={2}
         onClick={() => props.toggle()}
         cursor="pointer"
-        ml={hideProfile ? 0 : 12}
+        ml={hideProfile ? 0 : "2.7em"}
         h="full"
         onMouseOver={() => {
           setHideProfile(false);

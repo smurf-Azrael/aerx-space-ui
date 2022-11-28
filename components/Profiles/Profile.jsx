@@ -449,7 +449,7 @@ function Profile(props) {
                 >
                   Wallet
                 </Heading>
-                <Flex my={2} justifyContent="space-between" gap="10px">
+                <Flex my={2} justifyContent="space-between" gap="0">
                   <Flex gap={1}>
                     <Text
                       fontSize="14px"
@@ -585,9 +585,9 @@ function Profile(props) {
                     </div> */}
                   {/* </Flex> */}
                 </Flex>
-                <Flex gap={3} justifyContent="space-between">
+                <Flex justifyContent="space-between">
                   <Box
-                    bgImage="/resources/Squircle-light.png"
+                    bgImage="resources/Squircle-light.png"
                     h="48px"
                     w="48px"
                     color="#fff"
@@ -602,7 +602,7 @@ function Profile(props) {
                     <Image src="resources/download-icon.png" />
                   </Box>
                   <Box
-                    bgImage="/resources/Squircle-light.png"
+                    bgImage="resources/Squircle-light.png"
                     h="48px"
                     w="48px"
                     color="#fff"
@@ -617,7 +617,7 @@ function Profile(props) {
                     <Image src="resources/Upload-icon.png" />
                   </Box>
                   <Box
-                    bgImage="/resources/Squircle-light.png"
+                    bgImage="resources/Squircle-light.png"
                     h="48px"
                     w="48px"
                     color="#fff"
@@ -632,7 +632,7 @@ function Profile(props) {
                     <Image src="resources/refresh-logo.png" />
                   </Box>
                   <Box
-                    bgImage="/resources/Squircle-light.png"
+                    bgImage="resources/Squircle-light.png"
                     h="48px"
                     w="48px"
                     color="#fff"
@@ -697,7 +697,7 @@ function Profile(props) {
                   flexBasis="100%"
                 >
                   <Box
-                    bgImage="/resources/Squircle-light.png"
+                    bgImage="resources/Squircle-light.png"
                     h="48px"
                     w="48px"
                     color="#fff"
@@ -711,7 +711,7 @@ function Profile(props) {
                     <Image src="resources/module-1.png" alt="home" />
                   </Box>
                   <Box
-                    bgImage="/resources/Squircle-light.png"
+                    bgImage="resources/Squircle-light.png"
                     h="48px"
                     w="48px"
                     color="#fff"

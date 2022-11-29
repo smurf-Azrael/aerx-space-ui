@@ -202,3 +202,33 @@ a {
 ul {
   flex-wrap: nowrap!important;
 }
+
+.super-ellipse {
+  border-radius: 38%;
+  height: 48px;
+  position: relative;
+  width: 48px;
+}
+
+.super-ellipse::before,
+.super-ellipse::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+}
+
+.super-ellipse::before {
+  border-radius: 2% /38%;
+  bottom: 33px;
+  left: -2px;
+  right: -2px;
+  top: 33px;
+}
+
+.super-ellipse::after {
+  border-radius: 38% / 2%;
+  bottom: -2px;
+  left: 33px;
+  right: 33px;
+  top: -2px;
+}

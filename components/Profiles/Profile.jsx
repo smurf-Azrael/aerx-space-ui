@@ -149,6 +149,7 @@ function Profile(props) {
               ? "#191919"
               : "#191919"
           }
+          id={nearState.profile.profileImg.includes(".glb") ? "#" : "babylon-element-profile"} 
           bgImage={
             !nearState.profile.profileImg.includes(".glb")
               ? `url('${nearState.profile.profileImg}')`
@@ -596,7 +597,7 @@ function Profile(props) {
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    onClick={props.wallet}
+                    onClick={() => props.recieved()}
                     cursor="pointer"
                   >
                     <Image src="resources/download-icon.png" />
@@ -611,7 +612,7 @@ function Profile(props) {
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    onClick={props.wallet}
+                    onClick={() => props.upload()}
                     cursor="pointer"
                   >
                     <Image src="resources/Upload-icon.png" />
@@ -626,7 +627,7 @@ function Profile(props) {
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    onClick={props.wallet}
+                    onClick={() => props.exchange()}
                     cursor="pointer"
                   >
                     <Image src="resources/refresh-logo.png" />
@@ -641,7 +642,7 @@ function Profile(props) {
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    onClick={props.wallet}
+                    onClick={() => props.pool()}
                     cursor="pointer"
                   >
                     <Image src="resources/profit-logo.png" />
@@ -770,7 +771,7 @@ function Profile(props) {
               >
                 <Box
                   cursor="pointer"
-                  onClick={logOutUser}
+                  onClick={() => logOutUser()}
                   flex="0.5"
                   display="flex"
                   justifyContent="flex-start"

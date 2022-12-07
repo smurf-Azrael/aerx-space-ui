@@ -45,10 +45,6 @@ function Index() {
 
   const [isLogout, setLogout] = React.useState(false);
 
-
-
-
-
   const logOutUser = () => {
     setLogout((prevState) => !prevState);
   };
@@ -84,62 +80,51 @@ function Index() {
     // change toggle state
   };
   let index;
-  
+
   // isToggle  ? index= -1 : index=1
   isCircle ? (index = 1) : (index = -1);
 
-
   const HoverClick = () => {
     // if (e.detail == 2) {
-  setTimeout(() => {
-
+    setTimeout(() => {
       setDoubleClicked(true);
-
     }, 3000);
-   
   };
 
   let profileCardTimeout;
   // Write a function to show the tooltip
   const ProfileCardEnter = () => {
     profileCardTimeout = setTimeout(() => {
-        setDoubleClicked(true);
-   }, 4000);
-};
+      setDoubleClicked(true);
+    }, 4000);
+  };
 
-// Write a function to hide the tooltip
-const ProfileCardLeave = () => {
+  // Write a function to hide the tooltip
+  const ProfileCardLeave = () => {
     clearInterval(profileCardTimeout);
     // setDoubleClicked(false);
-
-};
-  
-
-
-
+  };
 
   const LeaveClick = () => {
     // if (e.detail == 2) {
-      // setTimeout(() => {
-      // setDoubleClicked(false);
-      clearTimeout
+    // setTimeout(() => {
+    // setDoubleClicked(false);
+    clearTimeout;
     // }, 3000);
 
-     
     // }
   };
   const CircleClick = () => {
     // if (e.detail == 2) {
-    
-      setDoubleClicked((prevState) => !prevState);
 
-   
+    setDoubleClicked((prevState) => !prevState);
+
     // }
   };
 
-//   const handleMouseLeave = () => {
-//     clearTimeout(delayHandler)
-// }
+  //   const handleMouseLeave = () => {
+  //     clearTimeout(delayHandler)
+  // }
 
   const removeCircle = (e) => {
     if (e.detail == 1) {
@@ -164,9 +149,10 @@ const ProfileCardLeave = () => {
     />
   );
   return (
-      
-        <div id="profile" className=" bg-[#1E202100] flex  h-[100vh] overflow-hidden ">
-
+    <div
+      id="profile"
+      className=" bg-[#1E202100] flex  h-[100vh] overflow-hidden "
+    >
       {isToggle && (
         <div>
           {!isOpenWallet ? (
@@ -179,13 +165,13 @@ const ProfileCardLeave = () => {
                 wallet={openWallet}
                 removeCircle={removeCircle}
                 switch={switchCircle}
-                logOutUser={logOutUser} 
+                logOutUser={logOutUser}
                 shadow={doubleClicked}
+                recieved={changeRecieve}
+                upload={changeUpload}
+                exchange={changeExchange}
+                pool={changePool}
                 m={setDoubleClicked}
-          
-              
-
-              
               />
               {/* <ProfileSection toggle={toggleClick} doubleClick={doubleClick}
                 removeCircle={removeCircle}
@@ -200,6 +186,22 @@ const ProfileCardLeave = () => {
               <NftValues />
               <Notifications logOutUser={logOutUser} /> */}
               {/* <tokenWallet /> */}
+              {isUpload && (
+                <NewSendToken upload={changeUpload} toggleWallet={openWallet} />
+              )}
+              {isPool && <Pools pool={changePool} toggleWallet={openWallet} />}
+              {isExchange && (
+                <ExchangeToken
+                  exchange={changeExchange}
+                  toggleWallet={openWallet}
+                />
+              )}
+              {isRecieved && (
+                <RecieveToken
+                  recieved={changeRecieve}
+                  toggleWallet={openWallet}
+                />
+              )}
             </div>
           ) : (
             <div className=" h-[100vh]">
@@ -238,11 +240,10 @@ const ProfileCardLeave = () => {
           Toggle={isToggle}
           circle={isCircle}
           index={index}
-     
         />
       )}
 
-      {doubleClicked && <Circle circle={doubleClicked} remove={removeCircle}  />}
+      {doubleClicked && <Circle circle={doubleClicked} remove={removeCircle} />}
     </div>
   );
 }

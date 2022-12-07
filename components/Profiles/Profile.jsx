@@ -771,7 +771,7 @@ function Profile(props) {
               >
                 <Box
                   cursor="pointer"
-                  onClick={() => logOutUser()}
+                  onClick={logOutUser}
                   flex="0.5"
                   display="flex"
                   justifyContent="flex-start"
@@ -822,6 +822,7 @@ function Profile(props) {
       >
         <Image w="16px" h="16px" src={"resources/close-arrow.png"} />
       </Box>
+      <LogOut zIndex={zIndex} show={isLogout} revert={logOutUser} />  
     </Flex>
   );
 }

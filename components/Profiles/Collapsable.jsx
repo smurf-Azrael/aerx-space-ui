@@ -1,12 +1,22 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Box, Image, Text, Center, Flex, Button } from "@chakra-ui/react";
 import { useDispatch } from "../../store/store";
+import LogOut from "./LogOut";
+
 import { expandChat, expandFlow } from "../../store/slices/modulesSlices";
 
 function collapsable(props) {
   const [hideProfile, setHideProfile] = useState(false);
   const [toggle, setToggle] = useState(true);
+  const [isLogout, setLogout] = React.useState(false);
+
+  const logOutUser = () => {
+    setLogout((prevState) => !prevState);
+  };
   const dispatch = useDispatch();
+
+  let zIndex;
+  isLogout ? (zIndex = 1) : (zIndex = 0);
 
   if (toggle) {
     setInterval(() => {
@@ -55,16 +65,20 @@ function collapsable(props) {
             bgImage="resources/Squircle-side-light.png"
             h="32px"
             w="32px"
-            
             backdropBlur="10px"
             backdropFilter="10px"
             display="flex"
             justifyContent="center"
             alignItems="center"
-            onClick={props.wallet}
+            onClick={() => dispatch(expandFlow())}
             cursor="pointer"
           >
-            <Image w="20px" h="20px" color="#717171" src="resources/side-2.png" />
+            <Image
+              w="20px"
+              h="20px"
+              color="#717171"
+              src="resources/side-2.png"
+            />
           </Box>
           <Box
             bgImage="resources/Squircle-side-light.png"
@@ -75,7 +89,7 @@ function collapsable(props) {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            onClick={props.wallet}
+            onClick={() => dispatch(expandChat())}
             cursor="pointer"
           >
             <Image w="20px" h="20px" src="resources/side-3.png" />
@@ -145,7 +159,7 @@ function collapsable(props) {
           <Box display="flex" justifyContent="flex-end">
             <Image w="19px" h="20px" src={"resources/Setting.png"} />
           </Box>
-          <Box cursor="pointer" onClick={props.logOutUser} display="flex">
+          <Box cursor="pointer" onClick={logOutUser} display="flex">
             <Image src="resources/Logout-icon.png" />
           </Box>
         </Flex>
@@ -160,6 +174,8 @@ function collapsable(props) {
         cursor="pointer"
         ml={hideProfile ? 0 : "2.7em"}
         h="full"
+        position="fixed"
+        zIndex={-1}
       >
         <Image w="16px" h="16px" src={"resources/open-profile.png"} />
       </Box>
@@ -180,6 +196,7 @@ function collapsable(props) {
       >
         <Image w="16px" h="16px" src={"resources/open-profile.png"} />
       </Box>
+      <LogOut zIndex={zIndex} show={isLogout} revert={logOutUser} />
     </Flex>
   );
 }

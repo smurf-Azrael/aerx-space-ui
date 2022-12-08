@@ -70,7 +70,7 @@ function collapsable(props) {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            onClick={props.wallet}
+            onClick={() => dispatch(expandFlow())}
             cursor="pointer"
           >
             <Image
@@ -89,7 +89,7 @@ function collapsable(props) {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            onClick={props.wallet}
+            onClick={() => dispatch(expandChat())}
             cursor="pointer"
           >
             <Image w="20px" h="20px" src="resources/side-3.png" />

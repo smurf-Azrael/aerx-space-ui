@@ -33,6 +33,7 @@ function Profile(props) {
   const { ellipse4, ellipse5, ellipse3, logoP, frameP1, frameP2 } =
     useSelector(getUserState);
   const [isLogout, setLogout] = React.useState(false);
+  const [hide, setHide] = React.useState(false);
   const logOutUser = () => {
     setLogout((prevState) => !prevState);
   };
@@ -126,7 +127,7 @@ function Profile(props) {
     window.addEventListener("keydown", handleESC);
 
     return () => {
-      window.addEventListener("keydown", handleESC);
+      window.removeEventListener("keydown", handleESC);
     };
   }, []);
 
@@ -149,7 +150,11 @@ function Profile(props) {
               ? "#191919"
               : "#191919"
           }
-          id={nearState.profile.profileImg.includes(".glb") ? "#" : "babylon-element-profile"} 
+          id={
+            nearState.profile.profileImg.includes(".glb")
+              ? "#"
+              : "babylon-element-profile"
+          }
           bgImage={
             !nearState.profile.profileImg.includes(".glb")
               ? `url('${nearState.profile.profileImg}')`
@@ -822,7 +827,7 @@ function Profile(props) {
       >
         <Image w="16px" h="16px" src={"resources/close-arrow.png"} />
       </Box>
-      <LogOut zIndex={zIndex} show={isLogout} revert={logOutUser} />  
+      <LogOut zIndex={zIndex} show={isLogout} revert={logOutUser} />
     </Flex>
   );
 }

@@ -84,6 +84,10 @@ export type NearStoreType = {
     setServiceAmount: (serviceAmount: any) => void;
     removeServiceAmount: () => void;
 
+    babylonViewer: any|null,
+    setBabylonViewer: (babylonViewer: any) => void;
+    removeBabylonViewer: () => void;
+
 };
 
 export type ProfileStoreType = {

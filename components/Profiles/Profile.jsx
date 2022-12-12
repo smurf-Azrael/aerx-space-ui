@@ -60,62 +60,128 @@ function Profile(props) {
   const mouseDown = (e) => {
     return <Circle />;
   };
-  if (nearState.profile.profileImg.includes(".glb")) {
-    useEffect(() => {
-      const initBabylon = async () => {
-        const BabylonViewer = await import("babylonjs-viewer");
-        const babylon = document.getElementById("babylon-element-profile");
-        let viewer = new BabylonViewer.DefaultViewer(babylon, {
-          extends: "none",
-          templates: {
-            main: {
-              html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
-              params: {
-                ["no-escape"]: true,
-                ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`,
-              },
-            },
-            ["loadingScreen"]: {
-              html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
-              params: {
-                ["backgroundColor"]: "#0000004d",
-                ["loadingImage"]:
-                  "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png",
-              },
+  const babylonViewer = nearState.babylonViewer;
+  const babylon = document.getElementById("babylon-element-profile");
+  // if (nearState.profile.profileImg.includes(".glb")) {
+  //   useEffect(() => {
+  //     const initBabylon = async () => {
+  //       const BabylonViewer = await import("babylonjs-viewer");
+  //       const babylon = document.getElementById("babylon-element-profile");
+  //       new BabylonViewer.DefaultViewer(babylon, {
+  //         extends: "none",
+  //         templates: {
+  //           main: {
+  //             html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+  //             params: {
+  //               ["no-escape"]: true,
+  //               ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`,
+  //             },
+  //           },
+  //           ["loadingScreen"]: {
+  //             html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+  //             params: {
+  //               ["backgroundColor"]: "#0000004d",
+  //               ["loadingImage"]:
+  //                 "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png",
+  //             },
+  //           },
+  //         },
+  //         scene: {
+  //           clearColor: {
+  //             r: 0,
+  //             g: 0,
+  //             b: 0,
+  //             a: 0,
+  //           },
+  //         },
+  //         engine: {
+  //           antialiasing: true,
+  //           hdEnabled: true,
+  //           adaptiveQuality: true,
+  //         },
+  //         optimizer: true,
+  //         model: {
+  //           url: `${nearState.profile.profileImg}`,
+  //           scaling: {
+  //             x: 0.9,
+  //             y: 0.5,
+  //             z: 0.8,
+  //           },
+  //           position: {
+  //             x: 0,
+  //             y: -1,
+  //             z: 1,
+  //           },
+  //         },
+  //       });
+  //     };
+  //     initBabylon();
+  //   }, []);
+  // }
+
+  const load3d = async(element, mediaUrl) => {
+    if (babylonViewer) {
+      await new babylonViewer.DefaultViewer(element, {
+        extends: "none",
+        templates: {
+          main: {
+            html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+            params: {
+              ["no-escape"]: true,
+              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`,
             },
           },
-          scene: {
-            clearColor: {
-              r: 0,
-              g: 0,
-              b: 0,
-              a: 0,
+          ["loadingScreen"]: {
+            html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+            params: {
+              ["backgroundColor"]: "#0000004d",
+              ["loadingImage"]:
+                "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png",
             },
           },
-          engine: {
-            antialiasing: true,
-            hdEnabled: true,
-            adaptiveQuality: true,
+        },
+        scene: {
+          clearColor: {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0,
           },
-          optimizer: true,
-          model: {
-            url: `${nearState.profile.profileImg}`,
-            scaling: {
-              x: 0.9,
-              y: 0.5,
-              z: 0.8,
-            },
-            position: {
-              x: 0,
-              y: -1,
-              z: 1,
-            },
+        },
+        engine: {
+          antialiasing: true,
+          hdEnabled: true,
+          adaptiveQuality: true,
+        },
+        optimizer: true,
+        model: {
+          url: `${mediaUrl}`,
+          scaling: {
+            x: 0.9,
+            y: 0.5,
+            z: 0.8,
           },
-        });
-      };
-      initBabylon().then(() => {});
-    }, []);
+          position: {
+            x: 0,
+            y: -1,
+            z: 1,
+          },
+        },
+      });
+    }else{
+      console.log("Babylon viewer is null")
+    }
   }
+
+  useEffect(() => {
+    if (babylon) {
+      (async () => {
+        await load3d(babylon, nearState.profile.profileImg)
+      })();
+    }
+    
+  }, [babylon,  nearState.profile.profileImg])
+  
 
   const handleESC = useCallback((e) => {
     if (e.key === "Escape") {
@@ -151,7 +217,7 @@ function Profile(props) {
               : "#191919"
           }
           id={
-            nearState.profile.profileImg.includes(".glb")
+            !nearState.profile.profileImg.includes(".glb")
               ? "#"
               : "babylon-element-profile"
           }

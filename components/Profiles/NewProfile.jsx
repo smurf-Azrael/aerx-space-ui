@@ -54,7 +54,11 @@ function NewProfile(props) {
         w="257.56px"
         // bgColor="rgba(0, 0, 0, 0.1)"
         // bgColor="#191919"
-        bgImage={`url('${profileImage}')`}
+        bgImage={
+          !nearState.profile.profileImg.includes(".glb")
+            ? `url('${nearState.profile.profileImg}')`
+            : "none"
+        }
         fontFamily="Poppins"
         bgRepeat="no-repeat"
         bgSize="257.56px 378.12px"

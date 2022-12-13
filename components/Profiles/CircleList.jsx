@@ -1,351 +1,1158 @@
-import React from "react";
-import { Box, Text, Center, Flex, Image,Button } from "@chakra-ui/react";
-import { MinusIcon } from "@chakra-ui/icons";
+import React, { useState } from "react";
+import {
+  Box,
+  Text,
+  Center,
+  Flex,
+  Image,
+  Button,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
+import { MinusIcon, RepeatClockIcon } from "@chakra-ui/icons";
 
 function CircleList(props) {
-
+  const [tab, setTab] = useState(0);
 
   return (
     <Box
-      height="739.8px"
-      w="257.56px"
+      height="100vh"
+      w="250px"
       bgColor="#1f1f1f"
-      //   position="absolute"
-      //   top="0"
       // zIndex="6"
       fontFamily="poppins"
     >
-      
-
-      <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
-            <Button
-              onClick={props.remove}
-              cursor="pointer"
-              background="none"
-              w="21.92px"
-              bgColor="rgba(255, 255, 255, 0.3);"
-              height="12px"
-              mt="2"
-              px="0"
-              flexDirection="column"
-              gap="2px"
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </Button>
-          </Center>
+      <Center borderRadius="50px 50px 0px 0px" zIndex={6}>
+        <Button
+          onClick={props.remove}
+          cursor="pointer"
+          background="none"
+          h="16px"
+          w="16px"
+          my={3}
+          px="0"
+        >
+          <Image src="/resources/arrow-down.png" />
+        </Button>
+      </Center>
 
       {/* circle text */}
-      <Center>
+      <Flex justifyContent="space-between" mx={4}>
+        <Box>
+          {" "}
+          <Image src="/resources/contact-search.png" h="20px" w="20px" />
+        </Box>
         <Text
-          mb="21.92px"
+          // mb="21.92px"
           fontFamily="poppins"
-          fontSize="16.44px"
+          fontSize="14px"
           color="#ffffff"
-          fontWeight="411"
+          fontWeight="600"
+          letterSpacing="-0.02em"
+          lineHeight="21px"
         >
-          Circles
+          Contacts
         </Text>
-      </Center>
-
-      {/* family text */}
-
-      <Center>
-        <Text
-          mb="16.44px"
-          fontFamily="poppins"
-          fontSize="12.33px"
-          color="#ffffff"
-          fontWeight="342.5"
-        >
-          Family
-        </Text>
-      </Center>
-
-      {/* Images grid */}
-      <Flex flexDirection="column" gap="6.96px" mb="10.96px">
-        <Flex mx="16.44px" gap="16.44px">
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 3604.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360a.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360b.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360d.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-        </Flex>
-
-        <Flex mx="16.44px" gap="16.44px">
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 3604.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360a.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360b.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Damola
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Box
-              bgColor="#FFFFFF0D"
-              w="43.84px"
-              h="43.84px"
-              borderRadius="13.7px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Image src={"../resources/Add User.png"} w="13.7px" h="13.7px" />
-            </Box>
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-        </Flex>
+        <Box>
+          <Image src="/resources/contact-plus.png" h="20px" w="20px" />
+        </Box>
       </Flex>
 
-      <Center>
-        <Text
-          mb="10.96px"
-          fontFamily="poppins"
-          fontSize="12.33px"
-          color="#ffffff"
-          fontWeight="342.5"
+      <Center my={3} mx={4} bg="#191A1B" borderRadius="8px" w="226px" h="34px">
+        <Button
+          onClick={() => setTab(0)}
+          h="26px"
+          w="109px"
+          borderRadius="5px"
+          bg={tab === 0 ? "#6054F0" : "none"}
+          outline="none"
+          _hover={{
+            background: "#6054F0",
+          }}
         >
-          Work
-        </Text>
+          <Image
+            src="/resources/profile-contact.png"
+            h="20px"
+            w="20px"
+            mx={2}
+          />{" "}
+          <Text
+            color="#fff"
+            fontSize="12px"
+            fontWeight={tab === 0 ? 500 : 400}
+            fontFamily="Poppins"
+            lineHeight="100%"
+            opacity={tab === 0 ? 1 : 0.3}
+          >
+            All
+          </Text>
+        </Button>
+        <Button
+          onClick={() => setTab(1)}
+          h="26px"
+          w="109px"
+          borderRadius="5px"
+          bg={tab === 1 ? "#6054F0" : "none"}
+          outline="none"
+          _hover={{
+            background: "#6054F0",
+          }}
+        >
+          <Image src="/resources/group-user.png" h="16px" w="16px" mx={2} />{" "}
+          <Text
+            color="#fff"
+            fontSize="12px"
+            fontWeight={tab === 1 ? 500 : 400}
+            fontFamily="Poppins"
+            lineHeight="100%"
+            opacity={tab === 1 ? 1 : 0.3}
+          >
+            Circles
+          </Text>
+        </Button>
       </Center>
 
-      <Flex flexDirection="column" gap="6.96px" mb="10.96px">
-        <Flex mx="16.44px" gap="16.44px">
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 3604.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360a.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360b.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360d.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-        </Flex>
+      <Box overflowY="scroll" h="85vh" pb={3}>
+        {tab === 0 && (
+           <Box mx={1}>
+          <Grid
+            templateColumns="repeat(4, auto)"
+            alignContent="center"
+            h="auto"
+            gap={2}
+            ml={4}
+          >
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 3604.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360a.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360b.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Image
+                src={"../resources/Rectangle 360d.png"}
+                w="48px"
+                h="48px"
+                bgColor="rgba(255, 255, 255, 0.05)"
+                backdropFilter="10px"
+                borderRadius="15px"
+              />
+              <Text
+                fontFamily="poppins"
+                textAlign="center"
+                pt={2}
+                fontWeight="500"
+                color="#ffffff"
+                lineHeight="18px"
+                fontSize="12px"
+              >
+                Anna
+              </Text>
+            </GridItem>
+          </Grid>
+           </Box>
+        )}
 
-        <Flex mx="16.44px" gap="16.44px">
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 3604.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360a.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360b.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360d.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-        </Flex>
+        {tab === 1 && (
+          <>
+            <Flex flexDirection="column" gap="6.96px" mb="10.96px">
+              <Flex mx="16.44px" gap="16.44px">
+                <Flex flexDirection="column" gap="5.48px" alignItems="center">
+                  <Image
+                    src={"../resources/Rectangle 3604.png"}
+                    w="48px"
+                    h="48px"
+                  />
+                  <Text
+                    fontFamily="poppins"
+                    textAlign="center"
+                    pt={2}
+                    fontWeight="500"
+                    color="#ffffff"
+                    lineHeight="18px"
+                    fontSize="12px"
+                  >
+                    Anna
+                  </Text>
+                </Flex>
+                <Flex flexDirection="column" gap="5.48px" alignItems="center">
+                  <Image
+                    src={"../resources/Rectangle 360a.png"}
+                    w="48px"
+                    h="48px"
+                  />
+                  <Text
+                    fontFamily="poppins"
+                    textAlign="center"
+                    pt={2}
+                    fontWeight="500"
+                    color="#ffffff"
+                    lineHeight="18px"
+                    fontSize="12px"
+                  >
+                    Anna
+                  </Text>
+                </Flex>
+                <Flex flexDirection="column" gap="5.48px" alignItems="center">
+                  <Image
+                    src={"../resources/Rectangle 360b.png"}
+                    w="48px"
+                    h="48px"
+                  />
+                  <Text
+                    fontFamily="poppins"
+                    textAlign="center"
+                    pt={2}
+                    fontWeight="500"
+                    color="#ffffff"
+                    lineHeight="18px"
+                    fontSize="12px"
+                  >
+                    Anna
+                  </Text>
+                </Flex>
+                <Flex flexDirection="column" gap="5.48px" alignItems="center">
+                  <Image
+                    src={"../resources/Rectangle 360d.png"}
+                    w="48px"
+                    h="48px"
+                  />
+                  <Text
+                    fontFamily="poppins"
+                    textAlign="center"
+                    pt={2}
+                    fontWeight="500"
+                    color="#ffffff"
+                    lineHeight="18px"
+                    fontSize="12px"
+                  >
+                    Anna
+                  </Text>
+                </Flex>
+              </Flex>
 
-        <Flex mx="16.44px" gap="16.44px">
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 3604.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360a.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360b.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Damola
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Box
-              bgColor="#FFFFFF0D"
-              w="43.84px"
-              h="43.84px"
-              borderRadius="13.7px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Image src={"../resources/Add User.png"} w="13.7px" h="13.7px" />
-            </Box>
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-        </Flex>
-      </Flex>
-
-      <Center>
-        <Text
-          mb="10.96px"
-          fontFamily="poppins"
-          fontSize="12.33px"
-          color="#ffffff"
-          fontWeight="342.5"
-        >
-          Friends
-        </Text>
-      </Center>
-
-      <Flex flexDirection="column" gap="6.96px" mb="10.96px">
-        <Flex mx="16.44px" gap="16.44px">
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 3604.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360a.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              patrick
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360b.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360d.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-        </Flex>
-
-        <Flex mx="16.44px" gap="16.44px">
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 3604.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              pavel
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360a.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360b.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360d.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-        </Flex>
-
-        <Flex mx="16.44px" gap="16.44px">
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 3604.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Moses
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360a.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Image src={"../resources/Rectangle 360b.png"} w="43.84px" />
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Damola
-            </Text>
-          </Flex>
-          <Flex flexDirection="column" gap="5.48px" alignItems="center">
-            <Box
-              bgColor="#FFFFFF0D"
-              w="43.84px"
-              h="43.84px"
-              borderRadius="13.7px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Image src={"../resources/Add User.png"} w="13.7px" h="13.7px" />
-            </Box>
-            <Text fontSize="10.96px" color="#ffffff" fontWeight="342.5px">
-              Anna
-            </Text>
-          </Flex>
-        </Flex>
-      </Flex>
+              <Flex mx="16.44px" gap="16.44px">
+                <Flex flexDirection="column" gap="5.48px" alignItems="center">
+                  <Image
+                    src={"../resources/Rectangle 3604.png"}
+                    w="48px"
+                    h="48px"
+                  />
+                  <Text
+                    fontFamily="poppins"
+                    textAlign="center"
+                    pt={2}
+                    fontWeight="500"
+                    color="#ffffff"
+                    lineHeight="18px"
+                    fontSize="12px"
+                  >
+                    Anna
+                  </Text>
+                </Flex>
+                <Flex flexDirection="column" gap="5.48px" alignItems="center">
+                  <Image
+                    src={"../resources/Rectangle 360a.png"}
+                    w="48px"
+                    h="48px"
+                  />
+                  <Text
+                    fontFamily="poppins"
+                    textAlign="center"
+                    pt={2}
+                    fontWeight="500"
+                    color="#ffffff"
+                    lineHeight="18px"
+                    fontSize="12px"
+                  >
+                    Anna
+                  </Text>
+                </Flex>
+                <Flex flexDirection="column" gap="5.48px" alignItems="center">
+                  <Image
+                    src={"../resources/Rectangle 360b.png"}
+                    w="48px"
+                    h="48px"
+                  />
+                  <Text
+                    fontFamily="poppins"
+                    textAlign="center"
+                    pt={2}
+                    fontWeight="500"
+                    color="#ffffff"
+                    lineHeight="18px"
+                    fontSize="12px"
+                  >
+                    Damola
+                  </Text>
+                </Flex>
+                <Flex flexDirection="column" gap="5.48px" alignItems="center">
+                  <Box
+                    bgColor="#FFFFFF0D"
+                    w="48px"
+                    h="48px"
+                    borderRadius="13.7px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Image
+                      src={"../resources/Add User.png"}
+                      w="13.7px"
+                      h="13.7px"
+                    />
+                  </Box>
+                  <Text
+                    fontFamily="poppins"
+                    textAlign="center"
+                    pt={2}
+                    fontWeight="500"
+                    color="#ffffff"
+                    lineHeight="18px"
+                    fontSize="12px"
+                  >
+                    Anna
+                  </Text>
+                </Flex>
+              </Flex>
+            </Flex>
+          </>
+        )}
+      </Box>
     </Box>
   );
 }

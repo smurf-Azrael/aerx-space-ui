@@ -10,6 +10,280 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 import { MinusIcon, RepeatClockIcon } from "@chakra-ui/icons";
+import Contact from "./Contact";
+
+const data = [
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 0,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Have",
+    id: 1,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Scave",
+    id: 2,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Ronan",
+    id: 3,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Nore",
+    id: 4,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 5,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 0,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Have",
+    id: 1,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Scave",
+    id: 2,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Ronan",
+    id: 3,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Nore",
+    id: 4,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 5,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 0,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Have",
+    id: 1,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Scave",
+    id: 2,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Ronan",
+    id: 3,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Nore",
+    id: 4,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 5,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 0,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Have",
+    id: 1,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Scave",
+    id: 2,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Ronan",
+    id: 3,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Nore",
+    id: 4,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 5,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 0,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Have",
+    id: 1,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Scave",
+    id: 2,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Ronan",
+    id: 3,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Nore",
+    id: 4,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 5,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 0,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Have",
+    id: 1,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Scave",
+    id: 2,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Ronan",
+    id: 3,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Nore",
+    id: 4,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 5,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 0,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Have",
+    id: 1,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Scave",
+    id: 2,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Ronan",
+    id: 3,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Nore",
+    id: 4,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 5,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 0,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Have",
+    id: 1,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Scave",
+    id: 2,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Ronan",
+    id: 3,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Nore",
+    id: 4,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 5,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 0,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Have",
+    id: 1,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Scave",
+    id: 2,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Ronan",
+    id: 3,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Nore",
+    id: 4,
+  },
+  {
+    src: "../resources/Rectangle 3604.png",
+    name: "Anna",
+    id: 5,
+  },
+];
 
 function CircleList(props) {
   const [tab, setTab] = useState(0);
@@ -21,6 +295,8 @@ function CircleList(props) {
       bgColor="#1f1f1f"
       // zIndex="6"
       fontFamily="poppins"
+      display="flex"
+      flexDirection="column"
     >
       <Center borderRadius="50px 50px 0px 0px" zIndex={6}>
         <Button
@@ -112,879 +388,26 @@ function CircleList(props) {
         </Button>
       </Center>
 
-      <Box overflowY="scroll" h="85vh" pb={3}>
+      <Box overflowY="scroll" flex={2} pb={3}>
         {tab === 0 && (
-           <Box mx={1}>
-          <Grid
-            templateColumns="repeat(4, auto)"
-            alignContent="center"
-            h="auto"
-            gap={2}
-            ml={4}
-          >
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 3604.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360a.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360b.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Image
-                src={"../resources/Rectangle 360d.png"}
-                w="48px"
-                h="48px"
-                bgColor="rgba(255, 255, 255, 0.05)"
-                backdropFilter="10px"
-                borderRadius="15px"
-              />
-              <Text
-                fontFamily="poppins"
-                textAlign="center"
-                pt={2}
-                fontWeight="500"
-                color="#ffffff"
-                lineHeight="18px"
-                fontSize="12px"
-              >
-                Anna
-              </Text>
-            </GridItem>
-          </Grid>
-           </Box>
+          <Box mx={1}>
+            <Grid
+              templateColumns="repeat(4, auto)"
+              alignContent="center"
+              h="auto"
+              gap={2}
+              ml={4}
+            >
+              {data.map((item, index) => (
+                <Contact
+                  key={index}
+                  src={item.src}
+                  name={item.name}
+                  selected={false}
+                />
+              ))}
+            </Grid>
+          </Box>
         )}
 
         {tab === 1 && (

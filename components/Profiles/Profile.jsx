@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "../../store/store";
 import { getUserState, setImages } from "../../store/slices/imageSlices";
 import LogOut from "./LogOut";
 import CircleList from "./CircleList";
+import PinContact from "./PinContact";
 import Circle from "./Circle";
 import { expandChat, expandFlow } from "../../store/slices/modulesSlices";
 import dynamic from "next/dynamic";
@@ -48,10 +49,18 @@ function Profile(props) {
   isLogout ? (zIndex = 1) : (zIndex = -8);
   isLogout ? (backdrop = 1) : (backdrop = -1);
   const [circ, setCirc] = React.useState(false);
+  const [pin, setPin] = React.useState(false);
+
   const remCirc = () => {
     setCirc((prevState) => !prevState);
     console.log("done", circ);
   };
+
+  const pinned = () => {
+    setPin((prevState) => !prevState);
+    console.log("done", pin);
+  };
+  
   let disabled;
   let opacity;
 
@@ -133,6 +142,8 @@ function Profile(props) {
 
   return circ ? (
     <CircleList remove={remCirc} />
+  ) :  pin ? (
+    <PinContact remove={pinned} /> 
   ) : (
     <Flex>
       <Grid
@@ -336,6 +347,7 @@ function Profile(props) {
                   <Box
                     bgImage="resources/Squircle-dark.png"
                     cursor="pointer"
+                    onClick={pinned}
                     h="48px"
                     w="48px"
                     color="#fff"
@@ -358,6 +370,7 @@ function Profile(props) {
                   <Box
                     bgImage="/resources/Squircle-dark.png"
                     cursor="pointer"
+                    onClick={pinned}
                     h="48px"
                     w="48px"
                     color="#fff"
@@ -380,6 +393,7 @@ function Profile(props) {
                   <Box
                     bgImage="resources/Squircle-dark.png"
                     cursor="pointer"
+                    onClick={pinned}
                     h="48px"
                     w="48px"
                     color="#fff"
@@ -402,6 +416,7 @@ function Profile(props) {
                   <Box
                     bgImage="/resources/Squircle-dark.png"
                     cursor="pointer"
+                    onClick={pinned}
                     h="48px"
                     w="48px"
                     color="#fff"
@@ -829,7 +844,7 @@ function Profile(props) {
       </Box>
       <LogOut zIndex={zIndex} show={isLogout} revert={logOutUser} />
     </Flex>
-  );
+  )
 }
 
 export default Profile;

@@ -9,8 +9,9 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
-import { MinusIcon, RepeatClockIcon } from "@chakra-ui/icons";
+// import { MinusIcon, RepeatClockIcon } from "@chakra-ui/icons";
 import Contact from "./Contact";
+import AddCircles from "./AddCircles";
 
 const data = [
   {
@@ -287,295 +288,220 @@ const data = [
 
 function CircleList(props) {
   const [tab, setTab] = useState(0);
+  const [circle, setCircle] = React.useState(false);
+
+  const addCircle = () => {
+    setCircle((prevState) => !prevState);
+  };
 
   return (
-    <Box
-      height="100vh"
-      w="250px"
-      bgColor="#1f1f1f"
-      // zIndex="6"
-      fontFamily="poppins"
-      display="flex"
-      flexDirection="column"
-    >
-      <Center borderRadius="50px 50px 0px 0px" zIndex={6}>
-        <Button
-          onClick={props.remove}
-          cursor="pointer"
-          background="none"
-          h="16px"
-          w="16px"
-          my={3}
-          px="0"
-        >
-          <Image src="/resources/arrow-down.png" />
-        </Button>
-      </Center>
-
-      {/* circle text */}
-      <Flex justifyContent="space-between" mx={4}>
-        <Box>
-          {" "}
-          <Image src="/resources/contact-search.png" h="20px" w="20px" />
-        </Box>
-        <Text
-          // mb="21.92px"
+    <Box>
+      {circle ? (
+        <AddCircles remove={addCircle} />
+      ) : (
+        <Box
+          height="100vh"
+          w="250px"
+          bgColor="#1f1f1f"
+          // zIndex="6"
           fontFamily="poppins"
-          fontSize="14px"
-          color="#ffffff"
-          fontWeight="600"
-          letterSpacing="-0.02em"
-          lineHeight="21px"
+          display="flex"
+          flexDirection="column"
         >
-          Contacts
-        </Text>
-        <Box>
-          <Image src="/resources/contact-plus.png" h="20px" w="20px" />
-        </Box>
-      </Flex>
-
-      <Center my={3} mx={4} bg="#191A1B" borderRadius="8px" w="226px" h="34px">
-        <Button
-          onClick={() => setTab(0)}
-          h="26px"
-          w="109px"
-          borderRadius="5px"
-          bg={tab === 0 ? "#6054F0" : "none"}
-          outline="none"
-          _hover={{
-            background: "#6054F0",
-          }}
-        >
-          <Image
-            src="/resources/profile-contact.png"
-            h="20px"
-            w="20px"
-            mx={2}
-          />{" "}
-          <Text
-            color="#fff"
-            fontSize="12px"
-            fontWeight={tab === 0 ? 500 : 400}
-            fontFamily="Poppins"
-            lineHeight="100%"
-            opacity={tab === 0 ? 1 : 0.3}
-          >
-            All
-          </Text>
-        </Button>
-        <Button
-          onClick={() => setTab(1)}
-          h="26px"
-          w="109px"
-          borderRadius="5px"
-          bg={tab === 1 ? "#6054F0" : "none"}
-          outline="none"
-          _hover={{
-            background: "#6054F0",
-          }}
-        >
-          <Image src="/resources/group-user.png" h="16px" w="16px" mx={2} />{" "}
-          <Text
-            color="#fff"
-            fontSize="12px"
-            fontWeight={tab === 1 ? 500 : 400}
-            fontFamily="Poppins"
-            lineHeight="100%"
-            opacity={tab === 1 ? 1 : 0.3}
-          >
-            Circles
-          </Text>
-        </Button>
-      </Center>
-
-      <Box overflowY="scroll" flex={2} pb={3}>
-        {tab === 0 && (
-          <Box mx={1}>
-            <Grid
-              templateColumns="repeat(4, auto)"
-              alignContent="center"
-              h="auto"
-              gap={2}
-              ml={4}
+          <Center borderRadius="50px 50px 0px 0px" zIndex={6}>
+            <Button
+              onClick={props.remove}
+              cursor="pointer"
+              background="none"
+              h="16px"
+              w="16px"
+              my={3}
+              px="0"
             >
-              {data.map((item, index) => (
-                <Contact
-                  key={index}
-                  src={item.src}
-                  name={item.name}
-                  selected={false}
-                />
-              ))}
-            </Grid>
-          </Box>
-        )}
+              <Image src="/resources/arrow-down.png" />
+            </Button>
+          </Center>
 
-        {tab === 1 && (
-          <>
-            <Flex flexDirection="column" gap="6.96px" mb="10.96px">
-              <Flex mx="16.44px" gap="16.44px">
-                <Flex flexDirection="column" gap="5.48px" alignItems="center">
-                  <Image
-                    src={"../resources/Rectangle 3604.png"}
-                    w="48px"
-                    h="48px"
-                  />
-                  <Text
-                    fontFamily="poppins"
-                    textAlign="center"
-                    pt={2}
-                    fontWeight="500"
-                    color="#ffffff"
-                    lineHeight="18px"
-                    fontSize="12px"
-                  >
-                    Anna
-                  </Text>
-                </Flex>
-                <Flex flexDirection="column" gap="5.48px" alignItems="center">
-                  <Image
-                    src={"../resources/Rectangle 360a.png"}
-                    w="48px"
-                    h="48px"
-                  />
-                  <Text
-                    fontFamily="poppins"
-                    textAlign="center"
-                    pt={2}
-                    fontWeight="500"
-                    color="#ffffff"
-                    lineHeight="18px"
-                    fontSize="12px"
-                  >
-                    Anna
-                  </Text>
-                </Flex>
-                <Flex flexDirection="column" gap="5.48px" alignItems="center">
-                  <Image
-                    src={"../resources/Rectangle 360b.png"}
-                    w="48px"
-                    h="48px"
-                  />
-                  <Text
-                    fontFamily="poppins"
-                    textAlign="center"
-                    pt={2}
-                    fontWeight="500"
-                    color="#ffffff"
-                    lineHeight="18px"
-                    fontSize="12px"
-                  >
-                    Anna
-                  </Text>
-                </Flex>
-                <Flex flexDirection="column" gap="5.48px" alignItems="center">
-                  <Image
-                    src={"../resources/Rectangle 360d.png"}
-                    w="48px"
-                    h="48px"
-                  />
-                  <Text
-                    fontFamily="poppins"
-                    textAlign="center"
-                    pt={2}
-                    fontWeight="500"
-                    color="#ffffff"
-                    lineHeight="18px"
-                    fontSize="12px"
-                  >
-                    Anna
-                  </Text>
-                </Flex>
-              </Flex>
+          {/* circle text */}
+          <Flex justifyContent="space-between" mx={4}>
+            <Box>
+              {" "}
+              <Image src="/resources/contact-search.png" h="20px" w="20px" />
+            </Box>
+            <Text
+              // mb="21.92px"
+              fontFamily="poppins"
+              fontSize="14px"
+              color="#ffffff"
+              fontWeight="600"
+              letterSpacing="-0.02em"
+              lineHeight="21px"
+            >
+              Contacts
+            </Text>
+            <Box>
+              <Image src="/resources/contact-plus.png" h="20px" w="20px" />
+            </Box>
+          </Flex>
 
-              <Flex mx="16.44px" gap="16.44px">
-                <Flex flexDirection="column" gap="5.48px" alignItems="center">
-                  <Image
-                    src={"../resources/Rectangle 3604.png"}
-                    w="48px"
-                    h="48px"
-                  />
-                  <Text
-                    fontFamily="poppins"
-                    textAlign="center"
-                    pt={2}
-                    fontWeight="500"
-                    color="#ffffff"
-                    lineHeight="18px"
-                    fontSize="12px"
+          <Center
+            my={3}
+            mx={4}
+            bg="#191A1B"
+            borderRadius="8px"
+            w="226px"
+            h="34px"
+          >
+            <Button
+              onClick={() => setTab(0)}
+              h="26px"
+              w="109px"
+              borderRadius="5px"
+              bg={tab === 0 ? "#6054F0" : "none"}
+              outline="none"
+              _hover={{
+                background: "#6054F0",
+              }}
+            >
+              <Image
+                src="/resources/profile-contact.png"
+                h="20px"
+                w="20px"
+                mx={2}
+              />{" "}
+              <Text
+                color="#fff"
+                fontSize="12px"
+                fontWeight={tab === 0 ? 500 : 400}
+                fontFamily="Poppins"
+                lineHeight="100%"
+                opacity={tab === 0 ? 1 : 0.3}
+              >
+                All
+              </Text>
+            </Button>
+            <Button
+              onClick={() => setTab(1)}
+              h="26px"
+              w="109px"
+              borderRadius="5px"
+              bg={tab === 1 ? "#6054F0" : "none"}
+              outline="none"
+              _hover={{
+                background: "#6054F0",
+              }}
+            >
+              <Image src="/resources/group-user.png" h="16px" w="16px" mx={2} />{" "}
+              <Text
+                color="#fff"
+                fontSize="12px"
+                fontWeight={tab === 1 ? 500 : 400}
+                fontFamily="Poppins"
+                lineHeight="100%"
+                opacity={tab === 1 ? 1 : 0.3}
+              >
+                Circles
+              </Text>
+            </Button>
+          </Center>
+
+          <Box overflowY={tab === 1 ? "hidden" :"scroll"} flex={2} pb={3}>
+            {tab === 0 && (
+              <Box mx={1}>
+                <Grid
+                  templateColumns="repeat(4, auto)"
+                  alignContent="center"
+                  h="auto"
+                  gap={2}
+                  ml={4}
+                >
+                  {data.map((item, index) => (
+                    <Contact
+                      key={index}
+                      src={item.src}
+                      name={item.name}
+                      selected={false}
+                    />
+                  ))}
+                </Grid>
+              </Box>
+            )}
+
+            {tab === 1 && (
+              <Grid
+                templateColumns="repeat(2, auto)"
+                gap={2}
+                alignContent="flex-start"
+                justifyContent="flex-start"
+                mx={4}
+              >
+                <Flex flexDirection="column" alignItems="center">
+                  <Grid
+                    templateColumns="repeat(2, auto)"
+                    gap={2}
+                    alignContent="flex-start"
+                    justifyContent="flex-start"
+                    p={2}
+                    my={2}
+                    bgColor="rgba(255, 255, 255, 0.05)"
+                    borderRadius="15px"
+                    h="107px"
+                    w="107px"
+                    overflow="hidden"
                   >
-                    Anna
+                    {data.slice(0, 4).map((item, index) => (
+                      <Contact
+                        key={index}
+                        src={item.src}
+                        name=""
+                        w="42px"
+                        h="42px"
+                        circle={true}
+                      />
+                    ))}
+                  </Grid>
+                  <Text
+                    color="#FFF"
+                    fontSize="12px"
+                    fontWeight="500"
+                    lineHeight="18px"
+                  >
+                    Family
                   </Text>
                 </Flex>
-                <Flex flexDirection="column" gap="5.48px" alignItems="center">
-                  <Image
-                    src={"../resources/Rectangle 360a.png"}
-                    w="48px"
-                    h="48px"
-                  />
-                  <Text
-                    fontFamily="poppins"
-                    textAlign="center"
-                    pt={2}
-                    fontWeight="500"
-                    color="#ffffff"
-                    lineHeight="18px"
-                    fontSize="12px"
-                  >
-                    Anna
-                  </Text>
-                </Flex>
-                <Flex flexDirection="column" gap="5.48px" alignItems="center">
-                  <Image
-                    src={"../resources/Rectangle 360b.png"}
-                    w="48px"
-                    h="48px"
-                  />
-                  <Text
-                    fontFamily="poppins"
-                    textAlign="center"
-                    pt={2}
-                    fontWeight="500"
-                    color="#ffffff"
-                    lineHeight="18px"
-                    fontSize="12px"
-                  >
-                    Damola
-                  </Text>
-                </Flex>
-                <Flex flexDirection="column" gap="5.48px" alignItems="center">
-                  <Box
-                    bgColor="#FFFFFF0D"
-                    w="48px"
-                    h="48px"
-                    borderRadius="13.7px"
-                    display="flex"
+                <Flex flexDirection="column" alignItems="center">
+                  <Flex
                     alignItems="center"
                     justifyContent="center"
+                    p={2}
+                    my={2}
+                    bgColor="rgba(255, 255, 255, 0.05)"
+                    borderRadius="15px"
+                    h="107px"
+                    w="107px"
+                    onClick={addCircle}
+                    cursor="pointer"
                   >
-                    <Image
-                      src={"../resources/Add User.png"}
-                      w="13.7px"
-                      h="13.7px"
-                    />
-                  </Box>
+                    <Box display="flex" alignItems="center"
+                    justifyContent="center" bgImage="resources/add-circle-icon-bg.png" h="42px" w="42px">
+                      <Image src="resources/add-circle-group.png" />
+                    </Box>
+                  </Flex>
                   <Text
-                    fontFamily="poppins"
-                    textAlign="center"
-                    pt={2}
-                    fontWeight="500"
-                    color="#ffffff"
-                    lineHeight="18px"
+                    color="#FFF"
                     fontSize="12px"
+                    fontWeight="500"
+                    lineHeight="18px"
+                    opacity="0.3"
                   >
-                    Anna
+                    + Add circles
                   </Text>
                 </Flex>
-              </Flex>
-            </Flex>
-          </>
-        )}
-      </Box>
+              </Grid>
+            )}
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 }

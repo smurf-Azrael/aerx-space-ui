@@ -5,7 +5,13 @@ function Contact({
   src = "../resources/Rectangle 3604.png",
   name = "Annas",
   selected,
+  circle = false,
   onClick,
+  w = "48px",
+  h = "48px",
+  justifyContent = "flex-start",
+  more = false,
+  count,
 }) {
   return (
     <GridItem
@@ -13,7 +19,7 @@ function Contact({
       pos="relative"
       onClick={onClick}
       display="flex"
-      justifyContent="flex-start"
+      justifyContent={justifyContent}
     >
       <Box
         display="flex"
@@ -23,23 +29,25 @@ function Contact({
       >
         <Image
           src={src}
-          w="48px"
-          h="48px"
+          w={w}
+          h={h}
           bgColor="rgba(255, 255, 255, 0.05)"
           backdropFilter="10px"
           borderRadius="15px"
         />
-        <Text
-          fontFamily="poppins"
-          textAlign="center"
-          pt={2}
-          fontWeight="500"
-          color="#ffffff"
-          lineHeight="18px"
-          fontSize="12px"
-        >
-          {name}
-        </Text>
+        {!circle && (
+          <Text
+            fontFamily="poppins"
+            textAlign="center"
+            pt={2}
+            fontWeight="500"
+            color="#ffffff"
+            lineHeight="18px"
+            fontSize="12px"
+          >
+            {name}
+          </Text>
+        )}
       </Box>
       {selected && (
         <Box
@@ -51,12 +59,33 @@ function Contact({
           display="flex"
           justifyContent="center"
           alignItems="center"
-          h="48px"
-          w="48px"
+          h={h}
+          w={w}
           overflow="hidden"
           borderRadius="15px"
         >
           <Image src="resources/selected.png" h="20px" w="20px" />
+        </Box>
+      )}
+      {more && (
+        <Box
+          bg="linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(.jpg), url(.jpg), url(.jpg), url(.jpg), rgba(255, 255, 255, 0.05)"
+          backdropBlur="2px"
+          pos="absolute"
+          top="0"
+          left="0"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          h={h}
+          w={w}
+          overflow="hidden"
+          borderRadius="15px"
+        >
+          <Text color="#fff" fontSize="12px" fontWeight={500} lineHeight="18px">
+            {" "}
+            +{`${count.length - 3}`}
+          </Text>
         </Box>
       )}
     </GridItem>

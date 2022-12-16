@@ -50,6 +50,7 @@ function Profile(props) {
   isLogout ? (backdrop = 1) : (backdrop = -1);
   const [circ, setCirc] = React.useState(false);
   const [pin, setPin] = React.useState(false);
+  const [circle, setCircle] = React.useState(false);
 
   const remCirc = () => {
     setCirc((prevState) => !prevState);
@@ -58,7 +59,10 @@ function Profile(props) {
 
   const pinned = () => {
     setPin((prevState) => !prevState);
-    console.log("done", pin);
+  };
+
+  const addCircle = () => {
+    setCircle((prevState) => !prevState);
   };
   
   let disabled;

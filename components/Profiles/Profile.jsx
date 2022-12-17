@@ -64,7 +64,7 @@ function Profile(props) {
   const addCircle = () => {
     setCircle((prevState) => !prevState);
   };
-  
+
   let disabled;
   let opacity;
 
@@ -146,8 +146,8 @@ function Profile(props) {
 
   return circ ? (
     <CircleList remove={remCirc} />
-  ) :  pin ? (
-    <PinContact remove={pinned} /> 
+  ) : pin ? (
+    <PinContact remove={pinned} />
   ) : (
     <Flex>
       <Grid
@@ -161,14 +161,9 @@ function Profile(props) {
       >
         <GridItem
           bgColor={
-            !nearState.profile.profileImg.includes(".glb")
+            nearState.profile.profileImg.includes(".glb")
               ? "#191919"
               : "#191919"
-          }
-          id={
-            nearState.profile.profileImg.includes(".glb")
-              ? "#"
-              : "babylon-element-profile"
           }
           bgImage={
             !nearState.profile.profileImg.includes(".glb")
@@ -179,19 +174,44 @@ function Profile(props) {
           bgSize="cover"
           bgPos="center"
           w="inherit"
+          position="relative"
         >
+          {nearState.profile.profileImg.includes(".glb") && (
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            style={{
+              zIndex: 0,
+            }}
+            w="full"
+            h="full"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Box
+              w="full"
+              h="full"
+              id="babylon-element-profile"
+            ></Box>
+          </Box>
+          )}
           <Flex
+            position="absolute"
+            top={0}
             w="250px"
             width="100%"
             // onDoubleClick={props.circleClick}
-            // gap="17%"
             bgGradient={
               !nearState.profile.profileImg.includes(".glb")
                 ? bgGradient
                 : "none"
             }
             h="100%"
-            // justifycontent="space-evenly"
+            style={{
+              zIndex: 1,
+            }}
           >
             <Flex flexDirection="column" w="full">
               <Flex
@@ -848,7 +868,7 @@ function Profile(props) {
       </Box>
       <LogOut zIndex={zIndex} show={isLogout} revert={logOutUser} />
     </Flex>
-  )
+  );
 }
 
 export default Profile;

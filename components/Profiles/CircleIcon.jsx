@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Box,
   Text,
@@ -23,278 +24,103 @@ import AddIcon from "./AddIcon";
 const data = [
   {
     src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 0,
   },
   {
     src: "../resources/Folder-circle-icon.png",
-    name: "Have",
-    id: 1,
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Scave",
-    id: 2,
+    src: "../icons/Bag.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Ronan",
-    id: 3,
+    src: "../icons/Bookmark.png",
   },
   {
-    src: "../resources/Folder-circle-icon.png",
-    name: "Nore",
-    id: 4,
+    src: "../icons/Calendar.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 5,
+    src: "../icons/Category.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 0,
+    src: "../icons/Chat.png",
   },
   {
-    src: "../resources/Folder-circle-icon.png",
-    name: "Have",
-    id: 1,
+    src: "../icons/Game.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Scave",
-    id: 2,
+    src: "../icons/Heart.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Ronan",
-    id: 3,
+    src: "../icons/Message.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Nore",
-    id: 4,
+    src: "../icons/Message_bulk.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 5,
+    src: "../icons/More-Square.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 0,
+    src: "../icons/Password.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Have",
-    id: 1,
+    src: "../icons/Send.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Scave",
-    id: 2,
+    src: "../icons/Ticket-Star.png",
   },
   {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Ronan",
-    id: 3,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Nore",
-    id: 4,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 5,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 0,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Have",
-    id: 1,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Scave",
-    id: 2,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Ronan",
-    id: 3,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Nore",
-    id: 4,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 5,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 0,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Have",
-    id: 1,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Scave",
-    id: 2,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Ronan",
-    id: 3,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Nore",
-    id: 4,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 5,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 0,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Have",
-    id: 1,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Scave",
-    id: 2,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Ronan",
-    id: 3,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Nore",
-    id: 4,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 5,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 0,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Have",
-    id: 1,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Scave",
-    id: 2,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Ronan",
-    id: 3,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Nore",
-    id: 4,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 5,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 0,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Have",
-    id: 1,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Scave",
-    id: 2,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Ronan",
-    id: 3,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Nore",
-    id: 4,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 5,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 0,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Have",
-    id: 1,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Scave",
-    id: 2,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Ronan",
-    id: 3,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Nore",
-    id: 4,
-  },
-  {
-    src: "../resources/Search-circle-icon.svg",
-    name: "Anna",
-    id: 5,
+    src: "../icons/Work.png",
   },
 ];
 
 function CircleIcon(props) {
   const [selectedIcon, setSelectedIcons] = useState([]);
+  const [status, setStatus] = useState(false);
+  const [image, setImage] = React.useState({
+    name: "",
+    display: "",
+    placeholder: "",
+    changed: false,
+  });
+
+  const handleCapture = async () => {
+    try {
+      const data = new FormData();
+      data.append("file", image.placeholder);
+      data.append("upload_preset", "cipher");
+      data.append("cloud_name", "dos6ec8wr");
+      if (image.changed === true) {
+        setStatus(true);
+
+        const res = await axios.post(
+          "https://api.cloudinary.com/v1_1/dos6ec8wr/image/upload",
+          data
+        );
+        const { secure_url } = res.data;
+        props.url(secure_url);
+        setStatus(false);
+        props.remove();
+      }
+    } catch (e) {
+      console.log(e);
+      setStatus(true);
+    }
+  };
+
+  useEffect(() => {
+    if (status) {
+      handleCapture();
+    }
+  }, [handleCapture, status]);
+
+  const handleImageUpload = async (e) => {
+    setImage({
+      name: e.target.files[0].name,
+      display: URL.createObjectURL(e.target.files[0]),
+      placeholder: e.target.files[0],
+      changed: true,
+    });
+    setStatus(true);
+  };
 
   const handleClick = (item) => {
     setSelectedIcons((ps) => {
@@ -307,8 +133,13 @@ function CircleIcon(props) {
   };
 
   const handleDone = () => {
+    props.url("");
     props.icon(selectedIcon);
     props.remove();
+  };
+
+  const handleClear = () => {
+    setImage({ name: "", display: "", placeholder: "", changed: false });
   };
 
   return (
@@ -349,54 +180,78 @@ function CircleIcon(props) {
         </Text>
       </Flex>
 
-      <Box
-        border="1.5px dashed rgba(255, 255, 255, 0.15)"
-        borderRadius="10px"
-        mx={4}
-        my={4}
-        h="40px"
-        cursor="pointer"
-      >
-        <Flex justifyContent="center" alignItems="center" gap={2} h="full">
-          <Image h="24px" w="24px" src="resources/circle-upload.png" />
-          <Text fontSize="12px" fontWeight={500} lineheight="100%" color="#fff">
-            Upload image
-          </Text>
-        </Flex>
-      </Box>
-
-      {/* <Box
-        bg="rgba(255, 255, 255, 0.05)"
-        borderRadius="10px"
-        mx={4}
-        my={4}
-        h="48px"
-        cursor="pointer"
-        display="flex"
-      >
-        <Flex
-          justifyContent="center"
-          alignItems="center"
-          gap={2}
-          h="full"
-          ml={2}
-          mr="auto"
-        >
-          <Image h="32px" w="32px" src="resources/placeholder-circle-icon.png" border="1px dashed grey" />
-          <Text
-            fontSize="12px"
-            fontWeight={500}
-            fontStyle="italic"
-            lineheight="100%"
-            color="#fff"
+      {!image.changed ? (
+        <label>
+          <Box
+            border="1.5px dashed rgba(255, 255, 255, 0.15)"
+            borderRadius="10px"
+            mx={4}
+            my={4}
+            h="40px"
+            cursor="pointer"
           >
-            Picture.png
-          </Text>
-        </Flex>
-        <Flex color="#fff" justifyContent="center" alignItems="center" mr={4}>
-          <Image h="24px" w="24px" src="resources/cancel-circle-icon.png" />
-        </Flex>
-      </Box> */}
+            <input
+              type="file"
+              name="cover"
+              onChange={handleImageUpload}
+              accept="img/*"
+              style={{ display: "none" }}
+            />
+            <Flex justifyContent="center" alignItems="center" gap={2} h="full">
+              <Image h="24px" w="24px" src="resources/circle-upload.png" />
+              <Text
+                fontSize="12px"
+                fontWeight={500}
+                lineheight="100%"
+                color="#fff"
+              >
+                Upload image
+              </Text>
+            </Flex>
+          </Box>
+        </label>
+      ) : (
+        <Box
+          bg="rgba(255, 255, 255, 0.05)"
+          borderRadius="10px"
+          mx={4}
+          my={4}
+          h="48px"
+          cursor="pointer"
+          display="flex"
+        >
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            gap={2}
+            h="full"
+            ml={2}
+            mr="auto"
+          >
+            <Box borderRadius="15px" h="32px" w="32px">
+              <Image h="32px" w="32px" src={image.display} borderRadius="9px" />
+            </Box>
+            <Text
+              fontSize="12px"
+              fontWeight={500}
+              fontStyle="italic"
+              lineheight="100%"
+              color="#fff"
+            >
+              {status ? "uploading..." : image.name}
+            </Text>
+          </Flex>
+          <Flex
+            color="#fff"
+            justifyContent="center"
+            alignItems="center"
+            mr={4}
+            onClick={handleClear}
+          >
+            <Image h="24px" w="24px" src="resources/cancel-circle-icon.png" />
+          </Flex>
+        </Box>
+      )}
 
       <Box overflowY="scroll" flex={2} mb={0}>
         <Box mx={1}>

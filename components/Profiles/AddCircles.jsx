@@ -300,6 +300,7 @@ function AddCircles(props) {
 
   const [icon, setIcon] = React.useState(false);
   const [selectedIcon, setSelectedIcon] = React.useState([]);
+  const [url, setUrl] = useState("");
 
   const addCircleIcon = () => {
     setIcon((prevState) => !prevState);
@@ -325,12 +326,14 @@ function AddCircles(props) {
     setSelectedIcon([]);
   };
 
-  console.log(selectedIcon);
-
   return (
     <Box>
       {icon ? (
-        <CircleIcon icon={setSelectedIcon} remove={addCircleIcon} />
+        <CircleIcon
+          icon={setSelectedIcon}
+          url={setUrl}
+          remove={addCircleIcon}
+        />
       ) : (
         <Box
           height="100vh"
@@ -385,10 +388,11 @@ function AddCircles(props) {
             >
               <Box
                 bgImage={
-                  selectedIcon?.length === 1
+                  selectedIcon?.length === 1 || url
                     ? "resources/add-circle-icon-bg.png"
                     : "resources/add-circle.png"
                 }
+                // bgRepeat="no-repeat"
                 cursor="pointer"
                 onClick={handleAddIcon}
                 h="42px"
@@ -403,6 +407,7 @@ function AddCircles(props) {
                 {selectedIcon?.length === 1 && (
                   <Image src={selectedIcon[0]?.src} alt="add" />
                 )}
+                {url && <Image h="32px" w="32px" src={url} alt="add" />}
               </Box>
               {selectedContacts.map((item, index) => (
                 <>

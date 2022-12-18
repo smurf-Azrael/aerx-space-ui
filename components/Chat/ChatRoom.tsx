@@ -9,7 +9,6 @@ import {
 } from "../../store/slices/modulesSlices"
 import SendTokens from "../SendTokens"
 import { IMessageItem } from "."
-import { nearStore } from "../../store/near"
 import {
   selectMessages,
   setDirectMessages,
@@ -18,6 +17,7 @@ import { Box, Flex, Text } from "@chakra-ui/react"
 import { SmoothCorners } from "react-smooth-corners"
 import Image from "next/image"
 import { Transaction } from "../../components/SendTokens/ui/Transaction"
+import { nearStore } from "../../store/near"
 
 const PrimaryHeader: React.FC = () => {
   const { chat } = useSelector(selectModules)
@@ -84,59 +84,82 @@ const PrimaryHeader: React.FC = () => {
 const SecondaryHeader: React.FC<{
   activeMessage: IMessageItem
 }> = ({ activeMessage }) => {
-  useEffect(() => {
-    const initBabylon = async () => {
-      const BabylonViewer = await import("babylonjs-viewer")
-      const babylon = document.getElementById("babylon-element-chat-room")!
-      new BabylonViewer.DefaultViewer(babylon, {
-        extends: "none",
-        templates: {
-          main: {
-            html: "<canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
-            params: {
-              ["no-escape"]: true,
-              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`,
+  const nearState: any = nearStore((state) => state);
+  const babylonViewer = nearState.babylonViewer;
+  
+  const load3d = async(avatarUrl: string | string[]) => {
+    if (avatarUrl?.includes(".glb")) {
+      const babylon = document.getElementById("babylon-element-chat-room");
+      if (babylonViewer) {
+        if (babylon) {
+          new babylonViewer.DefaultViewer(babylon, {
+            extends: "none",
+            templates: {
+              main: {
+                html: "<canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
+                params: {
+                  ["no-escape"]: true,
+                  ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`,
+                },
+              },
+              ["loadingScreen"]: {
+                html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+                params: {
+                  ["backgroundColor"]: "#0000004d",
+                  ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+                }
+              },
             },
-          },
-          // ["loadingScreen"]: {
-          //   html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
-          //   params: {
-          //     ["backgroundColor"]: "#0000004d",
-          //     ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
-          //   }
-          // },
-        },
-        scene: {
-          clearColor: {
-            r: 0,
-            g: 0,
-            b: 0,
-            a: 0,
-          },
-        },
-        engine: {
-          antialiasing: true,
-          hdEnabled: true,
-          adaptiveQuality: true,
-        },
-        optimizer: true,
-        model: {
-          url: `${activeMessage?.avatar}`,
-          // scaling: {
-          //   x: 3.5,
-          //   y: 3,
-          //   z: 3,
-          // },
-          // position: {
-          //   x: 0,
-          //   y: -2,
-          //   z: 1
-          // }
-        },
-      })
+            scene: {
+              clearColor: {
+                r: 0,
+                g: 0,
+                b: 0,
+                a: 0,
+              },
+            },
+            engine: {
+              antialiasing: true,
+              hdEnabled: true,
+              adaptiveQuality: true,
+            },
+            optimizer: true,
+            model: {
+              url: avatarUrl,
+              // scaling: {
+              //   x: 3.5,
+              //   y: 3,
+              //   z: 3,
+              // },
+              // position: {
+              //   x: 0,
+              //   y: -2,
+              //   z: 1
+              // }
+            },
+          })
+        }
+        
+      }else{
+        console.log("Babylon is null")
+      }
     }
-    initBabylon().then(() => {})
-  }, [])
+
+
+  }
+
+  useEffect(() => {
+   
+      (async () => {
+        await load3d(activeMessage?.avatar)
+        console.log("babylon chatroom is working")
+      })();
+    
+  }, [activeMessage?.avatar])
+
+   
+  
+  
 
   return (
     <Flex

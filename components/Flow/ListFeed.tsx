@@ -56,17 +56,17 @@ const TextPost: React.FC<IProps> = ({
   const { postChargers } = useSelector(selectPostChargers);
   const [userCharged, setUserCharged] = useState<boolean>(false);
 
-  useEffect(() => {
-    getChargeStatus();
-  }, [feed]);
+  // useEffect(() => {
+  //   getChargeStatus();
+  // }, [feed]);
 
-  useEffect(() => {
-    findIfUserCharged();
-  }, [postChargers]);
+  // useEffect(() => {
+  //   findIfUserCharged();
+  // }, [postChargers]);
 
   const getChargeStatus = async () => {
     const chargers = await getPostChargers(feed.post_id, false, dispatch);
-    console.log("post chargers", chargers);
+    // console.log("post chargers", chargers);
   };
 
   const findIfUserCharged = async () => {
@@ -101,11 +101,15 @@ const TextPost: React.FC<IProps> = ({
     }
   }, [metadata]);
 
-  useEffect(() => {
-    const initBabylonFeed = async () => {
-      const BabylonViewer = await import('babylonjs-viewer');
-      const babylon = document.getElementById("babylon-element-feed")!;
-      new BabylonViewer.DefaultViewer(babylon, {
+
+
+  const babylonViewer = nearState.babylonViewer;
+  const babylon = document.getElementById(`babylon-element-feed-for-${metadata.media}`);
+  const babylonPost = document.getElementById(`babylon-element-feed-post-for-${metadata.media}`);
+
+  const load3d = async(element: HTMLElement, mediaUrl: String | undefined) => {
+    if (babylonViewer) {
+      await new babylonViewer.DefaultViewer(element, {
         extends: "none",
         templates: {
           main: {
@@ -116,10 +120,10 @@ const TextPost: React.FC<IProps> = ({
             }
           },
           // ["loadingScreen"]: {
-          //   html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
+          //   html: "<img id='loading-image'  src='https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png' >",
           //   params: {
           //     ["backgroundColor"]: "#0000004d",
-          //     ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
+          //     // ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
           //   }
           // },
         },
@@ -138,7 +142,7 @@ const TextPost: React.FC<IProps> = ({
         },
         optimizer: true,
         model: {
-          url: `${metadata.media}`,
+          url: mediaUrl,
           // scaling: {
           //   x: 3.5,
           //   y: 3,
@@ -151,57 +155,35 @@ const TextPost: React.FC<IProps> = ({
           // }
         }
       });
-      const babylonPost = document.getElementById("babylon-element-feed-post")!;
-      new BabylonViewer.DefaultViewer(babylonPost, {
-        extends: "none",
-        templates: {
-          main: {
-            html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
-            params: {
-              ["no-escape"]: true,
-              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
-            }
-          },
-          ["loadingScreen"]: {
-            html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
-            params: {
-              ["backgroundColor"]: "#0000004d",
-              ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
-            }
-          },
-        },
-        scene: {
-          clearColor: {
-            r: 0,
-            g: 0,
-            b: 0,
-            a: 0,
-          }
-        },
-        engine: {
-          antialiasing: true,
-          hdEnabled: true,
-          adaptiveQuality: true,
-        },
-        optimizer: true,
-        model: {
-          url: `${metadata.media}`,
-          // scaling: {
-          //   x: 3.5,
-          //   y: 3,
-          //   z: 3,
-          // },
-          // position: {
-          //   x: 0,
-          //   y: -2,
-          //   z: 1
-          // }
-        }
-      });
+    }else{
+      console.log("Babylon viewer is null")
     }
-    initBabylonFeed()
-  }, [])
+  }
 
+  useEffect(() => {
+    if (babylon) {
+      (async () => {
+        await load3d(babylon, metadata.media)
+        // for (let i = 0; i < babylon.length; i + 1) {
+        //   console.log("babylon:  ", babylon.item(i))
+        // } 
+        
+      })();
+    }
+    
+  }, [babylon, metadata.media])
+
+  useEffect(() => {
+    if (babylonPost) {
+      (async () => {
+        await load3d(babylonPost, metadata.media)
+        console.log("babylon post working")
+      })();
+    }
+    
+  }, [babylonPost, metadata.media])
+
+    
 
   return (
     <Box
@@ -231,7 +213,7 @@ const TextPost: React.FC<IProps> = ({
             )}
             {metadata.media?.includes(".glb") && (
               <Box width="27.4px" height="27.4px" borderRadius="13.7px" borderColor="white" border="1px solid" >
-                <div id="babylon-element-feed" style={{ width: "100%", height: "100%", margin: "auto", borderRadius: "13.7px" }}></div>
+                <div  id={`babylon-element-feed-for-${metadata.media}`} style={{ width: "100%", height: "100%", margin: "auto", borderRadius: "13.7px" }}></div>
               </Box>
             )}
           </Box>
@@ -311,7 +293,7 @@ const TextPost: React.FC<IProps> = ({
         <Flex marginLeft="" height="200px" marginTop="-200px" width="280px" zIndex={-1}>
 
           <Box
-            style={{ width: '100%', height: '100%', margin: 'auto' }} id="babylon-element-feed-post">
+            style={{ width: '100%', height: '100%', margin: 'auto' }} id={`babylon-element-feed-post-for-${metadata.media}`}>
 
           </Box>
         </Flex>

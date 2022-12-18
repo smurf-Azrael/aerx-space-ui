@@ -46,13 +46,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [isLoading, nearState.accountId, nearState.tokenContract]);
 
   useEffect(() => {
-    //4)fetch posts 
     if (!isLoading) {
       (async () => {
-        await fetchPosts(nearState);
+        const BabylonViewer = await import("babylonjs-viewer");
+        nearState.setBabylonViewer(BabylonViewer);
       })();
     }
-  }, [isLoading, nearState.accountId, nearState.pnftContract]);
+    
+  }, [isLoading, nearState.accountId, nearState.babylonViewer])
 
   useEffect(() => {
     // 5) authenticate Pinata
@@ -62,6 +63,17 @@ function MyApp({ Component, pageProps }: AppProps) {
       })();
     }
   }, [isLoading, nearState.accountId, nearState.pnftContract]);
+
+  useEffect(() => {
+    //4)fetch posts 
+    if (!isLoading) {
+      (async () => {
+        await fetchPosts(nearState);
+      })();
+    }
+  }, [isLoading, nearState.accountId, nearState.pnftContract]);
+
+  
 
   //Todo: add more contracts functions and set state for all needed informations
 

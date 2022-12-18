@@ -119,6 +119,10 @@ const nearStore = create<NearStoreType>((set) => ({
     setServiceAmount: (serviceAmount: any) => set((state) => ({ ...state, serviceAmount })),
     removeServiceAmount: () => set((state) => ({ ...state, serviceAmount: null })),
 
+    babylonViewer: null,
+    setBabylonViewer: (babylonViewer: any) => set((state) => ({ ...state, babylonViewer })),
+    removeBabylonViewer: () => set((state) => ({ ...state, babylonViewer: null })),
+
 
 }));
 

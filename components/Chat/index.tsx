@@ -138,11 +138,11 @@ const MessageItem: React.FC<IMessageItem> = ({
           //   y: 3,
           //   z: 3,
           // },
-          // position: {
-          //   x: 0,
-          //   y: -2,
-          //   z: 1
-          // }
+          position: {
+            x: 0,
+            y: -10,
+            z: 1
+          }
         },
       })
       console.log("3d avater working for: ", mediaUrl)

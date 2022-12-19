@@ -56,13 +56,13 @@ const TextPost: React.FC<IProps> = ({
   const { postChargers } = useSelector(selectPostChargers);
   const [userCharged, setUserCharged] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   getChargeStatus();
-  // }, [feed]);
+  useEffect(() => {
+    getChargeStatus();
+  }, [feed]);
 
-  // useEffect(() => {
-  //   findIfUserCharged();
-  // }, [postChargers]);
+  useEffect(() => {
+    findIfUserCharged();
+  }, [postChargers]);
 
   const getChargeStatus = async () => {
     const chargers = await getPostChargers(feed.post_id, false, dispatch);
@@ -100,7 +100,6 @@ const TextPost: React.FC<IProps> = ({
       });
     }
   }, [metadata]);
-
 
 
   const babylonViewer = nearState.babylonViewer;
@@ -148,11 +147,11 @@ const TextPost: React.FC<IProps> = ({
           //   y: 3,
           //   z: 3,
           // },
-          // position: {
-          //   x: 0,
-          //   y: -2,
-          //   z: 1
-          // }
+          position: {
+            x: 0,
+            y: -12,
+            z: 4
+          }
         }
       });
     }else{
@@ -160,28 +159,28 @@ const TextPost: React.FC<IProps> = ({
     }
   }
 
-  useEffect(() => {
-    if (babylon) {
-      (async () => {
-        await load3d(babylon, metadata.media)
-        // for (let i = 0; i < babylon.length; i + 1) {
-        //   console.log("babylon:  ", babylon.item(i))
-        // } 
+  // useEffect(() => {
+  //   if (babylon) {
+  //     (async () => {
+  //       await load3d(babylon, metadata.media)
+  //       // for (let i = 0; i < babylon.length; i + 1) {
+  //       //   console.log("babylon:  ", babylon.item(i))
+  //       // } 
         
-      })();
-    }
+  //     })();
+  //   }
     
-  }, [babylon, metadata.media])
+  // }, [babylon, metadata.media])
 
-  useEffect(() => {
-    if (babylonPost) {
-      (async () => {
-        await load3d(babylonPost, metadata.media)
-        console.log("babylon post working")
-      })();
-    }
+  // useEffect(() => {
+  //   if (babylonPost) {
+  //     (async () => {
+  //       await load3d(babylonPost, metadata.media)
+  //       console.log("babylon post working")
+  //     })();
+  //   }
     
-  }, [babylonPost, metadata.media])
+  // }, [babylonPost, metadata.media])
 
     
 

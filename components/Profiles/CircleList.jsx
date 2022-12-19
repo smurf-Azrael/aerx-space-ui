@@ -405,7 +405,7 @@ function CircleList(props) {
             </Button>
           </Center>
 
-          <Box overflowY={tab === 1 ? "hidden" :"scroll"} flex={2} pb={3}>
+          <Box overflowY={tab === 1 ? "hidden" : "scroll"} flex={2} pb={3}>
             {tab === 0 && (
               <Box mx={1}>
                 <Grid
@@ -449,7 +449,23 @@ function CircleList(props) {
                     w="107px"
                     overflow="hidden"
                   >
-                    {data.slice(0, 4).map((item, index) => (
+                    <Box
+                      bgImage="resources/add-circle-icon-bg.png"
+                      // bgRepeat="no-repeat"
+                      cursor="pointer"
+                      // onClick={handleAddIcon}
+                      h="42px"
+                      w="42px"
+                      color="#fff"
+                      backdropBlur="10px"
+                      backdropFilter="10px"
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Image h="32px" w="32px" src='../icons/Bookmark.png' alt="add" />
+                    </Box>
+                    {data.slice(0, 3).map((item, index) => (
                       <Contact
                         key={index}
                         src={item.src}
@@ -482,8 +498,14 @@ function CircleList(props) {
                     onClick={addCircle}
                     cursor="pointer"
                   >
-                    <Box display="flex" alignItems="center"
-                    justifyContent="center" bgImage="resources/add-circle-icon-bg.png" h="42px" w="42px">
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      bgImage="resources/add-circle-icon-bg.png"
+                      h="42px"
+                      w="42px"
+                    >
                       <Image src="resources/add-circle-group.png" />
                     </Box>
                   </Flex>

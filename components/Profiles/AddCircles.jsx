@@ -554,7 +554,7 @@ function AddCircles(props) {
             justifyContent="center"
             mb={4}
           >
-            {selectedContacts.length > 3 ? (
+            {selectedContacts.length > 0 ? (
               <Button
                 bgColor="#6054F0"
                 borderRadius="10px"

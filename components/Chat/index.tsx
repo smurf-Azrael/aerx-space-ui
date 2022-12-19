@@ -207,18 +207,18 @@ const MessageItem: React.FC<IMessageItem> = ({
   //     }
   //     load3d();
   // }
-  useEffect(() => {
-    if (babylon) {
-      (async () => {
-        await load3d(babylon, avatar)
-        // for (let i = 0; i < babylon.length; i + 1) {
-        //   console.log("babylon:  ", babylon.item(i))
-        // } 
+  // useEffect(() => {
+  //   if (babylon) {
+  //     (async () => {
+  //       await load3d(babylon, avatar)
+  //       // for (let i = 0; i < babylon.length; i + 1) {
+  //       //   console.log("babylon:  ", babylon.item(i))
+  //       // } 
         
-      })();
-    }
+  //     })();
+  //   }
     
-  }, [babylon, avatar])
+  // }, [babylon, avatar])
   
   return (
     <div

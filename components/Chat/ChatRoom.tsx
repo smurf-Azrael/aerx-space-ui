@@ -148,14 +148,14 @@ const SecondaryHeader: React.FC<{
 
   }
 
-  useEffect(() => {
+  // useEffect(() => {
    
-      (async () => {
-        await load3d(activeMessage?.avatar)
-        console.log("babylon chatroom is working")
-      })();
+  //     (async () => {
+  //       await load3d(activeMessage?.avatar)
+  //       console.log("babylon chatroom is working")
+  //     })();
     
-  }, [activeMessage?.avatar])
+  // }, [activeMessage?.avatar])
 
    
   

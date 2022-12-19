@@ -220,7 +220,7 @@ function Profile(props) {
             }
             h="100%"
             style={{
-              zIndex: 1,
+              zIndex: 0,
             }}
           >
             <Flex flexDirection="column" w="full">

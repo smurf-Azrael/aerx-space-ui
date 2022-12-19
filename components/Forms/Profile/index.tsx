@@ -151,7 +151,8 @@ const ProfileSettingForm: React.FC = () => {
       console.log("avt: ", nearState._3dUrl)
       const BabylonViewer = await import('babylonjs-viewer');
       const babylon = document.getElementById("babylon-element")!;
-      let viewer = new BabylonViewer.DefaultViewer(babylon, {
+      if(babylon) {
+         let viewer = new BabylonViewer.DefaultViewer(babylon, {
         extends: "none",
         templates: {
           main: {
@@ -197,9 +198,10 @@ const ProfileSettingForm: React.FC = () => {
           }
         }
       });
+      }
+     
     }
-    initBabylon().then(() => {
-    })
+    initBabylon();
 
   }, [])
 

@@ -44,7 +44,7 @@ export async function fetchPosts(state: any) {
                 state.setFeed(post.reverse());
             }
         } catch (err) {
-            toast.error("Error while getting all posts");
+            // toast.error("Error while getting all posts");
             console.log("Error while getting all posts due to: ", err)
         }
     }

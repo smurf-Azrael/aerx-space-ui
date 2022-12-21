@@ -75,9 +75,8 @@ function Profile(props) {
   };
   const babylonViewer = nearState.babylonViewer;
   const babylon = document.getElementById("babylon-element-profile");
-  
 
-  const load3d = async(element, mediaUrl) => {
+  const load3d = async (element, mediaUrl) => {
     if (babylonViewer) {
       await new babylonViewer.DefaultViewer(element, {
         extends: "none",
@@ -126,19 +125,16 @@ function Profile(props) {
           },
         },
       });
-    }else{
-      console.log("Babylon viewer is null")
+    } else {
+      console.log("Babylon viewer is null");
     }
+  };
+
+  if (babylon) {
+    (async () => {
+      await load3d(babylon, nearState.profile.profileImg);
+    })();
   }
-
-
-    if (babylon) {
-      (async () => {
-        await load3d(babylon, nearState.profile.profileImg)
-      })();
-    }
-  
-  
 
   const handleESC = useCallback((e) => {
     if (e.key === "Escape") {
@@ -170,11 +166,7 @@ function Profile(props) {
         style={{ padding: "0!important" }}
       >
         <GridItem
-          bgColor={
-            nearState.profile.profileImg.includes(".glb")
-              ? "#191919"
-              : "#191919"
-          }
+          bgColor="#141414"
           bgImage={
             !nearState.profile.profileImg.includes(".glb")
               ? `url('${nearState.profile.profileImg}')`
@@ -187,25 +179,21 @@ function Profile(props) {
           position="relative"
         >
           {nearState.profile.profileImg.includes(".glb") && (
-          <Box
-            position="absolute"
-            top={0}
-            left={0}
-            style={{
-              zIndex: 0,
-            }}
-            w="full"
-            h="full"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
             <Box
+              position="absolute"
+              top={0}
+              left={0}
+              style={{
+                zIndex: 0,
+              }}
               w="full"
               h="full"
-              id="babylon-element-profile"
-            ></Box>
-          </Box>
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Box w="full" h="full" id="babylon-element-profile"></Box>
+            </Box>
           )}
           <Flex
             position="absolute"
@@ -330,14 +318,14 @@ function Profile(props) {
             </Flex>
           </Flex>
         </GridItem>
-        <GridItem bgColor="rgba(0, 0, 0, 0.15)">
+        <GridItem bgColor="rgba(0, 0, 0, 0.09)">
           <Box
             px="13px"
             bgColor=" #1F1F1F"
             w="250px"
             marginLeft="0"
             borderRadius=" 25px 25px 0px 0px"
-            boxShadow="0px -5px 25px rgba(0, 0, 0, 0.4)"
+            boxShadow="0px -5px 25px rgba(0, 0, 0, 0.32)"
           >
             <Center borderRadius="50px 50px 0px 0px">
               <Button

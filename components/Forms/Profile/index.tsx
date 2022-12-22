@@ -52,7 +52,7 @@ const ProfileSettingForm: React.FC = () => {
     if (creating) return;
     if (!file && !nearState._3dUrl)
       return "Please select a profile image or use 3d avatar";
-    setCreating(true); // fix
+    setCreating(true);
     console.log("File: ", file);
     console.log("Username: ", formik.values.userName);
     let fileUrl: string = "";
@@ -120,6 +120,7 @@ const ProfileSettingForm: React.FC = () => {
           window.location.replace(`${window.location.origin}/flow`);
         });
     } catch (error) {
+      setCreating(false);
       toast.error(`Unable to mint AERX profileNFT. Try again later`);
       console.error("Unable to mint AERX profileNFT: ", error);
     }
@@ -162,7 +163,7 @@ const ProfileSettingForm: React.FC = () => {
       const avatarPngUrl = JSON.parse(http.responseText).renders[0];
       console.log("png: ", avatarPngUrl);
       setAvatarUrl(avatarPngUrl);
-      setFilePreview(avatarPngUrl); // fix
+      setFilePreview(avatarPngUrl);
       setIs3d(true);
     };
   };

@@ -130,11 +130,14 @@ function Profile(props) {
     }
   };
 
-  if (babylon) {
-    (async () => {
-      await load3d(babylon, nearState.profile.profileImg);
-    })();
-  }
+useEffect(() => {
+    if (babylon) {
+      (async () => {
+        await load3d(babylon, nearState.profile.profileImg)
+      })();
+    }
+    
+  }, [babylon,  nearState.profile.profileImg])
 
   const handleESC = useCallback((e) => {
     if (e.key === "Escape") {

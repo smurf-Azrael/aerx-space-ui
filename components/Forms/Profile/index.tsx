@@ -20,6 +20,8 @@ const ProfileSettingForm: React.FC = () => {
   const router = useRouter();
   const [file, setFile] = useState<File>();
   const [filePreview, setFilePreview] = useState<string>();
+  const [avatarUrl, setAvatarUrl] = useState<string>();
+  const [is3d, setIs3d] = useState<boolean>();
   const [ipfsData, setIpfsData] = useState<IPFSDataType>({
     fileUrl: null,
     fileSize: null,
@@ -27,7 +29,6 @@ const ProfileSettingForm: React.FC = () => {
   });
   const [creating, setCreating] = useState<boolean>(false);
   const nearState = nearStore((state) => state);
-  console.log!("avater url: ", nearState._3dUrl)
   const [showTriggers, setShowTriggers] = useState<boolean>(false);
   const initialValues = {
     name: '',
@@ -59,7 +60,7 @@ const ProfileSettingForm: React.FC = () => {
     console.log('Username: ', formik.values.userName);
     let fileUrl: string = "";
     let fileUrlHash: string = "";
-    if (!nearState._3dUrl) {
+    if (!nearState._3dUrl && !is3d) {
       let returnedIpfsData = await pinToPinata(
         file,
         'PROFILE',
@@ -78,12 +79,15 @@ const ProfileSettingForm: React.FC = () => {
         fileSize: fileSize,
         urlSha256: fileUrlHash,
       }));
+    }else{
+      fileUrl = avatarUrl!;
+      fileUrlHash = new shajs.sha256().update(avatarUrl).digest('base64');
     }
     const profileToMint = {
       title: 'AERX ProfileNFT for ' + formik.values.userName,
       username: formik.values.userName,
       description: formik.values.bio,
-      media: nearState._3dUrl ? nearState._3dUrl : fileUrl,
+      media: fileUrl,
       media_hash: fileUrlHash,
       issued_at: new Date().toISOString(),
       extra: formik.values.name,
@@ -146,62 +150,32 @@ const ProfileSettingForm: React.FC = () => {
       toast.success('Image selected');
     }
   }
+  const render3dAsImage = (avatarUrl: string) => {
+    const params = {
+      model: `${avatarUrl}`,
+      scene: "fullbody-portrait-v1-transparent",
+      armature: "ArmatureTargetMale",
+      blendShapes: {},
+    };
+    const http = new XMLHttpRequest();
+    http.open("POST", "https://render.readyplayer.me/render");
+    http.setRequestHeader("Content-type", "application/json");
+    http.send(JSON.stringify(params));
+    http.onload = function () {
+      const avatarPngUrl = JSON.parse(http.responseText).renders[0];
+      console.log("png: ", avatarPngUrl);
+      setAvatarUrl(avatarPngUrl);
+      setFilePreview(avatarPngUrl);
+      setIs3d(true);
+    };
+  }
+
   useEffect(() => {
-    const initBabylon = async () => {
-      console.log("avt: ", nearState._3dUrl)
-      const BabylonViewer = await import('babylonjs-viewer');
-      const babylon = document.getElementById("babylon-element")!;
-      if(babylon) {
-         let viewer = new BabylonViewer.DefaultViewer(babylon, {
-        extends: "none",
-        templates: {
-          main: {
-            html: "<loading-screen id='babylon-loading-screen' style='height: 100%;width: 100%; position: absolute;left: 0;z-index: 100;opacity: 1;pointer-events: none;display: flex;justify-content: center;align-items: center;-webkit-transition: opacity 1s ease;-moz-transition: opacity 1s ease;transition: opacity 1s ease;'></loading-screen>  <canvas id='my-babylon-canvas' style='height: 100%;width: 100%;flex: 1;touch-action: none;' class='babylonjs-canvas' touch-action='none'></canvas>",
-            params: {
-              ["no-escape"]: true,
-              ["babylon-font"]: `https://viewer.babylonjs.com/babylon.woff`
-            }
-          },
-          ["loadingScreen"]: {
-            html: "<img id='loading-image' style='height: 2rem;width: 2rem;' src='{{loadingImage}}' >",
-            params: {
-              ["backgroundColor"]: "#0000004d",
-              ["loadingImage"]: "https://cdn.discordapp.com/attachments/922880841238065176/1024013739395141682/Loader.png"
-            }
-          },
-        },
-        scene: {
-          clearColor: {
-            r: 0,
-            g: 0,
-            b: 0,
-            a: 0,
-          }
-        },
-        engine: {
-          antialiasing: true,
-          hdEnabled: true,
-          adaptiveQuality: true,
-        },
-        optimizer: true,
-        model: {
-          url: `${nearState._3dUrl}`,
-          scaling: {
-            x: 0.8,
-            y: 0.8,
-            z: 0.8,
-          },
-          position: {
-            x: 0,
-            y: -1,
-            z: 1
-          }
-        }
-      });
-      }
-     
+    if (nearState._3dUrl != null) {
+      (async () => {
+        await render3dAsImage(nearState._3dUrl!);
+      })();
     }
-    initBabylon();
 
   }, [])
 

@@ -548,7 +548,7 @@ useEffect(() => {
                       textTransform="uppercase"
                     >
                       {" "}
-                      3,126
+                      {nearState.nearBalance}
                     </Text>
                     <Image
                       src="resources/near-logo.png"

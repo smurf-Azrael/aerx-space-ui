@@ -27,7 +27,6 @@ function RecieveToken(props) {
   const copiedB = () => navigator.clipboard.writeText(nearState.accountId);
   const popUpT = () => setCopiedTimeT(true);
   const popUpB = () => setCopiedTimeB(true);
-  
 
   //  setQrCode(QRCode.toDataUrl('abc'))
 
@@ -39,32 +38,35 @@ function RecieveToken(props) {
       position="absolute"
       top="0"
     >
-    <Center borderRadius="50px 50px 0px 0px" zIndex={6} >
-            <Button
-              onClick={props.toggleWallet}
-              cursor="pointer"
-              background="none"
-              w="21.92px"
-              bgColor="rgba(255, 255, 255, 0.3);"
-              height="12px"
-              mt="2"
-              px="0"
-              flexDirection="column"
-              gap="2px"
-              // backgroundColor="#1F1F1F"
-            >
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-              <MinusIcon
-                w="21.92px"
-                bgColor="rgba(255, 255, 255, 0.3);"
-                height="2px"
-              />
-            </Button>
-          </Center>
+      <Center borderRadius="50px 50px 0px 0px" zIndex={6}>
+        <Button
+          onClick={() => {
+            props.toggleWallet
+            props.recieved(false)
+          }}
+          cursor="pointer"
+          background="none"
+          w="21.92px"
+          bgColor="rgba(255, 255, 255, 0.3);"
+          height="12px"
+          mt="2"
+          px="0"
+          flexDirection="column"
+          gap="2px"
+          // backgroundColor="#1F1F1F"
+        >
+          <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+          <MinusIcon
+            w="21.92px"
+            bgColor="rgba(255, 255, 255, 0.3);"
+            height="2px"
+          />
+        </Button>
+      </Center>
       {/* end */}
 
       <Box
@@ -221,15 +223,15 @@ function RecieveToken(props) {
             </Box>
           </Center>
           <Center>
-            <Flex >
+            <Flex>
               <Text
-               fontFamily="Poppins"
-               fontStyle="normal"
-               fontWeight="500"
-               fontSize="9.59px"
-               color="#FFFFFF4D"
-               ml="24.88px"
-               mr="58.91"
+                fontFamily="Poppins"
+                fontStyle="normal"
+                fontWeight="500"
+                fontSize="9.59px"
+                color="#FFFFFF4D"
+                ml="24.88px"
+                mr="58.91"
               >
                 Available balance
               </Text>
@@ -241,8 +243,7 @@ function RecieveToken(props) {
                 color="#FFFFFF4D"
                 mr="24.88px"
               >
-                {nearState.aexBalance}  AEX
-              
+                {nearState.aexBalance} AEX
               </Text>
             </Flex>
           </Center>
@@ -305,21 +306,19 @@ function RecieveToken(props) {
               >
                 {/* e8e9f38940951e644a64a4ca90dcc67108b8f50343d58e1 */}
                 {nearState.accountId}
-
               </Text>
 
               <Image
-               onClick={() => {
-                copiedB();
-                popUpB();
-              }}
+                onClick={() => {
+                  copiedB();
+                  popUpB();
+                }}
                 src="../resources/Group23.png"
                 w="10.65px"
                 h="13.7px"
                 cursor="pointer"
-               
               />
-                  {copiedTimeB && (
+              {copiedTimeB && (
                 <Text
                   position="fixed"
                   ml="156px"
@@ -336,7 +335,6 @@ function RecieveToken(props) {
                   Copied
                 </Text>
               )}
-
             </Flex>
           </Center>
 

@@ -55,7 +55,10 @@ function AddLiquidities(props) {
         mb-[26.825px]
         mt-2
         "
-          onClick={props.toggleWallet}
+        onClick={() => {
+          props.toggleWallet
+          props.liquidity(false)
+        }}
           cursor="pointer"
         >
           <MinusIcon

@@ -182,12 +182,12 @@ const ProfileSettingForm: React.FC = () => {
       <div className="flex gap-6 mt-4 w-ful">
         <div className="relative ">
           <div
-            className="h-[450px] w-[245px] bg-[#0000004d] p-2"
+            className="h-[409px] w-[245px] bg-[#0000004d] p-2"
             style={{
               background: `${
                 !nearState._3dUrl
                   ? 'url("/assets/images/profile-avatar-cover.svg")'
-                  : "transparent"
+                  : "#000"
                 // : 'linear-gradient(180deg, #6054F0 0%, #332B8D 100%)'
               }`,
               backgroundSize: "cover",
@@ -249,6 +249,58 @@ const ProfileSettingForm: React.FC = () => {
             )} */}
 
             {filePreview && (
+              <div className="flex flex-col justify-between h-[50%] text-sm pt-4">
+                <div className="flex justify-around">
+                  <label className="text-white">Avatar</label>
+                </div>
+
+                <div
+                  className="flex flex-col justify-around w-full cursor-pointer upload-trigger"
+                  onClick={uploadPhoto}
+                  onMouseEnter={() => setShowTriggers(true)}
+                  style={{
+                    zIndex: showTriggers ? 5 : 1,
+                  }}
+                >
+                  <Image
+                    src="/assets/icons/upload-icon.svg"
+                    alt="profile-avatar"
+                    width={40}
+                    height={40}
+                    className="cursor-pointer"
+                  />
+                  <label className="text-center text-white cursor-pointer">
+                    Upload
+                  </label>
+                  <input
+                    type="file"
+                    hidden
+                    accept="image/*"
+                    onChange={fileChange}
+                    className="upload-photo"
+                  />
+                </div>
+
+                <div
+                  className="flex flex-col justify-around w-full cursor-pointer upload-trigger"
+                  onMouseEnter={() => setShowTriggers(true)}
+                  onClick={() => router.push("/create-avatar")}
+                  style={{
+                    zIndex: showTriggers ? 5 : 1,
+                  }}
+                >
+                  <Image
+                    src="/assets/icons/3d-account-icon.svg"
+                    alt="profile-avatar"
+                    width={40}
+                    height={40}
+                  />
+                  <label className="text-center text-white">3D avatar</label>
+                </div>
+              </div>
+            )}
+
+            {!nearState._3dUrl && (
               <div className="flex flex-col justify-between h-[50%] text-sm pt-4">
                 <div className="flex justify-around">
                   <label className="text-white">Avatar</label>

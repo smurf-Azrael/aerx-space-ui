@@ -47,7 +47,10 @@ function Pools(props) {
         >
           <Center borderRadius="50px 50px 0px 0px" zIndex={6}>
             <Button
-              onClick={props.toggleWallet}
+              onClick={() => {
+                props.toggleWallet
+                props.pool(false)
+              }}
               cursor="pointer"
               background="none"
               w="21.92px"

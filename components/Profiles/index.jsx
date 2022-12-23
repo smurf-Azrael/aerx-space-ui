@@ -133,7 +133,6 @@ function Index() {
   };
   const openWallet = () => {
     setOpenWallet((prevState) => !prevState);
-    console.log(isOpenWallet);
   };
 
   const wallet = (

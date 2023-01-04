@@ -1,4 +1,4 @@
-import { Box, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { collapseCollections } from "../../store/slices/modulesSlices";
 import { useDispatch } from "../../store/store";
@@ -60,8 +60,8 @@ export default function Collection() {
 
   const onCollapse = () => {
     dispatch(collapseCollections());
-  }
-  
+  };
+
   return (
     <Box
       bg="rgba(255, 255, 255, 0.07)"
@@ -69,8 +69,10 @@ export default function Collection() {
       w="266px"
       borderRadius="15px"
       overflowY="hidden"
+      display="flex"
+      flexDirection="column"
     >
-      <Box p={4}>
+      <Box p={3}>
         <Flex alignItems="center" mb={4}>
           <Box display="flex" alignItems="center" flex={1} gap={2}>
             <Image
@@ -90,7 +92,11 @@ export default function Collection() {
               Collections
             </Text>
           </Box>
-          <Box  className="cursor-pointer flex items-center hover:bg-black-light p-[3px]  transition duration-150 ease-in-out rounded-[10px]" ml="16.44px" onClick={() => onCollapse()}>
+          <Box
+            className="cursor-pointer flex items-center hover:bg-black-light p-[3px]  transition duration-150 ease-in-out rounded-[10px]"
+            ml="16.44px"
+            onClick={() => onCollapse()}
+          >
             <Image
               src="/assets/icons/chat-room-menu-icon.svg"
               alt="Meu"
@@ -131,40 +137,22 @@ export default function Collection() {
             />{" "}
           </Box>
         </Flex>
+
         <Box
           mt={4}
-        //   overflowY="scroll"
-        //   overflowX="hidden"
-        //   h="652px"
-        //   w="full"
-        //   css={{
-        //     "&::-webkit-scrollbar": {
-        //       width: "6px",
-              
-        //     },
-        //     "&::-webkit-scrollbar-track": {
-        //       width: "8px",
-        //       backgroundColor: "#6054f0",
-
-        //     },
-        //     "&::-webkit-scrollbar-thumb": {
-        //       display: "none",
-        //       // borderRadius: "24px",
-        //     },
-        //     "&::-webkit-scrollbar-behaviour": {
-        //       scrollBehavior: "smooth",
-        //     },
-        //   }}
+          mb={0}
         >
-          <SimpleGrid
-            columns={{ base: 1, sm: 2, md: 2 }}
-            spacing={2}
-            justifyContent={{ md: "center" }}
+          <Grid
+            templateColumns="repeat(2, auto)"
+            alignContent="center"
+            h="auto"
+            gap={3}
+            // ml={4}
           >
-            {data.map((item, i) => (
-              <Card key={i} image={item.image} amount={item.amount} />
+            {data.map((item, index) => (
+              <Card key={index} image={item.image} amount={item.amount} />
             ))}
-          </SimpleGrid>
+          </Grid>
         </Box>
       </Box>
     </Box>

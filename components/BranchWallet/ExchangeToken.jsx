@@ -15,6 +15,7 @@ import { Big } from "big.js";
 import toast from 'react-hot-toast';
 import { initNearConnectionForContract } from "../../lib/auth";
 
+const nearToken = "nearnativetoken.near";
 function Exchange(props) {
   const [isExchange, setExchange] = React.useState(false);
   const [convertedNear, setConvertedNear] = React.useState(0);
@@ -29,7 +30,7 @@ function Exchange(props) {
   const [amountToSwapNear, setAmountToSwapNear] = React.useState("");
   const [amountToSwapAex, setAmountToSwapAex] = React.useState("");
   const [amountToSwapOthers, setAmountToSwapOthers] = React.useState("");
-  const [tokenFrom, setTokenFrom] = React.useState("aextestnew.mohzcrea8me.testnet");
+  const [tokenFrom, setTokenFrom] = React.useState(process.env.NEXT_PUBLIC_TOKEN_ID);
   const [pointerColour, setPointerColour] = React.useState({
     colour1: "#ffffff",
     colour2: "#FFFFFF4D;",
@@ -39,10 +40,10 @@ function Exchange(props) {
   const nearState = nearStore((state) => state);
 
   const swapCapture = () => {
-    if (tokenFrom == "aextestnew.mohzcrea8me.testnet") {
-      setTokenFrom("nearnativetoken.near")
+    if (tokenFrom == process.env.NEXT_PUBLIC_TOKEN_ID) {
+      setTokenFrom(nearToken)
     } else {
-      setTokenFrom("aextestnew.mohzcrea8me.testnet")
+      setTokenFrom(process.env.NEXT_PUBLIC_TOKEN_ID)
     }
   }
 
@@ -51,15 +52,15 @@ function Exchange(props) {
   };
 
   const handleSwapAex = async (e) => {
-    if (tokenFrom == "aextestnew.mohzcrea8me.testnet") {
+    if (tokenFrom == process.env.NEXT_PUBLIC_TOKEN_ID) {
       const inputBigN = new Big(e.target.value || 0);
       const formattedInput = inputBigN.mul("10e23").toFixed(0);
       setAmountToSwapAex(formattedInput);
       const expectedReturn = await nearState.DexContract.get_return_amount_in_u128({
-        pool_id: 1, amount_to_swap: formattedInput, token_from: "aextestnew.mohzcrea8me.testnet", token_to: "nearnativetoken.near"
+        pool_id: 1, amount_to_swap: formattedInput, token_from: process.env.NEXT_PUBLIC_TOKEN_ID, token_to: nearToken
       });
       const priceFromPool = await nearState.DexContract.get_price_from_pool({
-        pool_id: 1, token_id: "aextestnew.mohzcrea8me.testnet"
+        pool_id: 1, token_id: process.env.NEXT_PUBLIC_TOKEN_ID
       })
       const expectedReturnRaw = expectedReturn / 1000000000000000000000000;
       const expectedReturnBigN = new Big(expectedReturnRaw || 0);
@@ -107,15 +108,15 @@ function Exchange(props) {
   }
 
   const handleSwapNear = async (e) => {
-    if (tokenFrom == "nearnativetoken.near") {
+    if (tokenFrom == nearToken) {
       const inputBigN = new Big(e.target.value || 0);
       const formattedInput = inputBigN.mul("10e23").toFixed(0);
       setAmountToSwapNear(formattedInput);
       const expectedReturn = await nearState.DexContract.get_return_amount_in_u128({
-        pool_id: 1, amount_to_swap: formattedInput, token_from: "nearnativetoken.near", token_to: "aextestnew.mohzcrea8me.testnet"
+        pool_id: 1, amount_to_swap: formattedInput, token_from: nearToken, token_to: process.env.NEXT_PUBLIC_TOKEN_ID
       });
       const priceFromPool = await nearState.DexContract.get_price_from_pool({
-        pool_id: 1, token_id: "nearnativetoken.near"
+        pool_id: 1, token_id: nearToken
       });
       const expectedReturnRaw = expectedReturn / 1000000000000000000000000;
       const expectedReturnBigN = new Big(expectedReturnRaw || 0);
@@ -226,16 +227,14 @@ function Exchange(props) {
   //Todo: handle min expected due to slippage
   const swapToOrFromAex = async () => {
     console.log("Swap button has been clicked");
-    if (tokenFrom == "aextestnew.mohzcrea8me.testnet") {
-      const message = `{\"action\": \"swap\",\"pool_id\": \"1\",\"token_to\": \"nearnativetoken.near\",\"min_expected\": \"${minExpectedNear}\"}`;
+    if (tokenFrom == process.env.NEXT_PUBLIC_TOKEN_ID) {
       try {
-        await nearState.tokenContract.ft_transfer_call({
-          receiver_id: "aeswaptestnew.mohzcrea8me.testnet",
+        await nearState.DexContract.swap_aex({
+          pool_id: 1,
+          token_to: nearToken,
           amount: `${amountToSwapAex}`,
-          memo: "Token swap on Aeswap",
-          msg: message,
+          min_expected: `${minExpectedNear}`,
         }, '300000000000000',
-          '1'
         )
         toast.success("Successfully swapped AEX to NEAR")
       } catch (err) {
@@ -243,12 +242,12 @@ function Exchange(props) {
         console.log("Unable to swap AEX to NEAR due to: ", err)
 
       }
-    } else if (tokenFrom == "nearnativetoken.near") {
+    } else if (tokenFrom == nearToken) {
       if (amountToSwapNear > 0) {
         try {
           await nearState.DexContract.swap_aex({
             pool_id: 1,
-            token_to: "aextestnew.mohzcrea8me.testnet",
+            token_to: process.env.NEXT_PUBLIC_TOKEN_ID,
             amount: `${amountToSwapNear}`,
             min_expected: `${minExpectedAex}`,
           },
@@ -260,29 +259,6 @@ function Exchange(props) {
           // toast.error("Unable to swap NEAR to AEX")
           console.log("Unable to swap NEAR to AEX due to: ", err)
         }
-      }
-    } else {
-      const token_contract = await initNearConnectionForContract(`${tokenFrom}`);
-      const amountToSwap = new Big(amountToSwapOthers || 0);
-      const formattedAmount = amountToSwap.mul("10e23").toFixed(0);
-      console.log("amount: ", formattedAmount)
-      let minAmount = minExpectedAex / 1000000000000000000000000;
-      const minAmountBigN = new Big(minAmount || 0);
-      const formattedMinAmount = minAmountBigN.mul("10e23").toFixed(0);
-      console.log("min: ", formattedMinAmount)
-      const message = `{\"action\": \"swap\",\"pool_id\": \"1\",\"token_to\": \"aextestnew.mohzcrea8me.testnet\",\"min_expected\": \"${formattedMinAmount}\"}`;
-      try {
-        await token_contract.ft_transfer_call({
-          receiver_id: "aeswaptestnew.mohzcrea8me.testnet",
-          amount: `${formattedAmount}`,
-          memo: "Token swap on Aeswap",
-          msg: message,
-        }, '300000000000000',
-          '1'
-        )
-      } catch (err) {
-        console.error("unable to swap token due to: ", err)
-
       }
     }
   };

@@ -31,7 +31,6 @@ const SendCoins: React.FC<IProps> = ({ setTransactionStatus }) => {
 
     const handleSend = async () => {
         if (loading) return;
-        console.log("amt: ", amount)
         if (accountId != null) {
             setLoading(true);
             await nearState.tokenContract.ft_transfer(
@@ -41,15 +40,15 @@ const SendCoins: React.FC<IProps> = ({ setTransactionStatus }) => {
                     memo: `AERX Chat token transfer From ${nearState.accountId}  to ${accountId} at ${new Date().toLocaleString()}`
                 },
                 '300000000000000',
-                '1',
+                1
             ).then(() => {
                 setLoading(false)
                 console.log("Sent token ....")
                 setTransactionStatus('success')
             }).catch((err: any) => {
-            setLoading(false)
-            // setTransactionStatus('failed')
-            console.error("Unable to send token due to: ",err)
+                setLoading(false)
+                // setTransactionStatus('failed')
+                console.error("Unable to send token due to: ", err)
             })
         }
     }

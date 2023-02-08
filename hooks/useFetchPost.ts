@@ -35,6 +35,7 @@ export async function fetchPosts(state: any) {
             const post = await state.pnftContract?.get_all_posts({
                 user_id: state.accountId,
             });
+
             if (post) {
                 post.sort(function (a: { metadata: { issued_at: any; }; }, b: { metadata: { issued_at: any; }; }) {
                     return (

@@ -361,6 +361,9 @@ const Chat: React.FC = () => {
       }
       messageItems.push(messageItem)
     })
+    if (messageItems.length > 0) {
+      dispatch(setActiveReceiver(messageItems[0].accountId))
+    }
     setChats(messageItems)
     setChatsClone(messageItems)
   }

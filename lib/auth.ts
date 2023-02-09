@@ -15,7 +15,7 @@ import {
     ProfileContract,
     TokenContract,
 } from "../types/contracts";
-import { TOKEN_CONTRACT_NAME, PROFILE_CONTRACT_NAME, DEX_CONTRACT_NAME } from "../utils/constants/contract";
+import { TOKEN_CONTRACT_NAME, NFT_CONTRACT_NAME, DEX_CONTRACT_NAME } from "../utils/constants/contract";
 import { authenticatePinata } from "./pinata";
 import Big from "big.js";
 
@@ -109,12 +109,12 @@ export default async function contractFullAccessKey(
             "comment",
             "charge",
             "charge_repost",
+            "nft_transfer",
         ],
     }) as PNFTContract;
 
     return contract;
 }
-
 
 export async function initNearConnection(nearState: NearStoreType) {
     // Initialize connection to the NEAR testnet
@@ -156,15 +156,17 @@ export async function initNearConnection(nearState: NearStoreType) {
     console.log("formated near balance: ", formattedNearBalance)
     //.2 load tokenContract whenever it is ready
     await loadTokenContract(nearState, walletConnection.account());
+    await loadNFTContract(nearState, walletConnection.account());
     //3. load dex contract whenever it is ready
     await loadDexContrat(nearState, walletConnection.account());
     //.4 load profile with user as signer(incase aerx decide to let user pay)
     await loadProfileWithUserAsSigner(nearState, walletConnection.account());
     //.5 halt until pnftContract is set to state
     await loadProfileContract(nearState);
+    //.6 load nft contract
+    // await loadNFTContract(nearState, walletConnection.account());
     // complete the initnearConnection
 }
-
 
 export async function checkProfile(nearState: any) {
     // checks profile contract is initialised and user is connected(has accountId)
@@ -193,6 +195,40 @@ export async function checkProfile(nearState: any) {
     }
 }
 
+const loadNFTContract = (
+    nearState: NearStoreType,
+    account: ConnectedWalletAccount,
+) => {
+    const nftContract: PNFTContract = new Contract(
+        account,
+        NFT_CONTRACT_NAME,
+        {
+            viewMethods: [
+                "is_username_available",
+                "has_registered",
+                "nft_tokens_for_owner",
+                "profile_by_id",
+                "post_details",
+                "get_all_posts",
+                "get_users_ids",
+                "repost_details",
+                "get_all_repost",
+            ],
+            changeMethods: [
+                "mint_profile",
+                "edit_profile",
+                "mint_post",
+                "comment",
+                "charge",
+                "charge_repost",
+                "nft_transfer",
+            ],
+        },
+    ) as PNFTContract;
+
+    nearState.setNFTContract(nftContract);
+    console.log("token contract:", nftContract);
+};
 // Initializing our token contract APIs by contract name and configuration
 const loadTokenContract = (
     nearState: NearStoreType,
@@ -222,7 +258,6 @@ const loadTokenContract = (
     nearState.setTokenContract(tokenContract);
     console.log("token contract:", tokenContract);
 };
-
 
 export async function initNearConnectionForContract(contractName: string) {
     // Initialize connection to the NEAR testnet
@@ -302,7 +337,7 @@ const loadProfileWithUserAsSigner = (
 ) => {
     const profileContractWithUserAsSigner = new Contract(
         account,
-        PROFILE_CONTRACT_NAME,
+        NFT_CONTRACT_NAME,
         {
             // change methods(methods that change state)
             changeMethods: [

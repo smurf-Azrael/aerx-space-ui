@@ -6,7 +6,6 @@ import SendCoins from './SendCoins';
 import SelectNFTs from '../Common/SelectNFT';
 import { NFT } from '../../../../types/NFT';
 import SendNFT from './SendNFT';
-import {nfts as allNfts} from '../Common/SelectNFT'
 
 interface IProps {
     onClose: () => void;
@@ -23,7 +22,6 @@ const SendFlow: React.FC<IProps> = ({onClose}) => {
            {flow === 3 && transactionStatus === 'pending' && <SendNFT 
            setTransactionStatus={(status) => setTransactionStatus(status)}
            nfts={selectedNFTs} 
-           allNfts={allNfts}
            setSelectedNFTs={setSelectedNFTs}  />}
            {transactionStatus === 'success' && <SuccessPayment onClose={onClose} />}
            {transactionStatus === 'failed' && <ErrorPayment onClose={onClose} />}

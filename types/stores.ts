@@ -30,6 +30,10 @@ export type NearStoreType = {
 
     pnftContract: PNFTContract | null;
     setPNFTContract: (pnftContract: PNFTContract) => void;
+    removePNFTContract: () => void;
+
+    nftContract: PNFTContract | null;
+    setNFTContract: (nftContract: PNFTContract) => void;
     removeNFTContract: () => void;
 
     profile: ProfileType | null;

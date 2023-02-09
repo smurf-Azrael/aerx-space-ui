@@ -105,6 +105,14 @@ export type PNFTContract = Contract & {
         },
         gas: string,
     ) => Promise<void>;
+    nft_transfer: (
+        args: {
+            receiver_id: string;
+            token_id: number;
+        },
+        gas: string,
+        deposit: string,
+    ) => Promise<void>;
 };
 
 export type ProfileContract = Contract & {

@@ -34,14 +34,6 @@ const SelectNFTs: React.FC<IProps> = ({ setNFTsSelected, setFlow }) => {
             account_id: nearState.accountId
         }
         ).then((res => {
-            console.log(res.map(function(nft: any) {
-                return {
-                    id: nft.token_id,
-                    media: nft.metadata.media,
-                    name: nft.metadata.title,
-                    author_name: nft.owner_id
-                }
-            }).filter((nft: any) => !(nft.name).includes("ProfileNFT")), "===========nfts=========")
             setNFTs(res.map(function(nft: any) {
                 return {
                     id: nft.token_id,

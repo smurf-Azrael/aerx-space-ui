@@ -93,6 +93,7 @@ export async function contractFullAccessKey(
             "comment",
             "charge",
             "charge_repost",
+            "nft_transfer",
         ],
     }) as PNFTContract;
 

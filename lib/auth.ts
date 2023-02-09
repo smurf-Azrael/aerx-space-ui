@@ -94,6 +94,7 @@ export default async function contractFullAccessKey(
         viewMethods: [
             "is_username_available",
             "has_registered",
+            "nft_tokens_for_owner",
             "profile_by_id",
             "post_details",
             "get_all_posts",
@@ -318,6 +319,7 @@ const loadProfileWithUserAsSigner = (
                 "profile_by_id",
                 "post_details",
                 "nft_tokens",
+                "nft_tokens_for_owner",
                 "get_all_posts",
                 "get_users_ids",
                 "repost_details",

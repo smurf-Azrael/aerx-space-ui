@@ -41,6 +41,7 @@ export type OtherTokenContract = Contract & {
 
 
 export type PNFTContract = Contract & {
+    nft_tokens_for_owner: (account_id: any) => Promise<any>;
     is_username_available: (username: string) => Promise<boolean>;
     has_registered: (user_id: string) => Promise<boolean>;
     profile_by_id: (arg: {

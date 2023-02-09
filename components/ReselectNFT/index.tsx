@@ -12,7 +12,7 @@ interface Props {
     allNfts: Array<NFT>,
     setSelectedNFTs: (nfts: Array<NFT>) => void,
 }
-const ReselectNFT: React.FC<Props> = ({nfts, setSelectedNFTs, allNfts}) => {
+const ReselectNFT: React.FC<Props> = ({ nfts, setSelectedNFTs, allNfts }) => {
     const coins: Coin[] = [
         {
             logo: '/assets/icons/ae-coin-icon.svg',
@@ -31,10 +31,10 @@ const ReselectNFT: React.FC<Props> = ({nfts, setSelectedNFTs, allNfts}) => {
     const [showSelect, setShowSelect] = useState<boolean>(false);
 
     const handleSelectNFT = (nftId: number) => {
-       setShowSelect(false);
-       if(nfts.findIndex(nft => nft.id === nftId) === -1){
-        setSelectedNFTs([...nfts, (allNfts.find(nft => nft.id === nftId) as NFT)]);
-       }
+        setShowSelect(false);
+        if (nfts.findIndex(nft => nft.id === nftId) === -1) {
+            setSelectedNFTs([...nfts, (allNfts.find(nft => nft.id === nftId) as NFT)]);
+        }
     }
 
     return (
@@ -50,18 +50,19 @@ const ReselectNFT: React.FC<Props> = ({nfts, setSelectedNFTs, allNfts}) => {
                 </div>
             </div>
             {showSelect && (
-            <div className='absolute bg-black-dark w-full mt-4 p-2 rounded-md z-50'>
-                <div>
-                    {allNfts.map((nft: NFT, index:number) => (
-                        <div className='mt-1 flex rounded-md  p-2 gap-2 cursor-pointer hover:bg-black-light' key={index}
-                         onClick={() => handleSelectNFT(nft.id)}
-                        >
-                            <label className='cursor-pointer text-white text-sm'>{nft.name}</label>
-                        </div>
-                    ))
-        }
+                <div className='absolute bg-black-dark w-full mt-4 p-2 rounded-md z-50'>
+                    <div>
+                        {allNfts && (
+                            allNfts.map((nft: NFT, index: number) => (
+                                <div className='mt-1 flex rounded-md  p-2 gap-2 cursor-pointer hover:bg-black-light' key={index}
+                                    onClick={() => handleSelectNFT(nft.id)}
+                                >
+                                    <label className='cursor-pointer text-white text-sm'>{nft.name}</label>
+                                </div>
+                            ))
+                        )}
+                    </div>
                 </div>
-            </div>
             )}
         </div>
     )

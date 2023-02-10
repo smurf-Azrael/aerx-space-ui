@@ -6,7 +6,6 @@ import RequestCoins from './RequestCoins';
 import SelectNFTs from '../Common/SelectNFT';
 import { NFT } from '../../../../types/NFT';
 import RequestNFT from './RequestNFT';
-import {nfts as allNfts} from '../Common/SelectNFT'
 
 interface IProps {
     onClose: () => void;
@@ -23,7 +22,7 @@ const RequestFlow: React.FC<IProps> = ({onClose}) => {
            {flow === 3 && transactionStatus === 'pending' && <RequestNFT 
            setTransactionStatus={(status) => setTransactionStatus(status)}
            nfts={selectedNFTs} 
-           allNfts={allNfts}
+           allNfts={selectedNFTs}
            setSelectedNFTs={setSelectedNFTs}  />}
            {transactionStatus === 'success' && <SuccessPayment message='Invoice successful!'  onClose={onClose} />}
            {transactionStatus === 'failed' && <ErrorPayment message='The user denied the invoice' onClose={onClose} />}
